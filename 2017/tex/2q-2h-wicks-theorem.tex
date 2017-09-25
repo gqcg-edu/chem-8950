@@ -209,12 +209,12 @@ $.
 \end{ntt}
 
 \begin{lem}\label{lem:pre-wick-lemma}
-\thmtitle{$\gno{Q}q=\gno{Qq}+\sum_k\gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}$}
+\thmtitle{$\no{Q}q=\no{Qq}+\sum_k\no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}$}
 \begin{samepage}
 \thmproof{
-  Let $n$ be the number of operators in $Q$ and assume, without loss of generality, that $Q$ is already in normal order so that $\gno{Q}=Q$.
-  If $q$ is a quasiparticle annihilation operator then $\gno{Qq}=Qq$ and all cross-contractions vanish, so the statement holds trivially.
-  If $q$ is a quasiparticle creation operator then $\gno{Qq}=(-)^nqQ$ and, using an anticommutator relation derived in the appendix (\cref{prop:pull-through-relation}),
+  Let $n$ be the number of operators in $Q$ and assume, without loss of generality, that $Q$ is already in normal order so that $\no{Q}=Q$.
+  If $q$ is a quasiparticle annihilation operator then $\no{Qq}=Qq$ and all cross-contractions vanish, so the statement holds trivially.
+  If $q$ is a quasiparticle creation operator then $\no{Qq}=(-)^nqQ$ and, using an anticommutator relation derived in the appendix (\cref{prop:pull-through-relation}),
   \begin{align*}
     Qq
   =
@@ -224,32 +224,32 @@ $.
     (-)^{n-k}
     q_1\cd [q_k,q]_+\cd q_n
   =
-    \gno{Qq}
+    \no{Qq}
   +
     \sum_{k=1}^n
-    \gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}
+    \no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}
   \end{align*}
-  since $\gno{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}=(-)^{n-k}\gno{q_1\cd\ctr{}{q}{_k}{q}q_kq\cd q_n}$ and $\ctr{}{q}{_k}{q} q_kq=[q_k,q]_+$ when $q$ is a quasiparticle creation operator (see \cref{dfn:contraction}).
+  since $\no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}=(-)^{n-k}\no{q_1\cd\ctr{}{q}{_k}{q}q_kq\cd q_n}$ and $\ctr{}{q}{_k}{q} q_kq=[q_k,q]_+$ when $q$ is a quasiparticle creation operator (see \cref{dfn:contraction}).
 }
 \end{samepage}
 \end{lem}
 
-\begin{thm}\label{wicks-theorem}
-\thmtitle{Wick's theorem} $Q=\gno{Q}+\gno{\ol{Q}}$\vspace{5pt}
+\begin{thm}\label{wicks-theorem-vacuum}
+\thmtitle{Wick's theorem (vacuum).} $Q=\no{Q}+\no{\ol{Q}}$\vspace{5pt}
 \thmproof{
   Let $n$ be the length of $Q$.
-  The result holds for $n=2$ since $q_1q_2=\gno{q_1q_2}+\ctr{}{q}{_1}{q} q_1q_2$ by the definition of contraction.
+  The result holds for $n=2$ since $q_1q_2=\no{q_1q_2}+\ctr{}{q}{_1}{q} q_1q_2$ by the definition of contraction.
   Now, assume it holds for $n$ operators and consider $Qq$.
-  By our inductive assumption, $Qq=\gno{Q}q + \gno{\ol{Q}}q$.
+  By our inductive assumption, $Qq=\no{Q}q + \no{\ol{Q}}q$.
   Applying \cref{lem:pre-wick-lemma} to $\no{Q}q$ gives
-  $\gno{Q}q=\gno{Qq}+\sum_i\gno{\ctr{Q(}{q}{_i)}{q} Q(q_i)q}$.
-  Expanding $\gno{\ol{Q}}q$ and applying \cref{lem:pre-wick-lemma} to each term gives
+  $\no{Q}q=\no{Qq}+\sum_i\no{\ctr{Q(}{q}{_i)}{q} Q(q_i)q}$.
+  Expanding $\no{\ol{Q}}q$ and applying \cref{lem:pre-wick-lemma} to each term gives
   \\[5pt]
   {\footnotesize
   $\begin{array}{rl}\displaystyle
     \sum_{k=1}^{\floor{\sfr{n}{2}}}
     \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
-    \gno{Q(
+    \no{Q(
       \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
       \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
     )}
@@ -257,7 +257,7 @@ $.
   =&\displaystyle
     \sum_{k=1}^{\floor{\sfr{n}{2}}}
     \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
-    \gno{Q(
+    \no{Q(
       \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
       \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
       )q
@@ -267,21 +267,21 @@ $.
     \sum_{(i_1j_1)\cd(i_kj_k)}^{\mr{Ctr}_k(Q)}
     \sum_{i\notin\{i_1,j_1,\cd,i_k,j_k\}}
     %\sum_{\substack{i\,\notin\\\{i_1,j_1,\cd,i_k,j_k\}}}
-    \gno{Q(
+    \no{Q(
       \ctr{}{q}{_{i_1}}{q} q_{i_1}q_{j_1}
       \ctr{}{q}{_{i_k}}{q} q_{i_k}q_{j_k}
       \ctr{}{q}{_i)}{q}    q_i)q
     }
   \\=&\displaystyle
     \sum_{(i_1j_1)}^{\mr{Ctr}_1(Q)}
-    \gno{Q(
+    \no{Q(
       \ctr{}{a}{_{i_1}}{q} q_{i_1}q_{j_1}
       )q
     }
   +
     \sum_{k=2}^{\floor{\sfr{(n+1)}{2}}}
     \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
-    \gno{Qq(
+    \no{Qq(
       \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
       \cd
       \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
@@ -293,44 +293,56 @@ $.
   $\begin{array}{rl}\displaystyle
     Qq
   =
-    \gno{Q}q
+    \no{Q}q
   +
-    \gno{\ol{Q}}q
+    \no{\ol{Q}}q
   =&\displaystyle
-    \gno{Qq}
+    \no{Qq}
   +
     \sum_{i=1}^n
-    \gno{Q(
+    \no{Q(
       \ctr{}{q}{_i)}{q}  q_i)q
     }
   +
     \sum_{(i_1j_1)}^{\mr{Ctr}_1(Q)}
-    \gno{Q(
+    \no{Q(
       \ctr{}{a}{_{i_1}}{q} q_{i_1}q_{j_1}
       )q
     }
   +
     \sum_{k=2}^{\floor{\sfr{(n+1)}{2}}}
     \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
-    \gno{Qq(
+    \no{Qq(
       \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
       \cd
       \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
     )}
   \\[20pt]=&\displaystyle
-    \gno{Qq}
+    \no{Qq}
   +
     \sum_{k=1}^{\floor{\sfr{(n+1)}{2}}}
     \sum_{(i_1j_2)\cd(i_kj_k)}^{\mr{Ctr}_k(Qq)}
-    \gno{Qq(
+    \no{Qq(
       \ctr{}{q}{_{i_1}}{q}  q_{i_1}q_{j_1}
       \cd
       \ctr{}{q}{_{i_k}}{q}  q_{i_k}q_{j_k}
     )}
   \end{array}$}\\
-  which is $\gno{Qq}+\gno{\ol{Qq}}$.
+  which is $\no{Qq}+\no{\ol{Qq}}$.
   So if the statement holds for strings of length $n$ it must also hold for strings of length $n+1$.
   By induction, the theorem holds for $Q$ of arbitrary length.
+}
+\end{thm}
+
+
+\begin{thm}\label{wicks-theorem}
+\thmtitle{Wick's theorem (general)} $Q=\gno{Q}+\gno{\ol{Q}}$\vspace{5pt}
+\thmproof{
+    Under particle-hole isomorphism,
+    \(
+        \Phi
+    \)-normal
+    ordering is algebraically identical to vacuum normal ordering.
 }
 \end{thm}
 
@@ -361,7 +373,8 @@ To recap, let's state Wick's theorem and its corollaries in words as the followi
 \item
   The reference expectation value of a string equals the sum of its complete contractions.
 \end{enumerate}
-The next proposition proves a convenient rule for evaluating completely contracted operator strings, relating the overall sign of the term to the number of times its contraction lines cross.
+The next proposition provides a convenient rule for evaluating completely
+contracted operator strings.
 \end{rmk}
 
 \begin{prop}
