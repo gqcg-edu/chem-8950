@@ -212,24 +212,81 @@ $.
 \thmtitle{$\no{Q}q=\no{Qq}+\sum_k\no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}$}
 \begin{samepage}
 \thmproof{
-  Let $n$ be the number of operators in $Q$ and assume, without loss of generality, that $Q$ is already in normal order so that $\no{Q}=Q$.
-  If $q$ is a particle annihilation operator then $\no{Qq}=Qq$ and all cross-contractions vanish, so the statement holds trivially.
-  If $q$ is a particle creation operator then $\no{Qq}=(-)^nqQ$ and, using an anticommutator relation derived in the appendix (\cref{prop:pull-through-relation}),
-  \begin{align*}
-    Qq
-  =
-    (-)^n qQ
-  +
-    \sum_{k=1}^n
-    (-)^{n-k}
-    q_1\cd [q_k,q]_+\cd q_n
-  =
-    \no{Qq}
-  +
-    \sum_{k=1}^n
-    \no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}
-  \end{align*}
-  since $\no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}=(-)^{n-k}\no{q_1\cd\ctr{}{q}{_k}{q}q_kq\cd q_n}$ and $\ctr{}{q}{_k}{q} q_kq=[q_k,q]_+$ when $q$ is a particle creation operator (see \cref{dfn:contraction}).
+    Let $n$ be the number of operators in $Q$ and begin by assuming that $Q$ is
+    already in normal order, i.e.~$\no{Q}=Q$.
+    If $q$ is an annihilation operator then $\no{Q}q=Qq=\no{Qq}$ and all
+    cross-contractions vanish, so the statement holds trivially.
+    If $q$ is a creation operator, note that $\no{Qq}=(-)^nqQ$.
+    By the anticommutator relation derived in
+    appendix~\ref{app:pull-through-relation}, we find%
+\footnote{%
+    Note that
+    \(
+        (-)^{n-k}
+    \)
+    is the sign factor for bringing
+    \(
+        q_k
+    \)
+    and
+    \(
+        q
+    \)
+    together,
+    and that
+    \(
+        \ctr{}{q}{_k}{q} q_kq
+        =
+        [q_k,q]_+
+    \)
+    when
+    \(
+        q
+    \)
+    is a creation operator.
+}
+    \begin{align*}
+      \no{Q}q
+    =
+      Qq
+    =
+      (-)^n qQ
+    +
+      \sum_{k=1}^n
+      (-)^{n-k}
+      q_1\cd [q_k,q]_+\cd q_n
+    =
+      \no{Qq}
+    +
+      \sum_{k=1}^n
+      \no{\ctr{Q(}{q}{_k)}{q} Q(q_k)q}
+      \,,
+    \end{align*}
+    which completes the proof under our starting assumption.
+    When
+    \(
+        Q
+    \)
+    is not in normal order, we can write
+    \(
+        \no{Q}
+        =
+        (-)^p
+        Q'
+    \)
+    and apply the proposition to
+    \(
+        Q'
+    \)
+    in order to confirm that it still holds.%
+\footnote{%
+    For this last step, note that
+    \(
+        \no{(\no{Q})q}
+        =
+        \no{Qq}
+    \).
+}
 }
 \end{samepage}
 \end{lem}
@@ -582,7 +639,7 @@ Multiplying these by $f_{pq}$ and $\tfr{1}{4}\ip{pq||rs}$ and summing over Hamil
 
 \newpage
 \appendix
-\section{The pull-through relation}
+\section{The pull-through relation}\label{app:pull-through-relation}
 
 \begin{prop}\label{prop:pull-through-relation}
 \thmtitle{Pull-through relation}
