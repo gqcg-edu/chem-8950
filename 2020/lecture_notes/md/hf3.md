@@ -32,7 +32,26 @@ The exchange operator is without a doubt a very weird operator; it rips the elec
 
 \\[E = 2 \sum\limits_{i}^{MO} \langle \phi_i | \hat{h}(i) | \phi_i \rangle +  \sum\limits_{i}^{MO} \sum\limits_{j}^{MO} 2 \langle \phi_i  | \hat{J}_j | \phi_i \rangle - \langle \phi_i | \hat{K}_j | \phi_i \rangle \\]
 
-Now, every operator is a "one-electron operator", and by this we mean that each operator gives a piece of the energy when we take the expectation value of some one-electron wavefunction \$\phi_i\$.
+Now, every operator is a "one-electron operator", and by this we mean that each operator gives a piece of the energy when we take the expectation value over some one-electron wavefunction \$\phi_i\$.
+
+In the Hartree-Fock equation derivation, one finds that the best set of molecular orbitals satisfy the following equations:
+
+\\[ \left[\hat{h} + \sum\limits_j (2 \hat{J}_j - \hat{K}_j) \right] \phi_i = \epsilon_i \phi_i  \\]
+
+The term in square brackets is referred to as the Fock Operator \$\hat{F}\$, so we just write
+
+\\[\hat{F} \phi_i = \epsilon_i \phi_i \\]
+
+These are the Hartree-Fock (HF) equations. This simple set of equations for a set of orbitals \\(\{ \phi_i \}\\) represent a great deal of buried complexity. The MO's which give the best Slater determinant (and lowest energy) are all eigenfunctions of the hermitian operator \$\hat{F}\$, which itself is defined _in terms of these MO's_ (look at the equations of our coulomb and exchange operators).
+
+Thus, solving these equations requires trial and error. Pick a set of \$\phi_i\$, build \$\hat{F}\$, solve the equations for the \$n\$ lowest eigenvalues, compare the newly obtained \$\phi_i\$'s to the old ones. One repeats this procedure until the \$\phi_i\$'s converge. Hence, this procedure is commonly called the _self-consisten field_ procedure. Our 'field' of energy interactions described by the Fock operator must stabilize to the optimal solution when the orbitals are improved. **The self-consistent orbitals are the best MO's from which to construct a Slater determinant wavefunction. That Slater determinant wavefunction is the best possible single Slater determinant wavefunction obtainable. The corresponding energy is the best possible approximate ground state energy, and it is bounded below by the true electronic energy of the system.**
+
+The HF equations are quite expensive to solve. For atoms, it is a bit easier due to the spherical symmetry, and since we kind of know what the one-electron wavefunctions should look like. For molecules, solving the HF equations is pretty much impossible. **As a result, we have to use an approximation to the best MO's, since obtaining them analytically by the HF method is unfeasible in the fast majority of cases.**
 
 
 ## The Roothaan-Hall Equations 
+
+To apply the Hartree-Fock method to molecules, we approximate the best MO's which solve the Hartree-Fock equations by a _linear combination of atomic orbitals_ (LCAO), which form our MO's. We will call these LCAO-MO's, to distinguish them from the MO's of Hartree-Fock theory.
+
+\\[\phi_i = \sum\limits_p \chi_p C_{pi} \\]
+
