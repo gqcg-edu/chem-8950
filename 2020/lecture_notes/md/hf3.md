@@ -133,7 +133,7 @@ In summary, each element of the Fock matrix is composed of a simple sum of integ
 
 The equation 
 \\[\boldsymbol{F}\boldsymbol{C} = \boldsymbol{S}\boldsymbol{C}\boldsymbol{\epsilon}  \\]
-is a standard eigenvalue problem if \\(\boldsymbol{S} \\) is an identity matrix. If this is the case, the Roothaan-Hall equations are easy to solve; just diagonalize \\(\boldsymbol{F}\\)! Also, if \\(\boldsymbol{S} \\) is an identity matrix, our basis functions are orthonormal. Recall that our energy expression derivation and the Hartree-Fock equations derivation depended on the basis functions being orthonormal. So 'orthogonalizing' our basis is not only is _sufficient_ to make the Roothaan-Hall equations easy to solve, it's also _necessary_ because our equation derivations depended on orbital orthonormality. So, we seek some tranformation \\(\boldsymbol{U}\\) such that 
+is a standard eigenvalue problem if \\(\boldsymbol{S} \\) is an identity matrix. If this is the case, the Roothaan-Hall equations are easy to solve; just diagonalize \\(\boldsymbol{F}\\)! Also, if \\(\boldsymbol{S} \\) is an identity matrix, our basis functions are orthonormal. Recall that our energy expression derivation and the Hartree-Fock equations derivation depended on the basis functions being orthonormal. So 'orthogonalizing' our basis is not only _sufficient_ to make the Roothaan-Hall equations easy to solve, it's also _necessary_ because our equation derivations depended on orbital orthonormality. So, we seek some unitary matrix \\(\boldsymbol{U}\\) such that the transformation performed by this matrix changes our basis to an orthonormal one:
 
 \\[\boldsymbol{U}^T\boldsymbol{S}\boldsymbol{U} = \boldsymbol{I} \\]
 
@@ -144,13 +144,13 @@ There's two such transformations \\(\boldsymbol{U} \\) that are often used. The 
 \\[\boldsymbol{U} = \boldsymbol{V} \boldsymbol{\Lambda}^{-1/2} \\]
 
 \\[\boldsymbol{U}^T \boldsymbol{S} \boldsymbol{U} = \boldsymbol{\Lambda}^{-1/2} \boldsymbol{V}^T \boldsymbol{S} \boldsymbol{V} \boldsymbol{\Lambda}^{-1/2} = \boldsymbol{\Lambda}^{-1/2} \boldsymbol{\Lambda} \boldsymbol{\Lambda}^{-1/2} = \boldsymbol{I}  \\]
-The canonical orthogonalization carries the advantage that we can identify linear dependency in the basis set (an eigenvalue in \\(\boldsymbol{\Lambda}\\) would be near zero!), and **remove** the linear dependency by just setting the corresponding column of \\( \boldsymbol{V}\\) by setting its eigenvalue partner to zero.
+The canonical orthogonalization carries the advantage that we can identify linear dependency in the basis set (an eigenvalue in \\(\boldsymbol{\Lambda}\\) would be near zero), and **remove** the linear dependency by just removing the corresponding column of \\( \boldsymbol{V}\\) by setting its eigenvalue partner to zero.
 
 The second \\(\boldsymbol{U}\\) used often to orthogonalize our basis is known as the **symmetric orthogonalization**
 \\[ \boldsymbol{U} = \boldsymbol{S}^{-1/2} \\]
 This matrix is symmetric (equal to its transpose), so the transformation is simply
 \\[\boldsymbol{U}^T \boldsymbol{S} \boldsymbol{U} = \boldsymbol{S}^{-1/2} \boldsymbol{S} \boldsymbol{S}^{-1/2} = \boldsymbol{I} \\]
-The advantage of the symmetric orthonalization is that it is simpler and the new basis is as "close" to the original as possible. For the rest of this document, we will use the symmetric orthogonalization.
+The advantage of the symmetric orthogonalization is that it is simpler and the new basis is as "close" to the original as possible. We will use the symmetric orthogonalization here.
 
 In order to apply this transformation to the equation \\(\boldsymbol{F}\boldsymbol{C} = \boldsymbol{S}\boldsymbol{C}\boldsymbol{\epsilon}  \\), we need to transform both the Fock matrix and the overlap matrix, since they both depend on the AO basis. That is, we can't just change the basis of one side of the equation, we need to do it to both sides. Mathematically, we need to do this: \\(\boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \\) and this: \\(\boldsymbol{S}^{-1/2}\boldsymbol{S} \boldsymbol{S}^{-1/2} \\). This is achieved by multiplying both sides from the left by \\(\boldsymbol{S}^{-1/2}\\) and inserting the identity matrix \\(\boldsymbol{I} = \boldsymbol{S}^{-1/2}\boldsymbol{S}^{1/2}\\) between  \\(\boldsymbol{F}\\) and \\(\boldsymbol{C}\\) on the left and  \\(\boldsymbol{S}\\) and \\(\boldsymbol{C}\\) on the right:
 
@@ -158,7 +158,9 @@ In order to apply this transformation to the equation \\(\boldsymbol{F}\boldsymb
 
 \\[\boldsymbol{S}^{-1/2} \boldsymbol{F} \boldsymbol{S}^{-1/2} \boldsymbol{S}^{1/2} \boldsymbol{C} = \boldsymbol{S}^{-1/2} \boldsymbol{S} \boldsymbol{S}^{-1/2}  \boldsymbol{S}^{1/2}  \boldsymbol{C} \boldsymbol{\epsilon}  \\]
 
-\\[ \tilde{\boldsymbol{F}} \tilde{\boldsymbol{C}} = \tilde{\boldsymbol{C}} \boldsymbol{\epsilon} \quad \quad \quad \tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{1/2} \quad \quad \quad \tilde{\boldsymbol{C}} = \boldsymbol{S}^{1/2}\boldsymbol{C} \\]
+\\[\tilde{\boldsymbol{F}} \tilde{\boldsymbol{C}} = \tilde{\boldsymbol{C}} \boldsymbol{\epsilon} \\]
+
+\\[ \tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{1/2} \quad \quad \quad \tilde{\boldsymbol{C}} = \boldsymbol{S}^{1/2}\boldsymbol{C} \\]
 
 We can now easily diagonalize \\(\tilde{\boldsymbol{F}} \\) and transform \\(\tilde{\boldsymbol{C}} \\) back to the original unorthogonal basis \\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\), build a new density matrix, Fock matrix, get a new energy, transform the Fock matrix again, diagonalize... etc. etc. until self-consistency is achieved in the LCAO-MO coefficient matrix \\(\boldsymbol{C}\\) (and thus the density matrix).
 
@@ -168,10 +170,12 @@ The energy expression is found by taking the restricted case of the first Slater
 \\[E = 2 \sum\limits_{i}^{N/2} \langle \phi_i | \hat{h}(i) | \phi_i \rangle +  \sum\limits_{i}^{N/2} \sum\limits_{j}^{N/2} 2 \langle \phi_i \phi_j | \hat{g}(i,j) | \phi_i \phi_j \rangle - \langle \phi_i \phi_j | \hat{g}(i,j) | \phi_j \phi_i \rangle\\]
 
 and expanding each spatial orbital in a basis. This is left as an  excercise. The final result is:
+\\[E = 2 \sum\limits_{pq} D_{pq} \langle \chi_p \mid \hat{h} \mid \chi_q \rangle  + \sum\limits_{pqrs} D_{pq} D_{rs} [ 2 \langle \chi_p \chi_r \mid \hat{g} \mid \chi_q \chi_s \rangle - \langle \chi_p \chi_r \mid \hat{g} \mid \chi_s \chi_q \rangle ] \\]
 
-TODO TODO TODO!!!
+Of course, the nuclear repulsion energy would be added to this as a constant.
 
-So, one algorithm for solving the Roothaan-Hall equations and obtaining the whats often referred to as the "Restricted Hartree-Fock" (RHF) energy is:
+
+So, one algorithm for solving the Roothaan-Hall equations and obtaining whats often referred to as the "Restricted Hartree-Fock" (RHF) energy is:
 
 1. Collect all one and two-electron integrals in a matrix, form the orthgonalizer \\(\boldsymbol{S}^{1/2} \\) 
 
@@ -192,27 +196,38 @@ So, one algorithm for solving the Roothaan-Hall equations and obtaining the what
 
 ### Epilogue 1: Is our energy computation correct?
 
-You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy in an un-orthonormal basis!" You'd be right. But, recall from the excercises of a previous set of notes, you proved that if we subject our orbitals to some linear transformation
+You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy with non-orthonormal orbitals!" You'd be right. But, recall from the excercises of a previous set of notes, you proved that if we subject our orbitals to some linear transformation
 \\[ \boldsymbol{\phi'} = \boldsymbol{\phi} \boldsymbol{A} \\] we only scale our wavefunction (Slater determinant) by a scalar quantity, 
 
-\\[ \Phi = \Phi \det(\boldsymbol{A}) \\]
+\\[ \Phi = \Phi \det(\boldsymbol{A}) = \Phi c \\]
 
+This implies our energy is also invariant to this transformation. After all,
 
-the remnant of orthonormality that once was make everything okay. One _could_ just transform everything to the orthogonalized AO basis (one electron integrals, two electron integrals, etc) but this would be needlessly expensive.
+\\[ \hat{H} \Phi c = E \Phi c \rightarrow \hat{H} \Phi = E \Phi \\]
+
+So, once we solve for some coefficients of orthonormal LCAO-MO's, we can freely transform those coefficients by some matrix and everything will be okay (\\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\)). One _could_ just transform everything in the energy expression to the orthogonalized AO basis (one electron integrals, two electron integrals, etc) and compute the energy, but this would be needlessly expensive.
 
 
 ### Epilogue 2: Where is the Slater determinant?
 
-Taking a look at our RHF algorithm above... Where is our wavefunction? Where is the _Slater determinant_? Didn't we go through all this fuss about representing our wavefunction as a Slater determinant, but it doesn't come up anywhere in solving the Roothaan-Hall equations. It doesn't come up anywhere in our Python code. You're right! It's never actually directly used. 
-(to be continued)
+Taking a look at our RHF algorithm above... Where is our wavefunction? Where is the _Slater determinant_? Didn't we go through all this fuss about representing our wavefunction as a Slater determinant, but it doesn't come up anywhere in solving the Roothaan-Hall equations. It doesn't come up anywhere in our Python code. You're right! It's never actually directly used. The  derivation of the first Slater-Condon rule as well as the Hartree-Fock equations (and therefore, the Roothaan-Hall equations) all assumed a Slater determinant form of the wavefunction. So its never used directly in the algorithm, but it influenced the form of our equations. We _could_ build a Slater determinant wavefunction from our LCAO-MO coefficients combined with our AO basis functions, but it is not needed for computing the energy.
 
 
 ### Epilogue 3: Two-electron integral notations
 
-We presented everything above in terms of _physicist's notation_ (Dirac) for two electron integrals:
+We presented everything above in terms of _physicist's notation_ (Dirac notation) for two electron integrals:
 
-However, in a lot of quantum chemistry literature, some prefer _chemist's notation_ (Pople)
+\\[ \langle \chi_i \chi_j \mid \hat{g} \mid \chi_k \chi_l \rangle = \int \chi_i^*(\boldsymbol{r}_1)\chi_j^*(\boldsymbol{r}_2) \frac{1}{\boldsymbol{r}_{12}}\chi_k(\boldsymbol{r}_1)\chi_l(\boldsymbol{r}_2) d\boldsymbol{r}_1 d\boldsymbol{r}_2 \\]
+
+where we group the real and complex conjugate functions together.
+
+However, in a lot of quantum chemistry literature, some prefer _chemist's notation_ (Pople notation), where the functions are ordered by which electron's coordinates they correspond to. These are often represented with square brackets or parathenses:
+
+\\[ [\chi_i \chi_j \mid \hat{g} \mid \chi_k \chi_l ] = \int \chi_i^*(\boldsymbol{r}_1)\chi_j(\boldsymbol{r}_1) \frac{1}{\boldsymbol{r}_{12}}\chi_k^*(\boldsymbol{r}_2)\chi_l(\boldsymbol{r}_2) d\boldsymbol{r}_1 d\boldsymbol{r}_2 \\]
 
 
 
+**Psi4 gives you two-electron integrals in chemist's notation. Therefore you need to transpose Psi4's two-electron integral tensor if you are referencing physicist's notation equations when coding. Alternatively, you can translate all equations into chemists notation.**
+
+Fin.
 
