@@ -177,7 +177,7 @@ Of course, the nuclear repulsion energy would be added to this as a constant.
 
 So, one algorithm for solving the Roothaan-Hall equations and obtaining whats often referred to as the "Restricted Hartree-Fock" (RHF) energy is:
 
-1. Collect all one and two-electron integrals in a matrix, form the orthgonalizer \\(\boldsymbol{S}^{1/2} \\) 
+1. Collect all one and two-electron integrals in a matrix, form the orthogonalizer \\(\boldsymbol{S}^{-1/2} \\) 
 
 2. Guess \\(\boldsymbol{D} = \boldsymbol{0}\\)
 
@@ -212,7 +212,6 @@ So, once we solve for some coefficients of orthonormal LCAO-MO's, we can freely 
 
 Taking a look at our RHF algorithm above... Where is our wavefunction? Where is the _Slater determinant_? Didn't we go through all this fuss about representing our wavefunction as a Slater determinant, but it doesn't come up anywhere in solving the Roothaan-Hall equations. It doesn't come up anywhere in our Python code. You're right! It's never actually directly used. The  derivation of the first Slater-Condon rule as well as the Hartree-Fock equations (and therefore, the Roothaan-Hall equations) all assumed a Slater determinant form of the wavefunction. So its never used directly in the algorithm, but it influenced the form of our equations. We _could_ build a Slater determinant wavefunction from our LCAO-MO coefficients combined with our AO basis functions, but it is not needed for computing the energy.
 
-
 ### Epilogue 3: Two-electron integral notations
 
 We presented everything above in terms of _physicist's notation_ (Dirac notation) for two electron integrals:
@@ -227,7 +226,7 @@ However, in a lot of quantum chemistry literature, some prefer _chemist's notati
 
 
 
-**Psi4 gives you two-electron integrals in chemist's notation. Therefore you need to transpose Psi4's two-electron integral tensor if you are referencing physicist's notation equations when coding. Alternatively, you can translate all equations into chemists notation.**
+**Psi4 gives you two-electron integrals in chemist's notation. Therefore you need to transpose Psi4's two-electron integral tensor if you are referencing physicist's notation equations when coding. Alternatively, you can translate all equations into chemists notation and use Psi4's two-electron integrals as given.**
 
 Fin.
 
