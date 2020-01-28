@@ -117,7 +117,7 @@ Integrals over just \\(s\\)-type Gaussian functions have clean, analytic forms. 
 ### Overlap integrals over \\(s\\) functions
 A normalized \\(s\\) overlap integral over primitive Gaussians is given by
 
-\\[ (\boldsymbol{a}\mid\boldsymbol{b}) = (s \mid s) = N_a N_b \frac{\pi}{\alpha_a + \alpha_b} \exp \left( \frac{-\alpha_a \alpha_b (\boldsymbol{A} - \boldsymbol{B})^2}{\alpha_a + \alpha_b} \right)\\]
+\\[ (\boldsymbol{a}\mid\boldsymbol{b}) = (s \mid s) = N_a N_b \left(\frac{\pi}{\alpha_a + \alpha_b}\right)^{3/2} \exp \left( \frac{-\alpha_a \alpha_b (\boldsymbol{A} - \boldsymbol{B})^2}{\alpha_a + \alpha_b} \right)\\]
 
 The normalization constant for each Gaussian can be found by
 
