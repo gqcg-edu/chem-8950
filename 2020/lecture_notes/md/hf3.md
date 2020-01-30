@@ -160,7 +160,7 @@ In order to apply this transformation to the equation \\(\boldsymbol{F}\boldsymb
 
 \\[\tilde{\boldsymbol{F}} \tilde{\boldsymbol{C}} = \tilde{\boldsymbol{C}} \boldsymbol{\epsilon} \\]
 
-\\[ \tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{1/2} \quad \quad \quad \tilde{\boldsymbol{C}} = \boldsymbol{S}^{1/2}\boldsymbol{C} \\]
+\\[ \tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \quad \quad \quad \tilde{\boldsymbol{C}} = \boldsymbol{S}^{1/2}\boldsymbol{C} \\]
 
 We can now easily diagonalize \\(\tilde{\boldsymbol{F}} \\) and transform \\(\tilde{\boldsymbol{C}} \\) back to the original unorthogonal basis \\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\), build a new density matrix, Fock matrix, get a new energy, transform the Fock matrix again, diagonalize... etc. etc. until self-consistency is achieved in the LCAO-MO coefficient matrix \\(\boldsymbol{C}\\) (and thus the density matrix).
 
@@ -185,7 +185,7 @@ So, one algorithm for solving the Roothaan-Hall equations and obtaining whats of
 
 4. Compute the energy 
 
-5. Diagonalize \\(\tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{1/2} \\) to get \\(\tilde{\boldsymbol{C}}\\) and \\(\boldsymbol{\epsilon}\\)
+5. Diagonalize \\(\tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \\) to get \\(\tilde{\boldsymbol{C}}\\) and \\(\boldsymbol{\epsilon}\\)
 
 6. Backtransform to unorthogonalized AO basis \\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\)
 
@@ -196,16 +196,67 @@ So, one algorithm for solving the Roothaan-Hall equations and obtaining whats of
 
 ### Epilogue 1: Is our energy computation correct?
 
-You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy with non-orthonormal orbitals!" You'd be right. But, recall from the excercises of a previous set of notes, you proved that if we subject our orbitals to some linear transformation
+You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy with non-orthonormal orbitals!" You'd be right. But, recall from the excercises of a previous set of notes, you proved that if we subject our orbitals to some linear transformation (NxN nonsingular matrix)
 \\[ \boldsymbol{\phi'} = \boldsymbol{\phi} \boldsymbol{A} \\] we only scale our wavefunction (Slater determinant) by a scalar quantity, 
 
-\\[ \Phi = \Phi \det(\boldsymbol{A}) = \Phi c \\]
+\\[ \Phi' = \Phi \det(\boldsymbol{A}) = \Phi c \\]
 
 This implies our energy is also invariant to this transformation. After all,
 
 \\[ \hat{H} \Phi c = E \Phi c \rightarrow \hat{H} \Phi = E \Phi \\]
 
-So, once we solve for some coefficients of orthonormal LCAO-MO's, we can freely transform those coefficients by some matrix and everything will be okay (\\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\)). One _could_ just transform everything in the energy expression to the orthogonalized AO basis (one electron integrals, two electron integrals, etc) and compute the energy, but this would be needlessly expensive.
+Re-writing the above MO row-vector \\(\boldsymbol{\phi}\\) in terms of our expansion in \\(m\\) AO's:
+\\[\boldsymbol{\phi'} = [\sum\limits_i C_{i0} \chi_i, \sum\limits_i C_{i1} \chi_i, ..., \sum\limits_i C_{im}\chi_i] \cdot \boldsymbol{A}  \\]
+We can write the above in terms of a matrix expression containing a row vector of AO's (\\(\boldsymbol{\chi}\\))
+
+\\[  \boldsymbol{\phi'} = \boldsymbol{\chi} \boldsymbol{C} \boldsymbol{A}\\]
+
+The left hand side can also be expanded in terms of the same AO's but different coefficients
+\\[  \boldsymbol{\chi} \boldsymbol{C}' = \boldsymbol{\chi} \boldsymbol{C} \boldsymbol{A}\\]
+
+Of course, the same argument regarding the effect of this linear transformation (wavefunction only being scaled and the energy unchanged) still remains true if you have AO-basis-expanded MO's.
+
+In the context of our Hartree-Fock algorithm, this all means that we can transform our orthogonalized AO-basis coefficients \\(\tilde{\boldsymbol{C}} \\) to some other basis. This will not change our energy _so long as every term in our energy expression is in the same basis_. But we shouldn't choose just any transformation \\(\boldsymbol{A}\\), we should choose one that gets us back to the unorthogonalized AO basis, since we have all of these one electron and two-electron integrals sitting around in this unorthogonal AO basis already. We do not want to have to transform every one and two electron integral to a new basis; this would be prohibitively expensive. We _could_, and we would get the same energy, but there would be no point.
+
+So, once we solve for some coefficients of orthonormal LCAO-MO's, we can freely transform those coefficients by some matrix and everything will be okay (\\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\)). One _could_ just transform everything in the energy expression to the orthogonalized AO basis (one electron integrals, two electron integrals, etc) and compute the energy, but this would be needlessly expensive. Suppose you wanted to do this. Well, you could do the following. First, we note the following is true for our MO coefficient matrix \\(\boldsymbol{C}\\): it can transform our basis to an orthonormal one. You can verify this empirically if you like:
+
+\\[\boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} = \boldsymbol{1}  \\]
+
+Similarly, one can transform our AO basis one electron Hamiltonian matrix (sum of kinetic and potential integral matrices)
+
+\\[ \boldsymbol{H}^{MO} = \boldsymbol{C}^T \boldsymbol{H} \boldsymbol{C}   \\]
+
+Our two electron integral array in the AO basis can also be transformed to the MO basis:
+
+\\[\boldsymbol{G}_{ijkl}^{MO} = \sum\limits_{pqrs} C_{pi}C_{qj}C_{rk}C_{sl} G_{pqrs} \\]
+
+We also have to transform our AO-basis density matrix into the MO basis:
+
+\\[\boldsymbol{D}^{AO} = \boldsymbol{C} \boldsymbol{D}^{MO} \boldsymbol{C}^T \implies \boldsymbol{D}^{MO} = \boldsymbol{C}^{-1} \boldsymbol{D}^{AO} (\boldsymbol{C}^{-1})^{T}   \\]
+
+Our energy expression is then
+\\[E = 2 \sum\limits_{pq} D^{MO}_{pq} H^{MO}_{pq} + \sum\limits_{pqrs} D_{pq}^{MO} D_{rs}^{MO} [ 2 G^{MO}_{prqs} - G^{MO}_{prsq} ] \\]
+**This gives the same energy as the AO basis energy expression previously given in these notes**, so long as you did the transformations correctly.
+
+
+There's yet another interesting way to get the same RHF energy. If we **really wanted to,** we could actually use \\(\tilde{\boldsymbol{C}} \\) directly in our energy computation. Recall we obtained \\(\tilde{\boldsymbol{C}} \\) by changing our basis with the 'orthogonalizer' \\(\boldsymbol{S}^{-1/2} \\), and we had to transform \\(\boldsymbol{F}\\) and \\(\boldsymbol{S}\\) to \\(\tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \\) and \\(\boldsymbol{I} = \boldsymbol{S}^{-1/2}\boldsymbol{S}\boldsymbol{S}^{-1/2} \\). To use \\(\tilde{\boldsymbol{C}} \\) directly, we just build our density matrix directly from it:
+
+\\[ \tilde{\boldsymbol{D}}_{pq} = \sum\limits_j^{N/2} \tilde{C}^*_{pj} \tilde{C}_{qj} \\]
+
+We need to also transform our one and two electron integrals with the same \\(\boldsymbol{S}^{-1/2} \\) transformation:
+\\[\tilde{\boldsymbol{H}} = \boldsymbol{S}^{-1/2} \boldsymbol{H} \boldsymbol{S}^{-1/2}  \\]
+\\[\tilde{\boldsymbol{G}}_{ijkl} = \sum\limits_{pqrs} \tilde{C}_{pi}\tilde{C}_{qj}\tilde{C}_{rk}\tilde{C}_{sl} G_{pqrs} \\]
+
+Our energy expression is just:
+
+\\[E = 2 \sum\limits_{pq} \tilde{D}_{pq} \tilde{H}_{pq} + \sum\limits_{pqrs} \tilde{D}_{pq} \tilde{D}_{rs} [ 2 \tilde{G}_{prqs} - \tilde{G}_{prsq} ] \\]
+
+
+All of these energy expressions should evaluate to the same thing. The reason they do is that a transformation of our MO  coefficients only scales our wavefunction by a scalar quantity.
+
+
+Feel free to verify this emprically using your Psi4-Numpy RHF code!
+
 
 
 ### Epilogue 2: Where is the Slater determinant?
