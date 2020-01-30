@@ -194,76 +194,11 @@ So, one algorithm for solving the Roothaan-Hall equations and obtaining whats of
 8. If new \\(\boldsymbol{D}\\) and old \\(\boldsymbol{D}\\) differ by too much, return to step 3.
 
 
-### Epilogue 1: Is our energy computation correct?
-
-You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy with non-orthonormal orbitals!" You'd be right. But, recall from the excercises of a previous set of notes, you proved that if we subject our orbitals to some linear transformation (NxN nonsingular matrix)
-\\[ \boldsymbol{\phi'} = \boldsymbol{\phi} \boldsymbol{A} \\] we only scale our wavefunction (Slater determinant) by a scalar quantity, 
-
-\\[ \Phi' = \Phi \det(\boldsymbol{A}) = \Phi c \\]
-
-This implies our energy is also invariant to this transformation. After all,
-
-\\[ \hat{H} \Phi c = E \Phi c \rightarrow \hat{H} \Phi = E \Phi \\]
-
-Re-writing the above MO row-vector \\(\boldsymbol{\phi}\\) in terms of our expansion in \\(m\\) AO's:
-\\[\boldsymbol{\phi'} = [\sum\limits_i C_{i0} \chi_i, \sum\limits_i C_{i1} \chi_i, ..., \sum\limits_i C_{im}\chi_i] \cdot \boldsymbol{A}  \\]
-We can write the above in terms of a matrix expression containing a row vector of AO's (\\(\boldsymbol{\chi}\\))
-
-\\[  \boldsymbol{\phi'} = \boldsymbol{\chi} \boldsymbol{C} \boldsymbol{A}\\]
-
-The left hand side can also be expanded in terms of the same AO's but different coefficients
-\\[  \boldsymbol{\chi} \boldsymbol{C}' = \boldsymbol{\chi} \boldsymbol{C} \boldsymbol{A}\\]
-
-Of course, the same argument regarding the effect of this linear transformation (wavefunction only being scaled and the energy unchanged) still remains true if you have AO-basis-expanded MO's.
-
-In the context of our Hartree-Fock algorithm, this all means that we can transform our orthogonalized AO-basis coefficients \\(\tilde{\boldsymbol{C}} \\) to some other basis. This will not change our energy _so long as every term in our energy expression is in the same basis_. But we shouldn't choose just any transformation \\(\boldsymbol{A}\\), we should choose one that gets us back to the unorthogonalized AO basis, since we have all of these one electron and two-electron integrals sitting around in this unorthogonal AO basis already. We do not want to have to transform every one and two electron integral to a new basis; this would be prohibitively expensive. We _could_, and we would get the same energy, but there would be no point.
-
-So, once we solve for some coefficients of orthonormal LCAO-MO's, we can freely transform those coefficients by some matrix and everything will be okay (\\(\boldsymbol{C} =\boldsymbol{S}^{-1/2}\tilde{\boldsymbol{C}}\\)). One _could_ just transform everything in the energy expression to the orthogonalized AO basis (one electron integrals, two electron integrals, etc) and compute the energy, but this would be needlessly expensive. Suppose you wanted to do this. Well, you could do the following. First, we note the following is true for our MO coefficient matrix \\(\boldsymbol{C}\\): it can transform our basis to an orthonormal one. You can verify this empirically if you like:
-
-\\[\boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} = \boldsymbol{1}  \\]
-
-Similarly, one can transform our AO basis one electron Hamiltonian matrix (sum of kinetic and potential integral matrices)
-
-\\[ \boldsymbol{H}^{MO} = \boldsymbol{C}^T \boldsymbol{H} \boldsymbol{C}   \\]
-
-Our two electron integral array in the AO basis can also be transformed to the MO basis:
-
-\\[\boldsymbol{G}_{ijkl}^{MO} = \sum\limits_{pqrs} C_{pi}C_{qj}C_{rk}C_{sl} G_{pqrs} \\]
-
-We also have to transform our AO-basis density matrix into the MO basis:
-
-\\[\boldsymbol{D}^{AO} = \boldsymbol{C} \boldsymbol{D}^{MO} \boldsymbol{C}^T \implies \boldsymbol{D}^{MO} = \boldsymbol{C}^{-1} \boldsymbol{D}^{AO} (\boldsymbol{C}^{-1})^{T}   \\]
-
-Our energy expression is then
-\\[E = 2 \sum\limits_{pq} D^{MO}_{pq} H^{MO}_{pq} + \sum\limits_{pqrs} D_{pq}^{MO} D_{rs}^{MO} [ 2 G^{MO}_{prqs} - G^{MO}_{prsq} ] \\]
-**This gives the same energy as the AO basis energy expression previously given in these notes**, so long as you did the transformations correctly.
-
-
-There's yet another interesting way to get the same RHF energy. If we **really wanted to,** we could actually use \\(\tilde{\boldsymbol{C}} \\) directly in our energy computation. Recall we obtained \\(\tilde{\boldsymbol{C}} \\) by changing our basis with the 'orthogonalizer' \\(\boldsymbol{S}^{-1/2} \\), and we had to transform \\(\boldsymbol{F}\\) and \\(\boldsymbol{S}\\) to \\(\tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \\) and \\(\boldsymbol{I} = \boldsymbol{S}^{-1/2}\boldsymbol{S}\boldsymbol{S}^{-1/2} \\). To use \\(\tilde{\boldsymbol{C}} \\) directly, we just build our density matrix directly from it:
-
-\\[ \tilde{\boldsymbol{D}}_{pq} = \sum\limits_j^{N/2} \tilde{C}^*_{pj} \tilde{C}_{qj} \\]
-
-We need to also transform our one and two electron integrals with the same \\(\boldsymbol{S}^{-1/2} \\) transformation:
-\\[\tilde{\boldsymbol{H}} = \boldsymbol{S}^{-1/2} \boldsymbol{H} \boldsymbol{S}^{-1/2}  \\]
-\\[\tilde{\boldsymbol{G}}_{ijkl} = \sum\limits_{pqrs} \tilde{C}_{pi}\tilde{C}_{qj}\tilde{C}_{rk}\tilde{C}_{sl} G_{pqrs} \\]
-
-Our energy expression is just:
-
-\\[E = 2 \sum\limits_{pq} \tilde{D}_{pq} \tilde{H}_{pq} + \sum\limits_{pqrs} \tilde{D}_{pq} \tilde{D}_{rs} [ 2 \tilde{G}_{prqs} - \tilde{G}_{prsq} ] \\]
-
-
-All of these energy expressions should evaluate to the same thing. The reason they do is that a transformation of our MO  coefficients only scales our wavefunction by a scalar quantity.
-
-
-Feel free to verify this emprically using your Psi4-Numpy RHF code!
-
-
-
-### Epilogue 2: Where is the Slater determinant?
+### Epilogue 1: Where is the Slater determinant?
 
 Taking a look at our RHF algorithm above... Where is our wavefunction? Where is the _Slater determinant_? Didn't we go through all this fuss about representing our wavefunction as a Slater determinant, but it doesn't come up anywhere in solving the Roothaan-Hall equations. It doesn't come up anywhere in our Python code. You're right! It's never actually directly used. The  derivation of the first Slater-Condon rule as well as the Hartree-Fock equations (and therefore, the Roothaan-Hall equations) all assumed a Slater determinant form of the wavefunction. So its never used directly in the algorithm, but it influenced the form of our equations. We _could_ build a Slater determinant wavefunction from our LCAO-MO coefficients combined with our AO basis functions, but it is not needed for computing the energy.
 
-### Epilogue 3: Two-electron integral notations
+### Epilogue 2: Two-electron integral notations
 
 We presented everything above in terms of _physicist's notation_ (Dirac notation) for two electron integrals:
 
@@ -279,5 +214,102 @@ However, in a lot of quantum chemistry literature, some prefer _chemist's notati
 
 **Psi4 gives you two-electron integrals in chemist's notation. Therefore you need to transpose Psi4's two-electron integral tensor if you are referencing physicist's notation equations when coding. Alternatively, you can translate all equations into chemists notation and use Psi4's two-electron integrals as given.**
 
-Fin.
+### Epilogue 3: Is our energy computation correct?
+You may or may not have noticed that we are computing our energy expression in the _unorthogonalized AO basis_. This may sound in alarm in your head: "Wait a second, we derived the energy expression under the assumption our orbitals are orthonormal, but we are computing the energy with non-orthonormal atomic orbitals!" You'd be right. Here is our energy expression:
+
+\\[E = 2 \sum\limits_{pq} D_{pq} \langle \chi_p \mid \hat{h} \mid \chi_q \rangle  + \sum\limits_{pqrs} D_{pq} D_{rs} [ 2 \langle \chi_p \chi_r \mid \hat{g} \mid \chi_q \chi_s \rangle - \langle \chi_p \chi_r \mid \hat{g} \mid \chi_s \chi_q \rangle ] \\]
+
+All of those \\(\chi \\)'s are AO's, a set of _non-orthonormal_ AO's. This can be seen most easily by looking at your overlap matrix in this AO basis: it is not an identity matrix. So, are we disobeying our assumption that the MO's (not AO's) are orthonormal, which was needed to derive the 1st Slater-Condon rule, hence our energy expression above?
+
+First, we note the following is true for our MO coefficient matrix \\(\boldsymbol{C}\\): it can transform our AO basis to an orthonormal AO basis. You can verify this empirically if you like:
+
+\\[\boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} = \boldsymbol{1}  \\]
+
+Why is this true? Consider the definition of \\(\boldsymbol{C}\\):
+
+\\[\boldsymbol{C} = \boldsymbol{S}^{-1/2} \boldsymbol{\tilde{C}} \\]
+
+taking the transpose of both sides (\\(\boldsymbol{S}^{-1/2} \\) is symmetric):
+
+\\[\boldsymbol{C}^T = \boldsymbol{\tilde{C}}^T \boldsymbol{S}^{-1/2}  \\]
+
+So we have that 
+
+\\[\boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} =\boldsymbol{\tilde{C}}^T \boldsymbol{S}^{-1/2} \boldsymbol{S} \boldsymbol{S}^{-1/2} \boldsymbol{\tilde{C}} = \boldsymbol{\tilde{C}}^T  \boldsymbol{\tilde{C}} = \boldsymbol{1} \\]
+
+The last equality is true because the eigenvectors of a symmetric matrix are _always orthonormal_, and \\(\boldsymbol{\tilde{C}}\\) is a matrix of eigenvectors of \\(\boldsymbol{\tilde{F}}\\), which is a symmetric matrix. You can verify this empirically using your RHF code.
+
+Writing our derived expression in summation notation,
+
+\\[ \boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} = \sum\limits_{pq} C_{pr} S_{pq} C_{qs} = \boldsymbol{1}_{rs}\\]
+\\[ \sum\limits_{pq} C_{pr} \langle \chi_p \mid \chi_q \rangle C_{qs} = \boldsymbol{1}_{rs}\\]
+
+The above can be re-expressed using our definition for the AO basis expansion of MO's:
+
+\\[ \langle \phi_r \mid \phi_s \rangle = \boldsymbol{1}_{rs} \\]
+
+What this tells us is the overlaps of all of our molecular orbitals form an identity matrix. Thus, our MO coefficients \\(\boldsymbol{C}\\) (_not_ \\(\boldsymbol{\tilde{C}}\\)) have the effect of transforming our AO-basis overlap matrix to the orthogonalized MO basis when the above operation is performed. So, we might write the following:
+
+\\[\boldsymbol{C}^T \boldsymbol{S}^{AO} \boldsymbol{C} = \boldsymbol{S}^{MO} \\]
+\\[\sum\limits_{pq} C_{pr} S^{AO}_{pq} C_{qs} = \boldsymbol{S}^{MO}_{rs} \\]
+
+Summing both sides over the just the \\(n\\) doubly occupied MO's we obtain
+
+\\[\sum\limits_{pq} D_{pq} S_{pq} = n \\]
+
+So, a sum over the occupied dimesions of our MO-basis overlap (an identity matrix) gives the same result as a full contraction of our AO-basis overlap and AO-basis density matrix. It's a bit more involved, but one can show the same is true for our energy contributions in our energy expression: contractions of our AO-basis density matrix with the integral arrays constructed from non-orthogonal AO basis functions gives the same result as using the _orthonormal_ MO-basis quantities directly.
+Similar to the above relationships between the AO-basis overlap and MO-basis overlap, the one-electron integrals obey the following:
+
+\\[ \boldsymbol{H}^{MO} = \boldsymbol{C}^T \boldsymbol{H} \boldsymbol{C}   \\]
+
+In more explicit notation the above really means:
+
+\\[\boldsymbol{H}^{MO} = \langle \phi_i \mid \hat{h} \mid \phi_j \rangle = \sum\limits_{pq} C_{pi} \langle \chi_p \mid \hat{h} \mid \chi_q \rangle C_{qj} \\]
+
+We can write a similar transformation for the two electron integrals:
+
+\\[\boldsymbol{G}_{ijkl}^{MO} = \langle \phi_i \phi_j \mid \hat{g} \mid \phi_k \phi_l \rangle =  \sum\limits_{pqrs} C_{pi}C_{qj}C_{rk}C_{sl} \langle \chi_p \chi_q \mid \hat{g} \mid \chi_r \chi_s \rangle \\]
+
+As for the density matrix, 
+\\[\boldsymbol{D}^{MO} = \boldsymbol{C}^{-1} \boldsymbol{D}^{AO} (\boldsymbol{C}^{-1})^{T}   \\]
+
+So, the energy expression in terms of our MO basis quantities is:
+
+\\[E = 2 \sum\limits_{pq} D^{MO}_{pq} H^{MO}_{pq} + \sum\limits_{pqrs} D_{pq}^{MO} D_{rs}^{MO} [ 2 G^{MO}_{prqs} - G^{MO}_{prsq} ] \\]
+
+The above energy expression is equivalent to our AO-basis energy expression,
+
+\\[E = 2 \sum\limits_{pq} D_{pq} \langle \chi_p \mid \hat{h} \mid \chi_q \rangle  + \sum\limits_{pqrs} D_{pq} D_{rs} [ 2 \langle \chi_p \chi_r \mid \hat{g} \mid \chi_q \chi_s \rangle - \langle \chi_p \chi_r \mid \hat{g} \mid \chi_s \chi_q \rangle ] \\]
+
+These two energy expressions are not equivalent in a _term-by-term_ sense (if you write out each term in the sums, they are not the same for the AO basis computation and MO basis computation).  However, the contraction of the AO density matrix with the AO-basis integral quantities each evaluate to the same total energy as using integrals over orthogonal MO's. 
+
+There's yet another interesting way to get the same RHF energy. If we **really wanted to,** we could actually use \\(\tilde{\boldsymbol{C}} \\) directly in our energy computation. Recall we obtained \\(\tilde{\boldsymbol{C}} \\) by changing our AO basis with the 'orthogonalizer' \\(\boldsymbol{S}^{-1/2} \\), and we had to transform \\(\boldsymbol{F}\\) and \\(\boldsymbol{S}\\) to \\(\tilde{\boldsymbol{F}} = \boldsymbol{S}^{-1/2}\boldsymbol{F}\boldsymbol{S}^{-1/2} \\) and \\(\boldsymbol{I} = \boldsymbol{S}^{-1/2}\boldsymbol{S}\boldsymbol{S}^{-1/2} \\). To use \\(\tilde{\boldsymbol{C}} \\) directly, we just build our density matrix directly from it:
+
+\\[ \tilde{\boldsymbol{D}}_{pq} = \sum\limits_j^{N/2} \tilde{C}^*_{pj} \tilde{C}_{qj} \\]
+
+We need to also transform our one and two electron integrals with the same \\(\boldsymbol{S}^{-1/2} \\) transformation:
+\\[\tilde{\boldsymbol{H}} = \boldsymbol{S}^{-1/2} \boldsymbol{H} \boldsymbol{S}^{-1/2}  \\]
+\\[\tilde{\boldsymbol{G}}_{ijkl} = \sum\limits_{pqrs} S^{-1/2}_{pi}S^{-1/2}_{qj}S^{-1/2}_{rk}S^{-1/2}_{sl} G_{pqrs} \\]
+
+Our energy expression is just:
+
+\\[E = 2 \sum\limits_{pq} \tilde{D}_{pq} \tilde{H}_{pq} + \sum\limits_{pqrs} \tilde{D}_{pq} \tilde{D}_{rs} [ 2 \tilde{G}_{prqs} - \tilde{G}_{prsq} ] \\]
+
+Why does this energy expression give the same energy as the AO-basis and MO-basis energy expressions given earlier? We are transforming every integral quantity in terms of non-orthogonal AO basis functions \\(\chi\\) to a basis of _orthogonal_ AO basis functions \\(\tilde{\chi}\\):
+
+\\[\boldsymbol{I} = \boldsymbol{S}^{-1/2} \boldsymbol{S} \boldsymbol{S}^{-1/2}\\]
+
+\\[\boldsymbol{I} = \langle \tilde{\chi}_r \mid \tilde{\chi}_s \rangle = \sum\limits_{pq} S^{-1/2}_{rp} \langle \chi_p \mid \chi_q \rangle S^{-1/2}_{sq}  \\]
+
+So, our AO basis functions are orthonormal, and our coefficients \\(\tilde{\boldsymbol{C}} \\) are also orthonormal, since they are the eigenvectors of a symmetric matrix (\\(\tilde{\boldsymbol{F}} \\)). It follows that molecular orbitals constructed from these orthonormal AO basis functions and orthonormal coefficient eigenvectors are also orthonormal. So the above energy expression is in terms of orthonormal MO's.
+
+
+The conclusion of all of this is simple: our application of the 1st Slater-Condon rule energy expression **is correct**, because the molecular orbitals **are orthonormal**. Perhaps counter-intuitively, our set of non-orthogonal MO expansion coefficients \\(\boldsymbol{C}\\) and non-orthogonal AO's \\(\chi\\) **construct orthogonal MO's** (concluded from our first investigation showing \\(\boldsymbol{C}^T \boldsymbol{S} \boldsymbol{C} = \boldsymbol{1} \\)). Thus, the energy expression in terms of these quantities is correct. 
+
+We can also compute the energy using MO-basis integral arrays \\(\boldsymbol{H}^{MO}\\) and \\( \boldsymbol{G}^{MO} \\). This MO-basis energy expression is also in terms of orthogonal MO's. 
+
+Finally, we showed how one could use the orthonormal expansion coefficients \\(\tilde{\boldsymbol{C}} \\) combined with orthonormal AO basis functions \\(\tilde{\chi}\\). Together these construct orthonormal MO's, so transforming every integral quantity appropriately by \\(\boldsymbol{S}^{-1/2}\\) in our energy expression gives us the correct result.
+
+Our use of the 1st-Slater-Condon rule energy expression is valid, as long as we are consistent with our AO basis and expansion coefficients across each term in our energy expression, and these AO basis functions and expansion coefficients construct orthogonal MO's. 
+
 
