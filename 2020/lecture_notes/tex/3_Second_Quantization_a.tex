@@ -30,7 +30,8 @@ How many terms are in the summation over $p$?
 In theory, we could have an infinite set of spin orbitals.
 For all practical purposes, however, we define a finite number of spin orbitals, known as the basis set. \\
 \\
-A N-particle state $\Psi$ can be expressed as a tensor product\footnote{See \url{http://hitoshi.berkeley.edu/221A/tensorproduct.pdf} for a thorough explanation of tensor products} of N spin orbitals multiplied by a coefficient:
+A N-particle state $\Psi$ can be expressed as a tensor\footnote{See \url{http://hitoshi.berkeley.edu/221A/tensorproduct.pdf} for a thorough explanation of tensor products} 
+of N spin orbitals multiplied by a coefficient:
 \[\ket{\Psi} = \sum_{p_1}\sum_{p_2}\cdots\sum_{p_N} \ket{\phi_{p_1}}\otimes \ket{\phi_{p_2}} \otimes \cdots \otimes \ket{\phi_{p_N}}  \bra{\phi_{p_N}}\otimes \cdots \otimes \bra{\phi_{p_2}} \otimes \braket{\phi_{p_N}  | \Psi} \]
 Or to write it more succinctly: 
 \begin{equation}
@@ -52,7 +53,8 @@ We can multiply this expression by a factor of one, expressed as $\frac{1}{\sqrt
 \begin{align*}
 \ket{\Psi} &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} 
 \end{align*}
-We see now that $\sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}}$ is just what we've previously defined as our Slater determinant $\ket{\Phi_{p_1 \cdots p_N}}$: 
+We see now that $\sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}}$ is just what we've previously defined as our Slater determinant $\ket{\Phi_{p_1 \cdots p_N}}$
+\footnote{The tensor product here represent a literal product of orbitals in our case, so $\sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}} = \sqrt{N!} \hat{A} \ket{\phi_{p_1}\phi_{p_2} \cdots \phi_{p_N}} = \ket{\Phi_{p_1 \cdots p_N}}$ as we have defined in the HF notes}
 \begin{align*}
 \ket{\Psi} &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \ket{\Phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} 
 \end{align*}
@@ -91,7 +93,8 @@ This expansion in terms of Slater determinants is often called the Configuration
 There are some shortcomings to this way of expressing things. 
 First, the description of the N-particle state $\ket{\Psi}$ is explicitly dependent on the particle number N. 
 This means that a different expression has to be written for systems with different particle numbers N. 
-Second, (talk about explicit bookkeeping of antisymmetry)
+Second, the set of indices is ordered in the expression above, and any permutations will have signs associated with it.
+We have to explicitly keep track of antisymmetry properties.
 
 \section{Representing Slater determinants with occupation numbers}
 We want to find a different way of representing our Slater determinant $\Phi_{p_1 \cdots p_N}$. 
