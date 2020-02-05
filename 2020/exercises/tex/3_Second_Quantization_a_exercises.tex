@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage[shortlabels]{enumitem}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\ve}{\varepsilon}
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 3.1 }
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item Show that the number operator $N_p$ is hermitian ($N_p = N_p^\dagger$)
+\item Prove the following anticommuntation relations:
+\begin{enumerate}[(a)]
+\item $\{a_p^\dagger, a_q\} = \delta_{pq}$ (Show this for three cases: $p = q$, $p < q$, $p > q$)
+\item $\{a_p, a_q\} = 0$ (Show this for three cases: $p = q$, $p < q$, $p > q$)
+\item $\{a_p^\dagger, a_q^\dagger\} = 0$ (Hint: show by forming Hermitian adjoint of 2b)
+\end{enumerate}
+\item Prove the six properties that are listed in Section 4.4 of the lecture notes using anticommuntation relations
+\begin{itemize} 
+\item \textit{Hint:} If you get stuck, write everything explicitly in terms of creation and annhilation operators and try applying anticommuntation relations to the middle of the expression.
+\end{itemize}
+\item Show that  $\braket{\Phi_{pq} | \Phi_{rs}} = \delta_{pr} \delta_{qs} - \delta_{ps} \delta_{qr}$
+\begin{itemize} 
+\item \textit{Hint 1:} Represent the expectation value in terms of strings of creation and annihilation operators (take care of the order of indices!)
+\item \textit{Hint 2:} Apply anticommutation relations while moving annihilation operators to the right
+\item Note: Another way to write $\delta_{pr} \delta_{qs} - \delta_{ps} \delta_{qr}$ is $\braket{p|r}\braket{q|s} - \braket{p|s}\braket{q|r}$. 
+Note that this is just a Slater determinant of overlaps: 
+\[
+   \braket{\Phi_{pq} | \Phi_{rs}} =
+  \left| {\begin{array}{cc}
+   \braket{p|r} & \braket{p|s} \\
+   \braket{q|r} & \braket{q|r} \\
+  \end{array} } \right|
+\]
+In other words, an overlap of Slater determinants can be written as a Slater determinant of overlaps. 
+\end{itemize}
+\end{enumerate}
+\end{document}
+

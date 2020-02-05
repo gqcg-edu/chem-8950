@@ -25,6 +25,7 @@
 *.fdb_latexmk
 *.fls
 *.latexmain
+*.DS_Store
 
 # Swap files
 *.swp
