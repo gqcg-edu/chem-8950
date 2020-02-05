@@ -1,0 +1,303 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\ve}{\varepsilon}
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Lecture 3.1: Introduction to Second Quantization}
+\date{February 3, 2020}
+\begin{document}
+\maketitle
+\noindent
+\section{The wavefunction is fully represented by a linear combination of Slater determinants}
+Recall that the set of spin orbitals ${\phi_p}$ form a basis for the one particle space.
+They represent single-particle states.
+These spin orbitals form a complete set, such that any single particle state $\psi$ can be represented by
+a linear combination of spin orbitals:
+\[\ket{\psi} = \sum_p \ket{\phi_p}\braket{\phi_p | \psi} \]
+How many terms are in the summation over $p$? 
+In theory, we could have an infinite set of spin orbitals.
+For all practical purposes, however, we define a finite number of spin orbitals, known as the basis set. \\
+\\
+A N-particle state $\Psi$ can be expressed as a tensor product of N spin orbitals multiplied by a coefficient:
+\[\ket{\Psi} = \sum_{p_1}\sum_{p_2}\cdots\sum_{p_N} \ket{\phi_{p_1}}\otimes \ket{\phi_{p_2}} \otimes \cdots \otimes \ket{\phi_{p_N}}  \bra{\phi_{p_N}}\otimes \cdots \otimes \bra{\phi_{p_2}} \otimes \braket{\phi_{p_N}  | \Psi} \]
+Or to write it more succinctly: 
+\begin{equation}
+\ket{\Psi} = \sum_{p_1 \cdots p_N} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \Psi} 
+\end{equation}
+For a N-particle state made of fermions, our wavefunction is antisymmetric.
+Thus, the antisymmetrizer $\hat{A}$ acting on state $\ket{\Psi}$ should not change it: 
+\[ \hat{A}\ket{\Psi} = \ket{\Psi} \]
+We will now replace $\ket{\Psi}$ with the expression in Equation 1: 
+\begin{align*}
+\ket{\Psi} &=  \hat{A} \ket{\Psi}\\
+&=\sum_{p_1 \cdots p_N}\hat{A} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \Psi}  
+\end{align*}
+We can also replace $\braket{\phi_{p_1 \cdots p_N} | \Psi}$ with $\braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} $: 
+\begin{align*}
+\ket{\Psi} &=\sum_{p_1 \cdots p_N}\hat{A} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} 
+\end{align*}
+We can multiply this expression by a factor of one, expressed as $\frac{1}{\sqrt{N!}} \sqrt{N!}$: 
+\begin{align*}
+\ket{\Psi} &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} 
+\end{align*}
+We see now that $\sqrt{N!} \hat{A} \ket{\phi_{p_1 \cdots p_N}}$ is just what we've previously defined as our Slater determinant $\ket{\Phi_{p_1 \cdots p_N}}$: 
+\begin{align*}
+\ket{\Psi} &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \ket{\Phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} 
+\end{align*}
+Now, let's re-express the term $ \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} $ by taking similar steps: 
+\begin{align*}
+\braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi} &=  \frac{1}{\sqrt{N!}} {\sqrt{N!}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi}  \\
+&=  \frac{1}{\sqrt{N!}}\braket{\phi_{p_1 \cdots p_N} | \hat{A}  {\sqrt{N!}}  | \Psi}  \\
+&= \frac{1}{\sqrt{N!}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}  
+\end{align*}
+Putting this back into our expression for $\ket{\Psi}$, we obtain: 
+\begin{align*}
+\ket{\Psi} &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \ket{\Phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \hat{A} | \Psi}  \\
+ &=\sum_{p_1 \cdots p_N}  \frac{1}{\sqrt{N!}} \ket{\Phi_{p_1 \cdots p_N}}\frac{1}{\sqrt{N!}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}   \\
+&=\sum_{p_1 \cdots p_N}  \frac{1}{N!} \ket{\Phi_{p_1 \cdots p_N}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}   \\
+\end{align*}
+To simplify our expression further, we have to recognize two things. 
+First, the indices $p_1 \cdots p_N$ must all be unique in order to have a nonzero determinant. 
+This is simply a manifestation of the antisymmetric properties of fermions. 
+Thus, our sum goes from all $p_1 \cdots p_N$ to $p_1 \neq \cdots \neq p_N$. 
+Second, we recognize that since our determinant comes up in two places in the expression, any phase factor associated with a permutation of indices $p_1 \cdots p_N$ will cancel out. 
+Thus, all permutations of a set of indices $p_1 \cdots p_N$ will give back the same expression.
+For a set with N members, there will be N! permutations for that set, and thus N! permutations that will give back the same expression.
+Thus, we can just reduce our summation to be over the set of unique permutations, represented by the ordered set $p_1 < \cdots < p_N$, and add a factor of N! to account for the 
+other possible permutations of set $p_1 \cdots p_N$ that give the same expression: 
+\begin{align*}
+\ket{\Psi} &=N! \sum_{p_1 < \cdots < p_N}  \frac{1}{N!} \ket{\Phi_{p_1 \cdots p_N}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}   \\
+&=  \sum_{p_1 < \cdots < p_N} N! \frac{1}{N!} \ket{\Phi_{p_1 \cdots p_N}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}   \\
+&=  \sum_{p_1 < \cdots < p_N} \ket{\Phi_{p_1 \cdots p_N}}\braket{\Phi_{p_1 \cdots p_N} | \Psi}   \\
+&=  \sum_{p_1 < \cdots < p_N} c_p \ket{\Phi_{p_1 \cdots p_N}} \\
+\end{align*}
+We have arrived at an expression that we know how to interpret! 
+The Slater determinants form a basis in which we can expand a N-particle state $\ket{\Psi}$. 
+$\ket{\Psi}$ can be completely expressed as a linear combination of all possible Slater determinants that can be formed from spin orbitals $\phi_p$ in a defined basis set, with a coefficient $c_p$. 
+This expansion in terms of Slater determinants is often called the Configuration Interaction (CI) expansion.
+
+There are some shortcomings to this way of expressing things. 
+First, the description of the N-particle state $\braket{\Psi}$ is explicitly dependent on the particle number N. 
+This means that a different expression has to be written for systems with different particle numbers N. 
+Second, (talk about explicit bookkeeping of antisymmetry)
+
+\section{Representing Slater determinants with occupation numbers}
+We want to find a different way of representing our Slater determinant $\Phi_{p_1 \cdots p_N}$. 
+Let's think about we actually need to define a Slater determinant. 
+If we have a set of spin orbitals $\phi_p$, all we really need to know in order to uniquely define a determinant is which $\phi_p$ is occupied, and thus included in our Slater determinant, and which $\phi_p$ is not. 
+In other words, we only need the set of indices $p$. 
+For the Slater determinant written as $\Phi_{p_1 \cdots p_N}$, we need to know indices $p_1 \cdots p_N$.
+
+We can assign an ``occupation number" to each $\phi_p$ in our basis set.
+If it is occupied and in our Slater determinant, we can assign a number 1, denoting that there is one electron in the spin orbital.
+If it is unoccupied, we can assign a number 0.
+In this course, we are only dealing with electrons, which can only have occupation numbers 1 or 0, since two electrons cannot occupy the same spin orbital. 
+For particles which are bosons, we do not have this limitation and the occupation numbers are only restricted by the total number of particles N. 
+
+The general notation for representing a state in the occupation number representation is this: 
+\[\ket{n_1 \, n_2 \, \cdots \,  n_p \, \cdots }\] 
+where $n_p = 0$ if single-particle state $p$ is unoccupied and $n_p = 1$ if single-particle state $p$ is occupied.
+
+\section{Relating the determinant and ON formalisms}
+
+For the set of ordered indices $p_1 < p_2 < \cdots < p_n$, a determinant $\Phi_{p_1 \cdots p_N}$ is equivalent to the occupation vector $\ket{\mathbf{n}_{p_1 \cdots p_N}}$:
+\[\ket{\Phi_{p_1 \cdots p_N}} = \ket{\bold{n}_{p_1 \cdots p_N}}= \ket{ \cdots \,  n_p \, \cdots }\] 
+where
+\[n_p = 0 \,\, \text{if $p \notin \{p_1 \cdots p_N\}$} \]
+\[n_p = 1 \,\, \text{if $p \in \{p_1 \cdots p_N\}$} \]
+That is to say, $n_p$ is zero if spin orbital $\phi_p$ is not part of the determinant $\Phi_{p_1 \cdots p_N}$, and one if it is. \\
+\\
+Let's go through an example. 
+Say we have a 4 particle system. 
+We choose to represent this system with a basis set of 10 spin orbitals. 
+We form our first Slater determinant with particles in spin orbitals 1, 3, 4, and 7, and represent it as 
+$\ket{\Phi_{1347}}$, or alternatively, $\ket{\{\phi_1\phi_3\phi_4\phi_7\}}$
+How do we represent this in the  occupation number (ON) representation? 
+We simply use numbers 0 or 1 to represent all the spin orbitals in the basis set, putting a 1 when that spin orbital is occupied in the Slater determinant: 
+\[\ket{\Phi_{1347}} \rightarrow \ket{1011001000} \]
+For a set of indices $q_1, q_2, \cdots, q_n$ that are not ordered, 
+\[\ket{\Phi_{p_1 \cdots p_N}}  = (-1)^R \ket{\bold{n}_{p_1 \cdots p_N}}\]
+where $R \in S_n$ represents the permutations such that $q_{R_1} < q_{R_2} < \cdots < q_{R_n}$ \\
+\\
+Note that the choice to represent the Slater determinant in terms of occupation numbers is not much more abstract than our choice 
+of representing a quantum state by a state vector $\ket{\psi}$.
+Just as the state vectors came with its own set of mathematical rules and physical interpretations, 
+we now delve into the mathematics of the ON representation. 
+%where n_p = 0 if $\phi_p$ is unoccupied and n_p = 1 if $\phi_p$ is occupied. 
+%Hilbert space vs Fock space 
+\section{Creation and annihilation operators}
+Just as there were operators that acted on state vectors, there are operators in the ON representation. 
+Can we come up with some operators that make sense for this representation? 
+Remember that we are talking about performing actions on the numbers 1 or 0, corresponding to whether a spin state is occupied or not. 
+Realistically, there is not many basic actions that we can think of. 
+In fact, there are just \textit{two} basic operators that act in the ON representation:
+one that makes an occupied spin state unoccupied ($n_p$ goes from 1 to 0) and one that makes an unoccupied state occupied (($n_p$ goes from 0 to 1). 
+
+\subsection{The Annihilation Operator} 
+First, we can define an operator that takes $n_p$ from 1 to 0.
+Formally, this is defined as: 
+\begin{equation}
+a_p \ket{\cdots n_p \cdots} = (-1)^{m} n_p \ket{\cdots (1-n_p) \cdots} 
+\end{equation}
+where 
+\[m = \sum_{k=1}^{p-1} n_k \]
+You can see that when $n_p$ is 1, acting $a_p$ on the ON representation of the determinant returns a phase factor times that determinant with $n_p$=0. 
+Specifically, phase factor depends on the sum of all $n$ before $n_p$. 
+If $n_p$ is already 0, we just get 0 for the final result. 
+% in determinant form
+In the language of determinants, $a_p$ takes a determinant where spin orbital $\phi_p$ is occupied and makes it unoccupied. 
+To say it another way, it decreases the number of particles in a state by one. 
+If $\phi_p$ is already unoccupied, we get a 0 because you cannot take away a particle that is not there.
+We refer to $a_p$ as the annihilation operator, because it annihilates a particle from a particle state. 
+What happens if we act $a_p$ on a determinant with a single particle state $p$? 
+That is, where all $n_k$ is 0 except for $n_p$? 
+\[a_p \ket{0 \cdots n_p \cdots0} = (-1)^{m} n_p \ket{\cdots (1-n_p) \cdots}  \]
+We see that this gives us a state in which all occupation numbers are 0:
+\[a_p \ket{0 \cdots n_p \cdots0} = \ket{0 \cdots 0 \cdots 0}  \]
+We call this state the \textit{true vacuum} state, and represent it as $\ket{0}$. 
+It is an artificial state that we have defined so we know how the annihilation operator acts on single particle states, and it is normalized such that 
+\[\braket{0 | 0} = 1\]
+Using our definition of the annihilation operator in Equation 2, we know that 
+\[a_p \ket{0} = 0 \,  \, \forall \, \, p \]
+
+\subsection{The Creation Operator}
+We now need to define an operator that takes $n_p$ from 0 to 1.
+To do this, let's start from a relation we have discussed in the previous section: 
+\[a_p \ket{0 \cdots n_p \cdots0} = a_p \ket{n_p} = \ket{0} \]
+We can take the adjoint of both sides: 
+\begin{align*}
+(a_p \ket{0 \cdots n_p \cdots0})^\dagger &= (\ket{0})^\dagger \\
+\bra{0 \cdots n_p \cdots0} a_p^\dagger &= \bra{0} \\
+\end{align*}
+We can now right project $\ket{0}$ on both sides: 
+\begin{align*}
+\bra{0 \cdots n_p \cdots0} a_p^\dagger \ket{0} &= \braket{0 | 0}  \\
+\bra{0 \cdots n_p \cdots0} a_p^\dagger \ket{0} &= 1  \\
+\end{align*}
+
+Remember that $\bra{0 \cdots n_p \cdots0} $ represents a single particle state in which only spin orbital $\phi_p$ is occupied. 
+We see that in order for the quantity $\bra{0 \cdots n_p \cdots0} a_p^\dagger \ket{0}$ to equal 1, $a_p^\dagger \ket{0}$ has to also give a state in which just $\phi_p$ is occupied
+because of the orthonormality of the spin orbitals. We obtain:
+\begin{align*}
+&\bra{0 \cdots n_p \cdots0} a_p^\dagger \ket{0} = 1 \\
+&\braket{0 \cdots n_p \cdots0 | 0 \cdots n_p \cdots0 } = 1  \\
+&a_p^\dagger \ket{0}  = \ket{0 \cdots n_p \cdots0 } \\
+\end{align*}
+We have arrived at something that gives us what we wanted: a way to take $n_p$ from 0 to 1! 
+We see that the desired operator on state $\phi_p$ is simply the adjoint of the annhilation operator on state $\phi_p$.\\
+\\
+Formally this is defined as:
+\begin{equation}
+a_p^\dagger \ket{\cdots n_p \cdots} = (-1)^{m} (1 - n_p) \ket{\cdots (1-n_p) \cdots} 
+\end{equation}
+where 
+\[m = \sum_{k=1}^{p-1} n_k \]
+You can see that when $n_p$ is 0, acting $a_p^\dagger$ on the ON representation of the determinant returns a phase factor times that determinant with $n_p$=1. 
+If $n_p$ is already 1, we get a 0 for the final result.
+% in determinant form
+In the language of determinants, $a_p^\dagger$ takes a determinant where spin orbital $\phi_p$ is unoccupied and makes it occupied. 
+To say it another way, it increases the number of particles in a state by one. 
+If $\phi_p$ is already occupied, we get a 0 because we cannot occupy the same spin state more than once. 
+This is simply a reflection of the fermionic properties of the electron. 
+We refer to $a_p^\dagger$ as the creation operator, because it creates a particle and adds it to a state. 
+
+\subsection{The number operator}
+The annihilation and creation operators are the building blocks for more complicated operators, which are represented by products of the two.
+If an operator is particle conserving, we expect the same number of creation and annihilation operators. 
+The simplest particle conserving operator we can come up with is just the product of one creation and one annihilation operator: 
+\[x_p^\dagger x_p \]
+There are two cases, applying the operator on a state in which $n_p = 1$ and a state in which $n_p = 0$.
+We now treat both cases to see the consequences of this operator: \\
+\\
+Case 1: $n_p = 1$ \\
+\begin{align*}
+x_p^\dagger x_p \ket{\cdots p \cdots} &= x_p^\dagger x_p \ket{\cdots 1 \cdots} \\
+&= (-1)^m x_p^\dagger \ket{\cdots 0 \cdots} \\
+&= (-1)^m (-1)^m \ket{\cdots 1 \cdots}  \\
+&= (1) \ket{\cdots n_p \cdots}  \\
+\end{align*}
+Case 2: $n_p = 0$ \\
+\begin{align*}
+x_p^\dagger x_p \ket{\cdots p \cdots} &= x_p^\dagger x_p \ket{\cdots 0 \cdots} \\
+&= (0)\ket{\cdots 0 \cdots} \\
+\end{align*}
+We see that generally, 
+\[x_p^\dagger x_p \ket{\cdots p \cdots} = n_p\ket{\cdots p \cdots}  \]
+Operating the operator $x_p^\dagger x_p$ on a state will give back the occupation number times that state.
+The occupation numbers thus are eigenvalues of the operator $x_p^\dagger x_p$. 
+Because of this, we refer to this operator as the Number operator $N_p$. 
+We can define a Total Number operator, $\hat{N} = \sum_p N_p$, which gives back the total numbers of particles in a state. \\
+\\
+The number operator gives us some insight as to why we refer to this formalism as the occupation number occupation.
+Just as in the ``energy representation", basis states are eigenfunctions of an energy operator (Hamiltonian),
+in the ``occupation number representation", basis states are eigenfunctions of the number operator. 
+
+
+\subsection{The determinant can be represented by a string of creation operators}
+
+Any string of creation operators acting on the vacuum is equivalent to the corresponding Slater determinant with the same ordering of states. 
+%go through lemma 1 and 2 (maybe after anticommutation relations b/c need those? , also, see property 2 
+%distinguish determinant form vs ON form
+%determinant can be directly represented without phase ambiguity 
+%why spend so much time on ON if don't really use it? 
+% from here on mostly just work with determinant representation 
+
+\section{Anticommutation relations}
+
+Recall that the commutator of 2 operators $\hat{A}$ and $\hat{B}$ is defined as
+\[ [\hat{A}, \hat{B} ] = \hat{A}\hat{B} - \hat{B}\hat{A} \]
+We can also defined an \textit{anticommuntator} for operators $\hat{A}$ and $\hat{B}$:
+\[ \{\hat{A}, \hat{B} \} = \hat{A}\hat{B} + \hat{B}\hat{A} \]
+There are some key anticommuntation relations that will be critical for mathematical manipulations for creation and annihilation operators:
+\begin{enumerate}
+\item  $\{a_p, a_q\} = 0$
+\item $\{a_p^\dagger, a_q^\dagger \} = 0$
+\item $\{a_p^\dagger, a_q\} = \delta_{pq}$
+\end{enumerate}
+
+\subsection{Select properties}
+There are select properties that directly result from the anticommutation relations: 
+\begin{enumerate}
+\item $(a_p)^2 = 0$, $(a_p^\dagger)^2 = 0$
+\item $a_pa_q = -a_qa_p$,  $a_p^\dagger a_q^\dagger = -a_q^\dagger a_p^\dagger$
+\item$ N_p^2 = N_p$
+\item $[N_p, N_q] = 0$
+\item $[a_p, N_q] = \delta_{pq}a_p$
+\item $[a_p^\dagger, N_q] = -\delta_{pq}a_p^\dagger$
+\end{enumerate}
+
+\begin{comment}
+Types of problems:
+1. Slater's rules
+2. 
+
+
+Types of ways to solve:
+1. First quantization
+2. 2nd quantization in the true vacuum without Wick's theorem
+3. 2nd quantization in the true vacuum with Wick's theorem
+4. PH formalism with Wick's theorem 
+5. PH formalism with Wick's theorem and $\Phi$-normal ordered Hamiltonian
+
+\end{comment}
+
+\section{Exercises}
+\begin{enumerate}
+\item Show that the number operator $N_p$ is hermitian ($N_p = N_p^\dagger$)
+\item prove the anticommuntation relations
+\item prove properties 
+\item evaluate $\braket{\Phi_{pq} | \Phi_{rs}}$ using second quantization
+\end{enumerate}
+
+\section{Recommended Resources}
+\end{document}
