@@ -21,9 +21,9 @@
 \maketitle
 \noindent
 \section{The wavefunction is fully represented by a linear combination of Slater determinants}
-Recall that the set of all spin orbitals $\{\phi_p\}$ forms a basis for the one-particle space.
+Recall that the set of all \textbf{spin orbitals} $\{\phi_p\}$ forms a basis for the one-particle space.
 They can be used to represent any single-particle state.
-These spin orbitals form a complete set; any single particle state $\psi$ can be represented by
+These spin orbitals form a complete set; any \textbf{single particle state} $\psi$ can be represented by
 a linear combination of spin orbitals:
 \[\ket{\psi} = \sum_p \ket{\phi_p}\braket{\phi_p | \psi} \]
 How many terms are in the summation over $p$? 
@@ -32,7 +32,7 @@ For all practical purposes, however, we define a finite number of spin orbitals,
 \\
 A N-particle state $\Psi$ can be expressed as a tensor\footnote{See \url{http://hitoshi.berkeley.edu/221A/tensorproduct.pdf} for a thorough explanation of tensor products} 
 of N spin orbitals multiplied by a coefficient:
-\[\ket{\Psi} = \sum_{p_1}\sum_{p_2}\cdots\sum_{p_N} \ket{\phi_{p_1}}\otimes \ket{\phi_{p_2}} \otimes \cdots \otimes \ket{\phi_{p_N}}  \bra{\phi_{p_N}}\otimes \cdots \otimes \bra{\phi_{p_2}} \otimes \braket{\phi_{p_N}  | \Psi} \]
+\[\ket{\Psi} = \sum_{p_1}\sum_{p_2}\cdots\sum_{p_N} \ket{\phi_{p_1}}\otimes \ket{\phi_{p_2}} \otimes \cdots \otimes \ket{\phi_{p_N}}  \bra{\phi_{p_N}}\otimes \cdots \otimes \bra{\phi_{p_2}} \otimes \braket{\phi_{p_1}  | \Psi} \]
 Or to write it more succinctly: 
 \begin{equation}
 \ket{\Psi} = \sum_{p_1 \cdots p_N} \ket{\phi_{p_1 \cdots p_N}} \braket{\phi_{p_1 \cdots p_N} | \Psi} 
