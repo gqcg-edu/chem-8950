@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 3.2 }
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item Derive the first Slater's rule using the second quantization formalism: 
+\[\braket{\Phi | \hat{H} | \Phi} = h_{ii} + \frac{1}{2} \sum_{ij} \braket{ij || ij} \]
+\item (Optional, if you need more practice) Derive the second Slater's rule using the second quantization formalism: 
+\[\braket{\Phi | \hat{H} | \Phi_i^a } = h_{ia} + \frac{1}{2} \sum_{j} \braket{ij || aj} \]
+where $\ket{\Phi_i^a } = a_a\dg a_i \ket{\Phi}$
+\item Work through the derivation of the one-electron and two-electron operators in the second quantization formalism yourself and make sure you understand what is going on 
+\item Show that normal vs antisymmetrized forms of the two-electron operator are equivalent. Bonus: show that the antisymmetrized form for a general k-body operator is equivalent to its normal form 
+\item Show that $\hat{h}(\*{r_i}) \phi_p (\*{r_i})  = \sum_q \braket{q | \hat{h} | p } \phi_q (\*{r_i}) $
+\item (Optional) Show that $\hat{g}(\*{r_i}, \*{r_j}) \phi_{p_i} (\*{r_i}) \phi_{p_j} (\*{r_j})  \sum_{pq} \braket{pq | \hat{h} | p_i p_j  }  \phi_p (\*{r_i})  \phi_q (\*{r_i})$
+\item (Optional) Show that 
+\[a_r a_s \prod a\dg \ket{0} = \sum\limits_{i < j} ^N  (-1)^{i + j }   \delta_{rp_i} \delta_{sp_j}  \prod{}^{p_ip_j} a\dg \ket{0} + 
+\sum\limits_{i > j} ^N  (-1)^{i + j -1} \delta_{rp_i} \delta_{sp_j} \prod{}^{p_ip_j}a\dg \ket{0} \]
+by applying Equation 5 twice 
+\end{enumerate}
+\end{document}
+
