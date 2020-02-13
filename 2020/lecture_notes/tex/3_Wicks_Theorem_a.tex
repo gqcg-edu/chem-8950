@@ -1,0 +1,508 @@
+
+\documentclass{article}
+\usepackage{simplewick}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\ctr}{\contraction}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Lecture 3.3: Wick's Theorem}
+\date{February 10$^{\text{th}}$, 2020}
+\begin{document}
+\maketitle
+\noindent
+\section{A note on permutations} 
+We will use the following to denote permutations on a set of indices: 
+\[ x_{R_1} \cd x_{R_N} = (-1)^R x_1 \cd x_N \]
+R is the permutation of the set $\{x_1, \cd, x_N\}$, and belongs to the permutation group $S_N$ ($R \in S_N$). 
+It can be represented as: 
+\begin{equation*}
+R = 
+\begin{pmatrix}
+1 & 2 & \cdots & N  \\
+R_1& R_2& \cdots & R_N \\
+\end{pmatrix}
+\end{equation*}
+The first row corresponds to the original indices while the second row corresponds to the permuted indices. 
+R can also be written in cyclic notation to easily determine the sign of the permutation. It is easiest to show this with an example: \\ \\
+\[ x_2 x_3 x_1 x_5 x_4  = (-1)^R x_1 x_2 x_3 x_4 x_5 \]
+Permutation R can be expressed as:
+\begin{equation*}
+R = 
+\begin{pmatrix}
+1 & 2 &3 & 4 & 5  \\
+2 & 3 & 1 & 5 & 4 \\
+\end{pmatrix}
+\end{equation*}
+where the permuted indices $R_1$ corresponds to index 2 in the original string and so on. \\ \\
+To determine the cyclic permutations, we pick one index and follow the permutations until we get back to that same index. 
+We can see that here, index 1 turns to 2, index 2 turns to 3, and index 3 turns to 1.
+Thus, (123) represents a cyclic permutation. 
+In the same way, index 4 becomes index 5, and index 5 becomes index 4, and (45) represents another cyclic permutation. 
+\\ \\
+In cyclic notation, we can write: 
+\begin{equation*}
+R = 
+\begin{pmatrix}
+1 & 2 &3 & 4 & 5  \\
+2 & 3 & 1 & 5 & 4 \\
+\end{pmatrix}
+= (123)(45)
+\end{equation*}
+An odd number of elements in a particular cyclic permutation corresponds to a positive sign (+) for the permutation.
+An even number of elements in a particular cyclic permutation corresponds to a negative sign ($-$) for the permutation. 
+In the above example, we have one cyclic permutation with a positive sign and one cyclic permutation with a negative sign, so the overall sign of the permutation is negative.
+We thus have: 
+\[ x_2 x_3 x_1 x_5 x_4  = -x_1 x_2 x_3 x_4 x_5 \]
+\\
+Here is another example where one index does not change its place: 
+\[ x_1 x_3 x_2 x_5 x_4  = (-1)^R x_1 x_2 x_3 x_4 x_5 \]
+\begin{equation*}
+R = 
+\begin{pmatrix}
+1 & 2 &3 & 4 & 5  \\
+1 & 3 & 2 & 5 & 4 \\
+\end{pmatrix}
+= (1)(23)(45) = (+)(-)(-) = (+)
+\end{equation*}
+\[ x_1 x_3 x_2 x_5 x_4  =  x_1 x_2 x_3 x_4 x_5 \]
+
+\section{Prerequisites to Wick's Theorem}
+\subsection{Evaluating matrix elements of products of operators on vacuum}
+Wick's theorem is a clever bookkeeping method for evaluating matrix elements quickly and efficiently. 
+We need three things first: 
+
+\subsection{Normal Products}
+A normal product is a product of creation and annihilation operators where all the creation operators are to the left of the expression.
+We say that a product in which all creation operators are to the left is ``normal ordered". 
+We denote a normal product of a string of operators $x_1 \cd x_m$ (where $x_i$ can represent a creation or annihilation operator) with the notation ``$n[x_1 \cd x_m]$'', and formally define it as: 
+\[n[x_1 \cd x_m]= (-1)^R a_{R_1}\dg \cd a_{R_j}\dg a_{R_{j+1}} \cd a_{R_m} \]
+\[
+R = 
+\begin{pmatrix}
+1 & 2 &\cd & j & j+1 & \cd & m  \\
+R_1 & R_2 &\cd & R_j & R_{j+1} & \cd & R_m  \\
+\end{pmatrix}
+\] \\
+The normal product of an empty set is defined to be one:
+\[ n[\varnothing] = 1\]
+
+\subsubsection{Example 1}
+\[n[a_p\dg a_q a_r ] = (-)^R a_p\dg a_r\dg a_q \]\\
+\[
+R = 
+\begin{pmatrix}
+p & q & r  \\
+p & r & q  \\
+\end{pmatrix}
+= (p)(qr) = (+)(-) = (-)
+\] \\
+\[n[a_p\dg a_q a_r ] = - a_p\dg a_r\dg a_q \]
+Equivalently, we can write: 
+\[n[a_p\dg a_q a_r ] = (-)^R a_r\dg a_p\dg a_q \]\\
+\[
+R = 
+\begin{pmatrix}
+p & q & r  \\
+r & p & q  \\
+\end{pmatrix}
+= (prq) = (+) 
+\] \\
+\[n[a_p\dg a_q a_r ] =  a_r\dg a_q\dg a_q \]
+Thus we see normal products can be written in different ways. 
+\subsubsection{Example 2}
+\[ n[a_p\dg a_q\dg a_r\dg] = a_p\dg a_q\dg a_r\dg \]
+Here, the string is already normal ordered, so we can just drop the normal product notation. 
+\subsubsection{Properties of Normal Products}
+There are several properties of normal products that are useful to us: 
+\begin{enumerate}
+\item A normal product of a normal ordered string of operators is just that string of operators:
+\[n[a_{R_1}\dg \cd a_{R_j}\dg a_{R_{j+1}} \cd a_{R_m} ] = a_{R_1}\dg \cd a_{R_j}\dg a_{R_{j+1}} \cd a_{R_m}  \]
+We note that a string of only creation operators or only annihilation operators are already in normal order. 
+\item A normal product of a normal product is just the normal product: 
+\[n[n[x_1 \cd x_m]] = n[x_1 \cd x_m] \]
+This is simply a manifestation of property 1. 
+\item You can freely permute a string of operators, with an appropriate phase factor, as long as it is within the normal ordered form:
+\[n[x_{R_1} \cd x_{R_m} ] = (-1)^R n[ x_1 \cd x_m]\]
+For example,
+\[n[x_2 x_1] = -n[x_1 x_2] \]
+\end{enumerate}
+
+\subsection{Contractions of Operators}
+
+We \textit{define} a contraction between 2 operators $x_1$ and $x_2$ where $x_i$ can be either a creation or an annihilation operator, as the quantity: 
+$$
+\contraction{}{x}{{}_1}{x}
+x_1 x_2 = x_1x_2 - n[x_1x_2]
+$$
+We can derive the value of the contraction for various combinations of creation and annihilation operators by evaluating the expression. 
+We will make use of the properties listed above as well as remembering our anticommutation relations.
+We have four cases to consider: 
+\begin{enumerate}
+\item $x_1 = a_p$, $x_2 = a_q$ \\
+$$
+\contraction{}{a}{{}_p}{a}
+a_p a_q = a_p a_q  - n[a_p a_q] = a_p a_q  - a_p a_q  = 0 
+$$
+\item $x_1 = a_p$, $x_2 = a_q\dg$ \\
+$$
+\contraction{}{a}{{}_p}{a}
+a_p a_q\dg = a_p a_q\dg  - n[a_p a_q\dg] = a_p a_q\dg  +  a_q\dg a_p = \delta_{pq}
+$$
+\item $x_1 = a_p\dg$, $x_2 = a_q$ \\
+$$
+\contraction{}{a}{{}_p}{a}
+a_p\dg a_q = a_p\dg a_q  - n[a_p\dg a_q] = a_p\dg a_q  - a_p\dg a_q  = 0 
+$$
+\item $x_1 = a_p\dg$, $x_2 = a_q\dg$ \\
+$$
+\contraction{}{a}{{}_p}{a}
+a_p\dg a_q\dg = a_p\dg a_q\dg  - n[a_p\dg a_q\dg] = a_p\dg a_q\dg  - a_p\dg a_q\dg  = 0 
+$$
+
+\end{enumerate}
+\subsection{Normal Products with Contractions}
+A normal products with contractions inside
+\[ 
+\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] 
+\] 
+can be rewritten as: 
+\[ 
+\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] 
+= 
+\contraction{(-1)^R}{x}{{}_{i_1} }{x}
+\contraction{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
+(-1)^R x_{i_1}x_{j_1} \cd x_{i_\lambda} x_{j_\lambda} n[x_{k_1} \cd x_{k_\mu}]
+\] 
+where 
+\[
+R = 
+\begin{pmatrix}
+1 & 2 & \cd & x_m  \\
+i_1 & j_1 & \cd& k_\mu \\
+\end{pmatrix}
+\] \\
+and the indices $2\lambda + \mu = m$.
+In words, a normal product with contractions can be written as a product of contractions outside the normal product multiplied by the uncontracted terms and a phase factor. 
+It is important to note that when the contractions are taken out, you cannot flip the order of the contraction.
+In other words, 
+\[ \contraction{}{x}{{}_p}{x}
+x_p x_q \neq \pm x_q x_p  \]
+\subsubsection{Example 1}
+\[\contraction{n[}{a}{{}_p a_q }{a}
+\contraction{n[a_p a_q a_r\dg] = (-)^R a}{a}{_p}{a}
+n[a_p a_q a_r\dg] = (-1)^R a_p a_r\dg n[a_q] \] \\
+\[
+R = 
+\begin{pmatrix}
+p & q & r  \\
+p & r& q\
+\end{pmatrix}
+= (p)(qr) = (-)
+\] \\
+\[\contraction{n[}{a}{{}_p a_q }{a}
+\contraction{n[a_p a_q a_r\dg] = -}{a}{{}_p}{a}
+n[a_p a_q a_r\dg] = - a_p a_r\dg n[a_q] = -\delta_{pr}a_q \]
+\subsubsection{Two tips}
+There are two tips for faster evaluation of normal products with contractions. \\ \\
+First, for a \textit{fully contracted} term, meaning that all operators are involved in a contraction, 
+the phase factor can be obtained by counting the number of intersecting contraction lines $\nu$: 
+\[(-1)^R = (-1)^\nu\]
+For example, the term 
+$\contraction{n[}{a}{{}_p}{a}
+\contraction{n[a_p a_q  }{a}{{}_r\dg }{a}
+\contraction{n[a_p a_q a_r\dg a_s }{a}{{}_t\dg}{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $
+has 0 intersecting contraction lines, and will have an overall phase factor of (+1).  \\ \\
+The term 
+$\contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg }{a}
+\contraction{n[a_p a_q a_r\dg a_s  }{a}{{}_t\dg}{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $ has 1 intersection, and will have an overall phase factor of (-1).  \\ \\
+The term
+$\contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $ has 2 intersections, and will have an overall phase factor of (+1). \\ \\
+We will use the following notation to denote a normal product which is fully contracted: 
+\[n\ol{\ol{[x_1 \cd x_m]}} \]
+The above three examples can all be expressed with this notation. \\ \\
+If you have a group of fully contracted operators within your normal product, you can take the full group out and use the number of intersecting contraction lines
+to determine the permutation associated with taking the group out.  \\ \\
+For example, in the term 
+\[\contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+\contraction{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg a_w a_x a_y\dg] \]
+the first six operators are fully contracted, and has an overall phase factor of (+) because there are 2 intersections.
+As a result, we can take it out directly of the normal product: 
+\[\contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+\contraction{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
+n[{\color{blue} a_p a_q a_r\dg a_s a_t\dg a_u\dg} a_v\dg a_w a_x a_y\dg] =  
+\contraction{}{a}{{}_p}{a}
+\contraction{a_p a_r\dg }{a}{{}_q }{a}
+\contraction{a_p a_r\dg a_q a_t\dg  }{a}{{}_s}{a}
+\contraction{a_p a_r\dg a_q a_t\dg a_s  a_u\dg n[a_v\dg}{a}{{}_w a_x}{a}
+{\color{blue} a_p a_r\dg a_q a_t\dg a_s  a_u\dg }n[a_v\dg a_w a_x a_y\dg]\]
+\\ \\
+The second tip is that neighboring contractions can be taken out of the normal product without considering the permutation.
+By ``neighboring contraction", I mean contractions between operators that are next to each other.
+This is because the permutation associated with a neighboring pair is always positive. 
+For example,
+\[
+\contraction[2ex]{n[}{a}{{}_p{\color{blue} a_q a_r\dg } a_s}{a}
+\contraction{n[a_p }{a}{{}_q}{a}
+n[a_p {\color{blue} a_q a_r\dg } a_s a_t\dg a_u\dg] = 
+\contraction{}{a}{{}_q}{a}
+\contraction{{\color{blue} a_q a_r\dg }  n[}{a}{{}_p a_s}{a}
+{\color{blue} a_q a_r\dg }  n[a_p a_s a_t\dg a_u\dg] \]
+\subsection{Matrix elements of normal products with contractions}
+%ultimate goal is to know how to evaluate matrix elements 
+We are now ready to prove some rules for determining how a normal ordered string of operators acts in the true vacuum.
+
+\begin{itemize}
+\item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
+
+Proof: If all operators are creation operators, 
+\[n[a_{p_1}\dg \cd a_{p_m}\dg]\ket{0} = a_{p_1}\dg \cd a_{p_m}\dg\ket{0} = \ket{\Phi_{p_1 \cd p_m}} \neq 0\]
+
+If at least one $x_i$ is an annihilation operator, it will be the rightmost term by the definition of the normal product, and will annihilate the vacuum.
+The overall result is zero.  
+\item Rule 2: $\braket{0 | n[x_1 \cd x_m] | 0} = 0$ for  $m \geq 1$ \\
+
+Proof: If all operators are creation operators, they will annihilate the vacuum because 
+\[(a_p\ket{0})\dg = \bra{0}a_p\dg = 0\]
+If one or more operators are annihilation operators, they will be on the right by the definition of the normal product and annihilate the vacuum. 
+\item Rule 3. $\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0} = 0$ if there is at least 1 uncontracted annihilator among operators $x_1 \cd x_m$.  \\
+
+Proof:
+\[ 
+\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0}
+= 
+\contraction{(-1)^R}{x}{{}_{i_1} }{x}
+\contraction{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
+(-1)^R x_{i_1}x_{j_1} \cd x_{i_\lambda} x_{j_\lambda} n[x_{k_1} \cd x_{k_\mu}] \ket{0}
+\] 
+By Rule 1, $n[x_{k_1} \cd x_{k_\mu}] \ket{0} = 0$ unless all operators $x_{k_1} \cd x_{k_\mu}$ are creation operators. 
+\item Rule 4. $\braket{0| \contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] |0} = 0$ unless all operators are contracted. 
+In other words, only a fully contracted normal product ($n\ol{\ol{[x_1 \cd x_m] }}$) gives a nonzero expectation value in the true vacuum. \\
+
+Proof: This is easily see as an application of Rule 2. Contractions of operators reduces to a number which can be pulled out of the expectation value.The only case where the expectation value is nonzero is one in which there is no operators left in the normal product, $\braket{0 | n[\varnothing] | 0} \neq 0$ \\
+
+As a consequence of Rule 4, a vacuum expectation value of any normal product with contractions will be zero if there are a odd number of operators. 
+\end{itemize}
+%TODO: write better
+We know now how to quickly evaluate matrix elements of a normal ordered string, and a normal ordered string with contractions.
+Next, we need to know how to quickly put any string in normal order so we can take advantage of these shortcuts. 
+
+\section{Wick's Theorem}
+We will first start by seeing what happens if we put specific strings of operators in normal order just by applying anticommutation relations.  \\ 
+Putting a product of 2 operators in normal order is a direct application of anticommuntation relations: 
+\[a_p a_q\dg = \delta_{pq} - a_q\dg a_p \]
+The first term, $\delta_{pq}$, can be re-expressed as $\contraction{}{a}{{}_p}{a}a_p a_q\dg$, as shown in Section 2.3. 
+We can equivalently write $n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]$.
+You will show that $\contraction{}{a}{{}_p}{a}a_p a_q\dg = n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]$ in the exercises. 
+The second term is simply the normal product $n[a_p a_q\dg]$. 
+Thus, we can write (switching the order of the first and second terms): 
+\[a_p a_q\dg = n[a_p a_q\dg] + n[\contraction{}{a}{{}_p}{a}a_p a_q\dg] \]
+\\
+Let's try with a product of 3 operators, $a_p a_q\dg a_r\dg$: 
+\begin{align*}
+a_p a_q\dg a_r\dg &= (\delta_{pq} - a_q\dg a_p)a_r\dg \\
+&= \delta_{pq}a_r\dg  - a_q\dg a_p a_r\dg \\
+& = \delta_{pq}a_r\dg - a_q\dg (\delta_{pr} - a_r\dg a_p)  \\
+& = \delta_{pq}a_r\dg - \delta_{pr} a_q\dg +  a_q\dg a_r\dg a_p  \\
+\end{align*}
+Rewriting the terms in a similar way as for the product of 2 operators, we obtain:
+\[a_p a_q\dg a_r\dg  = n[a_p a_q\dg a_r\dg ] + n[\contraction{}{a}{{}_p}{a} a_p a_q\dg a_r\dg ]  + n[\contraction{}{a}{{}_p a_q\dg}{a} a_p a_q\dg a_r\dg ] \]
+In these two examples, we observe that the products of the creation and annihilations operators could be expressed as its normal product plus all possible contractions of its normal product form.
+Wick's theorem simply generalizes this observation to any string of creation and annihilation operators. 
+Formally defined, Wick's theorem states: 
+\begin{align*}
+x_1 \cd x_m &= n[x_1 \cd x_m ]  \\
+&+ \sum_{i < j} \contraction{n[x_1 \cd}{x}{{}_i \cd }{x} n[x_1 \cd x_i \cd x_j x_2] \\
+&+ \sum_{\substack{i_1 < j_1,  i_2 < j_2 \\ i_1 < j_2, j_1 \neq j_2}} 
+\contraction{n[x_1 \cd}{x}{{}_{i_1} \cd x_{i_2} \cd}{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd }{x}{{}_{i_2} \cd x_{j_1} \cd}{x}
+n[x_1 \cd x_{i_1} \cd x_{i_2} \cd x_{j_1} \cd x_{j_2} \cd x_m ]  \\
+&+ \cd \\
+&+ \sum_{f.c.} n \ol{\ol{[x_1 \cd x_m]  }}
+\end{align*}
+where ``f.c." stands for fully contracted. 
+In words, a string of operators can be written as its normal product plus all contractions of the normal product. 
+We will adoption a short term notation for expressing all possible contractions of the normal product and write Wick's theorem as: 
+\[x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \]\\
+where ``a.c." stands for all contractions.
+Let's explicitly write out Wick's theorem for a general product of 4 operators for a more concrete example: 
+\begin{align*}
+x_1x_2x_3x_4 &= n[x_1x_2x_3x_4 ] \\ 
+&+n[ \ctr{}{x}{{}_1}{x} x_1x_2x_3x_4 ] + n[ \ctr{}{x}{{}_1x_2}{x} x_1x_2x_3x_4 ] + n[ \ctr{}{x}{{}_1x_2 x_3}{x} x_1x_2x_3x_4 ] 
++ n[ \ctr{x_1}{x}{{}_2}{x} x_1x_2x_3x_4 ] +  n[ \ctr{x_1}{x}{{}_2 x_3}{x} x_1x_2x_3x_4 ] + n[ \ctr{x_1 x_2}{x}{{}_3}{x} x_1x_2x_3x_4 ] \\
+&+ n[ \ctr{}{x}{{}_1}{x}  \ctr{x_1 x_2}{x}{{}_3}{x} x_1x_2x_3x_4 ]
++ n[ \ctr{}{x}{{}_1x_2}{x}  \ctr[2ex]{x_1}{x}{{}_2 x_3}{x} x_1x_2x_3x_4 ] 
++ n[ \ctr{x_1}{x}{{}_2}{x} \ctr[2ex]{}{x}{{}_1x_2 x_3}{x}      x_1x_2x_3x_4 ] 
+\end{align*}
+\\
+Wick's theorem is thus a clever bookkeeping method for expressing a string of operators as normal products. 
+
+%TODO: write better
+In Section X we proved some rules for quickly evaluate normal products or normal products with contractions acting in the true vacuum. 
+We have now introduced Wick's theorem, which provides a way to express any product of operators as normal products and normal products with contractions. 
+%%after this - maybe a map of why wick's theorem is useful: have normal products and normal products with contractions, have 
+%%rules for determining these in the vacuum, then wick's theorem provides a way to put any product of operators in these forms
+Wick's theorem is proved generally in Appendix I.
+
+\subsection{Generalized Wick's Theorem}
+%TODO
+The generalized Wick's theorem is proved in Appendix II.
+
+\subsection{Rules for normal products and contractions - narrowing down wick's theorem for matrix elements - 3 more rules }
+
+Applying Wick's theorem to inform expectation values of general operator products
+%TODO: write better
+Rules previously started combined with WT.
+We list the four previous rules here for easy reference: 
+
+\begin{itemize}
+\item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
+\item Rule 2: $\braket{0 | n[x_1 \cd x_m] | 0} = 0$ for  $m \geq 1$ \\
+\item Rule 3. $\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0} = 0$ if there is at least 1 uncontracted annihilator among operators $x_1 \cd x_m$.  \\
+\item Rule 4. $\braket{0| \contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] |0} = 0$ unless all operators are contracted.
+A vacuum expectation value of any normal product with contractions will be zero if there are a odd number of operators. \\
+\end{itemize}
+
+new rules now 
+
+\begin{itemize}
+\item Rule 5 $\braket{0 | x_1 \cd x_{2m + 1} | 0} = 0 $ \\
+
+Proof: 
+\[\braket{0 | x_1 \cd x_{2m + 1} | 0}   =  \braket{0 | n[x_1 \cd x_{2m + 1}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m + 1}]} | 0}  \]
+The first term is zero by Rule 2 and the second term is zero by Rule 4
+
+\item \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}$\\
+
+\begin{equation*}
+R = 
+\begin{pmatrix}
+1 & 2 &\cd  & 2m - 1 & 2m  \\
+i_1 & j_1 & \cd  & i_m & j_m \\
+\end{pmatrix}
+\end{equation*}
+
+Proof: 
+\[\braket{0 | x_1 \cd x_{2m} | 0}   =  \braket{0 | n[x_1 \cd x_{2m}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m}]} | 0}  \]
+The first term is 0 by Rule 2 and the second term is $ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0}$ by Rule 4. 
+\[ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} =  \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m} \braket{0 | n[\varnothing] | 0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}  \]
+
+\item Rule 7: $x_1 \cd x_m \ket{0} = \sum\limits_{annihilator f.c.} n\ol{[x_1 \cd x_m] }\ket{0} $
+where ``annihilator f.c" denotes all contractions with the annihilation operator fully contracted.\\
+
+Proof: 
+\[x_1 \cd x_m \ket{0} = n[x_1 \cd x_m] \ket{0} + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \ket{0} \]
+The first term is 0 unless it is all creation operators by Rule 1, and the second is 0 unless all annihilation operators are contracted by Rule 3. 
+\end{itemize}
+
+*Don't remember rule by number, but just as general guides to quickly realize result - not important you remember which rule as you realize application and consequences
+\section{Derivation of Slater's rules using Wick's Theorem}
+
+
+
+
+
+
+% 3_Wicks_Theorem_b: 
+%\subsection{Proof of 2 Lemmas}
+%\subsection{Proof of Wick's Theorem}
+%\subsection{Proof of Generalized Wick's Theorem}
+
+
+% 3_Particle_Hole_a: 
+%\section{Particle-Hole Formalism}
+%\subsection{Motivating the particle-hole formalism}
+%\subsection{Normal Products}
+%\subsection{Contractions of Operators}
+%\subsection{Normal Products with Contractions}
+%\subsection{Wick's Theorem and generalized Wick's Theorem}
+
+%(at the end have a change comparing quantities in the true vs fermi vacuum
+
+% 3_Particle_Hole_b: 
+%\section{$\Phi$--Normal ordered Hamiltonian}
+%\section{Derivation of Slater's first rule in the Fermi vacuum}
+%\section{Derivation of Slater's second rule in the Fermi vacuum}
+%\section{Derivation of Slater's third rule in the Fermi vacuum}
+
+
+%\section{Wick's Theorem}
+
+
+%Examples for class lecture: explicitly write wick's thrm for 3, 4 operators 
+%Keep in mind these are all for true vacuum! 
+
+
+\section{Exercises}
+\begin{enumerate}
+\item Show the following are true: 
+ \[ \contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg]  = -\delta_{pr}\delta_{qt} a_u\dg a_s\] 
+ \[ \contraction{n[}{a}{{}_p a_q}{a}
+\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+n[a_p a_q a_r\dg a_s a_t\dg a_u\dg]  = \delta_{pr}\delta_{qt} \delta_{su}\] 
+% Note here that the term is \textit{fully contracted} and reduces to a number
+
+\item Show that
+\[\contraction{}{a}{{}_p}{a}a_p a_q\dg = n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]\]
+
+
+\item Show that $a_p a_q\dg a_r\dg  = \delta_{pq}a_r\dg - \delta_{pr} a_q\dg +  a_q\dg a_r\dg a_p$ can be rewritten as:
+\[a_p a_q\dg a_r\dg  = n[a_p a_q\dg a_r\dg ] + n[\contraction{}{a}{{}_p}{a} a_p a_q\dg a_r\dg ]  + n[\contraction{}{a}{{}_p a_q\dg}{a} a_p a_q\dg a_r\dg ] \]
+
+\end{enumerate}
+\begin{comment}
+Types of problems:
+1. Slater's rules
+Types of ways to solve:
+1. First quantization
+2. 2nd quantization in the true vacuum without Wick's theorem
+3. 2nd quantization in the true vacuum with Wick's theorem
+4. PH formalism with Wick's theorem 
+5. PH formalism with Wick's theorem and $\Phi$-normal ordered Hamiltonian
+\end{comment}
+\end{document}
