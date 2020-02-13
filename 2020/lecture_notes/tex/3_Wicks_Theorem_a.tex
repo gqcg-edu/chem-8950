@@ -24,7 +24,7 @@
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 \title{Lecture 3.3: Wick's Theorem}
-\date{February 10$^{\text{th}}$, 2020}
+\date{February 17$^{\text{th}}$, 2020}
 \begin{document}
 \maketitle
 \noindent
@@ -85,9 +85,12 @@ R =
 \[ x_1 x_3 x_2 x_5 x_4  =  x_1 x_2 x_3 x_4 x_5 \]
 
 \section{Prerequisites to Wick's Theorem}
-\subsection{Evaluating matrix elements of products of operators on vacuum}
-Wick's theorem is a clever bookkeeping method for evaluating matrix elements quickly and efficiently. 
-We need three things first: 
+
+Last time, we determined that much of the math we have to solve boils down to evaluating expectation values of 
+strings of creation and annihilation operators in the true vacuum.
+Using anti-communtation rules to do this was tedious, and we wanted to find a more efficient way. 
+Our answer is to use Wick's Theorem. 
+We first need to introduce three concepts needed to present Wick's Theorem: normal products, contractions, and normal products with contractions.
 
 \subsection{Normal Products}
 A normal product is a product of creation and annihilation operators where all the creation operators are to the left of the expression.
@@ -281,7 +284,7 @@ n[a_p {\color{blue} a_q a_r\dg } a_s a_t\dg a_u\dg] =
 \contraction{{\color{blue} a_q a_r\dg }  n[}{a}{{}_p a_s}{a}
 {\color{blue} a_q a_r\dg }  n[a_p a_s a_t\dg a_u\dg] \]
 \subsection{Matrix elements of normal products with contractions}
-%ultimate goal is to know how to evaluate matrix elements 
+Remember that our ultimate goal is to know how to quickly evaluate matrix elements of strings of operators in the vacuum. 
 We are now ready to prove some rules for determining how a normal ordered string of operators acts in the true vacuum.
 
 \begin{itemize}
@@ -321,9 +324,9 @@ Proof: This is easily see as an application of Rule 2. Contractions of operators
 
 As a consequence of Rule 4, a vacuum expectation value of any normal product with contractions will be zero if there are a odd number of operators. 
 \end{itemize}
-%TODO: write better
-We know now how to quickly evaluate matrix elements of a normal ordered string, and a normal ordered string with contractions.
+We now know how to quickly evaluate matrix elements of a normal ordered string, and a normal ordered string with contractions.
 Next, we need to know how to quickly put any string in normal order so we can take advantage of these shortcuts. 
+This is what Wick's theorem provides us. 
 
 \section{Wick's Theorem}
 We will first start by seeing what happens if we put specific strings of operators in normal order just by applying anticommutation relations.  \\ 
@@ -373,26 +376,42 @@ x_1x_2x_3x_4 &= n[x_1x_2x_3x_4 ] \\
 + n[ \ctr{x_1}{x}{{}_2}{x} \ctr[2ex]{}{x}{{}_1x_2 x_3}{x}      x_1x_2x_3x_4 ] 
 \end{align*}
 \\
-Wick's theorem is thus a clever bookkeeping method for expressing a string of operators as normal products. 
-
-%TODO: write better
-In Section X we proved some rules for quickly evaluate normal products or normal products with contractions acting in the true vacuum. 
-We have now introduced Wick's theorem, which provides a way to express any product of operators as normal products and normal products with contractions. 
-%%after this - maybe a map of why wick's theorem is useful: have normal products and normal products with contractions, have 
-%%rules for determining these in the vacuum, then wick's theorem provides a way to put any product of operators in these forms
-Wick's theorem is proved generally in Appendix I.
+Wick's theorem is proved generally in the next set of lecture notes.
 
 \subsection{Generalized Wick's Theorem}
-%TODO
-The generalized Wick's theorem is proved in Appendix II.
+In some cases, subgroups of operator strings are already in the normal product form.
+This will allow us to simplify the terms we need to consider for Wick's theorem. \\ \\
+Let's begin with an example: 
+\[x_1 n[x_2 x_3] \] 
+Wick's theorem for $x_2 x_3$ is
+\[ x_2 x_3 = n[x_2 x_3] +   n[\contraction{}{x}{{}_2}{x} x_2 x_3] \]
+We can rearrange this as: 
+\[n[x_2 x_3]  = x_2 x_3  - n[\contraction{}{x}{{}_2}{x} x_2 x_3]  \]
+We can substitute this into our original expression: 
+\begin{align*}
+x_1 n[x_2 x_3] &= x_1 (x_2 x_3  - n[\contraction{}{x}{{}_2}{x} x_2 x_3] ) \\
+&= {\color{blue} x_1 x_2 x_3} - x_1n[\contraction{}{x}{{}_2}{x} x_2 x_3] \\
+&= {\color{blue} x_1 x_2 x_3} - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
+&= {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + n[\contraction{x_1}{x}{{}_2}{x} x_1 x_2 x_3] }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
+&=  {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \contraction{}{x}{{}_2}{x} x_2 x_3 n[x_1] }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
+&= {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + x_1\contraction{}{x}{{}_2}{x} x_2 x_3  }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
+&= \color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] 
+\end{align*}
+We observe that the contraction between the operators originally in normal ordered form cancel out in the final expression.
+\\ \\
+This is an example of the generalized Wick's theorem, which formally states: 
+$$x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} {}' n\ol{[x_1 \cd x_m ]} $$
+where $\sum_{a.c.} {}' $ denotes skipping contractions of operators that originated from the same normal ordered group. 
+\\ \\
+Thus, we see it is to our benefit to have as many operators as we can in normal ordered form because then we do not have to consider contractions between the normal ordered operators. 
+The generalized Wick's theorem is proved in the next set of lecture notes.
 
-\subsection{Rules for normal products and contractions - narrowing down wick's theorem for matrix elements - 3 more rules }
-
-Applying Wick's theorem to inform expectation values of general operator products
-%TODO: write better
-Rules previously started combined with WT.
+\subsection{Expectation values with Wick's theorem }
+In Section 2.4 we proved some rules for quickly evaluate normal products or normal products with contractions acting in the true vacuum. 
+We have now introduced Wick's theorem (WT), which is a clever bookkeeping method to express any product of operators as normal products and normal products with contractions. 
+We will now apply WT with the rules developed in Section 2.4 to start seeing how we can take advantage of WT when evaluating matrix elements of operator strings. 
+\\ \\
 We list the four previous rules here for easy reference: 
-
 \begin{itemize}
 \item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
 \item Rule 2: $\braket{0 | n[x_1 \cd x_m] | 0} = 0$ for  $m \geq 1$ \\
@@ -405,7 +424,7 @@ n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] |0} =
 A vacuum expectation value of any normal product with contractions will be zero if there are a odd number of operators. \\
 \end{itemize}
 
-new rules now 
+We can use Rules 1--4 in conjunction with Wick's theorem to develop some more rules: 
 
 \begin{itemize}
 \item Rule 5 $\braket{0 | x_1 \cd x_{2m + 1} | 0} = 0 $ \\
@@ -436,15 +455,101 @@ Proof:
 \[x_1 \cd x_m \ket{0} = n[x_1 \cd x_m] \ket{0} + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \ket{0} \]
 The first term is 0 unless it is all creation operators by Rule 1, and the second is 0 unless all annihilation operators are contracted by Rule 3. 
 \end{itemize}
+It is not important to remember which rule you are using when applying Wick's theorem to solve problems. 
+Rather, we are simply listing the rules to document the important consequences of Wick's theorem that allows us to take shortcuts.
+As long as you understand Wick's theorem and how we obtained the rules, you should be able to naturally apply them to problems. 
 
-*Don't remember rule by number, but just as general guides to quickly realize result - not important you remember which rule as you realize application and consequences
-\section{Derivation of Slater's rules using Wick's Theorem}
+\section{Derivation of Slater's first rule using Wick's Theorem}
 
+We showed in class that using anticommutation relations to derive Slater's first rule was too much work. 
+We could only show that Slater's rule is true for Slater determinants with a few spin orbitals, but could not prove it generally without spending a lot of tedious time. 
+Now, with Wick's theorem, we can prove Slater's first rule generally. 
+\[\braket{\Phi_{p_1 \cd p_N} | \sum_{pq} h_{pq} a_p^\dagger a_q  +  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} a\dg_{p}a\dg_{q} a_s a_r  | \Phi_{p_1 \cd p_N}} = \sum_i h_{ii} + \frac{1}{2}\sum_{ij} \braket{ij || ij} \]
 
+\subsection{One-body operator}
+\[\braket{{\color{orange} \Phi_{p_1 \cd p_N} } | \sum_{pq}   h_{pq}{\color{blue}  a_p^\dagger a_q } | {\color{red} \Phi_{p_1 \cd p_N}}} = 
+\sum_{pq}   h_{pq} \braket{ 0| {\color{orange} a_{p_N} \cd a_{p_1} } {\color{blue} a_p^\dagger a_q } {\color{red} a_{p_1}\dg \cd a_{p_N}\dg }| 0} \]
+We know from Wick's theorem that the only nonzero terms will be the fully contracted terms. 
+Furthermore, we know that we do not have to consider contractions within normal ordered groups. 
+Thus, we do not consider contractions within the terms in blue, orange, or red, but only contractions between the different colors.  \\ \\ 
+$ {\color{blue} a_p^\dagger}$ will only form nonzero contractions with ${\color{orange} a_{p_N} \cd a_{p_1} } $, and 
+$ {\color{blue} a_q }$ will only form nonzero contractions with ${\color{red} a_{p_1}\dg \cd a_{p_N}\dg }$. 
+After forming those two contractions, the remaining terms in orange and red have to form contractions with each other. 
+However, the only nonzero contractions that they can form are between terms with the same indices ($\contraction{}{a}{{}_p}{a} a_p a_q\dg =  \delta_{pq}$)
+This means that $ {\color{blue} a_p^\dagger}$ and  $ {\color{blue} a_q }$ can only form nonzero contractions if their respective orange and red contraction partners have the same indices as each other. 
+\\ \\
+To summarize, the only terms in the expectation value that does not vanish are ones in which the operators in blue are contracted with orange and red operators with the same indices (${\color{orange} a_{p_i} } $ and 
+${\color{red} a_{p_i}\dg}$), and the remaining orange and red operators form contractions between operators with the same indices. There will be N contractions that can be formed, since the operators in blue can form 
+contractions with any operators in the red and orange set as long as the red and orange operators have the same indices.  \\ \\
+We can express this in the following way: 
+\[\braket{\Phi | \hat{O}_1 | \Phi} = \sum_{pq}   h_{pq} \sum_i^N \braket{0| 
+\contraction{a_{p_N} \cd}{a}{{}_{p_i} \cd  a_{p_1} }{a}  
+\contraction{{\color{orange} a_{p_N} \cd a_{p_i} \cd  a_{p_1} } a_p^\dagger}{a}{{}_q a_{p_1}\dg \cd}{a}
+\contraction[2ex]{ a_{p_N} \cd a_{p_i} \cd }{a}{{}_{p_1}  a_p^\dagger a_q }{a}
+\contraction[3ex]{}{a}{{}_{p_N} \cd a_{p_i} \cd  a_{p_1}{\color{blue} a_p^\dagger a_q } a_{p_1}\dg \cd a_{p_i}\dg \cd}{a}
+{\color{orange} a_{p_N} \cd a_{p_i} \cd  a_{p_1} } {\color{blue} a_p^\dagger a_q } {\color{red} a_{p_1}\dg \cd a_{p_i}\dg \cd a_{p_N}\dg } |0} \]
+We notice 2 things: 
+\begin{enumerate}
+\item The number of intersecting contraction lines will always be even, and so the phase factor to move all contractions out of the expectation value is positive.
+\item The contractions $\contraction{}{a}{{}_p}{a} {\color{orange} a_{j}}{\color{red} a_j\dg }=  \delta_{jj}$ will collapse to products of 1 for all j. 
+\end{enumerate}
+This means we are left with: 
+\begin{align*}
+\braket{\Phi | \hat{O}_1 | \Phi} &= \sum_i^N  \sum_{pq}   h_{pq} \delta_{p p_i}   \delta_{q p_i}  \braket{0| 0} \\
+&= \sum_i^N h_{p_i p_i}  \quad \text{or just }\\
+&= \sum_i^N h_{i i} 
+\end{align*}
 
+\subsection{Two-body operator }
+\[\braket{{\color{orange} \Phi_{p_1 \cd p_N} } |  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} {\color{blue}  a_p\dg a_q\dg a_s a_r } | {\color{red} \Phi_{p_1 \cd p_N}}} = 
+ \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \braket{ 0| {\color{orange} a_{p_N} \cd a_{p_1} } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red} a_{p_1}\dg \cd a_{p_N}\dg }| 0} \]
+In a similar manner as before, we are limited in the nonzero contractions we can form. 
+Operators  ${\color{blue}  a_s}$ and ${\color{blue}  a_r}$ can form contractions with ${\color{red} a_{p_i}\dg } $ and ${\color{red} a_{p_j}\dg}$,
+and operators $ {\color{blue}  a_p\dg}$ and ${\color{blue}  a_q\dg}$ can form contractions with  $ {\color{orange} a_{p_i} }$ and ${\color{orange} a_{p_j}}$.
+There are four total combinations of contractions between these 8 operators.
+The remaining uncontracted operators will form contractions between operators with the same indices and collapse to products of 1. 
+We will write the four types of contractions that can formed (contractions between red and orange operators assumed and not written explicitly): 
+\begin{align*}
+\braket{{\color{orange} \Phi_{p_1 \cd p_N} } | \hat{O}_2  | {\color{red} \Phi_{p_1 \cd p_N}}} &= 
+ \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
+ \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
+ \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
+ \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
+ \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
+ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
+ &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
+ \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
+  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
+ \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
+ \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
+ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\
+ &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
+ \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
+  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
+ \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
+ \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
+ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
+ &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
+ \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
+  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
+ \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
+ \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
+ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
+ &=  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \left[ \delta_{p p_i} \delta_{q p_j} \delta_{r p_i} \delta_{s p_j} 
+ - \delta_{p p_j} \delta_{q p_i} \delta_{r p_i} \delta_{s p_j} 
+ - \delta_{p p_i} \delta_{q p_j} \delta_{r p_j} \delta_{s p_i} 
+ + \delta_{p p_j} \delta_{q p_i} \delta_{r p_j} \delta_{s p_i} 
+ \right]  \\
+ &=  \frac{1}{2}\sum_{i < j} \left[  \braket{p_i p_j | p_i p_j}  - \braket{p_j p_i | p_i p_j}  - \braket{p_i p_j | p_j p_i} + \braket{p_j p_i | p_j p_i}  \right] \\
+ &= \frac{1}{2}  \sum_{i < j} 2 \left[  \braket{p_i p_j | p_i p_j}  - \braket{p_i p_j | p_j p_i} \right] \\
+  &= \frac{1}{2} \sum_{i j} \frac{1}{2} (2) \left[  \braket{p_i p_j | p_i p_j}  - \braket{p_i p_j | p_j p_i} \right] \\
+  &=  \frac{1}{2} \sum_{i j}  \braket{p_i p_j || p_i p_j}   \quad \text{or just }\\
+&=  \frac{1}{2} \sum_{i j}  \braket{ij || ij} 
+\end{align*}
 
-
-
+%We are still not quite where we want to be in terms of quickly and efficiently evaluating matrix elements of operator strings. 
+%The derivation of Slater's rules still took us two pages. 
+%Next, we will find ways to 
 % 3_Wicks_Theorem_b: 
 %\subsection{Proof of 2 Lemmas}
 %\subsection{Proof of Wick's Theorem}
@@ -460,41 +565,19 @@ The first term is 0 unless it is all creation operators by Rule 1, and the secon
 %\subsection{Wick's Theorem and generalized Wick's Theorem}
 
 %(at the end have a change comparing quantities in the true vs fermi vacuum
-
+%CI stuff - relate the grid to the overlap of SD is SD of overlaps stuff?
 % 3_Particle_Hole_b: 
 %\section{$\Phi$--Normal ordered Hamiltonian}
 %\section{Derivation of Slater's first rule in the Fermi vacuum}
 %\section{Derivation of Slater's second rule in the Fermi vacuum}
 %\section{Derivation of Slater's third rule in the Fermi vacuum}
 
-
-%\section{Wick's Theorem}
-
+%(note about second and third rules - can prove those as well! - what the nonzero tells us about implications of spin orbitals differing)! 
+%math with expectation value inform which specific value for integral. 
 
 %Examples for class lecture: explicitly write wick's thrm for 3, 4 operators 
 %Keep in mind these are all for true vacuum! 
 
-
-\section{Exercises}
-\begin{enumerate}
-\item Show the following are true: 
- \[ \contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
-n[a_p a_q a_r\dg a_s a_t\dg a_u\dg]  = -\delta_{pr}\delta_{qt} a_u\dg a_s\] 
- \[ \contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
-\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
-n[a_p a_q a_r\dg a_s a_t\dg a_u\dg]  = \delta_{pr}\delta_{qt} \delta_{su}\] 
-% Note here that the term is \textit{fully contracted} and reduces to a number
-
-\item Show that
-\[\contraction{}{a}{{}_p}{a}a_p a_q\dg = n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]\]
-
-
-\item Show that $a_p a_q\dg a_r\dg  = \delta_{pq}a_r\dg - \delta_{pr} a_q\dg +  a_q\dg a_r\dg a_p$ can be rewritten as:
-\[a_p a_q\dg a_r\dg  = n[a_p a_q\dg a_r\dg ] + n[\contraction{}{a}{{}_p}{a} a_p a_q\dg a_r\dg ]  + n[\contraction{}{a}{{}_p a_q\dg}{a} a_p a_q\dg a_r\dg ] \]
-
-\end{enumerate}
 \begin{comment}
 Types of problems:
 1. Slater's rules
