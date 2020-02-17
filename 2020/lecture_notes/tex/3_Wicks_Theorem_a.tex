@@ -14,7 +14,7 @@
 \usepackage{verbatim}
 \usepackage[margin=1.0in]{geometry}
 \newcommand{\ol}{\overline}
-\newcommand{\ctr}{\contraction}
+\newcommand{\ctr}{\bcontraction}
 \newcommand{\ve}{\varepsilon}
 \newcommand{\ap}{\ensuremath{a_p} }
 \newcommand{\dg}{\ensuremath{^\dagger} }
@@ -137,7 +137,7 @@ Here, the string is already normal ordered, so we can just drop the normal produ
 There are several properties of normal products that are useful to us: 
 \begin{enumerate}
 \item A normal product of a normal ordered string of operators is just that string of operators:
-\[n[a_{R_1}\dg \cd a_{R_j}\dg a_{R_{j+1}} \cd a_{R_m} ] = a_{R_1}\dg \cd a_{R_j}\dg a_{R_{j+1}} \cd a_{R_m}  \]
+\[n[a_{1}\dg \cd a_{j}\dg a_{j+1} \cd a_{m} ] = a_{1}\dg \cd a_{j}\dg a_{{j+1}} \cd a_{m}  \]
 We note that a string of only creation operators or only annihilation operators are already in normal order. 
 \item A normal product of a normal product is just the normal product: 
 \[n[n[x_1 \cd x_m]] = n[x_1 \cd x_m] \]
@@ -152,7 +152,7 @@ For example,
 
 We \textit{define} a contraction between 2 operators $x_1$ and $x_2$ where $x_i$ can be either a creation or an annihilation operator, as the quantity: 
 $$
-\contraction{}{x}{{}_1}{x}
+\ctr{}{x}{{}_1}{x}
 x_1 x_2 = x_1x_2 - n[x_1x_2]
 $$
 We can derive the value of the contraction for various combinations of creation and annihilation operators by evaluating the expression. 
@@ -161,22 +161,22 @@ We have four cases to consider:
 \begin{enumerate}
 \item $x_1 = a_p$, $x_2 = a_q$ \\
 $$
-\contraction{}{a}{{}_p}{a}
+\ctr{}{a}{{}_p}{a}
 a_p a_q = a_p a_q  - n[a_p a_q] = a_p a_q  - a_p a_q  = 0 
 $$
 \item $x_1 = a_p$, $x_2 = a_q\dg$ \\
 $$
-\contraction{}{a}{{}_p}{a}
+\ctr{}{a}{{}_p}{a}
 a_p a_q\dg = a_p a_q\dg  - n[a_p a_q\dg] = a_p a_q\dg  +  a_q\dg a_p = \delta_{pq}
 $$
 \item $x_1 = a_p\dg$, $x_2 = a_q$ \\
 $$
-\contraction{}{a}{{}_p}{a}
+\ctr{}{a}{{}_p}{a}
 a_p\dg a_q = a_p\dg a_q  - n[a_p\dg a_q] = a_p\dg a_q  - a_p\dg a_q  = 0 
 $$
 \item $x_1 = a_p\dg$, $x_2 = a_q\dg$ \\
 $$
-\contraction{}{a}{{}_p}{a}
+\ctr{}{a}{{}_p}{a}
 a_p\dg a_q\dg = a_p\dg a_q\dg  - n[a_p\dg a_q\dg] = a_p\dg a_q\dg  - a_p\dg a_q\dg  = 0 
 $$
 
@@ -184,18 +184,18 @@ $$
 \subsection{Normal Products with Contractions}
 A normal products with contractions inside
 \[ 
-\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] 
 \] 
 can be rewritten as: 
 \[ 
-\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] 
 = 
-\contraction{(-1)^R}{x}{{}_{i_1} }{x}
-\contraction{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
+\ctr{(-1)^R}{x}{{}_{i_1} }{x}
+\ctr{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
 (-1)^R x_{i_1}x_{j_1} \cd x_{i_\lambda} x_{j_\lambda} n[x_{k_1} \cd x_{k_\mu}]
 \] 
 where 
@@ -210,11 +210,11 @@ and the indices $2\lambda + \mu = m$.
 In words, a normal product with contractions can be written as a product of contractions outside the normal product multiplied by the uncontracted terms and a phase factor. 
 It is important to note that when the contractions are taken out, you cannot flip the order of the contraction.
 In other words, 
-\[ \contraction{}{x}{{}_p}{x}
-x_p x_q \neq \pm x_q x_p  \]
+\[ n[\ctr{}{x}{{}_p}{x}
+x_p x_q ] \neq \pm \ctr{}{x}{{}_q}{x}x_q x_p  \]
 \subsubsection{Example 1}
-\[\contraction{n[}{a}{{}_p a_q }{a}
-\contraction{n[a_p a_q a_r\dg] = (-)^R a}{a}{_p}{a}
+\[\ctr{n[}{a}{{}_p a_q }{a}
+\ctr{n[a_p a_q a_r\dg] = (-)^R a}{a}{_p}{a}
 n[a_p a_q a_r\dg] = (-1)^R a_p a_r\dg n[a_q] \] \\
 \[
 R = 
@@ -224,65 +224,68 @@ p & r& q\
 \end{pmatrix}
 = (p)(qr) = (-)
 \] \\
-\[\contraction{n[}{a}{{}_p a_q }{a}
-\contraction{n[a_p a_q a_r\dg] = -}{a}{{}_p}{a}
+\[\ctr{n[}{a}{{}_p a_q }{a}
+\ctr{n[a_p a_q a_r\dg] = -}{a}{{}_p}{a}
 n[a_p a_q a_r\dg] = - a_p a_r\dg n[a_q] = -\delta_{pr}a_q \]
 \subsubsection{Two tips}
 There are two tips for faster evaluation of normal products with contractions. \\ \\
-First, for a \textit{fully contracted} term, meaning that all operators are involved in a contraction, 
+The first tip is that neighboring contractions can be taken out of the normal product without considering the permutation.
+By ``neighboring contraction", I mean contractions between operators that are next to each other.
+This is because the permutation associated with a neighboring pair is always positive. 
+For example,
+\[
+\ctr[2ex]{n[}{a}{{}_p{\color{blue} a_q a_r\dg } a_s}{a}
+\ctr{n[a_p }{a}{{}_q}{a}
+n[a_p {\color{blue} a_q a_r\dg } a_s a_t\dg a_u\dg] = 
+\ctr{}{a}{{}_q}{a}
+\ctr{{\color{blue} a_q a_r\dg }  n[}{a}{{}_p a_s}{a}
+{\color{blue} a_q a_r\dg }  n[a_p a_s a_t\dg a_u\dg] \]
+The second tip is that for a \textit{fully contracted} term, meaning that all operators are involved in a contraction, 
 the phase factor can be obtained by counting the number of intersecting contraction lines $\nu$: 
 \[(-1)^R = (-1)^\nu\]
 For example, the term 
-$\contraction{n[}{a}{{}_p}{a}
-\contraction{n[a_p a_q  }{a}{{}_r\dg }{a}
-\contraction{n[a_p a_q a_r\dg a_s }{a}{{}_t\dg}{a}
-n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $
+$\ctr{n[}{a}{{}_p}{a}
+\ctr{n[a_p a_q\dg  }{a}{{}_r }{a}
+\ctr{n[a_p a_q\dg  a_r a_s\dg}{a}{{}_t}{a}
+n[a_p a_q\dg  a_r a_s\dg a_t a_u\dg] $
 has 0 intersecting contraction lines, and will have an overall phase factor of (+1).  \\ \\
 The term 
-$\contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg }{a}
-\contraction{n[a_p a_q a_r\dg a_s  }{a}{{}_t\dg}{a}
-n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $ has 1 intersection, and will have an overall phase factor of (-1).  \\ \\
+$\ctr{n[}{a}{{}_p a_q}{a}
+\ctr[2ex]{n[a_p }{a}{{}_q a_r\dg }{a}
+\ctr{n[a_p a_q a_r\dg a_s\dg  }{a}{{}_t}{a}
+n[a_p a_q a_r\dg a_s\dg a_t a_u\dg] $ has 1 intersection, and will have an overall phase factor of (-1).  \\ \\
 The term
-$\contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
-\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+$\ctr{n[}{a}{{}_p a_q}{a}
+\ctr[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\ctr{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
 n[a_p a_q a_r\dg a_s a_t\dg a_u\dg] $ has 2 intersections, and will have an overall phase factor of (+1). \\ \\
+While we will not formally prove why this is true, the general idea is to reorder the string so there are only neighboring contractions.
+In order to do that, we have to permute the indices, and see that an intersection of contraction lines is gotten rid of by a permutation of operators (one sign factor).
+\\ \\
 We will use the following notation to denote a normal product which is fully contracted: 
 \[n\ol{\ol{[x_1 \cd x_m]}} \]
 The above three examples can all be expressed with this notation. \\ \\
 If you have a group of fully contracted operators within your normal product, you can take the full group out and use the number of intersecting contraction lines
 to determine the permutation associated with taking the group out.  \\ \\
 For example, in the term 
-\[\contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
-\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
-\contraction{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
+\[\ctr{n[}{a}{{}_p a_q}{a}
+\ctr[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\ctr{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+\ctr{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
 n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg a_w a_x a_y\dg] \]
 the first six operators are fully contracted, and has an overall phase factor of (+) because there are 2 intersections.
 As a result, we can take it out directly of the normal product: 
-\[\contraction{n[}{a}{{}_p a_q}{a}
-\contraction[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
-\contraction{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
-\contraction{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
+\[\ctr{n[}{a}{{}_p a_q}{a}
+\ctr[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
+\ctr{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
+\ctr{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
 n[{\color{blue} a_p a_q a_r\dg a_s a_t\dg a_u\dg} a_v\dg a_w a_x a_y\dg] =  
-\contraction{}{a}{{}_p}{a}
-\contraction{a_p a_r\dg }{a}{{}_q }{a}
-\contraction{a_p a_r\dg a_q a_t\dg  }{a}{{}_s}{a}
-\contraction{a_p a_r\dg a_q a_t\dg a_s  a_u\dg n[a_v\dg}{a}{{}_w a_x}{a}
+\ctr{}{a}{{}_p}{a}
+\ctr{a_p a_r\dg }{a}{{}_q }{a}
+\ctr{a_p a_r\dg a_q a_t\dg  }{a}{{}_s}{a}
+\ctr{a_p a_r\dg a_q a_t\dg a_s  a_u\dg n[a_v\dg}{a}{{}_w a_x}{a}
 {\color{blue} a_p a_r\dg a_q a_t\dg a_s  a_u\dg }n[a_v\dg a_w a_x a_y\dg]\]
 \\ \\
-The second tip is that neighboring contractions can be taken out of the normal product without considering the permutation.
-By ``neighboring contraction", I mean contractions between operators that are next to each other.
-This is because the permutation associated with a neighboring pair is always positive. 
-For example,
-\[
-\contraction[2ex]{n[}{a}{{}_p{\color{blue} a_q a_r\dg } a_s}{a}
-\contraction{n[a_p }{a}{{}_q}{a}
-n[a_p {\color{blue} a_q a_r\dg } a_s a_t\dg a_u\dg] = 
-\contraction{}{a}{{}_q}{a}
-\contraction{{\color{blue} a_q a_r\dg }  n[}{a}{{}_p a_s}{a}
-{\color{blue} a_q a_r\dg }  n[a_p a_s a_t\dg a_u\dg] \]
 \subsection{Matrix elements of normal products with contractions}
 Remember that our ultimate goal is to know how to quickly evaluate matrix elements of strings of operators in the vacuum. 
 We are now ready to prove some rules for determining how a normal ordered string of operators acts in the true vacuum.
@@ -300,23 +303,23 @@ The overall result is zero.
 Proof: If all operators are creation operators, they will annihilate the vacuum because 
 \[(a_p\ket{0})\dg = \bra{0}a_p\dg = 0\]
 If one or more operators are annihilation operators, they will be on the right by the definition of the normal product and annihilate the vacuum. 
-\item Rule 3. $\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\item Rule 3. $\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0} = 0$ if there is at least 1 uncontracted annihilator among operators $x_1 \cd x_m$.  \\
 
 Proof:
 \[ 
-\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0}
 = 
-\contraction{(-1)^R}{x}{{}_{i_1} }{x}
-\contraction{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
+\ctr{(-1)^R}{x}{{}_{i_1} }{x}
+\ctr{(-1)^R x_{i_1}x_{j_1} \cd}{x}{{}_{i_\lambda} }{x}
 (-1)^R x_{i_1}x_{j_1} \cd x_{i_\lambda} x_{j_\lambda} n[x_{k_1} \cd x_{k_\mu}] \ket{0}
 \] 
 By Rule 1, $n[x_{k_1} \cd x_{k_\mu}] \ket{0} = 0$ unless all operators $x_{k_1} \cd x_{k_\mu}$ are creation operators. 
-\item Rule 4. $\braket{0| \contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\item Rule 4. $\braket{0| \ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] |0} = 0$ unless all operators are contracted. 
 In other words, only a fully contracted normal product ($n\ol{\ol{[x_1 \cd x_m] }}$) gives a nonzero expectation value in the true vacuum. \\
 
@@ -332,12 +335,12 @@ This is what Wick's theorem provides us.
 We will first start by seeing what happens if we put specific strings of operators in normal order just by applying anticommutation relations.  \\ 
 Putting a product of 2 operators in normal order is a direct application of anticommuntation relations: 
 \[a_p a_q\dg = \delta_{pq} - a_q\dg a_p \]
-The first term, $\delta_{pq}$, can be re-expressed as $\contraction{}{a}{{}_p}{a}a_p a_q\dg$, as shown in Section 2.3. 
-We can equivalently write $n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]$.
-You will show that $\contraction{}{a}{{}_p}{a}a_p a_q\dg = n[\contraction{}{a}{{}_p}{a}a_p a_q\dg]$ in the exercises. 
+The first term, $\delta_{pq}$, can be re-expressed as $\ctr{}{a}{{}_p}{a}a_p a_q\dg$, as shown in Section 2.3. 
+We can equivalently write $n[\ctr{}{a}{{}_p}{a}a_p a_q\dg]$.
+You will show that $\ctr{}{a}{{}_p}{a}a_p a_q\dg = n[\ctr{}{a}{{}_p}{a}a_p a_q\dg]$ in the exercises. 
 The second term is simply the normal product $n[a_p a_q\dg]$. 
 Thus, we can write (switching the order of the first and second terms): 
-\[a_p a_q\dg = n[a_p a_q\dg] + n[\contraction{}{a}{{}_p}{a}a_p a_q\dg] \]
+\[a_p a_q\dg = n[a_p a_q\dg] + n[\ctr{}{a}{{}_p}{a}a_p a_q\dg] \]
 \\
 Let's try with a product of 3 operators, $a_p a_q\dg a_r\dg$: 
 \begin{align*}
@@ -347,16 +350,16 @@ a_p a_q\dg a_r\dg &= (\delta_{pq} - a_q\dg a_p)a_r\dg \\
 & = \delta_{pq}a_r\dg - \delta_{pr} a_q\dg +  a_q\dg a_r\dg a_p  \\
 \end{align*}
 Rewriting the terms in a similar way as for the product of 2 operators, we obtain:
-\[a_p a_q\dg a_r\dg  = n[a_p a_q\dg a_r\dg ] + n[\contraction{}{a}{{}_p}{a} a_p a_q\dg a_r\dg ]  + n[\contraction{}{a}{{}_p a_q\dg}{a} a_p a_q\dg a_r\dg ] \]
+\[a_p a_q\dg a_r\dg  = n[a_p a_q\dg a_r\dg ] + n[\ctr{}{a}{{}_p}{a} a_p a_q\dg a_r\dg ]  + n[\ctr{}{a}{{}_p a_q\dg}{a} a_p a_q\dg a_r\dg ] \]
 In these two examples, we observe that the products of the creation and annihilations operators could be expressed as its normal product plus all possible contractions of its normal product form.
 Wick's theorem simply generalizes this observation to any string of creation and annihilation operators. 
 Formally defined, Wick's theorem states: 
 \begin{align*}
 x_1 \cd x_m &= n[x_1 \cd x_m ]  \\
-&+ \sum_{i < j} \contraction{n[x_1 \cd}{x}{{}_i \cd }{x} n[x_1 \cd x_i \cd x_j\cd  x_m] \\
+&+ \sum_{i < j} \ctr{n[x_1 \cd}{x}{{}_i \cd }{x} n[x_1 \cd x_i \cd x_j\cd  x_m] \\
 &+ \sum_{\substack{i_1 < j_1,  i_2 < j_2 \\ i_1 < i_2, j_1 \neq j_2}} 
-\contraction{n[x_1 \cd}{x}{{}_{i_1} \cd x_{i_2} \cd}{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd }{x}{{}_{i_2} \cd x_{j_1} \cd}{x}
+\ctr{n[x_1 \cd}{x}{{}_{i_1} \cd x_{i_2} \cd}{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd }{x}{{}_{i_2} \cd x_{j_1} \cd}{x}
 n[x_1 \cd x_{i_1} \cd x_{i_2} \cd x_{j_1} \cd x_{j_2} \cd x_m ]  \\
 &+ \cd \\
 &+ \sum_{f.c.} n \ol{\ol{[x_1 \cd x_m]  }}
@@ -384,18 +387,18 @@ This will allow us to simplify the terms we need to consider for Wick's theorem.
 Let's begin with an example: 
 \[x_1 n[x_2 x_3] \] 
 Wick's theorem for $x_2 x_3$ is
-\[ x_2 x_3 = n[x_2 x_3] +   n[\contraction{}{x}{{}_2}{x} x_2 x_3] \]
+\[ x_2 x_3 = n[x_2 x_3] +   n[\ctr{}{x}{{}_2}{x} x_2 x_3] \]
 We can rearrange this as: 
-\[n[x_2 x_3]  = x_2 x_3  - n[\contraction{}{x}{{}_2}{x} x_2 x_3]  \]
+\[n[x_2 x_3]  = x_2 x_3  - n[\ctr{}{x}{{}_2}{x} x_2 x_3]  \]
 We can substitute this into our original expression: 
 \begin{align*}
-x_1 n[x_2 x_3] &= x_1 (x_2 x_3  - n[\contraction{}{x}{{}_2}{x} x_2 x_3] ) \\
-&= {\color{blue} x_1 x_2 x_3} - x_1n[\contraction{}{x}{{}_2}{x} x_2 x_3] \\
-&= {\color{blue} x_1 x_2 x_3} - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
-&= {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + n[\contraction{x_1}{x}{{}_2}{x} x_1 x_2 x_3] }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
-&=  {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \contraction{}{x}{{}_2}{x} x_2 x_3 n[x_1] }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
-&= {\color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + x_1\contraction{}{x}{{}_2}{x} x_2 x_3  }  - x_1\contraction{}{x}{{}_2}{x} x_2 x_3 \\
-&= \color{blue} n[x_1x_2x_3] + n[\contraction{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\contraction{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] 
+x_1 n[x_2 x_3] &= x_1 (x_2 x_3  - n[\ctr{}{x}{{}_2}{x} x_2 x_3] ) \\
+&= {\color{blue} x_1 x_2 x_3} - x_1n[\ctr{}{x}{{}_2}{x} x_2 x_3] \\
+&= {\color{blue} x_1 x_2 x_3} - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&= {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + n[\ctr{x_1}{x}{{}_2}{x} x_1 x_2 x_3] }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&=  {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \ctr{}{x}{{}_2}{x} x_2 x_3 n[x_1] }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&= {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + x_1\ctr{}{x}{{}_2}{x} x_2 x_3  }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&= \color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] 
 \end{align*}
 We observe that the contraction between the operators originally in normal ordered form cancel out in the final expression.
 \\ \\
@@ -415,11 +418,11 @@ We list the four previous rules here for easy reference:
 \begin{itemize}
 \item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
 \item Rule 2: $\braket{0 | n[x_1 \cd x_m] | 0} = 0$ for  $m \geq 1$ \\
-\item Rule 3. $\contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\item Rule 3. $\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] \ket{0} = 0$ if there is at least 1 uncontracted annihilator among operators $x_1 \cd x_m$.  \\
-\item Rule 4. $\braket{0| \contraction{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
-\contraction[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
+\item Rule 4. $\braket{0| \ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
+\ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
 n[x_1 \cd x_{i_1} \cd x_{i_\lambda} \cd x_{j_1} \cd x_{j_\lambda} \cd x_m] |0} = 0$ unless all operators are contracted.
 A vacuum expectation value of any normal product with contractions will be zero if there are a odd number of operators. \\
 \end{itemize}
@@ -475,7 +478,7 @@ Thus, we do not consider contractions within the terms in blue, orange, or red, 
 $ {\color{blue} a_p^\dagger}$ will only form nonzero contractions with ${\color{orange} a_{p_N} \cd a_{p_1} } $, and 
 $ {\color{blue} a_q }$ will only form nonzero contractions with ${\color{red} a_{p_1}\dg \cd a_{p_N}\dg }$. 
 After forming those two contractions, the remaining terms in orange and red have to form contractions with each other. 
-However, the only nonzero contractions that they can form are between terms with the same indices ($\contraction{}{a}{{}_p}{a} a_p a_q\dg =  \delta_{pq}$)
+However, the only nonzero contractions that they can form are between terms with the same indices ($\ctr{}{a}{{}_p}{a} a_p a_q\dg =  \delta_{pq}$)
 This means that $ {\color{blue} a_p^\dagger}$ and  $ {\color{blue} a_q }$ can only form nonzero contractions if their respective orange and red contraction partners have the same indices as each other. 
 \\ \\
 To summarize, the only terms in the expectation value that does not vanish are ones in which the operators in blue are contracted with orange and red operators with the same indices (${\color{orange} a_{p_i} } $ and 
@@ -483,15 +486,15 @@ ${\color{red} a_{p_i}\dg}$), and the remaining orange and red operators form con
 contractions with any operators in the red and orange set as long as the red and orange operators have the same indices.  \\ \\
 We can express this in the following way: 
 \[\braket{\Phi | \hat{O}_1 | \Phi} = \sum_{pq}   h_{pq} \sum_i^N \braket{0| 
-\contraction{a_{p_N} \cd}{a}{{}_{p_i} \cd  a_{p_1} }{a}  
-\contraction{{\color{orange} a_{p_N} \cd a_{p_i} \cd  a_{p_1} } a_p^\dagger}{a}{{}_q a_{p_1}\dg \cd}{a}
-\contraction[2ex]{ a_{p_N} \cd a_{p_i} \cd }{a}{{}_{p_1}  a_p^\dagger a_q }{a}
-\contraction[3ex]{}{a}{{}_{p_N} \cd a_{p_i} \cd  a_{p_1}{\color{blue} a_p^\dagger a_q } a_{p_1}\dg \cd a_{p_i}\dg \cd}{a}
+\ctr{a_{p_N} \cd}{a}{{}_{p_i} \cd  a_{p_1} }{a}  
+\ctr{{\color{orange} a_{p_N} \cd a_{p_i} \cd  a_{p_1} } a_p^\dagger}{a}{{}_q a_{p_1}\dg \cd}{a}
+\ctr[2ex]{ a_{p_N} \cd a_{p_i} \cd }{a}{{}_{p_1}  a_p^\dagger a_q }{a}
+\ctr[3ex]{}{a}{{}_{p_N} \cd a_{p_i} \cd  a_{p_1}{\color{blue} a_p^\dagger a_q } a_{p_1}\dg \cd a_{p_i}\dg \cd}{a}
 {\color{orange} a_{p_N} \cd a_{p_i} \cd  a_{p_1} } {\color{blue} a_p^\dagger a_q } {\color{red} a_{p_1}\dg \cd a_{p_i}\dg \cd a_{p_N}\dg } |0} \]
 We notice 2 things: 
 \begin{enumerate}
 \item The number of intersecting contraction lines will always be even, and so the phase factor to move all contractions out of the expectation value is positive.
-\item The contractions $\contraction{}{a}{{}_p}{a} {\color{orange} a_{j}}{\color{red} a_j\dg }=  \delta_{jj}$ will collapse to products of 1 for all j. 
+\item The contractions $\ctr{}{a}{{}_p}{a} {\color{orange} a_{j}}{\color{red} a_j\dg }=  \delta_{jj}$ will collapse to products of 1 for all j. 
 \end{enumerate}
 This means we are left with: 
 \begin{align*}
@@ -512,28 +515,28 @@ We will write the four types of contractions that can formed (contractions betwe
 \begin{align*}
 \braket{{\color{orange} \Phi_{p_1 \cd p_N} } | \hat{O}_2  | {\color{red} \Phi_{p_1 \cd p_N}}} &= 
  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
- \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
- \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
- \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
- \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
+ \ctr{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
+ \ctr{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
+ \ctr[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
+ \ctr[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
  &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
- \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
-  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
- \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
- \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
+ \ctr{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd }{a}
+  \ctr[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd  a_{p_i}\dg \cd}{a}
+ \ctr{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
+ \ctr[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\
  &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
- \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
-  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
- \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
- \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
+ \ctr{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
+  \ctr[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
+ \ctr{ \cd a_{p_j} \cd }{a}{{}_{p_i}  \cd  }{ }
+ \ctr[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i} \cd a_p\dg}{}
  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
  &+  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \braket{ 0| 
- \contraction{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
-  \contraction[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
- \contraction{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
- \contraction[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
+ \ctr{  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg a_s }{a}{{}_r \cd  a_{p_i}\dg \cd }{a}
+  \ctr[2ex]{ {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } a_p\dg a_q\dg}{a}{{}_s a_r \cd }{a}
+ \ctr{ \cd a_{p_j} \cd }{a}{{}_{p_i} \cd a_p\dg  }{ }
+ \ctr[2ex] {\cd}{a}{{}_{p_j} \cd a_{p_i}  \cd }{}
  {\color{orange} \cd a_{p_j} \cd a_{p_i} \cd } {\color{blue} a_p\dg a_q\dg a_s a_r} {\color{red}\cd  a_{p_i}\dg \cd a_{p_j}\dg \cd }| 0} \\ 
  &=  \frac{1}{2}  \sum_{pqrs} \braket{pq | rs} \sum_{i < j} \left[ \delta_{p p_i} \delta_{q p_j} \delta_{r p_i} \delta_{s p_j} 
  - \delta_{p p_j} \delta_{q p_i} \delta_{r p_i} \delta_{s p_j} 
