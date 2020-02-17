@@ -83,7 +83,7 @@ R =
 = (1)(23)(45) = (+)(-)(-) = (+)
 \end{equation*}
 \[ x_1 x_3 x_2 x_5 x_4  =  x_1 x_2 x_3 x_4 x_5 \]
-
+Cyclic permutations can also be referred to as ``cycles". 
 \section{Prerequisites to Wick's Theorem}
 
 Last time, we determined that much of the math we have to solve boils down to evaluating expectation values of 
@@ -108,7 +108,7 @@ The normal product of an empty set is defined to be one:
 \[ n[\varnothing] = 1\]
 
 \subsubsection{Example 1}
-\[n[a_p\dg a_q a_r ] = (-)^R a_p\dg a_r\dg a_q \]\\
+\[n[a_p\dg a_q a_r \dg] = (-)^R a_p\dg a_r\dg a_q \]\\
 \[
 R = 
 \begin{pmatrix}
@@ -117,9 +117,9 @@ p & r & q  \\
 \end{pmatrix}
 = (p)(qr) = (+)(-) = (-)
 \] \\
-\[n[a_p\dg a_q a_r ] = - a_p\dg a_r\dg a_q \]
+\[n[a_p\dg a_q a_r \dg] = - a_p\dg a_r\dg a_q \]
 Equivalently, we can write: 
-\[n[a_p\dg a_q a_r ] = (-)^R a_r\dg a_p\dg a_q \]\\
+\[n[a_p\dg a_q a_r\dg ] = (-)^R a_r\dg a_p\dg a_q \]\\
 \[
 R = 
 \begin{pmatrix}
@@ -128,8 +128,8 @@ r & p & q  \\
 \end{pmatrix}
 = (prq) = (+) 
 \] \\
-\[n[a_p\dg a_q a_r ] =  a_r\dg a_q\dg a_q \]
-Thus we see normal products can be written in different ways. 
+\[n[a_p\dg a_q a_r ] =  a_r\dg a_p\dg a_q \]
+Thus we see normal products can be written in different ways, which are equivalent due to antisymmetry.
 \subsubsection{Example 2}
 \[ n[a_p\dg a_q\dg a_r\dg] = a_p\dg a_q\dg a_r\dg \]
 Here, the string is already normal ordered, so we can just drop the normal product notation. 
@@ -202,8 +202,8 @@ where
 \[
 R = 
 \begin{pmatrix}
-1 & 2 & \cd & x_m  \\
-i_1 & j_1 & \cd& k_\mu \\
+1 & 2 & \cd & 2\lambda -1 & 2\lambda & 2\lambda + 1&\cd & m  \\
+i_1 & j_1 & \cd& i_\lambda & j_\lambda  &k_1 & \cd & k_\mu \\
 \end{pmatrix}
 \] \\
 and the indices $2\lambda + \mu = m$.
@@ -288,7 +288,7 @@ Remember that our ultimate goal is to know how to quickly evaluate matrix elemen
 We are now ready to prove some rules for determining how a normal ordered string of operators acts in the true vacuum.
 
 \begin{itemize}
-\item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
+\item Rule 1: $n[x_1 \cd x_m]\ket{0} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
 
 Proof: If all operators are creation operators, 
 \[n[a_{p_1}\dg \cd a_{p_m}\dg]\ket{0} = a_{p_1}\dg \cd a_{p_m}\dg\ket{0} = \ket{\Phi_{p_1 \cd p_m}} \neq 0\]
@@ -363,7 +363,7 @@ n[x_1 \cd x_{i_1} \cd x_{i_2} \cd x_{j_1} \cd x_{j_2} \cd x_m ]  \\
 \end{align*}
 where ``f.c." stands for fully contracted. 
 In words, a string of operators can be written as its normal product plus all contractions of the normal product. 
-We will adoption a short term notation for expressing all possible contractions of the normal product and write Wick's theorem as: 
+We will adopt a shorthand notation for expressing all possible contractions of the normal product and write Wick's theorem as: 
 \[x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \]\\
 where ``a.c." stands for all contractions.
 Let's explicitly write out Wick's theorem for a general product of 4 operators for a more concrete example: 
@@ -379,7 +379,7 @@ x_1x_2x_3x_4 &= n[x_1x_2x_3x_4 ] \\
 Wick's theorem is proved generally in the next set of lecture notes.
 
 \subsection{Generalized Wick's Theorem}
-In some cases, subgroups of operator strings are already in the normal product form.
+In some cases, substrings of operator strings are already in the normal product form.
 This will allow us to simplify the terms we need to consider for Wick's theorem. \\ \\
 Let's begin with an example: 
 \[x_1 n[x_2 x_3] \] 
@@ -407,7 +407,7 @@ Thus, we see it is to our benefit to have as many operators as we can in normal 
 The generalized Wick's theorem is proved in the next set of lecture notes.
 
 \subsection{Expectation values with Wick's theorem }
-In Section 2.4 we proved some rules for quickly evaluate normal products or normal products with contractions acting in the true vacuum. 
+In Section 2.4 we proved some rules for quickly evaluating normal products or normal products with contractions acting in the true vacuum. 
 We have now introduced Wick's theorem (WT), which is a clever bookkeeping method to express any product of operators as normal products and normal products with contractions. 
 We will now apply WT with the rules developed in Section 2.4 to start seeing how we can take advantage of WT when evaluating matrix elements of operator strings. 
 \\ \\
@@ -433,7 +433,7 @@ Proof:
 \[\braket{0 | x_1 \cd x_{2m + 1} | 0}   =  \braket{0 | n[x_1 \cd x_{2m + 1}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m + 1}]} | 0}  \]
 The first term is zero by Rule 2 and the second term is zero by Rule 4
 
-\item \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}$\\
+ \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}$\\
 
 \begin{equation*}
 R = 
@@ -456,7 +456,7 @@ Proof:
 The first term is 0 unless it is all creation operators by Rule 1, and the second is 0 unless all annihilation operators are contracted by Rule 3. 
 \end{itemize}
 It is not important to remember which rule you are using when applying Wick's theorem to solve problems. 
-Rather, we are simply listing the rules to document the important consequences of Wick's theorem that allows us to take shortcuts.
+Rather, we are simply listing the rules to document the important consequences of Wick's theorem that allow us to take shortcuts.
 As long as you understand Wick's theorem and how we obtained the rules, you should be able to naturally apply them to problems. 
 
 \section{Derivation of Slater's first rule using Wick's Theorem}
