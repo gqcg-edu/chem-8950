@@ -21,6 +21,7 @@
 \newcommand{\cd}{\ensuremath{\cdots} }
 \newcommand{\apd}{\ensuremath{a_p^\dagger} }
 \def\*#1{\mathbf{#1}}
+\def\co#1{{\color{orange}#1}}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 \title{Lecture 3.3: Wick's Theorem}
@@ -90,7 +91,7 @@ Last time, we determined that much of the math we have to solve boils down to ev
 strings of creation and annihilation operators in the true vacuum.
 Using anti-communtation rules to do this was tedious, and we wanted to find a more efficient way. 
 Our answer is to use Wick's Theorem. 
-We first need to introduce three concepts needed to present Wick's Theorem: normal products, contractions, and normal products with contractions.
+Before introducing Wick's Theorem, we need to introduce three prerequisite concepts: normal products, contractions, and normal products with contractions.
 
 \subsection{Normal Products}
 A normal product is a product of creation and annihilation operators where all the creation operators are to the left of the expression.
@@ -128,7 +129,7 @@ r & p & q  \\
 \end{pmatrix}
 = (prq) = (+) 
 \] \\
-\[n[a_p\dg a_q a_r ] =  a_r\dg a_p\dg a_q \]
+\[n[a_p\dg a_q a_r\dg ] =  a_r\dg a_p\dg a_q \]
 Thus we see normal products can be written in different ways, which are equivalent due to antisymmetry.
 \subsubsection{Example 2}
 \[ n[a_p\dg a_q\dg a_r\dg] = a_p\dg a_q\dg a_r\dg \]
@@ -274,7 +275,7 @@ For example, in the term
 \ctr{n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg}{a}{{}_w a_x}{a}
 n[a_p a_q a_r\dg a_s a_t\dg a_u\dg a_v\dg a_w a_x a_y\dg] \]
 the first six operators are fully contracted, and has an overall phase factor of (+) because there are 2 intersections.
-As a result, we can take it out directly of the normal product: 
+As a result, we can take it out of the normal product: 
 \[\ctr{n[}{a}{{}_p a_q}{a}
 \ctr[2ex]{n[a_p }{a}{{}_q a_r\dg a_s }{a}
 \ctr{n[a_p a_q a_r\dg }{a}{{}_s a_t\dg }{a}
@@ -286,6 +287,9 @@ n[{\color{blue} a_p a_q a_r\dg a_s a_t\dg a_u\dg} a_v\dg a_w a_x a_y\dg] =
 \ctr{a_p a_r\dg a_q a_t\dg a_s  a_u\dg n[a_v\dg}{a}{{}_w a_x}{a}
 {\color{blue} a_p a_r\dg a_q a_t\dg a_s  a_u\dg }n[a_v\dg a_w a_x a_y\dg]\]
 \\ \\
+We will use the notation:
+\[n\ol{[x_1 \cd x_m]} \] 
+to represent a generic normal product with some contraction.
 \subsection{Matrix elements of normal products with contractions}
 Remember that our ultimate goal is to know how to quickly evaluate matrix elements of strings of operators in the vacuum. 
 We are now ready to prove some rules for determining how a normal ordered string of operators acts in the true vacuum.
@@ -364,11 +368,12 @@ n[x_1 \cd x_{i_1} \cd x_{i_2} \cd x_{j_1} \cd x_{j_2} \cd x_m ]  \\
 &+ \cd \\
 &+ \sum_{f.c.} n \ol{\ol{[x_1 \cd x_m]  }}
 \end{align*}
-where ``f.c." stands for fully contracted. 
+where ``f.c." stands for fully contracted, and the last term is the sum of all fully contracted terms.
 In words, a string of operators can be written as its normal product plus all contractions of the normal product. 
 We will adopt a shorthand notation for expressing all possible contractions of the normal product and write Wick's theorem as: 
 \[x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \]\\
-where ``a.c." stands for all contractions.
+where `a.c.' stands for `all possible contractions' and $n\ol{[x_1 \cd x_m ]}$ is just representative of some general normal order product with contractions. 
+\\ \\
 Let's explicitly write out Wick's theorem for a general product of 4 operators for a more concrete example: 
 \begin{align*}
 x_1x_2x_3x_4 &= n[x_1x_2x_3x_4 ] \\ 
@@ -393,12 +398,15 @@ We can rearrange this as:
 We can substitute this into our original expression: 
 \begin{align*}
 x_1 n[x_2 x_3] &= x_1 (x_2 x_3  - n[\ctr{}{x}{{}_2}{x} x_2 x_3] ) \\
-&= {\color{blue} x_1 x_2 x_3} - x_1n[\ctr{}{x}{{}_2}{x} x_2 x_3] \\
-&= {\color{blue} x_1 x_2 x_3} - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&=  x_1 x_2 x_3 - x_1n[\ctr{}{x}{{}_2}{x} x_2 x_3] \\
+&= x_1 x_2 x_3- x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+\end{align*}
+We can now do a Wick expansion for $x_1x_2x_3$ and use properties of normal products to rearrange the fourth term:
+\begin{align*}
 &= {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + n[\ctr{x_1}{x}{{}_2}{x} x_1 x_2 x_3] }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
-&=  {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \ctr{}{x}{{}_2}{x} x_2 x_3 n[x_1] }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
-&= {\color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + x_1\ctr{}{x}{{}_2}{x} x_2 x_3  }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
-&= \color{blue} n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] 
+&=   n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \co{\ctr{}{x}{{}_2}{x} x_2 x_3 n[x_1]}   - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&= n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] + \co{x_1\ctr{}{x}{{}_2}{x} x_2 x_3  }  - x_1\ctr{}{x}{{}_2}{x} x_2 x_3 \\
+&=  n[x_1x_2x_3] + n[\ctr{}{x}{{}_1}{x} x_1 x_2 x_3] +n[\ctr{}{x}{{}_1 x_2}{x} x_1 x_2 x_3] 
 \end{align*}
 We observe that the contraction between the operators originally in normal ordered form cancel out in the final expression.
 \\ \\
