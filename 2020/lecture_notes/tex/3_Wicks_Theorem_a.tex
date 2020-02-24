@@ -424,7 +424,7 @@ We will now apply WT with the rules developed in Section 2.4 to start seeing how
 \\ \\
 We list the four previous rules here for easy reference: 
 \begin{itemize}
-\item Rule 1: $n[x_1 \cd x_m]\ket{)} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
+\item Rule 1: $n[x_1 \cd x_m]\ket{0} = 0$ unless all $x_1 \cd x_m$ are creation operators \\
 \item Rule 2: $\braket{0 | n[x_1 \cd x_m] | 0} = 0$ for  $m \geq 1$ \\
 \item Rule 3. $\ctr{n[x_1 \cd }{x}{{}_{i_1} \cd x_{i_\lambda} \cd }{x}
 \ctr[2ex]{n[x_1 \cd x_{i_1} \cd}{ x}{{}_{i_\lambda} \cd x_{j_1} \cd }{x} 
@@ -444,7 +444,7 @@ Proof:
 \[\braket{0 | x_1 \cd x_{2m + 1} | 0}   =  \braket{0 | n[x_1 \cd x_{2m + 1}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m + 1}]} | 0}  \]
 The first term is zero by Rule 2 and the second term is zero by Rule 4
 
- \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}$\\
+ \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m}$\\
 
 \begin{equation*}
 R = 
@@ -457,7 +457,7 @@ i_1 & j_1 & \cd  & i_m & j_m \\
 Proof: 
 \[\braket{0 | x_1 \cd x_{2m} | 0}   =  \braket{0 | n[x_1 \cd x_{2m}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m}]} | 0}  \]
 The first term is 0 by Rule 2 and the second term is $ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0}$ by Rule 4. 
-\[ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} =  \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m} \braket{0 | n[\varnothing] | 0} = \sum_{f.c.} (-1)^R x_{i_1} x_{j_1} \cd x_{i_m} x_{i_m}  \]
+\[ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} =  \sum_{f.c.} (-1)^R  \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m} \braket{0 | n[\varnothing] | 0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m} \]
 
 \item Rule 7: $x_1 \cd x_m \ket{0} = \sum\limits_{annihilator f.c.} n\ol{[x_1 \cd x_m] }\ket{0} $
 where ``annihilator f.c" denotes all contractions with the annihilation operator fully contracted.\\
