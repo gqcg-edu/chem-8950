@@ -267,8 +267,8 @@ where ``f.c." stands for fully contracted.
 Note that in cases where $m$ is odd, the last terms will not be fully contracted but have one uncontracted operator. 
 In words, Wick's theorem states that a string of operators can be written as its normal product plus all possible contractions of the normal product. 
 We will adopt a shorthand notation for expressing all possible contractions of the normal product and write Wick's theorem as: 
-\[x_1 \cd x_m = n[x_1 \cd x_m ]  + n\ol{[x_1 \cd x_m ]} \]\\
-where $n\ol{[x_1 \cd x_m ]}$ is the sum of all possible contractions.
+\[x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} n\ol{[x_1 \cd x_m ]} \]\\
+where `a.c.' stands for `all possible contractions' and $n\ol{[x_1 \cd x_m ]}$ is just representative of some general normal order product with contractions. 
 \\ \\
 We will first prove Wick's Theorem for the case m=1: 
 \\
@@ -409,8 +409,8 @@ In some cases, substring of operator strings are already in the normal product f
 $$x_1 \cd x_m = n[x_1 \cd x_m ]  + \sum_{a.c.} {}' n\ol{[x_1 \cd x_m ]} $$
 where $\sum_{a.c.} {}' $ denotes skipping contractions of operators that originated from the same normal ordered group. 
 \\ \\
-Proof:
-
+Proof: \\ 
+\\
 We write a string of operators where a substring is already in normal order:
 \[x_1 \cd x_{k_{\mu-1}} n[x_{k_{\mu-1}+1} \cd x_{k_\mu}] x_{k_\mu+1} \cd x_m\]
 We can permute indices inside the normal-ordered string and take it out of the normal product:   
@@ -419,8 +419,10 @@ Using Wick's theorem, we can expand the string as:
 \begin{align*} 
 (-1)^R x_1 \cd x_{k_{\mu-1}} a_{p_1}\dg \cd a_{p_\alpha}\dg & a_{p_{\alpha + 1}} \cd a_{p_{\beta}} x_{k_\mu+1} \cd x_m  = \\ \\
 & (-1)^R n[x_1 \cd x_{k_{\mu-1}} a_{p_1}\dg \cd a_{p_\alpha}\dg  a_{p_{\alpha + 1}} \cd a_{p_{\beta}} x_{k_\mu+1} \cd x_m] \\ \\
-&+ (-1)^R n\ol{[x_1 \cd x_{k_{\mu-1}} a_{p_1}\dg \cd a_{p_\alpha}\dg  a_{p_{\alpha + 1}} \cd a_{p_{\beta}} x_{k_\mu+1} \cd x_m] }
+&+ (-1)^R \sum_{a.c.} n\ol{[x_1 \cd x_{k_{\mu-1}} a_{p_1}\dg \cd a_{p_\alpha}\dg  a_{p_{\alpha + 1}} \cd a_{p_{\beta}} x_{k_\mu+1} \cd x_m] }
 \end{align*}
+\newpage
+\noindent
 Let's consider all contractions involving only $a_{p_1}\dg \cd a_{p_\alpha}\dg  a_{p_{\alpha + 1}} \cd a_{p_{\beta}}$:
 \begin{itemize}
 \item If $\alpha = 0$ and there are no creation operators in the string, there are only annihilation operators in the normal-ordered group,
