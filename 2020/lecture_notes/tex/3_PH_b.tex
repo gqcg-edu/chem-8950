@@ -313,7 +313,7 @@ N[\fctr{}{a}{{}_p\dg a_q\dg }{a}  \fctr[2ex]{a_p\dg}{a}{{}q\dg a_s}{a} a_p\dg a_
 \frac{1}{4} \sum_{ps} \sum_i \braket{pi | is} N[ a_p\dg a_s] } \\
 &+ \co{ \frac{1}{2} \sum_{ij} \braket{ij || ij} }
 \end{align*}
-We can perform a change of variables: 
+We can perform a change of variables and permute within the integrals: 
 \begin{align*}
 \hat{g}&= \cg{\frac{1}{2} \sum_{pqrs} \braket{pq | rs} N[a_p\dg a_q\dg a_s a_r] } \\
 & \cb{- \frac{1}{2} \sum_{pq} \sum_i \braket{ip | qi} N[ a_p\dg a_q] +  
@@ -321,6 +321,15 @@ We can perform a change of variables:
 \frac{1}{2} \sum_{pq} \sum_i \braket{pi | qi} N[ a_p\dg a_q] -
 \frac{1}{2} \sum_{pq} \sum_i \braket{pi | iq} N[ a_p\dg a_q] } \\
 &+ \co{ \frac{1}{2} \sum_{ij} \braket{ij || ij} } \\ \\
+&= \cg{\frac{1}{2} \sum_{pqrs} \braket{pq | rs} N[a_p\dg a_q\dg a_s a_r] } \\
+& \cb{ \frac{1}{2} \sum_{pq} \sum_i \braket{pi | qi} N[ a_p\dg a_q] -
+\frac{1}{2} \sum_{pq} \sum_i \braket{pi | iq} N[ a_p\dg a_q ] + 
+\frac{1}{2} \sum_{pq} \sum_i \braket{pi | qi} N[ a_p\dg a_q] -
+\frac{1}{2} \sum_{pq} \sum_i \braket{pi | iq} N[ a_p\dg a_q] } \\
+&+ \co{ \frac{1}{2} \sum_{ij} \braket{ij || ij} } 
+\end{align*}
+We can reorder the order of terms:
+\begin{align*}
 &= \cg{\frac{1}{2} \sum_{pqrs} \braket{pq | rs} N[a_p\dg a_q\dg a_s a_r] } \\
 & \cb{+ \frac{1}{2} \sum_{pq} \sum_i \braket{pi | qi} N[ a_p\dg a_q] +  
 \frac{1}{2} \sum_{pq} \sum_i \braket{pi | qi} N[ a_p\dg a_q ] - 
