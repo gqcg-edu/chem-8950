@@ -308,9 +308,9 @@ N[\fctr{}{a}{{}_p\dg a_q\dg }{a}  \fctr[2ex]{a_p\dg}{a}{{}q\dg a_s}{a} a_p\dg a_
 &+ \co{ \frac{1}{2} \sum_{pqrs} \braket{pq | rs} ( \gamma_{pr}\gamma_{qs} -\gamma_{ps}\gamma_{qr}) }\\ \\
 &= \cg{\frac{1}{2} \sum_{pqrs} \braket{pq | rs} N[a_p\dg a_q\dg a_s a_r] } \\
 & \cb{- \frac{1}{2} \sum_{qr} \sum_i \braket{iq | ri} N[ a_q\dg a_r] +  
-\frac{1}{4} \sum_{qs} \sum_i \braket{iq | is} N[ a_q\dg a_s ] + 
-\frac{1}{4} \sum_{pr} \sum_i \braket{pi | ri} N[ a_p\dg a_r] -
-\frac{1}{4} \sum_{ps} \sum_i \braket{pi | is} N[ a_p\dg a_s] } \\
+\frac{1}{2} \sum_{qs} \sum_i \braket{iq | is} N[ a_q\dg a_s ] + 
+\frac{1}{2} \sum_{pr} \sum_i \braket{pi | ri} N[ a_p\dg a_r] -
+\frac{1}{2} \sum_{ps} \sum_i \braket{pi | is} N[ a_p\dg a_s] } \\
 &+ \co{ \frac{1}{2} \sum_{ij} \braket{ij || ij} }
 \end{align*}
 We can perform a change of variables and permute within the integrals: 
@@ -385,7 +385,7 @@ In the same way that in our original formalism,
 In the particle-hole formalism, 
 \[\braket{\Phi| H_N | \Phi} = 0\]
  Mathematically, the choice of the reference determinant is arbitrary. It does not matter which determinant you use in the wavefunction expansion.
- Practically, it is more efficient to choose a determinant that dominants the wavefunction expansion (large coefficient). 
+ Practically, it is more efficient to choose a determinant that dominates the wavefunction expansion (large coefficient). 
  If we choose our reference determinant \kphi to be the Hartree-Fock result, then shifting the Hamiltonian by the Hartree-Fock
  energy $E_{HF} = \braket{\Phi |H|\Phi}$ means we are really just defining a Hamiltonian that takes care of correlation effects. 
 \[H = E_{HF} + H_{correlation} \]
