@@ -444,7 +444,7 @@ Proof:
 \[\braket{0 | x_1 \cd x_{2m + 1} | 0}   =  \braket{0 | n[x_1 \cd x_{2m + 1}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m + 1}]} | 0}  \]
 The first term is zero by Rule 2 and the second term is zero by Rule 4
 
- \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m}$\\
+ \item Rule 6 $\braket{0 | x_1 \cd x_{2m } | 0} = \sum_{f.c.} \braket{0 | n\ol{\ol{ [x_1 \cd x_{2m }]}}|0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{j_m}$\\
 
 \begin{equation*}
 R = 
@@ -456,8 +456,8 @@ i_1 & j_1 & \cd  & i_m & j_m \\
 
 Proof: 
 \[\braket{0 | x_1 \cd x_{2m} | 0}   =  \braket{0 | n[x_1 \cd x_{2m}] | 0}  +  \sum_{a.c.} \braket{0 | n\ol{[x_1 \cd x_{2m}]} | 0}  \]
-The first term is 0 by Rule 2 and the second term is $ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0}$ by Rule 4. 
-\[ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} =  \sum_{f.c.} (-1)^R  \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m} \braket{0 | n[\varnothing] | 0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{i_m} \]
+The first term is 0 by Rule 2 and the second term is $ \sum_{f.c.} \braket{0 | n\ol{\ol{ [x_1 \cd x_{2m }]}}|0}$ by Rule 4. 
+\[ \sum_{f.c.} \braket{0 | \ol{\ol{ n[x_1 \cd x_{2m }]}}|0} =  \sum_{f.c.} (-1)^R  \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{j_m} \braket{0 | n[\varnothing] | 0} = \sum_{f.c.} (-1)^R \ctr{}{x}{{}_{i_1}}{x}  x_{i_1} x_{j_1} \cd \ctr{}{x}{{}_{i_m}}{x} x_{i_m} x_{j_m} \]
 
 \item Rule 7: $x_1 \cd x_m \ket{0} = \sum\limits_{annihilator f.c.} n\ol{[x_1 \cd x_m] }\ket{0} $
 where ``annihilator f.c" denotes all contractions with the annihilation operator fully contracted.\\
