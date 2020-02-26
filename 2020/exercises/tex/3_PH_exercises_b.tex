@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{simplewick}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\fctr}{\contraction}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 3.6 $a_p$ and $a_p\dg$ in the Particle-Hole Formalism}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item Prove:
+ $$
+ \fctr{}{a}{{}_p}{a}
+ a_p a_q\dg = \pi(p)\delta_{pq} = \eta_{pq}
+ $$
+ $$
+ \fctr{}{a}{{}_p}{a}
+ a_p\dg a_q\dg = 0
+ $$
+\item Put the Hamiltonian in $\Phi$-Normal ordering, define the Fock operator
+\item Prove Slater's first rule using the Particle-Hole formalism with a $\Phi$-Normal ordered Hamiltonian 
+\[\braket{\Phi|H|\Phi} = \sum_i h_{ii} + \frac{1}{2} \sum_{ij} \braket{ij || ij} \]
+\item Prove Slater's second rule using the Particle-Hole formalism with a $\Phi$-Normal ordered Hamiltonian 
+\[\braket{\Phi|H|\Phi_i^a} = h_{ia} + \sum_{j} \braket{ij || aj} \]
+\item Prove Slater's third rule using the Particle-Hole formalism with a $\Phi$-Normal ordered Hamiltonian 
+\[\braket{\Phi|H|\Phi_{ij}^{ab}} = \braket{ij || ab} \]
+\item Practice evaluating the following matrix elements: 
+\[ \braket{\Phi_j^b |\Phi_{i}^{a}} \]
+\[ \braket{\Phi_j^b |H| \Phi_{i}^{a}} \]
+\[ \braket{\Phi_{kl}^{cd}|\Phi_{ij}^{ab}} \]
+\[ \braket{\Phi_{kl}^{cd}|H|\Phi_{ij}^{ab}} \]
+\end{enumerate}
+\end{document}
+
