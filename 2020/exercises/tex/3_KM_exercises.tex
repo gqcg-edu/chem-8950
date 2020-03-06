@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{simplewick}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\hole}{\circ}
+\newcommand{\fctr}{\contraction}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\tl}{\tilde}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 3.7 KM notation}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item
+  Show algebraically that $\hat{P}_{(p/q/r)}=\hat{P}_{(p/qr)}\hat{P}_{(q/r)}=\hat{P}_{(pq/r)}\hat{P}_{(p/q)}$ and explain why these identities follow from the definition of the index antisymmetrizers.
+\item 
+  Prove the following identities.
+\begin{align*}
+  \tl{a}^{p_1\cd p_m}_{q_1\cd q_m}
+=
+N[a^{p_1}_{q_1}\cd a^{p_m}_{q_m}]
+&&
+N[a^{p_1\cd p_m}_{q_1\cd q_m}a^{r_1\cd r_n}_{s_1\cd s_n}]
+=
+  N[a^{p_1}_{q_1}\cd a^{p_m}_{q_m}a^{r_1}_{s_1}\cd a^{r_n}_{s_n}]
+=
+  \tl{a}^{p_1\cd p_mr_1\cd r_n}_{q_1\cd q_ms_1\cd s_n}
+\end{align*}
+Furthermore, explain why these identities do not apply to contracted operators. 
+  \item Explain why we cannot write: 
+\[\hat{P}^{(p/q)}_{(r/s)} \tl{a}^p_r\tl{a}^q_s \]
+\item Put the Hamiltonian in $\Phi$-Normal ordering using KM notation 
+\item Prove Slater's second rule using KM notation
+\[\braket{\Phi|H|\Phi_i^a} = h_{ia} + \sum_{j} \braket{ij || aj} \]
+\item Prove Slater's third rule using KM notation
+\[\braket{\Phi|H|\Phi_{ij}^{ab}} = \braket{ij || ab} \]
+\item Show that the Wick expansion of a triple excitation operator is: 
+\[
+  a^{pqr}_{stu}
+=
+  \tl{a}^{pqr}_{stu}
++
+  \hat{P}^{(p/qr)}_{(s/tu)}
+  \tl{a}^{p^\hole qr}_{s^\hole tu}
++
+  \hat{P}^{(p/q/r)}_{(st/u)}
+  \tl{a}^{p^\hole q^{\hole\hole} r}_{s^\hole t^{\hole\hole} u}
++
+  \hat{P}^{(p/q/r)}
+  \tl{a}^{p^\hole q^{\hole\hole} r^{\hole\hole\hole}}
+        _{s^\hole t^{\hole\hole} u^{\hole\hole\hole}}
+\]
+\item Practice evaluating the following matrix elements using KM notation:
+\[ \braket{\Phi_j^b |\Phi_{i}^{a}} \]
+\[ \braket{\Phi_j^b |H_c| \Phi_{i}^{a}} \]
+\[ \braket{\Phi_{kl}^{cd}|\Phi_{ij}^{ab}} \]
+\[ \braket{\Phi_{kl}^{cd}|H_c|\Phi_{ij}^{ab}} \]
+The answers can be found in the last section of Andreas's ``3q-1h-kutzelnigg-mukherjee.pdf" notes.
+Use it to check your results, but be sure you understand the work involved. 
+\end{enumerate}
+\end{document}
+
