@@ -1,0 +1,217 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\Ecorr}{E_{\mathrm{corr}}}
+\newcommand{\Hc}{H_{\mathrm{c}}}
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Lecture 4: Configuration Interaction}
+\date{March 6, 2020}
+\begin{document}
+\maketitle
+\noindent
+Now that you have been properly bombarded with new notations and algebra, we are ready to do some actual quantum chemistry again. 
+The rest of this course will be about post-Hartree-Fock (post-HF) methods (though, our current mathematical machinery will quickly run out of steam, 
+    and we will have to digress once again and learn diagrams to move any further).  
+What do post-HF methods do? They account for the electronic energy contribution due to electron correlation. 
+What is electron correlation? Well, colloquially, it's how much the movement of an electron is influenced by other nearby interacting electrons. 
+Most quantum chemists define the correlation energy as simply the difference between the exact energy and the HF energy. 
+\[E_{\mathrm{corr}}  = E_{\mathrm{exact}} - E_{\mathrm{HF}} \]
+By ``exact'' energy, we mean the energy eigenvalue corresponding to our electronic Hamiltonian and the 
+    exact wavefunction $\hat{H} \Psi_{\mathrm{exact}} = E_{\mathrm{exact}}  \Psi_{\mathrm{exact}} $. 
+If you're inclined to be snarky, HF exchange energy is technically accounting 
+    for a tiny amount of correlation by considering electrons of the same spin swapping orbitals. 
+In this way, the entire exchange energy portion of the HF energy is a correlation energy. 
+Nevertheless, the above definition of correlation energy still stands.
+
+The most conceptually simple scheme for finding the correlation energy is known as configuration interaction (CI) theory.
+The full configuration interaction (FCI) wavefunction is a valid form for the exact wavefunction described above within a given basis.
+Thus, the corresponding FCI energy is the exact energy for that basis, and in the complete basis set limit it is the exact electronic energy.
+By ``exact'', we mean exact w.r.t. our Hamiltonian and the time-independent Schr{\"o}dinger equation.
+Barring any relativistic effects, the FCI/CBS energy is the \textit{true} value of the energy for that molecular system.
+
+
+\section{The CI Wavefunction} 
+Recall from the first set of second quantization notes that for some molecular system with a set of spin-orbitals,
+the set of all Slater determinants which may be constructed from these spin orbitals form a basis for expanding our $N$-particle wavefunction $\ket{\Psi}$:
+\[ \ket{\Psi} = \sum_{p_1 < \cdots < p_N} c_p \ket{\Phi_{p_1 \cdots p_N}} \]
+To put it another way, the form of the exact $N$-particle wavefunction $\ket{\Psi}$ is just a linear combination of all possible Slater determinants given a set of spin-orbitals.
+
+The above summation is just a linear combination of every unique Slater determinant for a set a spin-orbitals. 
+An equivalent way of expressing a linear combination of every unique Slater determinant is to choose some arbitrary reference determinant, 
+    and then consider all possible excitations from that reference determinant. 
+%We point out that each of these Slater determinants can be expressed in terms of some arbitrary reference determinant. 
+Suppose we choose the Hartree-Fock wavefunction  $\ket{\Phi}$ as our reference determinant.
+Now we can write the wavefunction expansion above as 
+\[ \ket{\Psi} = c_0 \ket{\Phi} + \sum_{ia} c_i^a \ket{\Phi_i^a} +  \sum_{ \substack{i < j \\ a < b}} c_{ij}^{ab} \ket{\Phi_{ij}^{ab}} + \sum_{ \substack{i < j < k \\ a < b < c }} c_{ijk}^{abc} \ket{\Phi_{ijk}^{abc}} + \cdots \]
+Where each $c_i^a$ can be read as ``the coefficient associated with the Slater determinant which defers from the reference determinant 
+    by one excitation of an electron from spin orbital $i$ to spin orbital $a$.''
+An analogous description exists for each of the other coefficients.
+The above can be simplified signficantly by pulling out the excitation operators and taking advantage of the Einstein summation convention: 
+    we swap the upper and lower indice labels of the $c$'s to imply summation.
+However, to do this we need to unrestict our sums (theres no way to build-in $i <j$, etc. in the Einstein summation notation). 
+Summing over unrestricted indices for $N$ occupied indices and $N$ virtual indices introduces a redundancy of $(N!)^2$:
+%\[ \ket{\Psi} = c_0 \ket{\Phi} + c_a^i \tilde{a}_{i}^{a} \ket{\Phi} + c_{ab}^{ij} \tilde{a}_{ij}^{ab} \ket{\Phi} + c_{abc}^{ijk} \tilde{a}_{ij}^{ab} \ket{\Phi} + \cdots \]
+\[ \ket{\Psi} = c_0 \ket{\Phi} + \left(\frac{1}{1!}\right)^2 \sum_{ia} c_i^a \ket{\Phi_i^a} +  \left(\frac{1}{2!}\right)^2\sum_{ \substack{ij \\ ab}} c_{ij}^{ab} \ket{\Phi_{ij}^{ab}} + \left(\frac{1}{3!}\right)^2 \sum_{ \substack{ijk \\ abc}} c_{ijk}^{abc} \ket{\Phi_{ijk}^{abc}} + \cdots \]
+\[ \ket{\Psi} = \left(c_0 + \left(\frac{1}{1!}\right)^2 c_a^i \tilde{a}_{i}^{a} +  \left(\frac{1}{2!}\right)^2c_{ab}^{ij} \tilde{a}_{ij}^{ab} + \left(\frac{1}{3!}\right)^2 c_{abc}^{ijk} \tilde{a}_{ijk}^{abc} + \cdots\right) \ket{\Phi}  \]
+
+the above is now just a sum of excitation operators being applied to the reference wavefunction. 
+We can cleanly define a set of CI operators $C_n$ and arrive at the final form for the CI wavefunction. 
+\[ C_1 = \left(\frac{1}{1!}\right)^2 c_a^i \tilde{a}_{i}^{a} \quad \quad C_2 = \left(\frac{1}{2!}\right)^2c_{ab}^{ij} \tilde{a}_{ij}^{ab} \quad \quad C_3 = \left(\frac{1}{3!}\right)^2 c_{abc}^{ijk} \tilde{a}_{ijk}^{abc} \quad \quad \cdots  \]
+\[ \ket{\Psi} = \lp c_0 + C_1 + C_2 + C_3 + \cdots + C_n \rp \ket{\Phi} \]
+
+\subsection{Intermediate Normalization}
+It is often chosen to work with $\ket{\Psi}$ in \textit{intermediate normalized form} so that the overlap with the reference determinant is $\braket{\Phi | \Psi} = 1$.  
+This way the first coefficient $c_0$ is equal to 1, so that 
+\[ \ket{\Psi} = \lp 1 + C_1 + C_2 + C_3 + \cdots + C_n \rp \ket{\Phi} \]
+and the overall wavefunction is not normalized:
+\[ \braket{\Psi|\Psi} = 1 + \sum_{ia} (c_a^i)^2 + \sum_{ \substack{ij \\ ab}} (c_{ab}^{ij})^2 + \cdots  \]
+However one can easily retrieve the truely normalized $\ket{\Psi}$ by multiplying the intermediate normalized $\ket{\Psi}$ by a constant.
+
+
+\section{The CI Schr{\"o}dinger Equation and Correlation Energy}
+We have a form for the wavefunction (the \textit{intermediate normalized full CI wavefunction}), as well as our $\Phi$-normal ordered Hamiltonian, 
+the \textit{correlation} Hamiltonian $\Hc$ from before:
+\[\Hc =  \sum_{pq} f_{pq} N[a_p\dg a_q]  + \frac{1}{4} \sum_{pqrs} \braket{pq || rs} N[a_p\dg a_q\dg a_s a_r] = f_p^q \tilde{a}_q^p + \frac{1}{4} \bar{g}_{pq}^{rs} \tilde{a}_{rs}^{pq} \] 
+where $f_{p}^{q} = h_{p}^{q} + \sum_i \braket{pi||qi} $,
+we are ready to derive an energy expression for the correlation energy.
+
+\[\Hc \ket{\Psi} = \Ecorr \ket{\Psi} \]
+\[\Hc (1 + C_1 + C_2 \cdots) \ket{\Phi} = \Ecorr \ket{\Psi} \]
+\[\braket{\Phi | \Hc (1 + C_1 + C_2 + \cdots) | \Phi} = \Ecorr \braket{\Phi|\Psi} \]
+
+Here we will use the fact that  $\braket{\Phi|\Hc|\Phi} = 0 $ and $\braket{\Phi|\Psi} = 1$ to arrive at
+
+\[\braket{\Phi | \Hc (C_1 + C_2 + \cdots) | \Phi} = \Ecorr \]
+\[ \braket{\Phi | \Hc C_1 | \Phi} + \braket{\Phi | \Hc C_2 | \Phi} + \braket{\Phi | \Hc C_3 | \Phi} + \cdots = \Ecorr \]
+
+\[ \left(\frac{1}{1!}\right)^2 \braket{\Phi | \Hc c_a^i \tilde{a}_i^a  | \Phi}
++  \left(\frac{1}{2!}\right)^2 \braket{\Phi | \Hc c_{ab}^{ij} \tilde{a}_{ij}^{ab} | \Phi}
++  \left(\frac{1}{3!}\right)^2 \braket{\Phi | \Hc c_{abc}^{ijk} \tilde{a}_{ijk}^{abc} |\Phi} + \cdots = \Ecorr
+\]
+
+\[ \left(\frac{1}{1!}\right)^2 c_a^i \braket{\Phi | \Hc | \Phi_i^a}
++  \left(\frac{1}{2!}\right)^2 c_{ab}^{ij} \braket{\Phi | \Hc | \Phi_{ij}^{ab}}
++  \left(\frac{1}{3!}\right)^2 c_{abc}^{ijk} \braket{\Phi | \Hc |\Phi_{ijk}^{abc}} + \cdots = \Ecorr
+\]
+
+\[ f_i^a c_a^i + \frac{1}{4} \bar{g}_{ij}^{ab} c_{ab}^{ij} = \Ecorr \]
+
+where the first term is always 0 for a Hartree-Fock reference due to Brillouin's theorem, and all triple excitations and beyond go to zero 
+since the Wick expansion has no complete contractions (or equivalently, from Slater's rule $\braket{\Phi | H | \Phi_{ijk}^{abc}} = 0  \implies \braket{\Phi | \Hc | \Phi_{ijk}^{abc}} = 0 $).
+
+We arrive at the conclusion that the FCI electronic energy is just
+\[ \frac{1}{4} \bar{g}_{ij}^{ab} c_{ab}^{ij} = \Ecorr \]
+
+
+% Brillouins: ground electronic states from one-particle methods arlready mply configuration interaction of the ground state configuration with singly excited ones.
+% furhter inclusion redundant
+
+% Contract first term explicitly, third and higher terms are 0 because of no complete contractions
+% Equivalently,  0 because of 4th Slater rule, which is the same as saying the wick expansion has no complete contractions 
+
+
+%\left(\frac{1}{1!}\right)^2 c_a^i \tilde{a}_{i}^{a} 
+%\left(\frac{1}{2!}\right)^2c_{ab}^{ij} \tilde{a}_{ij}^{ab}
+%\left(\frac{1}{3!}\right)^2 c_{abc}^{ijk} \tilde{a}_{ijk}^{abc}
+%
+%\[ \braket{\Phi | \Hc C_1 | \Phi} + \braket{\Phi | \Hc C_2 | \Phi} + \braket{\Phi | \Hc C_3 | \Phi} + \cdots \]
+%
+%
+%\[\braket{\Phi | \Hc (C_1 + C_2 + \cdots) | \Phi} = \Ecorr \]
+%
+
+
+%intermediate normalization
+
+CI is conceptually very simple: Diagonalize the matrix representation of the $N$-electron Hamiltonian in a basis of all possible Slater determinants constructable from your basis set.
+
+There are a lot of linear combinations and basis expansions going on here. So let's set that straight right now:
+
+\textbf{For a given molecular system},
+\begin{itemize}
+\item Our spin-orbitals are constructed from a linear combination of atomic orbitals (LCAO), which are \textit{fixed, known} one-electron functions (typically Gaussians). 
+The spin-orbitals are typically optimized with an LCAO-HF procedure, such as the Roothaan-Hall or Pople-Nesbet approaches. 
+\item There is a finite set of Slater determinants one can construct given a finite set of spin-orbitals. This set of Slater determinants form a \textit{basis} for representing our $N$-electron wavefunction.
+\end{itemize}
+
+\textbf{Why} do the excitations from the reference determinant (which is almost always the HF wavefunction, but need not be) in the CI expansion account for electron correlation?
+What is it about these ``excitations'' that fully accounts for the instantaneous interactions between electrons which causes them to move in response to the presence of one another? 
+Well, we proved that the exact $N$-electron wavefunction (and thus, the FCI wavefunction) does in fact account for all electron correlation, and Hartree-Fock obviously does not.
+Since the primary difference between the HF wavefunction and FCI wavefunction is that the FCI wavefunction includes excitations from the HF wavefunction, it necessarily
+follows that including these excitation contributions is \textit{equivalent} to accounting for electron correlation.
+But this does not answer the question.
+Qualitatively, the CI expansion is considering the possibility that the electrons rearrange themselves by constructing different Slater determinants, which differ from one another in that 
+the electrons are occupying different spin-orbitals. 
+By mixing in all those possible determinants, or ``excited states'', you allow the flexibility for electrons to avoid each other, or ``correlate'',
+    whereas before in the Hartree-Fock picture they were clamped down into one Slater determinant configuration. 
+In the limit of an infinite basis, we are allowing infinite flexibility for electrons to occupy different orbitals, which is equivalent to perfectly describing electron correlation.
+
+If you're not buying the qualitative picture, consider the following philosophical-like argument:
+\begin{itemize}
+\item 1: The Hartree-Fock wavefunction does not account for electron correlation
+\item 2: The exact $N$-electron wavefunction does account for electron correlation 
+\item 2: The exact $N$-electron wavefunction can be represented as a linear combination of Slater determinant wavefunctions (this is proven in 1st set of second quantization notes)
+\item 3: Each Slater determinant in the above linear combination can be expressed with respect to some arbitrary reference determinant using creation and annihilation operators
+\item 4: We can choose the reference determinant in our expansion to be the Hartree-Fock wavefunction 
+\item 5: Expanding all excitations of our Hartree-Fock wavefunction constructs the exact $N$-electron wavefunction 
+\item 6: The exact $N$-electron wavefunction  Expanding all excitations of our Hartree-Fock wavefunction constructs the exact $N$-electron wavefunction 
+
+
+\item 1: The Hartree-Fock wavefunction does not account for electron correlation
+\item 2: The exact $N$-electron wavefunction fully accounts for electron correlation
+\item 3: The exact $N$-electron wavefunction can be expressed as a linear combination of excitations from the Hartree-Fock reference determinant 
+% includes all excitations from some reference determinant 
+\item C: Excitations from the reference determinant account for electron corrleation
+
+
+\item 1: The exact $N$-electron wavefunction can be represented as a linear combination of Slater determinant wavefunctions (this is proven in 1st set of second quantization notes)
+\[ \ket{\Psi} = \sum_{p_1 < \cdots < p_N} c_p \ket{\Phi_{p_1 \cdots p_N}} \]
+\item 2: Each Slater determinant in the above linear combination can be expressed with respect to some arbitrary reference determinant using creation and annihilation operators
+\item 3: We can freely choose the reference determinant in our expansion to be the Hartree-Fock wavefunction 
+\item 4: The Hartree-Fock wavefunction does not fully account for electron correlation
+
+Conclusion: 
+
+The exact $N$-electron wavefunction in a given basis is, well, \textit{exact}, it must perfectly describe all electron correlation effects.
+Since this exact wavefunction can be expressed in terms of excitations from the Hartree-Fock reference determinant, it follows that those excitation terms are accounting for electron correlation.
+
+\end{itemize}
+
+  we obtain electron correlation 
+
+
+\section{Interesting Conceptual Tidbits}
+For a Hartree-Fock/STO-3G computation on \textit{just the Hydrogen atom}, the Hartree-Fock wavefunction \textbf{is the full-CI wavefunction} for that basis set, 
+    because there is only \textbf{one basis function}, thus there is only \textbf{one possible Slater determinant} you can even form.
+
+What about Hartree-Fock/CBS, the \textit{complete basis set limit} for Hartree-Fock, performed on \textit{just the Hydrogen atom}?
+Well, this
+
+
+the Hartree-Fock limit, which is the Hartree-Fock energy at the complete basis set limit, 
+
+A complete basis of spin-orbitals will in turn allow a complete basis of Slater determinants.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
