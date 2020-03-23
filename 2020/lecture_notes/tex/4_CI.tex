@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amsmath,mathtools,amssymb}
 \usepackage{graphicx}
+\usepackage{blkarray}
 \usepackage{gensymb}
 \usepackage{verbatim}
 \usepackage{mathrsfs}
@@ -14,11 +15,14 @@
 \newcommand{\lp}{\left(}
 \newcommand{\rp}{\right)}
 \newcommand{\ve}{\varepsilon}
+\newcommand{\h}{\circ}
+\newcommand{\p}{\bullet}
 \newcommand{\Ecorr}{E_{\mathrm{corr}}}
 \newcommand{\Hc}{H_{\mathrm{c}}}
 \newcommand{\dg}{\ensuremath{^\dagger} }
 \def\*#1{\mathbf{#1}}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
 
 \title{Lecture 4: Configuration Interaction}
 \date{March 6, 2020}
@@ -92,7 +96,7 @@ where $f_{p}^{q} = h_{p}^{q} + \sum_i \braket{pi||qi} $,
 we are ready to derive an energy expression for the correlation energy.
 
 \[\Hc \ket{\Psi} = \Ecorr \ket{\Psi} \]
-\[\Hc (1 + C_1 + C_2 \cdots) \ket{\Phi} = \Ecorr \ket{\Psi} \]
+\[\Hc (1 + C_1 + C_2 + \cdots) \ket{\Phi} = \Ecorr \ket{\Psi} \]
 \[\braket{\Phi | \Hc (1 + C_1 + C_2 + \cdots) | \Phi} = \Ecorr \braket{\Phi|\Psi} \]
 
 Here we will use the fact that  $\braket{\Phi|\Hc|\Phi} = 0 $ and $\braket{\Phi|\Psi} = 1$ to arrive at
@@ -110,13 +114,77 @@ Here we will use the fact that  $\braket{\Phi|\Hc|\Phi} = 0 $ and $\braket{\Phi|
 +  \left(\frac{1}{3!}\right)^2 c_{abc}^{ijk} \braket{\Phi | \Hc |\Phi_{ijk}^{abc}} + \cdots = \Ecorr
 \]
 
+% first term TODO add 2nd term, zeros on the first line for subsequent terms
+\[ c_a^i f_p^q \braket{\Phi| \tilde{a}_{q}^{p} \tilde{a}_{i}^{a} |\Phi} + \frac{1}{16} c_{ab}^{ij} \bar{g}_{pq}^{rs} \braket{\Phi| \tilde{a}_{rs}^{pq} \tilde{a}_{ij}^{ab} | \Phi} + 0 + \cdots = \Ecorr \]
+
+\[ c_a^i f_p^q \braket{\Phi| \tilde{a}_{q \p}^{p \h} \tilde{a}_{i \h}^{a \p} |\Phi} + 
+   \frac{1}{16} c_{ab}^{ij} \bar{g}_{pq}^{rs} \hat{P}_{(r/s)}^{(p/q)} \braket{\Phi| \tilde{a}_{r \p s \p \p}^{p \h q \h \h} \tilde{a}_{i \h j \h \h}^{a \p b \p \p} | \Phi} = \Ecorr \]
+
+\[ c_a^i f_p^q \gamma_{pi} \eta_{qa} + \frac{1}{16} c_{ab}^{ij} \bar{g}_{pq}^{rs} \hat{P}_{(r/s)}^{(p/q)} \gamma_i^p \gamma_j^q \eta_r^a \eta_s^b \]
+\[ c_a^i f_p^q \gamma_{pi} \eta_{qa} + \frac{1}{16} c_{ab}^{ij}  \lp \bar{g}_{ij}^{ab} - \bar{g}_{ji}^{ab} - \bar{g}_{ij}^{ba} + \bar{g}_{ji}^{ba}  \rp\]
 \[ f_i^a c_a^i + \frac{1}{4} \bar{g}_{ij}^{ab} c_{ab}^{ij} = \Ecorr \]
 
-where the first term is always 0 for a Hartree-Fock reference due to Brillouin's theorem, and all triple excitations and beyond go to zero 
-since the Wick expansion has no complete contractions (or equivalently, from Slater's rule $\braket{\Phi | H | \Phi_{ijk}^{abc}} = 0  \implies \braket{\Phi | \Hc | \Phi_{ijk}^{abc}} = 0 $).
+where the first term is always 0 for a Hartree-Fock reference due to Brillouin's theorem. 
+Note that all triple excitations and beyond go to zero since the Wick expansion has no complete contractions 
+(or equivalently, from Slater's rule $\braket{\Phi | H | \Phi_{ijk}^{abc}} = 0  \implies \braket{\Phi | \Hc | \Phi_{ijk}^{abc}} = 0 $).
 
-We arrive at the conclusion that the FCI electronic energy is just
+We arrive at the conclusion that the FCI electronic energy for a HF reference is just
 \[ \frac{1}{4} \bar{g}_{ij}^{ab} c_{ab}^{ij} = \Ecorr \]
+
+\textbf{This does not mean only double excitation coefficients contribute to the energy}.
+All of the coefficients for different excitations are implicitly coupled together, their values influence each other. 
+In full-CI, this is accounted for in the matrix diagonalization.
+In truncated-CI, the task is reduced to a series of coupled equations which must be solved iteratively. 
+These topics will be explored in the exercises.
+
+\section{The FCI Algorithm} 
+Expressed in the most simple way possible, the form of our full-CI wavefunction from before is really
+just a linear combination of base states (excited determinants) $\Phi$.
+\[ \ket{\Psi} = \sum_i c_i \ket{\Phi_i} \]
+The problem of finding the optimal coefficients which minimize our energy to give the exact result can be found by diagonalizing the 
+matrix representation of our Hamiltonian (for a review of this, see Szabo and Ostlund, 1.3.2).
+\[\mathbf{HC} = \mathbf{CE}\]
+where  $\mathbf{H}$ is the CI matrix, $\mathbf{C}$ is a matrix of eigenvectors, and $\mathbf{E}$ is a diagonal matrix of energy eigenvalues.
+Upon solving the above equation, one obtains a set of states and corresponding energies
+\[ \Psi_\alpha = \sum_i c_i^\alpha \ket{\Phi_i} \quad , \quad E_\alpha \]
+the state with the lowest energy is the \textit{ground state}.
+
+$\mathbf{H}$ in our case is the full CI matrix, which contains every possible expectation value of our Hamiltonian 
+for two (excited) Slater determinants. 
+That is, it is a matrix of every expectation value you can create out of Slater determinants in the CI wavefunction expansion from before
+\[ \ket{\Psi} = c_0 \ket{\Phi} + \left(\frac{1}{1!}\right)^2 \sum_{ia} c_i^a \ket{\Phi_i^a} +  \left(\frac{1}{2!}\right)^2\sum_{ \substack{ij \\ ab}} c_{ij}^{ab} \ket{\Phi_{ij}^{ab}} + \left(\frac{1}{3!}\right)^2 \sum_{ \substack{ijk \\ abc}} c_{ijk}^{abc} \ket{\Phi_{ijk}^{abc}} + \cdots \]
+
+Typically the full CI matrix is expressed with a rather abusive notation consisting of ``excitation blocks''. 
+We write one block of the full CI matrix as, say, $\braket{\Phi_{r}^{e}|\Hc|\Phi_{ij}^{ab}}$ or $\braket{S|\Hc|D}$, and 
+by this we mean ``the block of all matrix elements consisting of singly excited determinants in the bra and doubly excited determinants in the ket.'' 
+If you were to have, say, 1,000 possible singly excited determinants and 20,000 possible doubly excited determinants,
+this block would be 1,000 by 20,000 elements. Each of these elements would be a \textit{number} representing the value of the expectation value.
+The reason I call this an abuse of notation is that typically the expression $\braket{\Phi_{r}^{e}|\Hc|\Phi_{ij}^{ab}}$ means \textit{a particular} 
+expectation value between \textit{two particular excited determinants} $\Phi_{r}^{e}$ and  $\Phi_{ij}^{ab}$.
+In the context of the full-CI matrix, this intuitive interpretation is abandoned in favor of the excitation blocks interpretation.
+Anyways, here it is, the full CI matrix:
+\[
+\begin{blockarray}{ccccccc}
+ & 	\ket{\Phi} & \ket{\Phi_{i}^{a}} & \ket{\Phi_{ij}^{ab}}  &\ket{\Phi_{ijk}^{abc}} & \ket{\Phi_{ijkl}^{abcd}} & \cdots \\
+\begin{block}{c(cccccc)}
+\bra{\Phi}               & \braket{\Phi|\Hc|\Phi} &  \mathbf{0} &  \braket{\Phi|\Hc|\Phi_{ij}^{ab}} & \mathbf{0} & \mathbf{0} & \cdots  \\
+\bra{\Phi_{r}^{e}}       &   &  \braket{\Phi_{r}^{e}|\Hc|\Phi_{i}^{a}} &  \braket{\Phi_{r}^{e}|\Hc|\Phi_{ij}^{ab}} & \braket{\Phi_{r}^{e}|\Hc|\Phi_{ijk}^{abc}} & \mathbf{0} & \cdots \\
+\bra{\Phi_{rs}^{ef}}     &   &   &  \braket{\Phi_{rs}^{ef}|\Hc|\Phi_{ij}^{ab}} & \braket{\Phi_{rs}^{ef}|\Hc|\Phi_{ijk}^{abc}}  & \braket{\Phi_{rs}^{ef}|\Hc|\Phi_{ijkl}^{abcd}}  & \cdots \\
+\bra{\Phi_{rst}^{efg}}   &   &   &   & \braket{\Phi_{rst}^{efg}|\Hc|\Phi_{ijk}^{abc}} & \braket{\Phi_{rst}^{efg}|\Hc|\Phi_{ijkl}^{abcd}}  & \cdots \\
+\bra{\Phi_{rstu}^{efgh}} &   &   &   &   &  \braket{\Phi_{rstu}^{efgh}|\Hc|\Phi_{ijkl}^{abcd}}  & \cdots \\
+\vdots                   &   &   &   &   &   & \ddots \\
+\end{block}
+\end{blockarray}
+\]
+
+With the exception of $\braket{\Phi|\Hc|\Phi}$, each entry in the matrix above \textbf{is not a single number} it is a (probably huge) 
+    submatrix of all possible matrix elements $\braket{\Psi_{r \cdots}^{e \cdots} | \Hc | \Psi_{i \cdots}^{a \cdots}  }$.
+Above, we have only filled in the upper triangle since it is a symmetric matrix. 
+Futhermore, some entries are all 0's since excitations between determinants differing by more than two excitations must be 0 (Slater's rules).
+% TODO check if this is bullshit:
+Anyways, you just diagonalize that bad boy and the lowest eigenvalue is your full-CI energy. 
+You don't even have to use the energy expression we derived earlier (that's only used direcly for truncated CI).
+You \textit{could} extract out 
 
 
 % Brillouins: ground electronic states from one-particle methods arlready mply configuration interaction of the ground state configuration with singly excited ones.
