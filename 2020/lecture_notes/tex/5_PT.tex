@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{blkarray}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lam}{\lambda}
+\newcommand{\h}{\circ}
+\newcommand{\p}{\bullet}
+\newcommand{\Ecorr}{E_{\mathrm{corr}}}
+\newcommand{\Hc}{H_{\mathrm{c}}}
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Lecture 5: Perturbation Theory}
+\date{March 27, 2020}
+\begin{document}
+\maketitle
+\noindent
+To remind you of the current task at hand, we are trying to find good-quality approximations 
+    to electronic wavefunctions in order to obtain the electronic energy of a molecular system. 
+That is, we seek to solve the Schr{\"o}dinger equation in the best way possible.
+\[H \ket{\Psi} = E \ket{\Psi} \]
+We already learned that HF theory is a decent and cheap approximation, and full-CI is exact but very expensive. 
+Perturbation theory is one of many approaches to finding wavefunctions and energies which are of 
+    reasonable cost and reasonable accuracy.
+Recall, however, that the HF wavefunction $\Phi$ gives us a very good starting point, so we are really just interested in solving for the correlation energy,
+which is obtained by shifting our Hamiltonian by the HF energy.
+\[\Hc \ket{\Psi} = \Ecorr \ket{\Psi} \]
+where 
+\[\Hc = H - \braket{\Phi| H | \Phi} \]
+\[\Ecorr = E_{\mathrm{exact}} - E_{\mathrm{HF}}\]
+In this set of notes, we will cover what is known as M{\o}ller-Plesset perturbation theory methods (MP$n$) 
+    for obtaining correlation energies.
+
+\subsection{Rayleigh-Schr{\"o}dinger Perturbation Theory}
+Perturbation theory (PT), in the most general sense, is applicable in nearly every domain of physics. 
+If a problem can be separated into some easily solvable piece A and not-so-easily solvable piece B 
+    (``the perturbation''), one can approach the exact solution of the problem in terms of the solution to A 
+    plus a series of corrections to account for the influence of perturbation.
+Rayleigh-Schr{\"o}dinger Perturbation Theory (RSPT) applies the ideas of PT to the time-independent 
+    Schr{\"o}dinger equation.
+The Hamiltonian is decomposed into a sum of a simple (easy to solve) problem $H_0$ and a perturbation $V$:
+\[H = H_0 + V \]
+If the perturbation is ``small'' (i.e., does not wildly shift the solutions of the problem) the 
+    energy levels/eigenstates associated with the \textit{perturbed system} described by $H$ can be expressed 
+    as sum of the energy levels/eigenstates of  the \textit{simple system} (described by $H_0$) and a series 
+    of corrections obtained by considering the influence of the perturbation $V$ on the 
+    energy levels/eigenstates of the simple system.
+Each of these corrections contain eigenvalues of $H_0$ and matrix elements of the perturbation 
+    between the eigenfunctions of $H_0$, as we will see.
+In summary, RSPT is applying age-old ideas of general perturbation theory to the
+    time independent Schr{\"o}dinger equation.
+MP$n$ methods can be understood as applying nondegenerate RSPT to the problem
+    of describing electron correlation in fermionic systems. 
+
+The eigenvalue problem we wish to solve is the following:
+\[H \ket{\Psi_i} = (H_0 + V) \ket{\Psi_i} = E_i \ket{\Psi_i}\]
+We are assuming $H_0$ is a simple, easy-to-solve system, for which we have access to all the eigenstates 
+    and eigenvalues.
+\[H_0 \ket{\Phi_i^{(0)}} = \eps_i^{(0)} \ket{\Phi_i^{(0)}} \]
+These eigenstates $\ket{\Phi_i^{(0)}}$ and eigenvalues $\eps_i$ for the simple system are hopefully very close
+    to the exact results  $\ket{\Psi_i}$ and  $E_i$, that is, the perturbation $V$ is small.
+Now, we do something a bit weird.
+We introduce a parameter $\lam$ in front of $V$, which allows us to toggle the influence of the
+    perturbation on the energy levels and eigenstates. 
+Before saying much else about $\lam$, let's write it down and see what it allows us to do.
+\[(H_0 +  \lam V) \ket{\Psi_i} = E_i \ket{\Psi_i}\]
+When $\lam = 0$, our Hamiltonian is just $H_0$, and our eigenstates and energy levels become that 
+    of the simple system $\ket{\Phi_i^{(0)}}$ and $ \eps_i^{(0)}$.
+When $\lam = 1$, our Hamiltonian is the full Hamiltonian $H$, and our eigenstates and energy levels 
+    are the perturbed system $\ket{\Psi_i^{(0)}}$ and $E_i$.
+By doing this, \textit{the energy levels and eigenstates of the perturbed system are a function
+    of }$\lam$.
+To put it another way, our energy levels and eigenstates depend on lambda; 
+    we might express this mathematically as  $E_i(\lam)$ and $\Psi_i(\lam)$.
+Since these quantities are \textit{functions of} $\lam$, we can write down a Taylor series
+expansion of the energy levels and eigenstates of $H$ in terms of $\lam$:
+\[E_i =  \eps_i^{(0)} +  \lam \eps_i^{(1)} + \lam^2 \eps_i^{(2)}  + \cdots \]
+\[\ket{\Psi_i} =  \Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots \]
+where each term is,  
+\[ \eps_i^{(k)} = \left. \frac{1}{k!} \frac{d^k \eps_i}{d \lam^k} \right\rvert_{\lam = 0} \]
+\[ \Psi_i^{(k)} = \left. \frac{1}{k!} \frac{d^k \ket{\Psi_i}}{d \lam^k} \right\rvert_{\lam = 0} \]
+
+We call $\eps_i^{(0)}$ the 0$^{th}$ order energy, which is the energy of the simple system. 
+Every additional term in the energy expansion is the $n^{th}$ order energy correction, 
+    and these are what we must solve for.
+Likewise terminology is used for the eigenstates $\ket{\Psi_i^{(k)}}$
+
+
+Many textbooks and other resources simply say $\lam$ is a 
+    ``fictitious dummy parameter'' or ``book-keeping device'' that is 
+    used to keep track of the  ``orders'' of the terms when working with the perturbation expansion.
+This is a bit of an oversimplification. The parameter $\lam$ has the utility of turning
+the perturbation on/off, and motivates the use of a Taylor expansion in the first place.
+Without $\lam$, you have no Taylor expansion, and no perturbation theory. 
+While it does serve as a useful label for the orders of each term, it's not just a ``dummy'' parameter. 
+It's the key to all of perturbation theory.
+
+
+We have a form for the wavefunction and the energy. Plugging these 
+into the time-independent Schr{\"o}dinger equation, we get 
+\[
+(H_0 + \lam V) (\Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots)
+=  (\eps_i^{(0)} +  \lam \eps_i^{(1)} + \lam^2 \eps_i^{(2)}  + \cdots ) (\Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots)
+ \]
+
+Subtracting from each side so that the left is 0 and grouping like powers of $\lam$ gives
+\begin{align*}
+&  \left(H_0 \ket{\Phi_i^{(0)}} - \eps_i^{(0)} \ket{\Phi_i^{(0)}}   \right) \\
+&+ \lam \left( H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} - \eps_i^{(0)}\ket{\Phi_i^{(1)}} - \eps_i^{(1)}\ket{\Phi_i^{(0)}} \right)  \\
+&+ \lam^2 \left( H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} - \eps_i^{(0)} \ket{\Phi_i^{(2)}} - \eps_i^{(1)} \ket{\Phi_i^{(1)}} - \eps_i^{(2)} \ket{\Phi_i^{(0)}}  \right)  \\
+&+ \cdots \\ 
+&= 0
+\end{align*}
+
+The only way the above equation can be satisfied for any arbitrary value of $\lam$ is 
+    if the coefficient in parentheses for each power of $\lam$ is equal to 0.
+Therefore, since each term for each power of $\lam$ is equal to 0,
+    this equation is fully separable into an infinite series of simultaneous equations
+\begin{align*}
+&  H_0 \ket{\Phi_i^{(0)}} = \eps_i^{(0)} \ket{\Phi_i^{(0)}}   \\
+&  H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} = \eps_i^{(0)}\ket{\Phi_i^{(1)}} + \eps_i^{(1)}\ket{\Phi_i^{(0)}}  \\
+&  H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} = \eps_i^{(0)} \ket{\Phi_i^{(2)}} + \eps_i^{(1)} \ket{\Phi_i^{(1)}} + \eps_i^{(2)} \ket{\Phi_i^{(0)}}  \\
+& \cdots \\ 
+\end{align*}
+Notice we have now dropped the $\lam$'s since each of the above equations hold whether or not $\lam^n$ is applied to each term.
+
+
+
+
+
+
+
+
+ 
+% TODO finish Szabo 6.1, up to second order PT.
+% then start up at 6.5 which applies HF and derives MP2. Then
+% Give expression for MP3, say how complicated things get, motivate Piecuch style
+
+
+\end{document}
