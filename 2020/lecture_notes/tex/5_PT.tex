@@ -18,6 +18,12 @@
 \newcommand{\lam}{\lambda}
 \newcommand{\h}{\circ}
 \newcommand{\p}{\bullet}
+
+\newcommand{\Ezero}{E^{(0)}}
+\newcommand{\Phizero}{\Phi^{(0)}}
+\newcommand{\Eone}{E^{(1)}}
+\newcommand{\Phione}{\Phi^{(1)}}
+
 \newcommand{\Ecorr}{E_{\mathrm{corr}}}
 \newcommand{\Hc}{H_{\mathrm{c}}}
 \newcommand{\dg}{\ensuremath{^\dagger} }
@@ -45,7 +51,7 @@ where
 In this set of notes, we will cover what is known as M{\o}ller-Plesset perturbation theory methods (MP$n$) 
     for obtaining correlation energies.
 
-\subsection{Rayleigh-Schr{\"o}dinger Perturbation Theory}
+\section{Rayleigh-Schr{\"o}dinger Perturbation Theory}
 Perturbation theory (PT), in the most general sense, is applicable in nearly every domain of physics. 
 If a problem can be separated into some easily solvable piece A and not-so-easily solvable piece B 
     (``the perturbation''), one can approach the exact solution of the problem in terms of the solution to A 
@@ -70,8 +76,8 @@ The eigenvalue problem we wish to solve is the following:
 \[H \ket{\Psi_i} = (H_0 + V) \ket{\Psi_i} = E_i \ket{\Psi_i}\]
 We are assuming $H_0$ is a simple, easy-to-solve system, for which we have access to all the eigenstates 
     and eigenvalues.
-\[H_0 \ket{\Phi_i^{(0)}} = \eps_i^{(0)} \ket{\Phi_i^{(0)}} \]
-These eigenstates $\ket{\Phi_i^{(0)}}$ and eigenvalues $\eps_i$ for the simple system are hopefully very close
+\[H_0 \ket{\Phi_i^{(0)}} = E_i^{(0)} \ket{\Phi_i^{(0)}} \]
+These eigenstates $\ket{\Phi_i^{(0)}}$ and eigenvalues $E_i$ for the simple system are hopefully very close
     to the exact results  $\ket{\Psi_i}$ and  $E_i$, that is, the perturbation $V$ is small.
 Now, we do something a bit weird.
 We introduce a parameter $\lam$ in front of $V$, which allows us to toggle the influence of the
@@ -79,7 +85,7 @@ We introduce a parameter $\lam$ in front of $V$, which allows us to toggle the i
 Before saying much else about $\lam$, let's write it down and see what it allows us to do.
 \[(H_0 +  \lam V) \ket{\Psi_i} = E_i \ket{\Psi_i}\]
 When $\lam = 0$, our Hamiltonian is just $H_0$, and our eigenstates and energy levels become that 
-    of the simple system $\ket{\Phi_i^{(0)}}$ and $ \eps_i^{(0)}$.
+    of the simple system $\ket{\Phi_i^{(0)}}$ and $ E_i^{(0)}$.
 When $\lam = 1$, our Hamiltonian is the full Hamiltonian $H$, and our eigenstates and energy levels 
     are the perturbed system $\ket{\Psi_i^{(0)}}$ and $E_i$.
 By doing this, \textit{the energy levels and eigenstates of the perturbed system are a function
@@ -88,13 +94,13 @@ To put it another way, our energy levels and eigenstates depend on lambda;
     we might express this mathematically as  $E_i(\lam)$ and $\Psi_i(\lam)$.
 Since these quantities are \textit{functions of} $\lam$, we can write down a Taylor series
 expansion of the energy levels and eigenstates of $H$ in terms of $\lam$:
-\[E_i =  \eps_i^{(0)} +  \lam \eps_i^{(1)} + \lam^2 \eps_i^{(2)}  + \cdots \]
+\[E_i =  E_i^{(0)} +  \lam E_i^{(1)} + \lam^2 E_i^{(2)}  + \cdots \]
 \[\ket{\Psi_i} =  \Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots \]
 where each term is,  
-\[ \eps_i^{(k)} = \left. \frac{1}{k!} \frac{d^k \eps_i}{d \lam^k} \right\rvert_{\lam = 0} \]
+\[ E_i^{(k)} = \left. \frac{1}{k!} \frac{d^k E_i}{d \lam^k} \right\rvert_{\lam = 0} \]
 \[ \Psi_i^{(k)} = \left. \frac{1}{k!} \frac{d^k \ket{\Psi_i}}{d \lam^k} \right\rvert_{\lam = 0} \]
 
-We call $\eps_i^{(0)}$ the 0$^{th}$ order energy, which is the energy of the simple system. 
+We call $E_i^{(0)}$ the 0$^{th}$ order energy, which is the energy of the simple system. 
 Every additional term in the energy expansion is the $n^{th}$ order energy correction, 
     and these are what we must solve for.
 Likewise terminology is used for the eigenstates $\ket{\Psi_i^{(k)}}$
@@ -114,14 +120,14 @@ We have a form for the wavefunction and the energy. Plugging these
 into the time-independent Schr{\"o}dinger equation, we get 
 \[
 (H_0 + \lam V) (\Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots)
-=  (\eps_i^{(0)} +  \lam \eps_i^{(1)} + \lam^2 \eps_i^{(2)}  + \cdots ) (\Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots)
+=  (E_i^{(0)} +  \lam E_i^{(1)} + \lam^2 E_i^{(2)}  + \cdots ) (\Phi_i^{(0)} +  \lam \Phi_i^{(1)} + \lam^2 \Phi_i^{(2)} + \cdots)
  \]
 
 Subtracting from each side so that the left is 0 and grouping like powers of $\lam$ gives
 \begin{align*}
-&  \left(H_0 \ket{\Phi_i^{(0)}} - \eps_i^{(0)} \ket{\Phi_i^{(0)}}   \right) \\
-&+ \lam \left( H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} - \eps_i^{(0)}\ket{\Phi_i^{(1)}} - \eps_i^{(1)}\ket{\Phi_i^{(0)}} \right)  \\
-&+ \lam^2 \left( H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} - \eps_i^{(0)} \ket{\Phi_i^{(2)}} - \eps_i^{(1)} \ket{\Phi_i^{(1)}} - \eps_i^{(2)} \ket{\Phi_i^{(0)}}  \right)  \\
+&  \left(H_0 \ket{\Phi_i^{(0)}} - E_i^{(0)} \ket{\Phi_i^{(0)}}   \right) \\
+&+ \lam \left( H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} - E_i^{(0)}\ket{\Phi_i^{(1)}} - E_i^{(1)}\ket{\Phi_i^{(0)}} \right)  \\
+&+ \lam^2 \left( H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} - E_i^{(0)} \ket{\Phi_i^{(2)}} - E_i^{(1)} \ket{\Phi_i^{(1)}} - E_i^{(2)} \ket{\Phi_i^{(0)}}  \right)  \\
 &+ \cdots \\ 
 &= 0
 \end{align*}
@@ -131,24 +137,139 @@ The only way the above equation can be satisfied for any arbitrary value of $\la
 Therefore, since each term for each power of $\lam$ is equal to 0,
     this equation is fully separable into an infinite series of simultaneous equations
 \begin{align*}
-&  H_0 \ket{\Phi_i^{(0)}} = \eps_i^{(0)} \ket{\Phi_i^{(0)}}   \\
-&  H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} = \eps_i^{(0)}\ket{\Phi_i^{(1)}} + \eps_i^{(1)}\ket{\Phi_i^{(0)}}  \\
-&  H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} = \eps_i^{(0)} \ket{\Phi_i^{(2)}} + \eps_i^{(1)} \ket{\Phi_i^{(1)}} + \eps_i^{(2)} \ket{\Phi_i^{(0)}}  \\
+&  H_0 \ket{\Phi_i^{(0)}} = E_i^{(0)} \ket{\Phi_i^{(0)}}   \\
+&  H_0\ket{\Phi_i^{(1)}} + V\ket{\Phi_i^{(0)}} = E_i^{(0)}\ket{\Phi_i^{(1)}} + E_i^{(1)}\ket{\Phi_i^{(0)}}  \\
+&  H_0 \ket{\Phi_i^{(2)}} + V \ket{\Phi_i^{(1)}} = E_i^{(0)} \ket{\Phi_i^{(2)}} + E_i^{(1)} \ket{\Phi_i^{(1)}} + E_i^{(2)} \ket{\Phi_i^{(0)}}  \\
 & \cdots \\ 
 \end{align*}
 Notice we have now dropped the $\lam$'s since each of the above equations hold whether or not $\lam^n$ is applied to each term.
+You could also interpret this as us setting $\lam=1$, and fully ``turning on'' the perturbation.
+
+Projecting each of these equations on the left by $\bra{\Phi_i^{(0)}}$ we obtain
+\begin{align*}
+E_i^{(0)} = \braket{\Phi_i^{(0)} | H_0 | \Phi_i^{(0)}} \\
+E_i^{(1)} = \braket{\Phi_i^{(0)} | V | \Phi_i^{(0)}} \\
+E_i^{(2)} = \braket{\Phi_i^{(0)} | V | \Phi_i^{(1)}} \\
+\end{align*}
+
+Notice that $E_i^{(1)}$ depends on $\Phi_i^{(0)}$, and $E_i^{(2)}$ depends on $\Phi_i^{(1)}$.
+This trend continues on for higher order energy corrections: 
+    the $n$th order correction to the wavefunction is required for finding the $(n+1)$th order energy correction.
+
+% Note, algebra in Szabo/Ostlund was arcahic, instead used this https://www.lct.jussieu.fr/pagesperso/toulouse/enseignement/introduction_pt_cc.pdf
+\subsection{The first-order wavefunction and second-order energy corrections}
+The third equation above, the second-order energy ($E_i^{(2)}$) correction, requires you to know the 1st order correction to the wavefunction $\Phione_i$.
+To obtain it, we take the equation containing our 1st-order terms and rearrange:
+
+\[ H_0\ket{\Phione_i} + V \ket{\Phizero_i} = \Ezero_i \ket{\Phione_i} + \Eone_i \ket{\Phizero_i} \]
+Projecting by $\bra{\Phizero_n}$ for some $n \neq i$ gives 
+
+\[ \braket{\Phizero_n | H_0 | \Phione_i} + \braket{ \Phizero_n | V | \Phizero_i} = \Ezero_i \braket{\Phizero_n|\Phione_i} + \Eone_i \braket{\Phizero_n | \Phizero_i} \]
+
+To simplify, note that $\bra{\Phizero_n} H_0 = \Ezero_n \bra{\Phizero_n}$, so the first term on the left becomes $\Ezero_n \braket{\Phizero_n | \Phione_i} $
+The second term on the right goes to 0 since $\braket{\Phizero_n|\Phizero_i} = 0 $ when $n \neq i$. 
+The reason is these are both eigenfunctions of $H_0$, which are orthonormal.
+We are left with
+\[ \Ezero_n \braket{ \Phizero_n | \Phione_i} + \braket{ \Phizero_n | V | \Phizero_i} = \Ezero_i \braket{ \Phizero_n | \Phione_i }    \]
+Rearranging we get
+\[ \braket{\Phizero_n | \Phione_i } = -\frac{ \braket{ \Phizero_n | V | \Phizero_i} }{ \Ezero_n - \Ezero_i} \]
+
+We want to get $\ket{\Phione_i}$ by itself on the left side.
+The left side above is the expansion coefficients of $ \Phione_i$ in the basis of $\Phizero_n$.
+To see this, project each side by $ \ket{\Phizero_n} $ and sum over all $n \neq i$
+\[ \sum_{n \neq i} \ket{ \Phizero_n} \braket{\Phizero_n | \Phione_i } = \sum_{n \neq i} -\frac{ \braket{ \Phizero_n | V | \Phizero_i} }{ \Ezero_n - \Ezero_i} \ket{\Phizero_n} \]
+
+The left side above would be equal to $\ket{\Phione_i}$ if the sum was over all $n$ (resolution of the identity), 
+    but if we sum over all $n$, the energy denominator on the right will be 0 for $n = i$. 
+Fortunately, the expansion coefficient $\braket{\Phizero_n | \Phione_i } $ for $n = i$ is necessarily 0.
+Why? Because of intermediate normalization.
+\[\braket{\Phizero_i | \Psi_i} = 1 = \braket{\Phizero_i | \Phizero_i} + \lam \braket{\Phizero_i \ \Phione_i} + \lam^2 \braket{\Phizero_i|\Phi_i^{(2)}} + \cdots \]
+Since our reference wavefunction is normalized $\braket{\Phizero_i | \Phizero_i} = 1$, in order  for this expression to be true for arbitrary $\lam$,
+it must be the case that $\braket{\Phizero_i | \Phi_i^{(k)} = 0 for k = 1,2,3,...}   $
+This implies that when $n = i$, the expansion coefficient is 0.
+Therefore, we can sum over all $n$ (rather than $n \neq i$) on the left side of our expression for $\ket{\Phione_i}$ without penalty; it is the same as adding zero to both sides:
+\[ \sum_{n} \ket{ \Phizero_n} \braket{\Phizero_n | \Phione_i } = \sum_{n \neq i} -\frac{ \braket{ \Phizero_n | V | \Phizero_i} }{ \Ezero_n - \Ezero_i} \ket{\Phizero_n} \]
+Noting the left side contains the resolution of the identity, we can just remove it:
+\[ \ket{\Phione_i} = \sum_{n \neq i} -\frac{ \braket{ \Phizero_n | V | \Phizero_i} }{ \Ezero_n - \Ezero_i} \ket{\Phizero_n} \]
+
+This now enables us to derive an evaluable expression for the second-order energy 
+\[ E_i^{(2)} = \braket{\Phi_i^{(0)} | V | \Phi_i^{(1)}} \]
+Plugging in the definition for $\Phi_i^{(1)}$ above we obtain
+\[ E_i^{(2)} = \sum_{n \neq i} -\frac{ \braket{ \Phizero_n | V | \Phizero_i} \braket{ \Phizero_i | V | \Phizero_n} }{ \Ezero_n - \Ezero_i} \ket{\Phizero_n} \]
+\[ E_i^{(2)} = \sum_{n \neq i} \frac{ |\braket{ \Phizero_i | V | \Phizero_n} |^2  }{ \Ezero_i - \Ezero_n} \]
+
+One could keep working through the tedious algebra and derive the expressions for the second order wavefunction, third order wavefunction, etc, and
+in turn obtain energy corrections $E_i^{(3)}$, $E_i^{(4)}$, etc, but we will stop here.
+The above results are sufficient for deriving second-order M{\o}ller--Plesset perturbation theory.
+
+There does exist a more advanced scheme which generalizes the results of all orders of perturbation theory using a mysterious new thing called ``resolvents''.
+We will touch on this at the end of these notes and continue down that path after learning diagrams. 
+
+\section{M{\o}ller--Plesset Perturbation Theory}
+M{\o}ller--Plesset Perturbation Theory (MP$n$) is the direct application of time-indepndent RSPT to the problem of finding electronic wavefunctions and energies.
+In this section, we will derive MP2, the energy which is correct up to second-order.
+
+We first divide our Hamiltonian into two parts, 
+\[H = H_0 + V \]
+In MP$n$ methods, the $H_0$ part of the Hamiltonian is taken to be the Hartree-Fock Hamiltonian,
+\[H_0 = F = (h_p^q + \bar{g}_{pi}^{qi}) a_q^p = f_p^q a_q^p  \]
+The perturbation $V$ will just be everything not included in $H_0$. 
+\[V = H - F \]
+\[V =  \frac{1}{4} \bar{g}_{pq}^{rs} a_{rs}^{pq} - \bar{g}_{pi}^{qi} a_{q}^{p}  \]
+One could interpret $V$, the perturbation, as being all of the two-electron interactions, except for the mean-field picture already given by the HF Hamiltonian.
+
+Suppose we seek the energy of the ground state of a system (which we will denote by a subscript 0).
+The ground state 0th order wavefunction $\Phi_0^{(0)}$ is the Hartree-Fock Slater determinant wavefunction. 
+The ground state 0th order energy is given by $E_0^{(0)} = \braket{\Phi_0^{(0)} | H_0 | \Phi_0^{(0)}}$
+\begin{align*}
+E_0^{(0)} &= \braket{\Phi_0^{(0)} | H_0 | \Phi_0^{(0)}} \\
+          &= \sum_i h_{ii} + \sum_{ij} \braket{ij||ij}  
+\end{align*}
+We note the above expression, from Hartree-Fock theory, is equal to the sum of the occupied orbital energies $\sum_i \eps_i$
+\[E_0^{(0)} = \sum_i h_{ii} + \sum_{ij} \braket{ij||ij} = \sum_i \eps_i  \]
+
+The 1st order energy correction is given by $E_0^{(1)} = \braket{\Phi_0^{(0)} | V | \Phi_0^{(0)}}$
+\begin{align*}
+E_0^{(1)} &= \braket{\Phi_0^{(0)} | V | \Phi_0^{(0)}} \\
+          &= -\frac{1}{2} \sum_{ij} \braket{ij||ij} 
+\end{align*}
+
+We notice immediately that the sum of the 0th and 1st order energies is the Hartree-Fock energy.
+\[ E_0^{(0)} + E_0^{(1)} = \sum_i h_{ii} + \frac{1}{2}\sum_{ij} \braket{ij||ij}   \] 
+
+Thus, the first two terms of our energy perturbation expansion is the HF energy.
+\[E_0 =  E_0^{(0)} +  E_0^{(1)} + E_0^{(2)} + \cdots \]
+\[E_0 =  E_{\mathrm{HF}} + E_0^{(2)} + \cdots \]
+It must be that all higher-order terms constitute \textit{correlation energies}, since in principle the expansion should approach the exact 
+    energy so long as the perturbation is small.
+
+The second-order energy correction to the ground state energy is given by 
+\[ E_0^{(2)} = \sum_{n \neq 0} \frac{ |\braket{ \Phizero_0 | V | \Phizero_n} |^2  }{ \Ezero_0 - \Ezero_n}  \]
+What sort of states are $\Phizero_n$? They can be any excitation from our ground state reference HF determinant $\Phi_0$ (any determinant in our CI expansion).
+However, we find that single excitations do not survive:
+\[ \braket{\Phi_0 | V | \Phi_i^a } =  \braket{\Phi_0 | H - H_0 | \Phi_i^a } = \braket{\Phi_0 | H | \Phi_i^a } - \braket{\Phi_0 | H_0 | \Phi_i^a }  = 0 \]
+Triple and higher excitations do not survive because you cannot form complete contractions, so $\Phizero_n$ can only be the set of unique doubly excited determinants. 
+What about the $\Ezero_0$ and $\Ezero_n $?
+Recall $\Ezero_0$ is the eigenvalue of $H_0$ acting on our Hartree-Fock determinant,
+\[H_0 \ket{\Phi_0^{(0)}} = E_0^{(0)} \ket{\Phi_0^{(0)}} \]
+ which is just the sum of the occupied orbital energies $E_0^{(0)} = \sum_k \eps_k$,.
+The same is true for $\Ezero_n$, but it has a sum over occupied orbital energies which differs by two spin orbital occupations. Thus,
+\[\Ezero_0 - \Ezero_n =  \sum_k \eps_k - ( \sum_k \eps_k - (\eps_i + \eps_j - \eps_a - \eps_b)) \]
+\[\Ezero_0 - \Ezero_n =  \eps_i + \eps_j - \eps_a - \eps_b \]
+
+So we finally obtain for the second order energy expression,
+\[ E_0^{(2)} = \sum_{n \neq 0} \frac{ |\braket{ \Phizero_0 | V | \Phizero_n} |^2  }{ \Ezero_0 - \Ezero_n}  \]
+\[ E_0^{(2)} = \sum_{\substack{i < j \\ a < b}} \frac{ |\braket{ \Phi_0 | V | \Phi_{ij}^{ab}} |^2}{ \eps_i + \eps_j - \eps_a - \eps_b  }  \]
+Noting that only the first term of $V$ yields a nonzero result,
+\[ E_0^{(2)} = \sum_{\substack{i < j \\ a < b}} \frac{ |\braket{ \Phi_0 | \frac{1}{4} \bar{g}_{pq}^{rs} a_{rs}^{pq} | \Phi_{ij}^{ab}} |^2}{ \eps_i + \eps_j - \eps_a - \eps_b  }  \]
+\[ E_0^{(2)} = \frac{1}{16} \sum_{\substack{i < j \\ a < b}}  \frac{ |\braket{ ij || ab}|^2}{ \eps_i + \eps_j - \eps_a - \eps_b}\]
+\[ E_0^{(2)} = \frac{1}{4} \sum_{ijab} \frac{ |\braket{ ij || ab}|^2}{ \eps_i + \eps_j - \eps_a - \eps_b}\]
 
 
-
-
-
-
-
-
- 
-% TODO finish Szabo 6.1, up to second order PT.
-% then start up at 6.5 which applies HF and derives MP2. Then
 % Give expression for MP3, say how complicated things get, motivate Piecuch style
+
+\section{L{\"o}wdin and his Resolvents}
+ 
 
 
 \end{document}
