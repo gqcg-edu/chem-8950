@@ -145,7 +145,19 @@ Therefore, since each term for each power of $\lam$ is equal to 0,
 Notice we have now dropped the $\lam$'s since each of the above equations hold whether or not $\lam^n$ is applied to each term.
 You could also interpret this as us setting $\lam=1$, and fully ``turning on'' the perturbation.
 
-Projecting each of these equations on the left by $\bra{\Phi_i^{(0)}}$ we obtain
+We will assume henceforth that our reference state is normalized  $\braket{\Phizero_i | \Phizero_i} = 1$
+and our exact wavefunction is intermediately normalized $\braket{\Phizero_i | \Psi_i} = 1$.
+This yields,
+\[\braket{\Phizero_i | \Psi_i} = 1 = \braket{\Phizero_i | \Phizero_i} + \lam \braket{\Phizero_i \ \Phione_i} + \lam^2 \braket{\Phizero_i|\Phi_i^{(2)}} + \cdots \]
+In order for the above expression to be true for arbitrary $\lam$,
+it must be the case that $\braket{\Phizero_i | \Phi_i^{(k)} = 0 \mathrm{for k} = 1,2,3,...}$
+
+We can now project each equation in our system of equations on the left by $\bra{\Phi_i^{(0)}}$.
+We can simplify quite a bit by noting $\braket{\Phizero_i | \Phi_i^{(k)} = 0 \mathrm{for k} = 1,2,3,...}$ 
+and that since $H_0$ is Hermitian, we can act it act on the left to give 
+$ \braket{\Phizero_i | H_0 | \Phi_n^{(k)}   } = \Ezero_i \braket{\Phizero_i | \Phi_i^{(k)}}  $.
+
+The final result is:
 \begin{align*}
 E_i^{(0)} = \braket{\Phi_i^{(0)} | H_0 | \Phi_i^{(0)}} \\
 E_i^{(1)} = \braket{\Phi_i^{(0)} | V | \Phi_i^{(0)}} \\
@@ -154,9 +166,10 @@ E_i^{(2)} = \braket{\Phi_i^{(0)} | V | \Phi_i^{(1)}} \\
 
 Notice that $E_i^{(1)}$ depends on $\Phi_i^{(0)}$, and $E_i^{(2)}$ depends on $\Phi_i^{(1)}$.
 This trend continues on for higher order energy corrections: 
-    the $n$th order correction to the wavefunction is required for finding the $(n+1)$th order energy correction.
+    the $n^{th}$ order correction to the wavefunction is required for finding the $(n+1)^{th}$ order energy correction.
 
-% Note, algebra in Szabo/Ostlund was arcahic, instead used this https://www.lct.jussieu.fr/pagesperso/toulouse/enseignement/introduction_pt_cc.pdf
+% Note, algebra in Szabo/Ostlund was archaic, instead used this https://www.lct.jussieu.fr/pagesperso/toulouse/enseignement/introduction_pt_cc.pdf
+% combined with some other sources
 \subsection{The first-order wavefunction and second-order energy corrections}
 The third equation above, the second-order energy ($E_i^{(2)}$) correction, requires you to know the 1st order correction to the wavefunction $\Phione_i$.
 To obtain it, we take the equation containing our 1st-order terms and rearrange:
@@ -183,7 +196,8 @@ The left side above would be equal to $\ket{\Phione_i}$ if the sum was over all 
     but if we sum over all $n$, the energy denominator on the right will be 0 for $n = i$. 
 Fortunately, the expansion coefficient $\braket{\Phizero_n | \Phione_i } $ for $n = i$ is necessarily 0.
 Why? Because of intermediate normalization.
-\[\braket{\Phizero_i | \Psi_i} = 1 = \braket{\Phizero_i | \Phizero_i} + \lam \braket{\Phizero_i \ \Phione_i} + \lam^2 \braket{\Phizero_i|\Phi_i^{(2)}} + \cdots \]
+\[\braket{\Phizero_i | \Psi_i} = 1 = \braket{\Phizero_i | \Phizero_i} + \lam \braket{\Phizero_i | \Phione_i} + \lam^2 \braket{\Phizero_i|\Phi_i^{(2)}} + \cdots \]
+
 Since our reference wavefunction is normalized $\braket{\Phizero_i | \Phizero_i} = 1$, in order for this expression to be true for arbitrary $\lam$,
 it must be the case that $\braket{\Phizero_i | \Phi_i^{(k)} = 0 \mathrm{for k} = 1,2,3,...}   $
 This implies that when $n = i$, the expansion coefficient is 0.
