@@ -35,7 +35,7 @@
 \begin{document}
 \maketitle
 \noindent
-To remind you of the current task at hand, we are trying to find good-quality approximations 
+To remind you of the current task at hand, we are trying to find good quality approximations 
     to electronic wavefunctions in order to obtain the electronic energy of a molecular system. 
 That is, we seek to solve the Schr{\"o}dinger equation in the best way possible.
 \[H \ket{\Psi} = E \ket{\Psi} \]
@@ -69,8 +69,6 @@ Each of these corrections contain eigenvalues of $H_0$ and matrix elements of th
     between the eigenfunctions of $H_0$, as we will see.
 In summary, RSPT is applying age-old ideas of general perturbation theory to the
     time independent Schr{\"o}dinger equation.
-MP$n$ methods can be understood as applying nondegenerate RSPT to the problem
-    of describing electron correlation in fermionic systems. 
 
 The eigenvalue problem we wish to solve is the following:
 \[H \ket{\Psi_i} = (H_0 + V) \ket{\Psi_i} = E_i \ket{\Psi_i}\]
@@ -184,8 +182,8 @@ The left side above would be equal to $\ket{\Phione_i}$ if the sum was over all 
 Fortunately, the expansion coefficient $\braket{\Phizero_n | \Phione_i } $ for $n = i$ is necessarily 0.
 Why? Because of intermediate normalization.
 \[\braket{\Phizero_i | \Psi_i} = 1 = \braket{\Phizero_i | \Phizero_i} + \lam \braket{\Phizero_i \ \Phione_i} + \lam^2 \braket{\Phizero_i|\Phi_i^{(2)}} + \cdots \]
-Since our reference wavefunction is normalized $\braket{\Phizero_i | \Phizero_i} = 1$, in order  for this expression to be true for arbitrary $\lam$,
-it must be the case that $\braket{\Phizero_i | \Phi_i^{(k)} = 0 for k = 1,2,3,...}   $
+Since our reference wavefunction is normalized $\braket{\Phizero_i | \Phizero_i} = 1$, in order for this expression to be true for arbitrary $\lam$,
+it must be the case that $\braket{\Phizero_i | \Phi_i^{(k)} = 0 \mathrm{for k} = 1,2,3,...}   $
 This implies that when $n = i$, the expansion coefficient is 0.
 Therefore, we can sum over all $n$ (rather than $n \neq i$) on the left side of our expression for $\ket{\Phione_i}$ without penalty; it is the same as adding zero to both sides:
 \[ \sum_{n} \ket{ \Phizero_n} \braket{\Phizero_n | \Phione_i } = \sum_{n \neq i} -\frac{ \braket{ \Phizero_n | V | \Phizero_i} }{ \Ezero_n - \Ezero_i} \ket{\Phizero_n} \]
@@ -205,11 +203,15 @@ The above results are sufficient for deriving second-order M{\o}ller--Plesset pe
 There does exist a more advanced scheme which generalizes the results of all orders of perturbation theory using a mysterious new thing called ``resolvents''.
 We will touch on this at the end of these notes and continue down that path after learning diagrams. 
 
-\section{M{\o}ller--Plesset Perturbation Theory}
-M{\o}ller--Plesset Perturbation Theory (MP$n$) is the direct application of time-indepndent RSPT to the problem of finding electronic wavefunctions and energies.
-In this section, we will derive MP2, the energy which is correct up to second-order.
+RSPT, as described above, is a completely general scheme, applicable to any application of the time-independent Schrodinger equation.
+We will use these ideas to come up with a way to obtain electronic energies with RSPT. 
 
-We first divide our Hamiltonian into two parts, 
+\section{M{\o}ller--Plesset Perturbation Theory}
+M{\o}ller--Plesset Perturbation Theory (MP$n$) is the direct application of time-independent RSPT to the problem of finding electronic wavefunctions and energies.
+In this section, we will derive MP2 by applying the RSPT equations derived above for a specific partition of our electronic Hamiltonian into $H_0$ and $V$.
+The MP2 energy which is correct up to second-order.
+
+We first must divide our Hamiltonian into two parts, one which has a simple solution $H_0$ and the perturbation $V$.
 \[H = H_0 + V \]
 In MP$n$ methods, the $H_0$ part of the Hamiltonian is taken to be the Hartree-Fock Hamiltonian,
 \[H_0 = F = (h_p^q + \bar{g}_{pi}^{qi}) a_q^p = f_p^q a_q^p  \]
