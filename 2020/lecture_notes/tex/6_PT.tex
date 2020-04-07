@@ -80,12 +80,12 @@ perturbed eigenvalue $E_0$ in terms of a \textit{shift} from the unperturbed eig
 \[ E_0 = \Ezero_0 + \braket{\Phi_0 | V \Omega | \Phi_0}  \]
 If we were to know what $\Omega$ is, at this point the eigenstates and eigenvalues would be completely
 determined.
-L{\"o}wdin derived that $\Omega$ is composed of generally determinable operator called a \textit{resolvent},
+L{\"o}wdin derived that such an $\Omega$ can be constructed from an operator called a \textit{resolvent},
 and under this definition, $\Omega$ yields the same perturbation expansion for $E_0$ and $\ket{\Psi_0}$.
 
 \section{Resolvents}
 A resolvent is a mathematical structure which is used to study the eigenspectrum
-of operators.
+of operators, among other things.
 The concept of a \textit{reduced resolvent} arises when one considers an eigenvalue problem \[A \phi = a \phi \]
 and divides the basis of the eigenstates into two partitions $p$ and $q$. 
 If the $p$ partition is just a single basis function and the $q$ partition 
@@ -116,7 +116,7 @@ which correspond to the $q$ partition; it lives in the $q$-space partition of ou
 Expressed pictorially as a matrix representation divided into $pp$, $pq$, $qp$, $qq$ blocks,
 \[\mathcal{R}_{\kappa}(A) =
 \left( \begin{array}{c|c}
-   \mathbf{0} & \mathbf{0} \\
+   0 & \mathbf{0} \\
    \midrule
    \mathbf{0} & (\kappa \mathbf{1}_{qq} - A_{qq})^{-1} \\
 \end{array}\right)
@@ -180,6 +180,7 @@ Using the definition of $P = \ket{\Phi_0}\bra{\Phi_0}$,
  (\kappa - H) \ket{\Psi_{\kappa}} &=  \ket{\Phi_0}\bra{\Phi_0} (\kappa - H) \ket{\Psi_{\kappa}} \\
  &=  \kappa \ket{\Phi_0} \braket{\Phi_0|\Psi_\kappa} - \ket{\Phi_0} \braket{\Phi_0| H | \Psi_\kappa} \\
  &= (\kappa - \braket{\Phi_0 | H | \Psi_\kappa}) \ket{\Phi_0} \\
+ &= (\kappa - \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}) \ket{\Phi_0} \\
  &= (\kappa - \braket{\Phi_0 | H + H \mathcal{R}_\kappa H  | \Phi_0} ) \ket{\Phi_0} \\
  &= (\kappa - f(\kappa)) \ket{\Phi_0}
 \end{align*}
@@ -196,12 +197,12 @@ we conclude that our trial function $\ket{\Psi_{\kappa}}$
 is a solution to the Schr{\"o}dinger equation, and the eigenvalue $\kappa$ is the corresponding 
 energy eigenvalue.}  
 Thus, our chosen trial function (derived by L{\"o}wdin) gives us access to the solutions of 
-the Schrodinger equation, by looking for zeros of $F(\kappa) = f(\kappa) - \kappa$.
-When we find a zero, we have the following well-defined, obtainable quantities
-\[ \kappa = E_0 \quad \quad (E_0 - H) \ket{\Psi_{\kappa=E_0}} = 0 \quad \quad \ket{\Psi_{\kappa=E_0}} = \ket{\Phi_0} + \mathcal{R}_{\kappa = E_0} H \ket{\Phi_0} \]
-
-The above equation is always applicable so long as the wavefunction is not orthogonal to $\ket{\Phi_0}$
-and the resolvent exists.
+%the Schrodinger equation, by looking for zeros of $F(\kappa) = f(\kappa) - \kappa$.
+%When we find a zero, we have the following well-defined, obtainable quantities
+%\[ \kappa = E_0 \quad \quad (E_0 - H) \ket{\Psi_{\kappa=E_0}} = 0 \quad \quad \ket{\Psi_{\kappa=E_0}} = \ket{\Phi_0} + \mathcal{R}_{\kappa = E_0} H \ket{\Phi_0} \]
+%
+%The above equation is always applicable so long as the wavefunction is not orthogonal to $\ket{\Phi_0}$
+%and the resolvent exists.
 
 %We conclude from the above that our wave operator $\Omega$ such that
 %\[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0} \]
@@ -283,10 +284,12 @@ and the wave function
 \[\Omega = P + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V P \]
 \[\ket{\Psi_0} = \Omega \ket{\Phi_0}\]
 \[\ket{\Psi_0} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi_0} \]
+\textbf{This is our perturbation expansion for the wavefunction.}
 From section 1, ``The Wave Operator'', we derived our energy expression to be, 
 \[ E_0 = \Ezero_0 + \braket{\Phi_0 | V \Omega | \Phi_0}  \]
 Our energy expansion is therefore,
 \[E_0 = \Ezero_0 + \braket{\Phi_0|V|\Phi_0} + \sum_{n=0}^{\infty} \braket{\Phi_0|V (\Rz V')^n \Rz V | \Phi_0}\]
+\textbf{This is our perturbation expansion for the energy.}
 
 The operator $V'$ introduces some complexity that is worth discussing. 
 It contains $E_0$, which is the exact energy, 
@@ -303,12 +306,15 @@ Each energy is just an expectation value of a string of operators $(\Rz, V, V')$
 Using these expansions in practice can be a bit tricky, as we will see in the next section.
 
 \section{Deriving Perturbation Theory Orders}
-Before we get started, we need to know how to identify the ``order'' of a term.
-Crashcourse:
+Before we get started, we need to know how to identify the ``order'' of a term in our
+wavefunction expansion. The reason is that if we want the 
+$m$th order wavefunction correction, we need to pull out all $m$th order
+terms in $\ket{\Psi_0} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi_0}$.
+
 \paragraph{\textbf{How to identify the order of a term?}}
 Some tips for finding the order of a given term:
 \begin{itemize} 
-\item $V$ contributes an order of 1
+\item Each $V$ contributes an order of 1
 \item Each $E_0^{(m)}$ contributes an order of $m$
 \item Instead of counting orders from $V$ and $E_0^{(m)}$, you can instead count
 the number of resolvents $\Rz$. Before doing so, you must convert all $E_0^{(m)}$ to the 
@@ -318,15 +324,20 @@ As an example of the above rules, when determining the order of the term
 \[ \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
 which appears in the third-order wavefunction, 
 we could reason that $V$ and $E_0^{(2)}$ is $1 + 2 = 3 \implies$ third order.
-Alternatively, we could recognize that $E_0^{(2)} = \braket{\Phi_0 |V \Rz V|\Phi_0}$,
+Alternatively, we could recognize that $E_0^{(2)} = \braket{\Phi_0 |V \Rz V|\Phi_0}$ (for now,
+just accept that this is true, we will derive it later),
 so therefore our expression is 
 \[ \Rz \braket{\Phi_0 |V \Rz V|\Phi_0} \Rz V \ket{\Phi_0} \]
 The above expression has 3 resolvents, so we conclude it is third order.
 OR, we could count that the above expression has 3 $V$'s, and conclude it is third order.
 Everything checks out.
+Let's derive some perturbation theory orders.
 
+\paragraph{\textbf{Zero order}}
 The 0th order wavefunction correction is just the first term of the respective pertubation expansion
-fro above. For higher orders: 
+fro above, which is of course just our reference determinant $\ket{\Phi_0}$. 
+The 0th order energy is just $\Ezero_0$.
+
 \paragraph{\textbf{First order}}
 \[ \ket{\Phi_0^{(1)}} = \Rz V \ket{\Phi_0}\]
 \[ E_0^{(1)} = \braket{ \Phi_0 | V | \Phi_0} \]
@@ -346,13 +357,13 @@ This means our $V'$ in this case is truncated to just $V + E_0^{(1)}$,
 so we have,
 \[\ket{\Phi_0^{(2)}} = \Rz (V - \Eone_0) \Rz V \ket{\Phi_0}\]
 \[\ket{\Phi_0^{(2)}} = \Rz V \Rz V \ket{\Phi_0} - \Rz \Eone_0 \Rz V \ket{\Phi_0}\]
-That's it! No more work!
+That's it! 
 The energy correction is,
 \[ E_0^{(2)} = \braket{ \Phi_0 | V \Rz V | \Phi_0} \]
 
 \paragraph{\textbf{Third order}}
-Here we have to be a bit more careful; we have to keep track of the orders of various terms
-more carefully. This may seem abstract and weird at first, and it takes some practice.
+Here we have track of the orders of various terms
+more carefully. 
 To remind you, our wavefunction perturbation expansion is 
 \[\ket{\Psi_0} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi_0} \]
 At $n=2$, we have a $V$ and two $V'$ in our term.
@@ -364,7 +375,7 @@ Let's now write this $n=2$ term down before moving on,
 
 There is also a third-order term which appears when $n=1$,
 $(\Rz V')^1 \Rz V \ket{\Phi_0}$. That $V'$ has a second order contribution from $E_0^{(2)}$,
-therefore we set $V' = E_0^{(2)}$ and 
+therefore we set $V' = -E_0^{(2)}$ and 
 pick up an additional term $ \Rz E_0^{(2)} \Rz V \ket{\Phi_0}$ for $\ket{\Phi_0^{(3)}}$
 \[\ket{\Phi_0^{(3)}} = (\Rz (V - \Eone_0))^2 \Rz V \ket{\Phi_0} - \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
 Expanding this and simplifying yields
@@ -377,38 +388,24 @@ Our energy expansion is
 
 The third order contribution to the energy expression occurs for $n=1$ and is 
 \[ E_0^{(3)} = \braket{\Phi_0 | V ( \Rz (V - E_0^{(1)})) \Rz V | \Phi_0} \]
-
-%\paragraph{\textbf{How to identify the order of a term?}}
-%Some tips for finding the order of a given term:
-%\begin{itemize} 
-%\item $V$ contributes an order of 1
-%\item Each $E_0^{(m)}$ contributes an order of $m$
-%\item Instead of counting orders from $V$ and $E_0^{(m)}$, you can instead count
-%the number of resolvents $\Rz$. In doing so, you must convert all $E_0^{(m)}$ to the 
-%corresponding analytic expression.
-%\end{itemize}
-%As an example of the above rules, when determining the order of the term 
-%\[ \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
-%which appears in the third-order wavefunction, 
-%we could reason that $V$ and $E_0^{(2)}$ is $1 + 2 = 3 \implies$ third order.
-%Alternatively, we could recognize that $E_0^{(2)} = \braket{\Phi_0 |V \Rz V|\Phi_0}$,
-%so therefore our expression is 
-%\[ \Rz \braket{\Phi_0 |V \Rz V|\Phi_0} \Rz V \ket{\Phi_0} \]
-%The above expression has 3 resolvents, so we conclude it is third order.
-%OR, we could count that the above expression has 3 $V$'s, and conclude it is third order.
-%Everything checks out.
+Alternatively, we could have also found the above by noting that generally the $(m+1)$ order energy is found
+by the $m$th order wavefunction,
+\[ E^{(m+1)} = \braket{\Phi_0 | V | \Phi_0^{(m)}} \]
+\[ E^{(3)} = \braket{\Phi_0 | V | \Phi_0^{(2)}} \]
+and just plug in our derived $\ket{\Phi_0^{(2)}}$.
 
 \section{The Energy Substitution Theorem}
 There is a pattern for finding equations for $\Phi_0^{(m)}$, so you don't have to
 go through the tedious process of analyzing where to get terms of a certain order for different
-values of $n$ in the expansion, or plucking out the proper terms from $V'$.
+values of $n$ in the expansion, or plucking out the proper terms from $V'$
+(but you should know how to do this anyway).
 
 \paragraph{\textbf{Energy Substitution Theorem}}
  $\ket{\Phi_0^{(m)}}$ is equal to the sum of a ``principal term'' 
  $(\Rz V)^m \ket{\Phi_0} $ plus all unique substitutions of 
 adjacent factors $(\Rz V)^r$ with $(\Rz E_0^{(r)})$. Each term
 in the sum is waited by a sign factor $(-1)^k$ where $k$ is the number of substitutions.
-The pair of operators $\Rz V$ closest to the ket $\ket{\Phi_0}$ are not considered substitutions. \\
+The pair of operators $\Rz V$ closest to the ket $\ket{\Phi_0}$ is not considered for substitutions. \\
 
 We will not prove this, but hopefully by looking at the expressions for  $\ket{\Phi_0^{(2)}}$ and $\ket{\Phi_0^{(3)}}$ that we just derived will convince you:
 
