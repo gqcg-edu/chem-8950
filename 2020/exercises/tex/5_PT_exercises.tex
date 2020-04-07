@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{simplewick}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\Rz}{\mathcal{R}_{0}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\Hc}{H_{\mathrm{c}}}
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 5: Perturbation Theory}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item Show that the bracketing function 
+\[f(\kappa) = \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}\] 
+becomes 
+\[f(\kappa) = E^{(0)}_0 + \braket{\Phi_0 | V \Omega_\kappa | \Phi_0 } \]
+when you substitute $H = H_0 + V$.
+How does this relate to our final result for the
+perturbation expansion of $E_0$?
+
+\item Derive the analytic form the reduced resolvent starting from the iterative expression
+\[\mathcal{R}_{\kappa} = \Rz +  \Rz V' \mathcal{R}_{\kappa} \]
+
+\item What is the order of the following
+terms according to perturbation theory?
+\[ (\Rz V)^{10} \ket{\Phi_0} \quad \quad (\Rz V)^{5} E_0^{(3)} \Rz V \ket{\Phi_0} \quad \quad E_0^{(5)}E_0^{(3)}E_0^{(1)} \Rz \Rz \Rz V \ket{\Phi_0}\]
+
+\item Derive an expression for $\Phi_0^{(3)}$ by explicitly 
+pulling out terms from the perturbation expansion.
+Explain you steps.
+
+\item Derive $\Phi_0^{(4)}$ using the energy 
+substitution trick.
+
+\end{enumerate}
+
+\end{document}
+
