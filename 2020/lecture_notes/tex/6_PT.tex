@@ -21,6 +21,8 @@
 \newcommand{\p}{\bullet}
 
 \newcommand{\Ezero}{E^{(0)}}
+\newcommand{\Rz}{\mathcal{R}_{0}}
+
 \newcommand{\Phizero}{\Phi^{(0)}}
 \newcommand{\Eone}{E^{(1)}}
 \newcommand{\En}{E^{(n)}}
@@ -90,8 +92,9 @@ If the $p$ partition is just a single basis function and the $q$ partition
     is all other basis functions,
     one finds with some manipulation that the eigenvalues are defined by the relation 
 \[ a =  A_{11} + \mathbf{A}_{1q}( a \cdot \mathbf{1}_{qq} - \mathbf{A}_{qq})^{-1} \mathbf{A}_{q1} \]
-The above is the ``reduced'' characteristic equation used for finding the eigenvalues.
-It can be thought of as an alternative to the standard characteristic equation $\mathrm{det}(A - aI) = 0$.
+The above is the ``reduced'' characteristic equation, and it can be used for finding the eigenvalues.
+It arises in the particular case of our partitioning of our basis.
+The above equation can be thought of as an alternative to the standard characteristic equation $\mathrm{det}(A - aI) = 0$.
 
 If we replace the eigenvalues $a$ in the expression above with some continuous, variable parameter $\kappa$, we obtain the following: 
 \[f(\kappa) =  A_{11} + \mathbf{A}_{1q}( \kappa \cdot \mathbf{1}_{qq} - \mathbf{A}_{qq})^{-1} \mathbf{A}_{q1} \]
@@ -103,7 +106,7 @@ The key quantity above
 \[\mathcal{R}_{\kappa}(A) = ( \kappa \cdot \mathbf{1}_{qq} - \mathbf{A}_{qq})^{-1}\]
 is the \textbf{reduced resolvent} operator of $\mathbf{A}$ for a particular $\kappa$.
 \footnote{Here, $\mathbf{1}_{qq}$ is the identity matrix of size $q \times q$ and $\mathbf{A}_{qq}$ is 
- the matrix representation of the operator in just the $q$-space, (over just $q$ basis functions)}.
+ the matrix representation of the operator in just the $q$-space, (over just $q$ basis functions)}
 In words, the reduced resolvent is an operator that is assigned to another operator $\mathbf{A}$.
 It is only defined in $q$-space part of the operator, and different values of $\kappa$ give different reduced resolvents.
 As abstract as that is, it is tremendously useful, as we will see later.
@@ -119,9 +122,9 @@ Expressed pictorially as a matrix representation divided into $pp$, $pq$, $qp$, 
 \end{array}\right)
   \]
 
-\section{L{\"o}wdin's big idea: using reduced resolvents to define perturbation theory and solve Schr{\"o}dinger equation}
+\section{L{\"o}wdin's big idea: using reduced resolvents to define perturbation theory and solve the Schr{\"o}dinger equation}
 Back to the world of quantum chemistry and the Schrodinger equation, 
-we can define two projection operators $P$ and $Q$ which partition our $n$-electron Hilbert space into two parts(note: if that sounds like gobbledygook to you, see the Appendix for details).
+we can define two projection operators $P$ and $Q$ which partition our $n$-electron Hilbert space into two parts (note: if that sounds like gobbledygook to you, see the Appendix for details).
 It is this partitioning which birthed the idea of a reduced resolvent above.
 
 $P$ is the ``model space projection operator'', which can act on a state 
@@ -131,39 +134,44 @@ $Q$ is the \textit{orthogonal complement} of $P$, which projects out every deter
 \[Q = 1 - P = \sum_{n \neq 0}  \ket{\Phi_n}\bra{\Phi_n}\]
 $P$ and $Q$ basically just split our basis into two parts, and the sum of $P$ and $Q$ yield the resolution of the identity, $P + Q = 1$.
 
-In terms of the $Q$ operator, the definition of the reduced resolvent for some operator $H$ is
+In terms operators, the definition of the reduced resolvent for some operator $H$ is
 \[\mathcal{R}_{\kappa} = (\kappa - H)^{-1} Q  \]
 
 L{\"o}wdin's idea, in short, was to generalize the Schr{\"o}dinger equation
 to a continous spectrum in $\kappa$, and use the $\kappa$-dependent reduced resolvent in the definition of 
 a trial wavefunction to solve for the eigenvalues. Read that last sentence a few more times. 
 Hopefully, it will soon become clear what I mean by this.
-
 Starting from the re-arranged Schr{\"o}dinger equation,
 \[(E_0 - H) \ket{\Psi_0} = 0 \]
-we generalize it to a continuous spectrum in $\kappa$,
+suppose we choose a form for the wavefunction which has a continuous dependence on some parameter
+$\kappa$: 
 \[(\kappa - H) \ket{\Psi_{\kappa}} = ... \]
-The above equation \textit{becomes} the Schrodinger equation whenever
-$\kappa$ happens to be equal to a true eigenvalue $E_0$.
+The above equation \textit{becomes} the Schrodinger equation whenever the right side is 0.
+If this is the case, $\kappa$ happens to be equal to a true eigenvalue $E_0$.
+For this reason, we refer to it as a \textit{generalization} of the Schr{\"o}dinger equation.
 
-L{\"o}wdin derived that 
-a \textbf{trial wavefunction} which is of the form $\ket{\Psi_0} = \Omega \ket{\Phi_0}$
-can be expressed in terms of the reduced resolvent. 
+%%%HERE TODO
+L{\"o}wdin derived that a \textbf{trial wavefunction} $\ket{\Psi_{\kappa}}$ 
+    which is of the form $\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0}$
+    can be expressed in terms of the reduced resolvent. 
+\[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0}\]
+\[\Omega_{\kappa} = P + \mathcal{R}_{\kappa} H P \]
 \[\ket{\Psi_{\kappa}} = \ket{\Phi_0} + \mathcal{R}_{\kappa} H \ket{\Phi_0} \]
+% maybe footnote here
+
 What happens when we apply $(\kappa - H)$ to our trial wavefunction $\ket{\Psi_{\kappa}}$? 
-as in $(\kappa - H) \ket{\Psi_{\kappa}} = ... $?
+as in the above expression $(\kappa - H) \ket{\Psi_{\kappa}} = ... $?
 Applying the resolution of the identity $P + Q = 1$, we find
 \[ (\kappa - H) \ket{\Psi_{\kappa}} =  P (\kappa - H) \ket{\Psi_{\kappa}} + Q (\kappa - H) \ket{\Psi_{\kappa}}  \]
 Looking at just the $Q$ term, we find that
-
 \begin{align*}
 Q (\kappa - H) \ket{\Psi_{\kappa}} &= Q (\kappa - H) \ket{\Phi_0} + Q (\kappa - H) \mathcal{R}_{\kappa} H \ket{\Phi_0}  \\
-&= \kappa Q \ket{\Phi_0} - Q H \ket{\Phi_0} + Q H \ket{\Phi_0}
-&= \kappa Q \ket{\Phi_0} 
+&= \kappa Q \ket{\Phi_0} - Q H \ket{\Phi_0} + Q H \ket{\Phi_0}  \\
+&= \kappa Q \ket{\Phi_0}  \\
 &= 0
 \end{align*}
 Above we have used the fact that $ Q (\kappa - H) \mathcal{R}_{\kappa}  = Q$ , which follows
-clearly from the definition of the reduced resolvent, and that $Q$ action on $\ket{\Phi_0}$ is 0, since 
+clearly from the definition of the reduced resolvent, and that $Q$ acting on $\ket{\Phi_0}$ is 0, since 
 $\ket{\Phi_0}$ lives in the $P$ space. 
 We conclude the $Q$ term is 0, so we are left with:
 \[ (\kappa - H) \ket{\Psi_{\kappa}} =  P (\kappa - H) \ket{\Psi_{\kappa}} \]
@@ -178,62 +186,268 @@ Using the definition of $P = \ket{\Phi_0}\bra{\Phi_0}$,
 
 where we have defined the function of $\kappa$, denoted  $f(\kappa)$ as
 \[ f(\kappa) =  \braket{\Phi_0 | H | \Psi_\kappa} = \braket{\Phi_0 | H + H \mathcal{R}_\kappa H  | \Phi_0}\]
-L{\"o}wdin calls this the \textit{bracketing function}, since it enables one to obtain both lower and upper bounds to true eigenvalues, it ``brackets'' them.
-
+L{\"o}wdin calls this the \textit{bracketing function}, since it enables one to obtain both lower and upper bounds to true eigenvalues.
 Restating the above in one compact expression, we have 
 \[ (\kappa - H) \ket{\Psi_{\kappa}} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
+\[ (\kappa - H) \Omega_\kappa \ket{\Phi_0} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
 This is a monumental result.
 \textbf{When $\kappa$ is equal to $f(\kappa)$, the right side above goes to zero. If this occurs,
 we conclude that our trial function $\ket{\Psi_{\kappa}}$
-is a solution to the Schr{\"o}dinger equation, and the eigenvalue $\kappa$ is our 
-energy eigenvalue $E_0$.}  
-
+is a solution to the Schr{\"o}dinger equation, and the eigenvalue $\kappa$ is the corresponding 
+energy eigenvalue.}  
 Thus, our chosen trial function (derived by L{\"o}wdin) gives us access to the solutions of 
 the Schrodinger equation, by looking for zeros of $F(\kappa) = f(\kappa) - \kappa$.
-
 When we find a zero, we have the following well-defined, obtainable quantities
 \[ \kappa = E_0 \quad \quad (E_0 - H) \ket{\Psi_{\kappa=E_0}} = 0 \quad \quad \ket{\Psi_{\kappa=E_0}} = \ket{\Phi_0} + \mathcal{R}_{\kappa = E_0} H \ket{\Phi_0} \]
 
 The above equation is always applicable so long as the wavefunction is not orthogonal to $\ket{\Phi_0}$
 and the resolvent exists.
 
-We conclude from the above that our wave operator $\Omega$ such that
-\[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0} \]
-\[\kappa = \braket{\Phi_0|H \Omega_{\kappa} | \Phi_0} \]
-is equal to
-\[\Omega_{\kappa} = 1 + \mathcal{R}_{\kappa} H \]
-For brevity, it is more proper to express $\Omega$ in terms of $P$ to ensure it behaves properly when acted
-on any state
-\[\Omega_{\kappa} = P + \mathcal{R}_{E_0} H P \]
-As defined in the case of $\ket{\Psi_0} = \Omega_{\kappa} \ket{\Phi_0} $, replacing $P$ with unity does not have an effect.
-$\Omega$ has the following properties, which we will not prove:
-\[ P \Omega = P \quad \quad \Omega P = \Omega \quad \quad \Omega^2 = \Omega \]
-These conditions classify $\Omega$ as a Bloch wave operator.
-
-Having defined $\Omega$, we can now re-express our main result above in terms of just our reference
-state $\ket{\Phi_0}$,
-\[ (\kappa - H) \Omega_\kappa \ket{\Phi_0} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
-\[ f(\kappa) = \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}\]
+%We conclude from the above that our wave operator $\Omega$ such that
+%\[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0} \]
+%\[\kappa = \braket{\Phi_0|H \Omega_{\kappa} | \Phi_0} \]
+%is equal to
+%\[\Omega_{\kappa} = 1 + \mathcal{R}_{\kappa} H \]
+%For brevity, it is more proper to express $\Omega$ in terms of $P$ to ensure it behaves properly when acted
+%on any state
+%\[\Omega_{\kappa} = P + \mathcal{R}_{E_0} H P \]
+%As defined in the case of $\ket{\Psi_0} = \Omega_{\kappa} \ket{\Phi_0} $, replacing $P$ with unity does not have an effect.
+%$\Omega$ has the following properties, which we will not prove:
+%\[ P \Omega = P \quad \quad \Omega P = \Omega \quad \quad \Omega^2 = \Omega \]
+%These conditions classify $\Omega$ as a Bloch wave operator.
+%
+%Having defined $\Omega$, we can now re-express our main result above in terms of just our reference
+%state $\ket{\Phi_0}$,
+%\[ (\kappa - H) \Omega_\kappa \ket{\Phi_0} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
+%\[ f(\kappa) = \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}\]
 
 \subsection{L{\"o}wdin's Rayleigh-Schr{\"o}dinger Perturbation Theory}
-We can now take our generalized Schr{\"o}dinger equation from above and consider 
-how it behaves when our Hamiltonian is partitioned into two parts $H = H_0 + V$. 
-Our wave operator becomes
-\[\Omega = P + \mathcal{R}_{\kappa} H_0 P + \mathcal{R}_{\kappa} V P \]
-\[\Omega = P + \mathcal{R}_{\kappa} H_0 \ket{\Phi_0}\bra{\Phi_0} + \mathcal{R}_{\kappa} V P \]
-\[\Omega = P + E_0 \mathcal{R}_{\kappa} P + \mathcal{R}_{\kappa} V P \]
-\[\Omega = P + \mathcal{R}_{\kappa} V P \]
-where the reduced resolvent acting on $P$ is zero, since the resolvent entirely resides in the $Q$ space, which is orthognoal to $P$.
+We can now take our generalized Schr{\"o}dinger equation from above 
+\[ (\kappa - H) \Omega_\kappa \ket{\Phi_0} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
+and consider how it behaves when our Hamiltonian is split into two parts $H = H_0 + V$. 
 
+\paragraph{\textbf{The Wave Operator}}
+Our wave operator becomes
+\[\Omega_\kappa = P + \mathcal{R}_{\kappa} H_0 P + \mathcal{R}_{\kappa} V P \]
+\[\Omega_\kappa = P + \mathcal{R}_{\kappa} H_0 \ket{\Phi_0}\bra{\Phi_0} + \mathcal{R}_{\kappa} V P \]
+\[\Omega_\kappa = P + E_0 \mathcal{R}_{\kappa} P + \mathcal{R}_{\kappa} V P \]
+\[\Omega_\kappa = P + \mathcal{R}_{\kappa} V P \]
+where the reduced resolvent acting on $P$ is zero, since the resolvent entirely resides in the $Q$ space, which is orthogonal to $P$.
+
+\paragraph{\textbf{The Bracketing Function}}
 After a few manipulations which are left as an exercise, 
 the bracketing function $f(\kappa) = \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}$ becomes 
+\[f(\kappa) = \Ezero_0 + \braket{\Phi_0 | V \Omega_\kappa | \Phi_0 } \]
+
+\paragraph{\textbf{The Reduced Resolvent}}
+We have one last quantity to fully define: the reduced resolvent. 
+How does the resolvent behave for our Hamiltonian $H = H_0 + V$? 
+\[\mathcal{R}_{\kappa} = (\kappa - H)^{-1}Q \]
+We are about to do a lot of tricky manipulations, but in doing so,
+we will arrive at perhaps the most important result in this set of notes. 
+Let's do it.
+First we will expand $H$ and add $0 = \Ezero_0 - \Ezero_0$
+\[\mathcal{R}_{\kappa} = (\kappa - \Ezero_0 + \Ezero_0 - H_0 - V)^{-1}Q \]
+Rearranging and letting $V' = V - (\kappa - \Ezero_0)$:
+\[\mathcal{R}_{\kappa} = (\Ezero_0 - H_0 - V')^{-1}Q \]
+To move further, we use of the following identity for two operators $A$ and $B$,
+\[ (A- B)^{-1} = A^{-1} + A^{-1} B (A - B)^{-1} \]
+If we let  $A = (\Ezero_0 - H_0)$ and $B = V'$, we have
+\[\mathcal{R}_{\kappa} = \left[ (\Ezero_0 - H_0)^{-1} +  (\Ezero_0 - H_0)^{-1} V' (\Ezero_0 - H_0 - V')^{-1} \right] Q\]
+\[\mathcal{R}_{\kappa} = (\Ezero_0 - H_0)^{-1}Q +  (\Ezero_0 - H_0)^{-1} V' (\Ezero_0 - H_0 - V')^{-1}Q\]
+Since $Q^2 = Q$ and Q is Hermitian we can insert a $Q$ in the second term:
+\[\mathcal{R}_{\kappa} = (\Ezero_0 - H_0)^{-1}Q +  (\Ezero_0 - H_0)^{-1}Q V' (\Ezero_0 - H_0 - V')^{-1}Q\]
+Expanding the definition of $V'$ in the parentheses we obtain
+\[\mathcal{R}_{\kappa} = (\Ezero_0 - H_0)^{-1}Q +  (\Ezero_0 - H_0)^{-1}Q V' (\kappa - H)^{-1}Q\]
+Now, we define the quantity $\Rz =  (\Ezero_0 - H_0)^{-1} Q$, the \textbf{unperturbed reduced resolvent}, 
+which is the resolvent defined for $\kappa = \Ezero_0 $ and unperturbed Hamiltonian $H_0$.
+\[\mathcal{R}_{\kappa} = \Rz +  \Rz V' (\kappa - H)^{-1}Q\]
+Noting the last part of the second term is just our original reduced resolvent $\mathcal{R}_{\kappa} = (\kappa - H)^{-1}Q $,
+we finally arrive at our result:
+\[\mathcal{R}_{\kappa} = \Rz +  \Rz V' \mathcal{R}_{\kappa} \]
+\textbf{The resolvent is dependent on itself. 
+Because of this, we can iteratively construct an expansion of the resolvent. 
+This will ultimately be the source of our perturbation expansion.}
+In an exercise, you will explicitly iterate the resolvent, and show that it generalizes to the following
+\[\mathcal{R}_{\kappa} = \sum_{n=0}^{\infty} (\Rz V')^n \Rz \]
+
+Up to this point, we have defined everything with the subscript $\kappa$.
+From here on, we will focus on just finding solutions for which $\kappa$ is our ground 
+state energy $\kappa = E_0$, so we will drop the $\kappa$ subscripts.
+Since the only part of the resolvent above which depends on $\kappa$ is 
+$V' = V - (\kappa - \Ezero_0)$, we will now have 
+\[V' = V - (E_0 - \Ezero_0)\]
+\[\mathcal{R} = \sum_{n=0}^{\infty} (\Rz V')^n \Rz \]
+We will likewise drop the $\kappa$ from our definition of the wave operator 
+and the wave function
+\[\Omega = P + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V P \]
+\[\ket{\Psi_0} = \Omega \ket{\Phi_0}\]
+\[\ket{\Psi_0} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi_0} \]
+From section 1, ``The Wave Operator'', we derived our energy expression to be, 
+\[ E_0 = \Ezero_0 + \braket{\Phi_0 | V \Omega | \Phi_0}  \]
+Our energy expansion is therefore,
+\[E_0 = \Ezero_0 + \braket{\Phi_0|V|\Phi_0} + \sum_{n=0}^{\infty} \braket{\Phi_0|V (\Rz V')^n \Rz V | \Phi_0}\]
+
+The operator $V'$ introduces some complexity that is worth discussing. 
+It contains $E_0$, which is the exact energy, 
+    so it involves a sum over all orders of energy corrections.
+\[V' = V - (E_0 - \Ezero_0) \]
+\[V' = V - \sum_{m=1} E_0^{(m)} \]
+\[V' = V - E_0^{(1)} - E_0^{(2)} - E_0^{(3)} - \cdots \]
+
+To conclude, we have obtained expressions for the $n^{th}$ order wavefunction 
+and energy corrections in perturbation theory.
+Looking at the expression for $\ket{\Psi_0}$, each order wavefunction correction
+at higher orders is just a string of operators $(\Rz, V, V')$ acting on our reference determinant.
+Each energy is just an expectation value of a string of operators $(\Rz, V, V')$.
+Using these expansions in practice can be a bit tricky, as we will see in the next section.
+
+\section{Deriving Perturbation Theory Orders}
+Before we get started, we need to know how to identify the ``order'' of a term.
+Crashcourse:
+\paragraph{\textbf{How to identify the order of a term?}}
+Some tips for finding the order of a given term:
+\begin{itemize} 
+\item $V$ contributes an order of 1
+\item Each $E_0^{(m)}$ contributes an order of $m$
+\item Instead of counting orders from $V$ and $E_0^{(m)}$, you can instead count
+the number of resolvents $\Rz$. Before doing so, you must convert all $E_0^{(m)}$ to the 
+corresponding analytic expression.
+\end{itemize}
+As an example of the above rules, when determining the order of the term 
+\[ \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
+which appears in the third-order wavefunction, 
+we could reason that $V$ and $E_0^{(2)}$ is $1 + 2 = 3 \implies$ third order.
+Alternatively, we could recognize that $E_0^{(2)} = \braket{\Phi_0 |V \Rz V|\Phi_0}$,
+so therefore our expression is 
+\[ \Rz \braket{\Phi_0 |V \Rz V|\Phi_0} \Rz V \ket{\Phi_0} \]
+The above expression has 3 resolvents, so we conclude it is third order.
+OR, we could count that the above expression has 3 $V$'s, and conclude it is third order.
+Everything checks out.
+
+The 0th order wavefunction correction is just the first term of the respective pertubation expansion
+fro above. For higher orders: 
+\paragraph{\textbf{First order}}
+\[ \ket{\Phi_0^{(1)}} = \Rz V \ket{\Phi_0}\]
+\[ E_0^{(1)} = \braket{ \Phi_0 | V | \Phi_0} \]
+
+\paragraph{\textbf{Second order}}
+We read off from the expansion for $n=1$,
+\[ \ket{\Phi_0^{(2)}} = \Rz V' \Rz V \ket{\Phi_0}\]
+Here is the only tricky thing with this formalism: $V'$ contains 
+higher order contributions to the energy 
+\[V' = V - E_0^{(1)} - E_0^{(2)} - E_0^{(3)} - \cdots\]
+\textbf{Since we are building the second order wavefunction, it must be composed of only 
+second order pieces. The prefactor $\Rz V' \Rz V$ above should therefore only be second order. 
+The V is first order, so multiplying by V' should only increase the order by 1. 
+This means only terms in the V' expansion which are first order contribute 
+to the second order wavefunction.}
+This means our $V'$ in this case is truncated to just $V + E_0^{(1)}$,
+so we have,
+\[\ket{\Phi_0^{(2)}} = \Rz (V - \Eone_0) \Rz V \ket{\Phi_0}\]
+\[\ket{\Phi_0^{(2)}} = \Rz V \Rz V \ket{\Phi_0} - \Rz \Eone_0 \Rz V \ket{\Phi_0}\]
+That's it! No more work!
+The energy correction is,
+\[ E_0^{(2)} = \braket{ \Phi_0 | V \Rz V | \Phi_0} \]
+
+\paragraph{\textbf{Third order}}
+Here we have to be a bit more careful; we have to keep track of the orders of various terms
+more carefully. This may seem abstract and weird at first, and it takes some practice.
+To remind you, our wavefunction perturbation expansion is 
+\[\ket{\Psi_0} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi_0} \]
+At $n=2$, we have a $V$ and two $V'$ in our term.
+To make the term third order overall (this is our target for constructing $\ket{\Phi_0^{(3)}}$),
+we require that each $V'$ is 1st order, so we only take out the first order
+energy and $V$ in our $V'$ expansion $V' = V - E_0^{(1)}$.
+Let's now write this $n=2$ term down before moving on, 
+\[\ket{\Phi_0^{(3)}} = (\Rz (V - \Eone_0))^2 \Rz V \ket{\Phi_0} + (... \mathrm{more})\]
+
+There is also a third-order term which appears when $n=1$,
+$(\Rz V')^1 \Rz V \ket{\Phi_0}$. That $V'$ has a second order contribution from $E_0^{(2)}$,
+therefore we set $V' = E_0^{(2)}$ and 
+pick up an additional term $ \Rz E_0^{(2)} \Rz V \ket{\Phi_0}$ for $\ket{\Phi_0^{(3)}}$
+\[\ket{\Phi_0^{(3)}} = (\Rz (V - \Eone_0))^2 \Rz V \ket{\Phi_0} - \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
+Expanding this and simplifying yields
+\[\ket{\Phi_0^{(3)}} = \Rz V \Rz V \Rz V \ket{\Phi_0} - \Rz \Eone_0 \Rz V \Rz V \ket{\Phi_0} 
+  - \Rz V \Rz \Eone_0 \Rz V \ket{\Phi_0} + \Rz E_0^{(1)} \Rz E_0^{(1)} \Rz V \ket{\Phi_0} 
+ - \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
+
+Our energy expansion is 
+\[E_0 = \Ezero_0 + \braket{\Phi_0|V|\Phi_0} + \sum_{n=0}^{\infty} \braket{\Phi_0|V (\Rz V')^n \Rz V | \Phi_0}\]
+
+The third order contribution to the energy expression occurs for $n=1$ and is 
+\[ E_0^{(3)} = \braket{\Phi_0 | V ( \Rz (V - E_0^{(1)})) \Rz V | \Phi_0} \]
+
+%\paragraph{\textbf{How to identify the order of a term?}}
+%Some tips for finding the order of a given term:
+%\begin{itemize} 
+%\item $V$ contributes an order of 1
+%\item Each $E_0^{(m)}$ contributes an order of $m$
+%\item Instead of counting orders from $V$ and $E_0^{(m)}$, you can instead count
+%the number of resolvents $\Rz$. In doing so, you must convert all $E_0^{(m)}$ to the 
+%corresponding analytic expression.
+%\end{itemize}
+%As an example of the above rules, when determining the order of the term 
+%\[ \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
+%which appears in the third-order wavefunction, 
+%we could reason that $V$ and $E_0^{(2)}$ is $1 + 2 = 3 \implies$ third order.
+%Alternatively, we could recognize that $E_0^{(2)} = \braket{\Phi_0 |V \Rz V|\Phi_0}$,
+%so therefore our expression is 
+%\[ \Rz \braket{\Phi_0 |V \Rz V|\Phi_0} \Rz V \ket{\Phi_0} \]
+%The above expression has 3 resolvents, so we conclude it is third order.
+%OR, we could count that the above expression has 3 $V$'s, and conclude it is third order.
+%Everything checks out.
+
+\section{The Energy Substitution Theorem}
+There is a pattern for finding equations for $\Phi_0^{(m)}$, so you don't have to
+go through the tedious process of analyzing where to get terms of a certain order for different
+values of $n$ in the expansion, or plucking out the proper terms from $V'$.
+
+\paragraph{\textbf{Energy Substitution Theorem}}
+ $\ket{\Phi_0^{(m)}}$ is equal to the sum of a ``principal term'' 
+ $(\Rz V)^m \ket{\Phi_0} $ plus all unique substitutions of 
+adjacent factors $(\Rz V)^r$ with $(\Rz E_0^{(r)})$. Each term
+in the sum is waited by a sign factor $(-1)^k$ where $k$ is the number of substitutions.
+The pair of operators $\Rz V$ closest to the ket $\ket{\Phi_0}$ are not considered substitutions. \\
+
+We will not prove this, but hopefully by looking at the expressions for  $\ket{\Phi_0^{(2)}}$ and $\ket{\Phi_0^{(3)}}$ that we just derived will convince you:
+
+\[\ket{\Phi_0^{(2)}} = \Rz V \Rz V \ket{\Phi_0} - \Rz \Eone_0 \Rz V \ket{\Phi_0}\]
+
+\[\ket{\Phi_0^{(3)}} = \Rz V \Rz V \Rz V \ket{\Phi_0} - \Rz \Eone_0 \Rz V \Rz V \ket{\Phi_0} 
+  - \Rz V \Rz \Eone_0 \Rz V \ket{\Phi_0} + \Rz E_0^{(1)} \Rz E_0^{(1)} \Rz V \ket{\Phi_0} 
+ - \Rz E_0^{(2)} \Rz V \ket{\Phi_0} \]
 
 
+Now we barely even need to think when we write down our perturbative wavefunction corrections.
+Keeping in mind the energy corrections follow form
+\[ E^{(m+1)} = \braket{\Phi_0 | V | \Phi_0^{(m)}} \]
+our wavefunction correction expressions determine our energy expression corrections.
+
+\section{Concluding Remarks}
+I should note that we have not actually translated the energy corrections into 
+programmable expressions. 
+To do this, we would have to actually evaluate the expectation values, and it would 
+be a lot of work.
+Later on in the course, after learning diagrams, we will revisit PT and learn 
+how to diagrammatically derive programmable expressions for the various energy orders.
+When we do this, we will cleverly choose $H_0$ and $V$ such that $E_0^{(0)} = E_0^{(1)} = 0$,
+which simplifies things a good bit, and also makes it so that each energy
+correction is purely a correlation energy contribution. 
+For a sneak peak, you can look at handout 6 from the 2017 edition of this course.
+
+
+That was a long and arduous mathematical climb. But we have finally reached the summit,
+and now hopefully you can see that all of perturbation theory is obtainable by just 
+smacking your reference state $\ket{\Phi_0}$ with operator strings consisting 
+of resolvents the pertubed part of the Hamiltonian $V$. 
+Compare this to how we derived MP2 in the previous set of notes; we had to do a bunch of 
+algebraic manipulations to get to the end result. 
+As you can imagine, deriving MP3 and MP4 under that framework only gets worse. 
+In L{\"o}wdin's resolvent formalism, we can just read off the result, 
+    and then evaluate it to an algebraic expression using diagrams. 
 
 \section{Appendix}
-L{\"o}wdin was a smart dude. In order to understand what the heck he's talking about,
-we need to put on our math hats and review a few things.
-
 \subsection{Hilbert Space}
 Recall that many of the objects we have been talking about (spin orbitals, Slater determinants, wavefunctions)
 ``live'' in some Hilbert space. This means many things, but for our purposes, we just need to know
