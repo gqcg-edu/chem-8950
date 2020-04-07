@@ -42,9 +42,9 @@
 \noindent
 
 In perturbation theory, we split our Hamiltonian into parts $H = H_0 + V$, and our ground 
-state wavefunction and energy are expressed as an infinite series, where the first term is the unperturbed
+state wavefunction $\ket{\Psi_0}$ and energy $E_0$ are expressed as an infinite series, where the first term is the unperturbed
 quantity of some simpler model system described by $H_0$, and the rest of the terms
-are corrections at various ``orders'':
+are corrections at various ``orders'' $n$:
 \[\ket{\Psi_0} = \ket{\Phi_0} + \sum_{n=1}^{\infty} \ket{\Phin_0} \]
 \[E_0 = \Ezero_0 + \sum_{n=1}^{\infty} \En_0\]
 
@@ -62,7 +62,7 @@ This methodology also beautifully translates into clean diagrams, which we will 
 %\section{L{\"o}wdin and his Resolvents}
 \section{The Wave Operator}
 Suppose there was some magical operator $\Omega$ which
-acts on the unperturbed state $\ket{\Phi_0}$ corresponding to $H_0$ 
+acts on the unperturbed state $\ket{\Phi_0}$ (an eigenstate of $H_0$)
 and transforms it into the exact state $\ket{\Psi_0}$ described by $H_0 + V$
 \[\ket{\Psi_0} = \Omega \ket{\Phi_0} \]
 We will call $\Omega$ the \textit{wave operator}.
@@ -87,14 +87,17 @@ and under this definition, $\Omega$ yields the same perturbation expansion for $
 A resolvent is a mathematical structure which is used to study the eigenspectrum
 of operators, among other things.
 The concept of a \textit{reduced resolvent} arises when one considers an eigenvalue problem \[A \phi = a \phi \]
-and divides the basis of the eigenstates into two partitions $p$ and $q$. 
-If the $p$ partition is just a single basis function and the $q$ partition 
-    is all other basis functions,
+
+Suppose the eigenfunctions $\phi$ can be expanded in an orthonormal basis ($f_1$, $f_2$, $f_3$,...) such that $\sum_i c_i f_i $
+and let $\mathbf{A}_{ij} = \braket{f_i | A | f_j}$ be the matrix representation of the operator $A$ in this basis. 
+Suppose we divide the basis of the eigenstates into two partitions $p$ and $q$. 
+If the $p$ partition is just a single basis function ($p: {f_1}$) (which we will just denote by the number 1) and the $q$ partition 
+    is all other basis functions ($q: {f_2, f_3,...}$),
     one finds with some manipulation that the eigenvalues are defined by the relation 
 \[ a =  A_{11} + \mathbf{A}_{1q}( a \cdot \mathbf{1}_{qq} - \mathbf{A}_{qq})^{-1} \mathbf{A}_{q1} \]
 The above is the ``reduced'' characteristic equation, and it can be used for finding the eigenvalues.
-It arises in the particular case of our partitioning of our basis.
-The above equation can be thought of as an alternative to the standard characteristic equation $\mathrm{det}(A - aI) = 0$.
+It arises in the particular case of our partitioning of our basis in this manner.
+The above equation can be thought of as an alternative to the standard characteristic equation $\mathrm{det}(\mathbf{A} - a\mathbf{1}) = 0$.
 
 If we replace the eigenvalues $a$ in the expression above with some continuous, variable parameter $\kappa$, we obtain the following: 
 \[f(\kappa) =  A_{11} + \mathbf{A}_{1q}( \kappa \cdot \mathbf{1}_{qq} - \mathbf{A}_{qq})^{-1} \mathbf{A}_{q1} \]
@@ -123,7 +126,7 @@ Expressed pictorially as a matrix representation divided into $pp$, $pq$, $qp$, 
   \]
 
 \section{L{\"o}wdin's big idea: using reduced resolvents to define perturbation theory and solve the Schr{\"o}dinger equation}
-Back to the world of quantum chemistry and the Schrodinger equation, 
+Back to the world of quantum chemistry and the Schr{\"o}dinger equation, 
 we can define two projection operators $P$ and $Q$ which partition our $n$-electron Hilbert space into two parts (note: if that sounds like gobbledygook to you, see the Appendix for details).
 It is this partitioning which birthed the idea of a reduced resolvent above.
 
@@ -133,9 +136,13 @@ $P$ is the ``model space projection operator'', which can act on a state
 $Q$ is the \textit{orthogonal complement} of $P$, which projects out every determinant other than the reference $\Phi_0$
 \[Q = 1 - P = \sum_{n \neq 0}  \ket{\Phi_n}\bra{\Phi_n}\]
 $P$ and $Q$ basically just split our basis into two parts, and the sum of $P$ and $Q$ yield the resolution of the identity, $P + Q = 1$.
-
-In terms operators, the definition of the reduced resolvent for some operator $H$ is
+In terms of operators, the definition of the reduced resolvent for some operator $H$ is
 \[\mathcal{R}_{\kappa} = (\kappa - H)^{-1} Q  \]
+This is the operator analogue of the matrix representation form of $\mathcal{R}_{\kappa}(A)$
+we defined earlier. Instead of only explicitly including matrix elements in the $q$ space, 
+we use our newly defined operator $Q$ to project the negative inverse of $H$ into the $Q$ space.
+%TODO
+
 
 L{\"o}wdin's idea, in short, was to generalize the Schr{\"o}dinger equation
 to a continous spectrum in $\kappa$, and use the $\kappa$-dependent reduced resolvent in the definition of 
@@ -150,14 +157,12 @@ The above equation \textit{becomes} the Schrodinger equation whenever the right 
 If this is the case, $\kappa$ happens to be equal to a true eigenvalue $E_0$.
 For this reason, we refer to it as a \textit{generalization} of the Schr{\"o}dinger equation.
 
-%%%HERE TODO
 L{\"o}wdin derived that a \textbf{trial wavefunction} $\ket{\Psi_{\kappa}}$ 
     which is of the form $\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0}$
     can be expressed in terms of the reduced resolvent. 
 \[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0}\]
 \[\Omega_{\kappa} = P + \mathcal{R}_{\kappa} H P \]
 \[\ket{\Psi_{\kappa}} = \ket{\Phi_0} + \mathcal{R}_{\kappa} H \ket{\Phi_0} \]
-% maybe footnote here
 
 What happens when we apply $(\kappa - H)$ to our trial wavefunction $\ket{\Psi_{\kappa}}$? 
 as in the above expression $(\kappa - H) \ket{\Psi_{\kappa}} = ... $?
@@ -175,7 +180,7 @@ clearly from the definition of the reduced resolvent, and that $Q$ acting on $\k
 $\ket{\Phi_0}$ lives in the $P$ space. 
 We conclude the $Q$ term is 0, so we are left with:
 \[ (\kappa - H) \ket{\Psi_{\kappa}} =  P (\kappa - H) \ket{\Psi_{\kappa}} \]
-Using the definition of $P = \ket{\Phi_0}\bra{\Phi_0}$,
+Using the definition of $P = \ket{\Phi_0}\bra{\Phi_0}$, and noting that we can always ensure $\ket{\Psi_\kappa}$ is intermediately normalized, we obtain
 \begin{align*}
  (\kappa - H) \ket{\Psi_{\kappa}} &=  \ket{\Phi_0}\bra{\Phi_0} (\kappa - H) \ket{\Psi_{\kappa}} \\
  &=  \kappa \ket{\Phi_0} \braket{\Phi_0|\Psi_\kappa} - \ket{\Phi_0} \braket{\Phi_0| H | \Psi_\kappa} \\
@@ -197,30 +202,16 @@ we conclude that our trial function $\ket{\Psi_{\kappa}}$
 is a solution to the Schr{\"o}dinger equation, and the eigenvalue $\kappa$ is the corresponding 
 energy eigenvalue.}  
 Thus, our chosen trial function (derived by L{\"o}wdin) gives us access to the solutions of 
-%the Schrodinger equation, by looking for zeros of $F(\kappa) = f(\kappa) - \kappa$.
-%When we find a zero, we have the following well-defined, obtainable quantities
-%\[ \kappa = E_0 \quad \quad (E_0 - H) \ket{\Psi_{\kappa=E_0}} = 0 \quad \quad \ket{\Psi_{\kappa=E_0}} = \ket{\Phi_0} + \mathcal{R}_{\kappa = E_0} H \ket{\Phi_0} \]
-%
-%The above equation is always applicable so long as the wavefunction is not orthogonal to $\ket{\Phi_0}$
-%and the resolvent exists.
+the Schrodinger equation, by looking for zeros of $F(\kappa) = f(\kappa) - \kappa$.
 
-%We conclude from the above that our wave operator $\Omega$ such that
-%\[\ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0} \]
-%\[\kappa = \braket{\Phi_0|H \Omega_{\kappa} | \Phi_0} \]
-%is equal to
-%\[\Omega_{\kappa} = 1 + \mathcal{R}_{\kappa} H \]
-%For brevity, it is more proper to express $\Omega$ in terms of $P$ to ensure it behaves properly when acted
-%on any state
-%\[\Omega_{\kappa} = P + \mathcal{R}_{E_0} H P \]
-%As defined in the case of $\ket{\Psi_0} = \Omega_{\kappa} \ket{\Phi_0} $, replacing $P$ with unity does not have an effect.
-%$\Omega$ has the following properties, which we will not prove:
-%\[ P \Omega = P \quad \quad \Omega P = \Omega \quad \quad \Omega^2 = \Omega \]
-%These conditions classify $\Omega$ as a Bloch wave operator.
-%
-%Having defined $\Omega$, we can now re-express our main result above in terms of just our reference
-%state $\ket{\Phi_0}$,
-%\[ (\kappa - H) \Omega_\kappa \ket{\Phi_0} = (\kappa - f(\kappa)) \ket{\Phi_0} \]
-%\[ f(\kappa) = \braket{\Phi_0 | H \Omega_\kappa | \Phi_0}\]
+\textbf{
+To summarize, our discrete eigenvalue problem (the Schr{\"o}dinger equation) 
+was modified into a continuous form, which was enabled by the $\kappa$ dependence of the
+reduced resolvent $\mathcal{R}_\kappa$, which Lowdin realized can be used to construct our magical wave operator $\Omega_\kappa$, which
+transforms our reference determinant into some function $\Psi_\kappa$ by $ \ket{\Psi_\kappa} = \Omega_\kappa \ket{\Phi_0}$.
+When $\kappa$ happens to be equal to an eigenvalue of the Schr{\"o}dinger equation,
+we will know it, since $\kappa - f(\kappa) = 0$, and we will have found an eigenstate and eigenvalue (solved the Schr{\"o}dinger equation).
+}
 
 \subsection{L{\"o}wdin's Rayleigh-Schr{\"o}dinger Perturbation Theory}
 We can now take our generalized Schr{\"o}dinger equation from above 
@@ -437,7 +428,7 @@ For a sneak peak, you can look at handout 6 from the 2017 edition of this course
 That was a long and arduous mathematical climb. But we have finally reached the summit,
 and now hopefully you can see that all of perturbation theory is obtainable by just 
 smacking your reference state $\ket{\Phi_0}$ with operator strings consisting 
-of resolvents the pertubed part of the Hamiltonian $V$. 
+of resolvents $\Rz$ and the perturbed part of the Hamiltonian $V$. 
 Compare this to how we derived MP2 in the previous set of notes; we had to do a bunch of 
 algebraic manipulations to get to the end result. 
 As you can imagine, deriving MP3 and MP4 under that framework only gets worse. 
