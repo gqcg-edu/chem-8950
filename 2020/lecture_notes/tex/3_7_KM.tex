@@ -191,20 +191,20 @@ The indices in the $ket$ will be written as upper indices.
 \\ \\
 We thus have: 
 \[\braket{p | \hat{h}| q} = h_{pq} = h_p^q \]
-\[\braket{p | \hat{h}| q} + \sum_i \braket{pi | qi} = f_{pq} = f_p^q \]
+\[\braket{p | \hat{h}| q} + \sum_i \braket{pi || qi} = f_{pq} = f_p^q \]
 We using $g$ for the two-electron integrals:
 \[\braket{pq| \hat{\nu} | rs} = \braket{pq| rs} =g_{pq}^{rs} \]
 The antisymmetrized two-electron integral can be represented with $\bar{g}$: 
 \[\braket{pq| rs}  - \braket{pq| sr} = \braket{pq|| rs} =\bar{g}_{pq}^{rs} \]
 We can thus express our Hamiltonian as: 
-\[ H = \sum_{pq} h_{pq} \apd a_q + \frac{1}{2} \sum_{pqrs} \braket{pq|rs} \apd a_q\dg a_s a_r  = \sum_{pq} h_{pq} a_q^p + \frac{1}{2} \sum_{pqrs} g_{pq}^{rs} a^{pq}_{rs}  \] 
+\[ H = \sum_{pq} h_{pq} \apd a_q + \frac{1}{2} \sum_{pqrs} \braket{pq|rs} \apd a_q\dg a_s a_r  = \sum_{pq} h_{p}^{q} a_q^p + \frac{1}{2} \sum_{pqrs} g_{pq}^{rs} a^{pq}_{rs}  \] 
 We can take advantage of the Einstein summation notation, which says that if an index appears once as an upper index and once as a lower index, it is \textit{implicitly} summed over. 
 Since $p$, $q$, $r$, and $s$ appear both as a upper and lower index, we can leave out the implicit summation: 
-\[ H  = h_{pq} a_q^p +  \frac{1}{2} g_{pq}^{rs} a^{pq}_{rs} \]
+\[ H  =  h_{p}^{q} a_q^p +  \frac{1}{2} g_{pq}^{rs} a^{pq}_{rs} \]
 The antisymmetrized Hamiltonian can be written as: 
 \[ H  = h_{pq} a_q^p +  \frac{1}{4} \bar{g}_{pq}^{rs} a^{pq}_{rs} \]
 The correlation component of the Hamiltonian can be written as: 
-\[ H_c  = \sum_{pq}f_{pq} N[\apd a_q  ] +  \frac{1}{4}\sum_{pqrs}  \braket{pq||rs}  N[\apd a_q\dg a_s a_r] =   f_{pq} \tilde{a}_q^p +  \frac{1}{4} \bar{g}_{pq}^{rs} \tilde{a}^{pq}_{rs} \]
+\[ H_c  = \sum_{pq}f_{pq} N[\apd a_q  ] +  \frac{1}{4}\sum_{pqrs}  \braket{pq||rs}  N[\apd a_q\dg a_s a_r] =   f_{p}^{q} \tilde{a}_q^p +  \frac{1}{4} \bar{g}_{pq}^{rs} \tilde{a}^{pq}_{rs} \]
 Note the use of $\tilde{a}$ in $H_c$. 
 \subsection{Contractions} 
 In the particle-hole formalism, we had 2 types of contractions: 
