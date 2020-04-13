@@ -1,0 +1,235 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{blkarray}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lam}{\lambda}
+\newcommand{\h}{\circ}
+\newcommand{\p}{\bullet}
+
+\newcommand{\Ezero}{E^{(0)}}
+\newcommand{\Rz}{\mathcal{R}_{0}}
+
+\newcommand{\Phizero}{\Phi^{(0)}}
+\newcommand{\Eone}{E^{(1)}}
+\newcommand{\En}{E^{(n)}}
+\newcommand{\Phione}{\Phi^{(1)}}
+\newcommand{\Phin}{\Phi^{(n)}}
+
+\newcommand{\Ecorr}{E_{\mathrm{corr}}}
+\newcommand{\Ec}{E_{\mathrm{c}}}
+\newcommand{\Hc}{H_{\mathrm{c}}}
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Lecture 6: Coupled Cluster Theory}
+\date{April 6, 2020}
+\begin{document}
+\maketitle
+\noindent
+
+\section{Quantum Chemistry Wavefunctions}
+In the last set of notes, we introduced the concept of a wave operator $\Omega$, which transforms 
+    our reference determinant $\Phi$ into the exact wavefunction $\Psi$
+\[\ket{\Psi} = \Omega \ket{\Phi} \]
+Different valid choices of the wave operator  $\Omega$ constitute different \textit{ansatz},  
+    which each arrive at valid form for the same exact wavefunction $\ket{\Psi}$.
+In perturbation theory (PT), our wave operator is of the form,
+$\Omega = P + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V P$, so that our wavefunction is
+\[\ket{\Psi_{\mathrm{PT}}} =  \ket{\Phi_0} + \sum_{n=0}^{\infty} (\Rz V')^n \Rz V \ket{\Phi} \]
+In configuration interaction (CI), our wave operator (though we did not call it that at the time)
+takes the form $\Omega = (1 + C_1 + C_2 + \cdots + C_n)$ so that 
+\[\ket{\Psi_{\mathrm{CI}}} = (1 + C_1 + C_2 + \cdots + C_n) \ket{\Phi} \]
+In coupled cluster theory (CC), our wave operator, and therefore our wavefunction, 
+is an exponential form,
+\[\ket{\Psi_{\mathrm{CC}}} = \exp(T_1 + T_2 + \cdots + T_n) \ket{\Phi} \]
+Or simply, 
+\[\ket{\Psi_{\mathrm{CC}}} = \exp(T) \ket{\Phi} \]
+
+Each of the wavefunctions, in their limit, approach the exact same wavefunction.
+However, perturbation theory is an odd duck, since it always has an infinite number of
+    contributions to the wavefunction and energy, 
+    whereas the CC and CI wavefunctions for a given $n$-electron system 
+    terminate at $n$ terms (you can't have a quadruple excitation in a 3-electron system). 
+
+\section{Coupled Cluster Theory}
+Our coupled cluster wavefunction from before is 
+\[\ket{\Psi_{\mathrm{CC}}} = \exp(T) \ket{\Phi} \]
+\[\ket{\Psi_{\mathrm{CC}}} = \exp(T_1 + T_2 + \cdots + T_n) \ket{\Phi} \]
+where $T$ is the ``cluster operator'' which is a sum over
+$k$-electron excitation operators
+\[T = T_1 + T_2 + T_3 + \cdots \]
+\[T_k = \left(\frac{1}{k!}\right)^2 t_{a_1 \cdots a_k}^{i_1 \cdots i_k } \tilde{a}_{i_1 \cdots i_k}^{a_1 \cdots a_k } \]
+where $t_{a_1 \cdots a_k}^{i_1 \cdots i_k }$ are the coupled cluster \textit{amplitudes}.
+Solving for the coupled cluster energy is done by doing the same thing we always do:
+project our reference determinant $\bra{\Phi}$ on the left of both sides 
+of the Schr{\"o}dinger equation.
+Assuming intermediate normalization, we obtain
+\[\braket{\Phi | \Hc | \Psi_{\mathrm{CC}}} = E_c \braket{\Phi|\Psi_{\mathrm{CC}}} \]
+\[\braket{\Phi | \Hc \exp(T) | \Phi} = \Ec \]
+
+Equations for the cluster amplitudes $t_{a b \cdots }^{i j \cdots}$
+can be found by left-projecting the Schr{\"o}dinger equation by excited determinants
+\[ \braket{ \Phi_{i j \cdots }^{a b \cdots} | \Hc \exp(T) | \Phi} = 
+   \Ec \braket{\Phi_{i j \cdots }^{a b \cdots} | \exp(T) | \Phi} \]
+where an equation involving $t_i^a$ would be obtained by projecting by $\bra{\Phi_{i}^{a}}$,
+an equation for $t_{ij}^{ab}$ by projecting by $\bra{\Phi_{ij}^{ab}}$, and so on. 
+To see this, one can take the right side of the above equation and expand the exponential $\exp(T) = 1 + T + \frac{T^2}{2!} + \cdots $, and only one term survives:
+\[ \Ec \braket{\Phi_{i j \cdots }^{a b \cdots} | \exp(T) | \Phi} = \Ec t_{a b \cdots }^{i j \cdots}\]
+
+Plugging in the exponential expansion of $\exp(T)$ into the energy and amplitude equations 
+yields 
+\[ \braket{\Phi_{i j \cdots }^{a b \cdots} | \Hc | \Phi} + \braket{\Phi_{i j \cdots }^{a b \cdots}| \Hc T| \Phi} + \braket{\Phi_{i j \cdots }^{a b \cdots} | \Hc \frac{T^2}{2!} | \Phi} 
+   = \Ec t_{a b \cdots }^{i j \cdots}\]
+\[ \braket{\Phi | \Hc | \Phi} + \braket{\Phi| \Hc T| \Phi} + \braket{\Phi | \Hc \frac{T^2}{2!} | \Phi} = \Ec \]
+
+These equations are not easily solvable. The trick used in traditional coupled cluster 
+theory to make these equations more workable is to multiply by $\exp(-T)$ on both sides,
+which effectively transforms our Hamiltonian $\bar{\Hc} = \exp(-T) H \exp(T)$.
+\[\braket{\Phi | \Hc | \Psi_{\mathrm{CC}}} = E_c \braket{\Phi|\Psi_{\mathrm{CC}}} \]
+\[ \braket{\Phi | \exp(-T) \Hc \exp(T) | \Phi } = E \braket{\Phi | \exp(-T) \exp(T) | \Phi} \]
+\[ \color{blue} \braket{\Phi | \exp(-T) \Hc \exp(T) | \Phi } = \Ec \]
+and 
+\\
+\[ \braket{ \Phi_{i j \cdots }^{a b \cdots} | \Hc \exp(T) | \Phi} = 
+    \Ec \braket{\Phi_{i j \cdots }^{a b \cdots} | \exp(T) | \Phi}  \]
+\[ \braket{ \Phi_{i j \cdots }^{a b \cdots} | \exp(-T) \Hc \exp(T) | \Phi} = 
+    \Ec \braket{\Phi_{i j \cdots }^{a b \cdots} | \exp(-T) \exp(T) | \Phi}  \]
+\[ \braket{ \Phi_{i j \cdots }^{a b \cdots} | \exp(-T) \Hc \exp(T) | \Phi} = 
+    \Ec \braket{\Phi_{i j \cdots }^{a b \cdots} | \Phi}  \]
+\[ \color{blue} \braket{ \Phi_{i j \cdots }^{a b \cdots} | \exp(-T) \Hc \exp(T) | \Phi} 
+   =  0  \]
+
+This transformation decouples the amplitude equation from the energy equation
+by setting the right side of the amplitude equation to zero. 
+In the language of diagrams, this transformation removes ``disconnected'' diagrams,
+and $\Ec t_{ab \cdots}^{ij \cdots}$ is one example. 
+
+
+
+
+
+%TODO hausdorff
+%Our CC equations are infinite series due to the exponential form. 
+%However, at a given truncation of excitations (CCSD, CCSDT, CCSDTQ, ...),
+%the series always truncates to a finite number of terms, even though
+%each $T_1$, $T_2$, $T_3$ are infinite expansions.
+%
+%We can figure out how these series converge using the Hausdorf expansion. 
+The Hausdorff
+
+Accoridng to Wick's theorem, the commutators evaluate to (andreas prop 5.1)
+
+The only nonzero terms in the Hausdorff expansion are those
+in which the Hamiltonian has at least one contraction with every cluster
+operator on its right. 
+In the language of diagrams, this translates to the Hausdorff expansion 
+containing only \textit{connected} diagrams,
+so that $\bar{\Hc} = \exp(-T) \Hc \exp(T)$ can be evaluated as $\bar{\Hc} = (\Hc \exp(T))_{\mathrm{C}}$,
+where the subscript $\mathrm{C}$ denotes a restriction to connected diagrams.
+
+\[\bar{\Hc} = (\Hc \exp(T))_{\mathrm{C}} = (\Hc + \Hc T + \frac{1}{2!} \Hc T^2 + \frac{1}{3!} \Hc T^3 + \frac{1}{4!} \Hc T^4)_{\mathrm{C}}\]
+This expansion ends at $T^4$ because $\Hc$ consists of one and two-electron operators,
+which can contract with at most two and four $T$'s, where $T = T_1 + T_2 + \cdots$.
+
+This gives us our final results for the coupled cluster energy and amplitude equations,
+which only consist of ``connected'' diagrams, or in algebraic language, terms in which
+the Hamiltonian has a contraction with the cluster operators.
+
+\section{On the connection between Coupled Cluster and Configuration Interaction}
+Our CI wavefunction is  
+\[ \ket{\Psi_{\mathrm{CI}}} = (1  + C_1 + C_2 + \cdots) \ket{\Phi}  \]
+Our CC wavefunction is 
+\[ \ket{\Psi_{\mathrm{CC}}} = \exp(T_1 + T_2 + \cdots) \ket{\Phi}  \]
+\[ \ket{\Psi_{\mathrm{CC}}} = \left[ 1 + (T_1 + T_2 + T_3 + T_4 + \cdots ) + \frac{1}{2} (T_1 + T_2 + T_3 + T_4 + \cdots)^2 +  \frac{1}{6} (T_1 + T_2 + T_3 + T_4 + \cdots)^3 \cdots \right] \ket{\Phi}  \]
+
+Noting that each $T_k$ ($C_k$) is just made up of scalar cluster amplitudes 
+$t_{ab \cdots}^{ij \cdots}$ (CI coefficients $c_{ab \cdots}^{ij \cdots}$) 
+and a Phi-normal-ordered excitation operator,  we can compare these wavefunction 
+expansions term by term and find the following:
+
+\begin{align*}
+C_1 &= T_1 \\
+C_2 &= T_2 + \frac{1}{2} T_1^2 \\
+C_3 &= T_3 + T_1 T_2 + \frac{1}{6} T_1^3 \\
+C_4 &= T_4 + \frac{1}{2}T_2^2 + T_1 T_3 +  \frac{1}{2} T_1^2 T_2 + \frac{1}{24} T_1^4 \\
+\end{align*}
+
+CI does not discriminate between different kinds of $n$-tuple excitations,
+but in coupled cluster thoery, we can sub-classify various $n$-tuple excitations 
+in different ways. 
+Consider the quadruple excitation terms.
+The physical interpretation of $T_4$ as an excitation event on some 
+quantum mechanical state is 4 electrons coming together at the same location
+and, upon interacting, they all have to simultaneously excite to a new state.
+$\frac{1}{2}T_2^2$, on the other hand, corresponds to an excitation event 
+in which a pair of 2 electrons which are close enough to locally interact
+each excite to a new state, while simultaneously another distinct pair of 
+    electrons does the same.
+Which of these physical events ($T_4$  or $\frac{1}{2}T_2^2$) are more likely 
+    to occur in a molecule? 
+Almost certainly the latter, since electrons tend to avoid each other, but they also
+    tend to form electron pairs! 
+We conclude that $\frac{1}{2}T_2^2$ is a more important contribution to our wavefunction
+than $T_4$.
+
+Now consider the CCSD wavefunction,
+\[ \ket{\Psi_{\mathrm{CCSD}}} = \exp(T_1 + T_2) \ket{\Phi} \] 
+\[ \ket{\Psi_{\mathrm{CCSD}}} = (1 + T_1 + T_2 + \frac{1}{2} T_1^2 + T_1 T_2 + 
+ \frac{1}{6} T_1^2 + \frac{1}{2} T_2^2 + \frac{1}{2} T_1^2 T_2 + \frac{1}{24} T_1^4 + ...)    \ket{\Phi} \] 
+
+We obtain all single and double excitations according to CI, but we also
+obtain some triple excitations ($T_1 T_2$, $\frac{1}{6} T_1^3$) and some quadruple 
+excitations ($\frac{1}{2} T_2^2 + \frac{1}{2} T_1^2 T_2 + \frac{1}{24} T_1^4 $).
+This is why its called coupled cluster; higher order excitations 
+(quadruple, $\frac{1}{2}T_2^2$) are included even in low-order truncation
+of the scheme (CCSD) via \textit{coupling} two double excitations together.
+To put it another way, in CCSD, we obtain some information about quadruple excitations 
+by considering two clusters which each doubly excite simultaneously. 
+Not only that, but CCSD is giving us quadruple excitation of relatively high importance,
+according to our physical argument earlier. 
+
+\subsection{Deriving CC from CI}
+Starting from full-CI,
+\[ \ket{\Psi} = \lp 1 + C_1 + C_2 + C_3 + \cdots + C_n \rp \ket{\Phi} \]
+\[ \ket{\Psi} = \lp 1 + C \rp \ket{\Phi} \]
+We can define the cluster operator $T = T_1 + T_2 + \cdots$ as $T = \ln(1+C)$ where $C = C_1 + C_2 + \cdots$.
+This way, $1 + C = e^T$, so it must be the case 
+\[\ket{\Psi} = e^T \ket{\Phi} \]
+which is our coupled cluster wavefunction.
+
+We can compare coupled cluster and CI operators using the Taylor expansion for $\ln (1 + z)$
+\[ \ln (1 + z) = \sum_{m=1}^{\infty} \frac{ (-1)^{m+1}  z^m}{ m} \]
+This implies that for $T$ we have 
+\[ T = \ln (1 + C) = \sum_{m=1}^{\infty} \frac{(-1)^{m+1}  C^m}{m} \]
+This series always converges, since we always have a finite number of electrons in a system.
+Expanding the series we get,
+\[T = C - \frac{C^2}{2} + \frac{C^3}{3} + \cdots \]
+\[T = C_1 + C_2 + C_3 + \cdots -  \frac{1}{2} ( C_1 + C_2 + C_3 + \cdots)^2 +  
+  \frac{1}{3} (C_1 + C_2 + C_3 + \cdots)^3 +  \cdots
+\]
+
+
+
+\section{On the connection between Coupled Cluster and Perturbation Theory}
+TODO; diagrams pre-requisite.
+
+
+
+
+\end{document}
