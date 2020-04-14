@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{amsmath,mathtools,amssymb}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{verbatim}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+\usepackage{braket}
+\usepackage{simplewick}
+\usepackage{xcolor}
+\definecolor{orange}{RGB}{255,127,0}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\newcommand{\ol}{\overline}
+\newcommand{\Rz}{\mathcal{R}_{0}}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\ap}{\ensuremath{a_p} }
+\newcommand{\dg}{\ensuremath{^\dagger} }
+\newcommand{\cd}{\ensuremath{\cdots} }
+\newcommand{\Hc}{H_{\mathrm{c}}}
+\newcommand{\mr}{\mathrm}
+\newcommand{\apd}{\ensuremath{a_p^\dagger} }
+\def\*#1{\mathbf{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{Homework for Lecture 6: Coupled Cluster}
+\date{}
+\begin{document}
+\maketitle
+\noindent
+\begin{enumerate}
+\item Write out the Hausdorff expansion for the CCSD case. You should get 15 terms 
+containing at least one of $\Hc$, $T_1$, and $T_2$. 
+\item Derive an expression for the CCSD correlation energy 
+\[ \braket{\Phi| (\Hc \exp(T))| \Phi}_\mathrm{C}  = E_{\mathrm{CCSD}} \]
+Hint: the only components of the Hausdorff expansion in question 1 which contribute
+are $\Hc T_1$,  $\Hc T_2$,  $ \frac{1}{2}\Hc T_1^2$.  
+
+\item Pick 3 terms from the Hausdorff expansion in question 1 which did not contribute to 
+the CCSD energy in question 2, and explain why in terms of excitation levels and/or because the term is disconnected.
+
+\item Explain why the following terms vanish, either due excitation levels
+and/or because the term is disconnected.
+\[ \braket{\Phi_i^a | V_\mr{c} T_2^2 | \Phi} \]
+\[ \braket{\Phi_{ijk}^{abc} | V_\mr{c} T_2^2 | \Phi} \]
+\[ \braket{\Phi_{ijk}^{abc} | V_\mr{c} T_1 | \Phi} \]
+
+\end{enumerate}
+
+\end{document}
+
