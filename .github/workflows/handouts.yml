@@ -22,6 +22,7 @@ jobs:
       run: conda install -y -c conda-forge tectonic
     - name: Typeset handouts
       run: | 
+        cd handouts
         tectonic handouts.tex
         makeindex handouts.idx
         tectonic handouts.tex
@@ -29,4 +30,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: handouts.pdf
-        path: handouts.pdf
+        path: handouts/handouts.pdf
