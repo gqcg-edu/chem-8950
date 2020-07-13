@@ -1,0 +1,1488 @@
+\chapter{Perturbative analysis}
+
+
+\begin{dfn}
+\thmtitle{Correct to order $p$}
+Let
+$
+  X\ord{p^-}
+$
+and
+$
+  X\ord{p^+}
+$
+denote
+$
+  X\ord{0}
++
+  X\ord{1}
++
+  \cd
++
+  X\ord{p}
+$
+and
+$
+  X\ord{p}
++
+  X\ord{p+1}
++
+  \cd
++
+  X\ord{\infty}
+$.
+We say that an approximation to $X$ is \textit{correct to order $p$} if it contains all of the contributions in $X\ord{p^-}$.
+\end{dfn}
+
+\begin{dfn}
+\thmtitle{Truncated CI and CC}
+Let $\text{CISDTQPH7}{\cd}m$ denote truncation of the CI Ansatz at $m$-tuples.
+Similarly, $\text{CCS}{\cd}m$ means that we omit cluster operators of excitation level $k>m$.
+Note that, unlike $C_k$, the cluster operator $T_k$ in truncated CC describes only \textit{connected $k$-tuples}, which are residual correlations that cannot be decomposed into products of smaller clusters.
+As a result, truncated CC actually contains much higher excitations than CI.
+\end{dfn}
+
+\begin{ntt}
+Let
+$\bm{\F}_k$
+be a row vector containing all unique $k$-fold substitutions of $\F$,
+so that $\bm{\F}=\pma{\F\ \bm{\F}_1\,\cd\,\bm{\F}_n}$ spans $\mc{F}_n$.
+Using $\bo{c}$ and $\bo{t}$ to denote column vectors of CI coefficients and CC amplitudes leads to the following relationships.
+\begin{align}
+  \bo{\F}\cdot\bo{c}
+=
+  (1 + C_1+\cd +C_n)\F
+&&
+  \bo{\F}\cdot\bo{t}
+=
+  (1 + T_1+\cd +T_n)\F
+\end{align}
+In Dirac notation the bra $\br{\bo{\F}}$ is transposed, so that
+$
+  \ip{\bm{\F}|W|\bm{\F}}
+=
+  [\ip{\F_\si|W|\F_\ta}]
+$
+is the matrix representation of $W$ in $\mc{F}_n$.
+Such matrix representations will be denoted with bolded letters,
+$
+  \bo{W}
+\equiv
+  \ip{\bm{\F}|W|\bm{\F}}
+$.
+\end{ntt}
+
+
+
+\begin{rmk}
+\label{rmk:ci-perturbative-analysis}
+\thmtitle{Perturbative analysis of CI}
+Writing the CI eigenvalue equation $\bo{H}_{\text{c}}\,\bo{c}=E_{\text{c}}\,\bo{c}$ in terms of model-Hamiltonian and fluctuation-potential matrices leads to the following rearranged matrix equation
+\begin{align}
+\label{eq:ci-matrix-equation}
+  (
+  -
+    \bo{H}_0
+  +
+    E_{\text{c}}
+  )\,
+  \bo{c}
+=
+  \bo{V}_{\text{c}}\,
+  \bo{c}
+\end{align}
+which provide a convenient starting point for perturbative analysis and for comparison to the coupled-cluster equations.
+The matrix elements of the model Hamiltonian are given by
+$
+  \ip{\F_\si|H_0|\F_\ta}
+=
+  \mc{E}_\ta
+  \delta_{\si\ta}
+$,
+so the matrix on the left is diagonal with eigenvalues
+$
+-
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
++
+  E_{\text{c}}
+$.
+The rows of this equation can be written in terms of CI operators as follows\footnote{See \url{https://en.wikipedia.org/wiki/Floor_and_ceiling_functions} for details on the floor and ceiling functions.}
+\begin{align}
+\label{eq:ci-reference-equation}
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+=&\
+  \ip{\F|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{((1^+))}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    )
+  |\F}
+\\
+\label{eq:ci-singles-equation}
+  \underset{(1^+)}{\vphantom{(}
+  c_a^i
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_a^i
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_i^a|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{((0))}{\vphantom{(}
+      1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    )
+  |\F}
+\\
+\label{eq:ci-doubles-equation}
+  \underset{(1^+)}{\vphantom{(}
+  c_{ab}^{ij}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{ab}^{ij}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{ij}^{ab}|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{(0^+)}{\vphantom{(}
+      1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_4
+    }
+    )
+  |\F}
+\\
+  \underset{(2^+)}{\vphantom{(}
+  c_{abc}^{ijk}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{abc}^{ijk}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{ijk}^{abc}|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{(1^+)}{\vphantom{(}
+      C_1
+    }
+    +
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_4
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_5
+    }
+    )
+  |\F}
+\\
+  \underset{(2^+)}{\vphantom{(}
+  c_{abcd}^{ijkl}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{abcd}^{ijkl}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+  \hspace{-2pt}
+  )
+\underset{\hspace{2pt}\vdots}{\vphantom{(}
+=
+}&\
+  \ip{\F_{ijkl}^{abcd}|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{(1^+)}{\vphantom{(}
+      C_2
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_3
+    }
+    +
+    \underset{(2^+)}{\vphantom{(}
+      C_4
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_5
+    }
+    +
+    \underset{(3^+)}{\vphantom{(}
+      C_6
+    }
+    )
+  |\F}
+\\
+\label{eq:ci-k-tuples-equation}
+  \underset{(\ceil{k/2}^+)}{\vphantom{(}
+  c_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+  (\hspace{1pt}
+  \underset{(0)}{\vphantom{(}
+    \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+  +
+  \underset{(2^+)}{\vphantom{(}
+    E_{\text{c}}
+  }
+  \hspace{-2pt}
+  )
+=&\
+  \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|
+  \underset{(1)}{\vphantom{(}
+    V_{\text{c}}
+  }
+    (
+    \underset{(\ceil{k/2}^+-1)}{\vphantom{(}
+      C_{k-2}
+    }
+    +
+    \underset{(\ceil{(k-1)/2}^+)}{\vphantom{(}
+      C_{k-1}
+    }
+    +
+    \underset{(\ceil{k/2}^+)}{\vphantom{(}
+      C_k
+    }
+    +
+    \underset{(\ceil{(k+1)/2}^+)}{\vphantom{(}
+      C_{k+1}
+    }
+    +
+    \underset{(\ceil{k/2}^++\,1)}{\vphantom{(}
+      C_{k+2}
+    }
+    )
+  |\F}
+\end{align}
+where the numbers in parentheses denote orders in perturbation theory and the double parentheses denote terms which vanish under Brillouin's theorem.
+The orders of the CI operators follow from the fact that each order in perturbation theory increases the maximum excitation level of the wavefunction by $+2$, starting from $\Y\ord{1}$ which contains up to doubles.
+Therefore the leading contributions to $C_k$ have order $\ceil{k/2}$.
+If Brillouin's theorem holds, the first-order contribution to $C_1$ vanishes and singles contribute at order $2^+$ in perturbation theory.
+\end{rmk}
+
+
+\begin{ex}
+\label{ex:analysis-of-cisd-throuh-q}
+The analysis of remark~\ref{rmk:ci-perturbative-analysis} shows that CISD is only correct to first order in the wavefunction, since triples contribute at second order.
+However, $C_1$ and $C_2$ are both correct to second order, ensuring that the the CISD correlation energy is correct to third order.
+In order to gain an order in perturbation theory we have to increase the truncation level by at least two, since triples and quadruples contribute at the same order.
+CISDTQ is correct to second order in the wavefunction and fifth order in the energy.
+\end{ex}
+
+
+\begin{prop}
+\label{prop:ci-orders}
+\thmstatement{
+$\text{CIS}{\cd}m$
+is correct to order
+$\floor{m/2}$
+in the wavefunction and order
+$2\floor{m/2}+1$
+in the energy.
+}
+\thmproof{
+The terms omitted from $\Y$ and from $E_{\text{c}}=\ip{\Y|H_{\text{c}}|\Y}/\ip{\Y|\Y}$ when we truncate at $m$-tuples are
+\begin{align*}
+  \Y
+=
+  (
+    1
+  +
+    C_1
+  +
+    \cd
+  +
+    \cancel{C_{m+1}}
+  +
+    \cd
+  +
+    \cancel{C_n}
+  )
+  \F
+&&
+  E_{\text{c}}
+=
+  \fr{
+    \ip{\F|H_{\text{c}}\,C_1|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{
+        C_{m+1}\dg H_{\text{c}}\,C_{m+1}
+    }|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{
+      C_n\dg H_{\text{c}}C_n
+    }|\F}
+  }{
+    \ip{\F|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{C_{m+1}\dg C_{m+1}}|\F}
+  +
+    \cd
+  +
+    \ip{\F|\cancel{C_n\dg C_n}|\F}
+  }
+\end{align*}
+yielding errors of $\ceil{(m+1)/2}$ in the wavefunction and $2\ceil{(m+1)/2}$ in the energy.\footnote{
+  There are also higher-order errors due to the indirect effect of truncation on $C_1$ through $C_m$, but these are always smaller than the direct error
+}
+Therefore, the wavefunction is correct to order
+$
+  \ceil{(m+1)/2} - 1
+=
+  \floor{m/2}
+$
+and the energy is correct to order
+$
+  2\ceil{(m+1)/2} - 1
+=
+  2\floor{m/2} + 1
+$.
+}
+\end{prop}
+
+
+
+\begin{rmk}
+\label{rmk:cc-perturbative-analysis}
+\thmtitle{Perturbative analysis of CC}
+The CC equations can be written as a non-linear matrix equation.
+\begin{align}
+\label{eq:cc-matrix-equation}
+(
+-
+  \bo{H}_0
++
+  E_{\text{c}}\,
+  \ip{\bm{\F}|\F}
+  \ip{\F|\bm{\F}}
+)
+  \bo{t}
+=
+  \ip{\bm{\F}|
+    V_{\text{c}}\,
+    \text{exp}(T(\bo{t}))
+  |\F}_{\text{c}}
+\end{align}
+To make the comparison with equation~\ref{eq:ci-matrix-equation} more transparent, note that the right-hand side equals
+$
+  (
+    \bo{V}_{\text{c}}\hspace{0.8pt}
+    \bo{t}
+  )_{\text{C}}
++
+  \mc{O}(\bo{t}^2)
+$.
+Non-vanishing contributions to the rows of this matrix equation can be expressed in terms of cluster operators as follows
+% % ERROR
+% \begin{align}
+% \label{eq:cc-reference-equation}
+%   \underset{(2^+)}{\vphantom{(}
+%   E_{\text{c}}
+%   }
+% =&\
+%   \ip{\F|
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{((1^{+}))}{\vphantom{(}
+%       T_1
+%     }
+%     +
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_2
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1^2
+%     }
+%     )
+%   |\F}_{\text{c}}
+% \\[3pt]
+%   \underset{(1^+)}{\vphantom{(}
+%   t_a^i
+%   }
+%   \underset{(0)}{\vphantom{(}
+%   \mc{E}_a^i
+%   }
+% =&\
+%   \ip{\F_i^a|
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{((0))}{\vphantom{(}
+%       1
+%     }
+%     +
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_1
+%     }
+%     +
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_2
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1^2
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1T_2
+%     }
+%     +
+%       \tfr{1}{3!}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1^3
+%     }
+%     )
+%   |\F}_{\text{c}}
+% \\[3pt]
+% \nonumber
+%   \underset{(1^+)}{\vphantom{(}
+%   t_{ab}^{ij}
+%   }
+%   \underset{(0)}{\vphantom{(}
+%   \mc{E}_{ab}^{ij}
+%   }
+% =&\
+%   \br{\F_{ij}^{ab}}
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{(0)}{\vphantom{(}
+%       1
+%     }
+%     +
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_1
+%     }
+%     +
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_2
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_3
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_4
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1^2
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1T_2
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1T_3
+%     }
+% \\
+% \label{eq:cc-doubles-equation}
+% &
+% \makebox[0.75\linewidth][r]{\ensuremath{
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_2^2
+%     }
+%     +
+%       \tfr{1}{3!}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1^3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1^2T_2
+%     }
+%     +
+%       \tfr{1}{4!}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1^4
+%     }
+%     )
+%   \kt{\F}_{\text{c}}
+% }}
+% \\[3pt]
+% \nonumber
+%   \underset{(2^+)}{\vphantom{(}
+%   t_{abc}^{ijk}
+%   }
+%   \underset{(0)}{\vphantom{(}
+%   \mc{E}_{abc}^{ijk}
+%   }
+% =&\
+%   \br{\F_{ijk}^{abc}}
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{(1^{+})}{\vphantom{(}
+%       T_2
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_3
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_4
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_5
+%     }
+%     +
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_1T_2
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1T_3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_2^2
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1T_4
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_2T_3
+%     }
+% \\
+% \label{eq:cc-triples-equation}
+% &
+% \makebox[0.75\linewidth][r]{\ensuremath{
+%     +
+%       \tfr{1}{2}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1^2T_2
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1^2T_3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1T_2^2
+%     }
+%     +
+%       \tfr{1}{3!}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1^3T_2
+%     }
+%     )
+%   \kt{\F}_{\text{c}}
+% }}
+% \\[3pt]
+% \nonumber
+%   \underset{(3^+)}{\vphantom{(}
+%   t_{abcd}^{ijkl}
+%   }
+%   \underset{(0)}{\vphantom{(}
+%   \mc{E}_{abcd}^{ijkl}
+%   }
+% =&\
+%   \br{\F_{ijkl}^{abcd}}
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_3
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_4
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_5
+%     }
+%     +
+%     \underset{(5^{+})}{\vphantom{(}
+%       T_6
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1T_3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(2^{+})}{\vphantom{(}
+%       T_2^2
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1T_4
+%     }
+%     +
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_2T_3
+%     }
+%     +
+%     \underset{(5^{+})}{\vphantom{(}
+%       T_1T_5
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_2T_4
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_3^2
+%     }
+% \\
+% \underset{\displaystyle\vdots}{{}}\hspace{2pt}
+% &
+% \makebox[0.75\linewidth][r]{\ensuremath{
+%     +
+%       \tfr{1}{2}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1^2T_3
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_1T_2^2
+%     }
+%     +
+%       \tfr{1}{2}
+%     \underset{(5^{+})}{\vphantom{(}
+%       T_1^2T_4
+%     }
+%     +
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1T_2T_3
+%     }
+%     +
+%       \tfr{1}{3!}
+%     \underset{(3^{+})}{\vphantom{(}
+%       T_2^3
+%     }
+%     +
+%       \tfr{1}{3!}
+%     \underset{(5^{+})}{\vphantom{(}
+%       T_1^3T_3
+%     }
+%     +
+%       \tfr{1}{2!2!}
+%     \underset{(4^{+})}{\vphantom{(}
+%       T_1^2T_2^2
+%     }
+%     )
+%   \kt{\F}_{\text{c}}
+% }}
+% \\[3pt]
+% \label{eq:cc-k-tuples-equation}
+%   \underset{({k^+}{-}\,1)}{\vphantom{(}
+%   t_{a_1\cd a_k}^{i_1\cd i_k}
+%   }
+%   \underset{(0)}{\vphantom{(}
+%   \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+%   }
+% =&\
+%   \br{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+%   \underset{(1)}{\vphantom{(}
+%     V_{\text{c}}
+%   }
+%     (
+%     \underset{({k^+}{-}\,2)}{\vphantom{(}
+%       T_{k-1}
+%     }
+%     +
+%     \underset{({k^+}{-}\,1)}{\vphantom{(}
+%       T_k
+%     }
+%     +
+%     \hspace{2pt}
+%     \underset{(k^+)}{\vphantom{(}
+%       T_{k+1}
+%     }
+%     \hspace{1pt}
+%     +
+%     \underset{({k^+}{+}\,1)}{\vphantom{(}
+%       T_{k+2}
+%     }
+%     +
+%       \sum_{p=2}^4
+%       \fr{1}{p!}
+%       \sum_{h=p-2}^{2}
+%       \sum_{\bm{k}}^{\mc{C}_p(k+h)}
+%     \underset{({k^+}{+}\,h-p+\f_{\bm{k}})}{\vphantom{(}
+%       T_{k_1}
+%       \cd
+%       T_{k_p}
+%     }
+%     )
+%   \kt{\F}_{\text{c}}
+% \end{align}
+where $\mc{C}_k(m)$ denotes the set of $k$-part integer compositions of $m$
+and $\f_{\bm{k}}$ is the number of 1's in
+$
+  \bm{k}
+=
+  (k_1,\ld,k_p)
+$.
+The orders of the cluster operators follow from straightforward induction on the fact that the lowest order contribution to $T_k$ always comes from
+$
+(
+  V_{\text{c}}
+  T_{k-1}
+)_{\text{c}}
+$,
+which means that each $T_k$ contributes at one order above $T_{k-1}$, starting from $k=3$.
+If Brillouin's theorem holds, $T_1$ has order $2^+$ and the orders of the disconnected products become ${k^+}{+}\,h-p+2\,\f_{\bm{k}}$.
+\end{rmk}
+
+\begin{prop}
+\label{prop:cc-orders}
+\thmstatement{
+$\text{CCS}{\cd}m$ is correct to order $m-1$ in the wavefunction and order $m+\floor{m/2}$ in the energy.
+}
+\thmproof{
+  According to \cref{rmk:cc-perturbative-analysis}, $T_{m+1}$ contributes at order $m$, implying that the wavefunction is correct to order $m-1$.
+  Truncation also leaves $T_m$ and $T_{m-1}$ correct to order $m$, and propagating these truncation errors down to $T_{m-2h}$ and $T_{m-1-2h}$ makes the latter correct to $m+h$.
+  One of these operators is $T_2$ when $h=\floor{m/2}-1$.
+  Since $T_2$ limits the error in equation \ref{eq:cc-reference-equation}, the energy is correct to order $m+\floor{m/2}$.
+}
+\end{prop}
+
+\begin{ex}
+Props~\ref{prop:ci-orders} and \ref{prop:cc-orders} allow us to compare the accuracies of CI and CC.
+At double excitations, CI and CC are both correct to first order in the wavefunction and third order in the energy.
+Triples yield no improvement for CI, whereas CC gains an order in both wavefunction and energy.
+In general, the CCS${\cd}m$ wavefunction and energy improve upon the wavefunction and energy obtained from
+CIS${\cd}m$ by
+$
+  m
+-
+  \floor{m/2}
+-
+  1
+=
+  \floor{(m-1)/2}
+$
+orders in perturbation theory.
+\end{ex}
+
+\begin{dfn}
+\thmtitle{Order $p$ truncation}
+If $X$ is a polynomial in $T_1,T_2,\ld,T_n$, we define
+its \textit{order $p$ truncation}, denoted $X\bord{p}$,
+to include all terms in the polynomial with leading contributions of order $p$ or less.
+This makes $X\bord{p}$ correct to order $p$ without isolating specific orders in the cluster operators, which will in general have infinite-order contributions.
+\end{dfn}
+
+
+\begin{samepage}
+\begin{ex}
+\thmtitle{The $[\text{T}]$ correction}
+Assuming Brillouin's theorem, we can complete the energy to fourth order using
+\begin{align}
+  t_{ab}^{ij}
+\,{=}\,
+  \br{\F_{ij}^{ab}}
+    R_0
+    V_{\text{c}}
+    (
+      1
+    \,{+}\,
+      T_1
+    \,{+}\,
+      T_2
+    \,{+}\,
+      T_3^{[2]}
+    \,{+}\,
+      \tfr{1}{2}
+      T_1^2
+    \,{+}\,
+      T_1T_2
+    \,{+}\,
+      \tfr{1}{2}
+      T_2^2
+    \,{+}\,
+      \tfr{1}{3!}
+      T_1^3
+    \,{+}\,
+      \tfr{1}{2}
+      T_1^2T_2
+    \,{+}\,
+      \tfr{1}{4!}
+      T_1^4
+    )
+  \kt{\F}_{\text{c}}
+&&
+  {}\bord{2}
+  t_{abc}^{ijk}
+\,{=}\,
+  \br{\F_{ijk}^{abc}}
+    R_0
+    V_{\text{c}}
+    T_2
+  \kt{\F}_{\text{c}}
+\end{align}
+where the resulting energy correction is
+$
+  E
+-
+  E^{\text{CCSD}}
+=
+  \ip{\F|
+    V_{\text{c}}
+    R_0
+    V_{\text{c}}
+    T_3\bord{2}
+  |\F}
+$.
+We can introduce additional infinite order contributions by noting that
+$
+  T_2
+  \F
+=
+  R_0
+  V_{\text{c}}
+  \F
++
+  \mc{O}(V_{\text{c}}^2)
+$
+and that the additional terms in
+$
+  \ip{\F|
+    T_2\dg
+    V_{\text{c}}
+    T_3\bord{2}
+  |\F}
+$
+are also valid energy contributions in perturbation theory.
+There is no risk of double counting since all of these contributions involve connected triples, which are absent in CCSD.
+With converged CCD or CCSD $T_2$-amplitudes, this defines the $[\text{T}]$ correction.
+\begin{align}
+  E_{[\text{T}]}
+\equiv
+  \ip{\F|T_2\dg V_{\text{c}} T_3\bord{2}|\F}
+=
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
++
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[-<-,bend left ] (3t1) to (2t1);
+  \draw[->-,bend right] (3t1) to (2t1);
+  \draw[-<-,bend left ] (3t2) to (2t2);
+  \draw[->-=0.25,->-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[-<-,bend left=40 ] (3t3) to (g2);
+  \draw[->-,bend right=40] (3t3) to (g2);
+}
+&&&&
+\diagram{
+  \interaction{3}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,1);
+  \draw[-<-] (t1) to ++(+0.25,1);
+  \draw[->-] (t2) to ++(-0.25,1);
+  \draw[-<-] (t2) to ++(+0.25,1);
+  \draw[->-] (t3) to ++(-0.25,1);
+  \draw[-<-] (t3) to ++(+0.25,1);
+  \node[right=2pt of t3 ] {[2]};
+}\hspace{-10pt}
+\equiv
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[->-] (t1) to ++(-0.25,1);
+  \draw[-<-] (t1) to ++(+0.25,1);
+  \draw[->-] (t2) to ++(-0.25,1);
+  \draw[-<-=0.25,-<-=0.85]
+      (t2)
+    to
+      node[ddot,midway] (g1) {}
+    ++(+0.25,1);
+  \draw[sawtooth] (g1) to ++(1,0) node[ddot] (g2) {};
+  \draw[->-=0.65] (g2) to ++(-0.25,0.5);
+  \draw[-<-=0.65] (g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,0.25) to ++(2.7,0);
+}
+\,{+}\,
+\diagram{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{overhang};
+  \draw[-<-] (t1) to ++(-0.25,1);
+  \draw[->-] (t1) to ++(+0.25,1);
+  \draw[-<-] (t2) to ++(-0.25,1);
+  \draw[->-=0.25,->-=0.85]
+      (t2)
+    to
+      node[ddot,midway] (g1) {}
+    ++(+0.25,1);
+  \draw[sawtooth] (g1) to ++(1,0) node[ddot] (g2) {};
+  \draw[-<-=0.65] (g2) to ++(-0.25,0.5);
+  \draw[->-=0.65] (g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,0.25) to ++(2.7,0);
+}
+\end{align}
+\end{ex}
+\end{samepage}
+
+
+
+\begin{rmk}
+\label{rmk:lowdin-partitioning}
+\thmtitle{The L\"owdin partitioning method}
+Partitioning the determinant basis as
+$
+  \bo{\F}
+=
+\pma{\bo{\F}_{\text{i}}\ \bo{\F}_{\text{e}}}
+$
+where $\text{i}$ denotes the \textit{internal space} and $\text{e}$ denotes the \textit{external space}, we can express the identity on $\mc{F}_n$ as follows.
+\begin{align}
+  1_n
+=
+  1_{\text{i}}
++
+  1_{\text{e}}
+&&
+\begin{array}{c@{\ }c@{\ }c@{\ }c@{\ }c}
+  1_{\text{i}}
+&
+\equiv
+&
+  1|_{\text{i}}
+&
+=
+&
+  \kt{\bo{\F}_{\text{i}}}
+  \br{\bo{\F}_{\text{i}}}
+\\[5pt]
+  1_{\text{e}}
+&
+\equiv
+&
+  1|_{\text{e}}
+&
+=
+&
+  \kt{\bo{\F}_{\text{e}}}
+  \br{\bo{\F}_{\text{e}}}
+\end{array}
+\end{align}
+This allows us to decompose the wavefunction as
+$
+  \Y
+=
+  \Y_{\text{i}}
++
+  \Y_{\text{e}}
+$
+and the Hamiltonian as
+$
+  H
+=
+  H_{\text{ii}}
++
+  H_{\text{ie}}
++
+  H_{\text{ei}}
++
+  H_{\text{ee}}
+$,
+with
+$
+  \Y_{\text{x}}
+\equiv
+  1_{\text{x}}
+  \Y
+$
+and
+$
+  H_{\text{xy}}
+\equiv
+  1_{\text{x}}
+  H
+  1_{\text{y}}
+$.\,\footnote{To see this, insert the identity in front of $\Y$ and on either side of $H$.}
+This allows us to define the
+\textit{L\"owdin resolvent}
+$
+  R_{\text{ee}}
+\equiv
+  \left.
+  (
+    E
+  -
+    H
+  )^{-1}
+  \right|_{\text{e}}
+$,
+which satisfies
+\begin{align}
+\label{eq:external-wavefunction-resolvent-expansion}
+  R_{\text{ee}}
+  (
+    E
+  -
+    H
+  )
+=
+-
+  R_{\text{ee}}
+  H_{\text{ei}}
++
+  1_{\text{e}}
+&&
+  \implies
+&&
+  \Y_{\text{e}}
+=
+  R_{\text{ee}}
+  H_{\text{ei}}
+  \Y_{\text{i}}
+\end{align}
+where the first equation follows from inserting the identity and the second follows from substituting this result into $R_{\text{ee}}$ times the Schr\"odinger equation,
+$
+  (
+    E
+  -
+    H
+  )
+  \Y
+=
+  0
+$.
+Projecting the Schr\"odinger equation by $1_{\text{i}}$ and rearranging then yields
+\begin{align}
+  (
+    H_{\text{ii}}
+  +
+    V_{\text{ii}}
+  )
+  \Y_{\text{i}}
+=
+  E
+  \Y_{\text{i}}
+&&
+  V_{\text{ii}}
+=
+  H_{\text{ie}}
+  R_{\text{ee}}
+  H_{\text{ei}}
+\end{align}
+where we have made use of equation~\ref{eq:external-wavefunction-resolvent-expansion}.
+This sets up an effective Schr\"odinger equation for the exact energy in the internal space.
+If $V_{\text{ii}}$ is treated as a perturbation, then the zeroth order states are eigenfunctions of the Hamiltonian in the basis of internal-space determinants.
+Normalizing $\Y_{\text{i}}$ to one, the exact energy is given by the
+\textit{L\"owdin functional}
+\begin{align}
+  E
+=
+  \ip{\Y_{\text{i}}|H|\Y_{\text{i}}}
++
+  \ip{\Y_{\text{i}}|H|\bo{\F}_{\text{e}}}
+  \ip{\bo{\F}_{\text{e}}|E - H|\bo{\F}_{\text{e}}}^{-1}
+  \ip{\bo{\F}_{\text{e}}|H|\Y_{\text{i}}}
+\end{align}
+where we have expanded the resolvent in the basis of external-space determinants.
+To first order, the energy correction is
+% % ERROR
+% \begin{align}
+%   E
+% -
+%   E^{\{0\}}
+% = \underset{E^{\{1\}}}{\underbrace{
+%   \ip{\Psi_{\text{i}}^{\{0\}}|V_{\text{ii}}|\Psi_{\text{i}}^{\{0\}}}
+% }}
+% +
+%   \mc{O}(V_{\text{ii}}^2)
+% % ERROR
+% &&
+%   E^{\{1\}}
+% =
+%   \ip{\Psi_{\text{i}}^{\{0\}}|H|\bo{\Phi}_{\text{e}}}
+%   \ip{\bo{\Phi}_{\text{e}}|E - H|\bo{\Phi}_{\text{e}}}^{-1}
+%   \ip{\bo{\Phi}_{\text{e}}|H|\Psi_{\text{i}}^{\{0\}}}
+%\end{align}
+where curly braces denote orders in $V_{\text{ii}}$.
+This gives the leading correction for truncating the wavefunction ansatz.
+\end{rmk}
+
+\begin{ex}
+If we include all determinants up to $m$-fold substitutions in our internal space, then $H_{\text{ii}}$ is the $\text{CIS}{\cd}m$ Hamiltonian matrix and $\Y_{\text{CIS}{\cd}m}$ is the zeroth order approximation to $\Y_{\text{i}}$.
+The L\"owdin partitioning method gives
+\begin{align}
+  E^{\{1\}}
+=
+  \ip{\F|(C_{m-1} + C_m)H|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}
+  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|E - H|\bo{\F}_{m+1}\ \bo{\F}_{m+2}}^{-1}
+  \ip{\bo{\F}_{m+1}\ \bo{\F}_{m+2}|H(C_{m-1} + C_m)|\F}
+\end{align}
+where we have used Slater's rules to eliminate matrix elements of $H$ where the determinants differ by more than two orbitals.
+Noting that to zeroth order in the fluctuation potential
+$
+  E
+-
+  H
+=
+  E_{\text{c}}
+-
+  H_{\text{c}}
+\approx
+-
+  H_0
+$, we can approximate the L\"owdin resolvent by $R_0$.
+This leads to the following correction to the $\text{CIS}{\cd}m$ energy
+\begin{align}
+  E^{\{1\}}
+\approx
+  (\tfr{1}{(m+1)!})^2
+  \sum_{\substack{a_1\cd a_{m+1}\\i_1\cd i_{m+1}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+1}}^{a_1\cd a_{m+1}}|V_{\text{c}}\,(C_{m-1} + C_m)|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+1}}^{i_1\cd i_{m+1}}
+  }
++
+  (\tfr{1}{(m+2)!})^2
+  \sum_{\substack{a_1\cd a_{m+2}\\i_1\cd i_{m+2}}}
+  \fr{
+    |\ip{\F_{i_1\cd i_{m+2}}^{a_1\cd a_{m+2}}|V_{\text{c}}\,C_m|\F}|^2
+  }{
+    \mc{E}_{a_1\cd a_{m+2}}^{i_1\cd i_{m+2}}
+  }
+\end{align}
+which can be viewed as a perturbative correction for $(m+1)$- and $(m+2)$-tuple substitutions.
+\end{ex}
+
+\begin{rmk}
+Under the TCC similarity transformation, the L\"owdin partitioning correction has the following form.
+\begin{align}
+  E^{\{1\}}
+=
+  \ip{\ol{\Y}_{\text{i}}^{\{0\}}|\ol{H}|\bo{\F}_{\text{e}}}
+  \ip{\bo{\F}_{\text{e}}|E - \ol{H}|\bo{\F}_{\text{e}}}^{-1}
+  \ip{\bo{\F}_{\text{e}}|\ol{H}|\ol{\Y}_{\text{i}}^{\{0\}}}
+&&
+\begin{array}{r@{\ }l}
+  \kt{\ol{\Y}_{\text{i}}^{\{0\}}}
+&=
+  \text{exp}(-T)\,\kt{\Y_{\text{i}}^{\{0\}}}
+\\
+  \br{\ol{\Y}_{\text{i}}^{\{0\}}}
+&=
+  \br{\Y_{\text{i}}^{\{0\}}}\,
+  \text{exp}(T)
+\end{array}
+\end{align}
+Using
+$
+  1_{\text{i}}(E + \ol{H}_0) 1_{\text{e}}
+=
+  0
+$
+and
+$
+  1_{\text{e}}(E + \ol{H}_0)\kt{\F}
+=
+  0
+$
+and substituting in the EOM-CCS${\cd}m$ states gives the following.
+\begin{align}
+  E^{\{1\}}
+=
+  \ip{\F|(L_{m-1} + L_m)\,(V_{\text{c}}\,\text{exp}(T))_{\text{c}}|\bo{\F}_{\text{e}}}
+  \ip{\bo{\F}_{\text{e}}|E - \ol{H}|\bo{\F}_{\text{e}}}^{-1}
+  \ip{\bo{\F}_{\text{e}}|(V_{\text{c}}\,\text{exp}(T))_{\text{c}} R|\F}
+\end{align}
+where we have used the fact that the excitation level of $\bm{\F}_{\text{e}}$ is at least $m+1$ and that of $\ol{V}_{\text{c}}$ is $-2$ or higher to eliminate the contributions to $L$ that cannot form complete contractions.
+This gives the first-order L\"owdin partitioning correction for ground and excited state energies obtained with a truncated TCC Ansatz.
+\end{rmk}
+
+
+
+
+
+\begin{ex}
+\thmtitle{The $(m+1)_\La$ correction}
+Approximating the L\"owdin resolvent by the model resolvent gives
+\begin{align}
+  E^{\{1\}}
+\approx
+  \ip{\F|(\La_{m-1} + \La_m)V_{\text{c}}\,\text{exp}(T)|\bo{\F}_{\text{e}}}_{\text{c}}
+  \ip{\bo{\F}_{\text{e}}|R_0 V_{\text{c}}\,\text{exp}(T)|\F}_{\text{c}}
+\end{align}
+for the ground state, which effectively ``dots'' the lambda equations against the amplitude equations for excitation level $m+1$ and higher with $\La$ and $T$ truncated at $m$-fold excitations.
+From \cref{rmk:cc-perturbative-analysis}, the leading contribution to the $(m+1)$-tuples amplitude equations  has order $m$.
+The vector of order-$m$-truncated $(m+1)$-tuples amplitudes is given by\footnote{$\bm{k}\not\ni 1$ here means that integer compositions containing 1 are excluded.}
+\begin{align}
+  \bo{t}_{m+1}\bord{m}
+=
+  \br{\bo{\F}_{m+1}}R_0
+    V_{\text{c}}
+    (
+      T_m
+    +
+      \sum_{p=2}^4
+      \fr{1}{p!}
+      \sum_{\bm{k}\not\ni 1}^{\mc{C}_p(m+p-1)}
+      T_{k_1}
+      \cd
+      T_{k_p}
+    )
+  \kt{\F}_{\text{c}}\,
+\end{align}
+using equation~\ref{eq:cc-k-tuples-equation}.
+The leading contribution to the $(m+1)$-tuples lambda equations comes from $\text{exp}(T)\bord{0}= 1$.
+This approximation to $E^{\{1\}}$ defines the
+$
+  (m+1)_\La
+$
+correction
+which,
+using
+$
+  \kt{\bo{\F}_{\text{m+1}}}\cdot
+  \bo{t}_{m+1}\bord{m}
+=
+  T_{m+1}\bord{m}
+$, can be written as follows
+\begin{align}
+  E_{(m+1)_\La}
+=
+  \ip{\F|(\La_{m-1} + \La_m) V_{\text{c}} T_{m+1}\bord{m}|\F}\,\,,
+\end{align}
+forming a well-defined hierarchy of perturbatively-corrected CC methods:
+CCSD(T)$_\La$,
+CCSDT(Q)$_\La$,
+CCSDTQ(P)$_\La$,
+etc.
+\end{ex}
+
+
+\begin{ex}
+\thmtitle{The $(\text{T})$ correction}
+Since the leading contributions to $\La_1$ and $\La_2$ are given by
+\begin{align}
+  {}\ord{1}\la_{ij}^{ab}
+=
+  \br{\F}
+  V_{\text{c}}
+  R_0
+  \kt{\F_{ij}^{ab}}
+=
+  {}\ord{1}t_{ab}^{ij*}
+&&
+  {}\ord{2}\la_i^a
+=
+  \br{\F}
+  \La_2\ord{1}
+  V_{\text{c}}
+  R_0
+  \kt{\F_i^a}
+=
+  {}\ord{2}t_a^{i*}\,\,,
+\end{align}
+the approximation $\La_1\approx T_1\dg, \La_2\approx T_2\dg$ will capture the leading terms in the (T)$_\La$ correction plus many higher-order ones.
+The resulting $(\text{T})$ correction augments the [T] correction with an order $5^+$ contribution,
+$
+  \br{\F}
+    T_1\dg
+    V_{\text{c}}
+    T_3\bord{2}
+  \kt{\F}
+$.
+Though less rigorous than the (T)$_\La$ correction, (T) is computationally advantageous in that it avoids solution of the $\La$ equations.
+\begin{align}
+  E_{(\text{T})}
+=
+  \br{\F}
+    (
+      T_1\dg
+    +
+      T_2\dg
+    )
+    V_{\text{c}}
+    T_3\bord{2}
+  \kt{\F}
+=
+\diagram{
+  \interaction{1}{1t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{2}{g}{(1,+0.5)}{ddot}{sawtooth};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (1t1);
+  \draw[-<-,bend right] (3t1) to (1t1);
+  \draw[->-,bend left ] (3t2) to (g1);
+  \draw[-<-,bend right] (3t2) to (g1);
+  \draw[->-,bend left ] (3t3) to (g2);
+  \draw[-<-,bend right] (3t3) to (g2);
+}\hspace{-8pt}
++
+\underset{\displaystyle E_{[\text{T}]}}{\underbrace{
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[->-,bend left ] (3t1) to (2t1);
+  \draw[-<-,bend right] (3t1) to (2t1);
+  \draw[->-,bend left ] (3t2) to (2t2);
+  \draw[-<-=0.25,-<-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[->-,bend left=40 ] (3t3) to (g2);
+  \draw[-<-,bend right=40] (3t3) to (g2);
+}\hspace{-8pt}
++
+\diagram{
+  \interaction{2}{2t}{(0,+0.5)}{ddot}{overhang};
+  \interaction{3}{3t}{(0,-0.5)}{ddot}{overhang};
+  \node[right=2pt of 3t3 ] {[2]};
+  \draw[-<-,bend left ] (3t1) to (2t1);
+  \draw[->-,bend right] (3t1) to (2t1);
+  \draw[-<-,bend left ] (3t2) to (2t2);
+  \draw[->-=0.25,->-=0.75, bend right]
+    (3t2)
+    to
+      node[ddot,midway] (g1) {}
+    (2t2);
+  \draw (2,0) node[ddot] (g2) {};
+  \draw[sawtooth] (g1) to (g2);
+  \draw[-<-,bend left=40 ] (3t3) to (g2);
+  \draw[->-,bend right=40] (3t3) to (g2);
+}
+}}
+\end{align}
+The CCSD(T) method was originally justified on different grounds, but its truly remarkable performance is difficult to understand using ordinary perturbation theory.
+Several other fifth-order terms could just as easily be included, and there is no strong \emph{a priori} reason to expect this one to be as magical as it is.
+L\"owdin partitioning suggests that $E_{(\text{T})}$ is the leading correction to the error incurred by truncating the configuration space at doubles.
+\end{ex}
+

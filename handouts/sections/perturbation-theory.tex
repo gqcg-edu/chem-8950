@@ -1,0 +1,1560 @@
+\chapter{Perturbation theory}
+
+\begin{dfn}
+\thmtitle{Model Hamiltonian}
+The electronic Hamiltonian\footnote{For the sake of brevity I will here refer to $H_{\text{c}}$ as ``the electronic Hamiltonian''.  We could also use $H=E_0+H_{\text{c}}$, which will simply shift some of the equations by a constant.} can be expressed as the sum of a \textit{zeroth order} or \textit{``model''~Hamiltonian} $H_0$ and a \textit{perturbation} $V_{\text{c}}$, known as the \textit{fluctuation potential}.
+For well-behaved electronic systems, a common choice for the model Hamiltonian is the diagonal part of the Fock operator.
+\begin{align}
+\label{eq:diagonal-fock-model-hamiltonian}
+  H_0
+\equiv
+  f_p^p
+  \tl{a}^p_p
+&&
+  V_{\text{c}}
+\equiv
+  f_p^q
+  (
+    1
+  -
+    \delta_p^q
+  )
+  \tl{a}^p_q
++
+  \tfr{1}{4}
+  \ol{g}_{pq}^{rs}
+  \tl{a}^{pq}_{rs}
+\end{align}
+This choice of $H_0$ brings the advantage that its eigenbasis is the standard basis of determinants.
+\begin{align}
+\label{eq:model-problem}
+  H_0
+  \F
+=
+  0\,
+  \F
+&&
+  H_0
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  \mc{E}_{i_1\cd i_k}^{a_1\cd a_k}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
+  \mc{E}_{q_1\cd q_k}^{p_1\cd p_k}
+\equiv
+  \sum_{r=1}^k
+  f_{p_r}^{p_r}
+-
+  \sum_{r=1}^k
+  f_{q_r}^{q_r}
+\end{align}
+In general the model Hamiltonian is chosen to make the matrix representation of $H_{\text{c}}$ in the model eigenbasis diagonally dominant.\footnote{See \url{https://en.wikipedia.org/wiki/Diagonally_dominant_matrix}.}
+Our choice of $H_0$ is appropriate for \textit{weakly correlated systems}, where the reference determinant can be chosen to satisfy $\ip{\F|\Y}\gg \ip{\F_{i_1\cd i_k}^{a_1\cd a_k}|\Y}$ for all substituted determinants.
+In this context it is convenient to employ intermediate normalization for the wavefunction, which will be assumed from here on out.
+\end{dfn}
+
+
+\begin{dfn}
+\thmtitle{Perturbation theory}
+\textit{Perturbation theory} analyzes the polynomial order with which the wavefunction and its observables depend on the fluctuation potential.
+For this purpose, we define a continuous series of Hamiltonians
+$
+  H(\la)
+\equiv
+  H_0
++
+  \la
+  V_{\text{c}}
+$
+parametrized by a \textit{strength parameter} $\la$ that smoothly toggles between the model Hamiltonian at $\la=0$ to the exact one at $\la=1$.
+The \textit{$m\eth$-order contribution} to a quantity $X$ is then defined as the $m\eth$ coefficient in its Taylor series about $\la=0$, denoted $X\ord{m}$.
+In particular, the wavefunction and correlation energy can be expanded as follows.
+\begin{align}
+\label{eq:series-schrodinger-equation}
+  \Y
+=
+  \sum_{m=0}^\infty
+  \Y\ord{m}
+&&
+  E_{\text{c}}
+=
+  \sum_{m=0}^\infty
+  E_{\text{c}}\ord{m}
+&&
+  \Y\ord{m}
+\equiv
+  \fr{1}{m!}
+  \left.
+    \pd{^m\Y(\la)}{\la^m}
+  \right|_{\la=0}
+&&
+  E_{\text{c}}\ord{m}
+\equiv
+  \fr{1}{m!}
+  \left.
+    \pd{^mE(\la)}{\la^m}
+  \right|_{\la=0}
+&&
+  H(\la)
+  \Y(\la)
+=
+  E(\la)
+  \Y(\la)
+\end{align}
+The order(s) at which a term contributes to the wavefunction or energy provides one measure of its relative importance.
+\end{dfn}
+
+\begin{rmk}
+Projecting the Schr\"odinger equation by $\F$ and using eq~\ref{eq:model-problem}, along with intermediate normalization, implies
+\begin{align}
+  E_{\text{c}}
+=
+  \ip{\F|V_{\text{c}}|\Y}
+\hspace{20pt}
+\implies
+\hspace{20pt}
+  E_{\text{c}}\ord{m+1}
+=
+  \ip{\F|V_{\text{c}}|\Y\ord{m}}
+\end{align}
+where the equation on the right follows from generalizing the energy expression to
+$
+  E(\la)
+=
+  \ip{\F|\la V_{\text{c}}|\Y(\la)}
+$.
+In words, this says that the $m\eth$-order wavefunction contribution determines the $(m+1)\eth$-order energy contribution.
+This immediately identifies the first-order energy as
+$
+  E_{\text{c}}\ord{1}
+=
+  \ip{\F|V_{\text{c}}|\F}
+=
+  0
+$,
+since $V_{\text{c}}$ consists of $\F$-normal-ordered operators.
+\end{rmk}
+
+\begin{dfn}
+\thmtitle{Model space projection operator}
+The projection onto the reference determinant, $P=\kt{\F}\br{\F}$, is termed the \textit{model space projection operator}.
+Its complement is the \textit{orthogonal space projection operator}.\footnote{$1_n\equiv 1|_{\mc{F}_n}$ is the identity on $\mc{F}_n$, which is equivalent to a projection onto this subspace.  For our purposes, this is the identity.}
+\begin{align}
+\label{eq:orthogonal-space-projection-operator}
+  Q
+\equiv
+  1_n
+-
+  P
+=
+  \sum_k
+  \pr{
+    \tfr{1}{k!}
+  }^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+  \br{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+\end{align}
+Note that $P$ and $Q$ satisfy the following relationships, which are characteristic of complementary projection operators.
+\begin{align}
+  P
++
+  Q
+=
+  1_n
+&&
+  P^2
+=
+  P
+&&
+  Q^2
+=
+  Q
+&&
+  PQ
+=
+  QP
+=
+  0
+\end{align}
+Due to intermediate normalization, we also have that
+$
+  P\Y
+=
+  \F
+$
+and
+$
+  Q\Y
+=
+  \Y
+-
+  \F
+$.
+\end{dfn}
+
+\begin{samepage}
+\begin{dfn}
+\thmtitle{Resolvent}
+The \textit{resolvent},
+$
+  R_0
+\equiv
+  (-H_0)^{-1}Q
+$, is the negative\footnote{The annoying sign factor is required for consistency with $R(\zeta)\equiv(\zeta-H_0)^{-1}Q$, which is a more general definition of the resolvent.} inverse of $H_0$ in the orthogonal space.\footnote{Note that this implies $R_0P=0$ and $R_0Q=R_0$.}
+\begin{align}
+\label{eq:resolvent-spectral-decomposition}
+  R_0
+  \F
+=
+  0
+  \F
+&&
+  R_0
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+=
+  (\mc{E}_{a_1\cd a_k}^{i_1\cd i_k})^{-1}
+  \F_{i_1\cd i_k}^{a_1\cd a_k}
+&&
+  R_0
+=
+  \sum_k
+  \pr{\tfr{1}{k!}}^2
+  \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+  \fr{
+    \kt{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+    \br{\F_{i_1\cd i_k}^{a_1\cd a_k}}
+  }{
+    \mc{E}_{a_1\cd a_k}^{i_1\cd i_k}
+  }
+\end{align}
+The equation on the right is the spectral decomposition of the resolvent.\footnote{This follows from the eigenvalue equations, but you can derive it explicitly by substituting equation~\ref{eq:orthogonal-space-projection-operator} into $R_0=(-H_0)^{-1}Q$.}
+Restriction to the orthogonal space is necessary because $H_0$ is singular in the model space, which means that $H_0^{-1}$ does not exist there.
+\end{dfn}
+\end{samepage}
+
+\begin{samepage}
+\begin{rmk}
+\thmtitle{A recursive solution to the Schr\"odinger equation}
+Operating $R_0$ on $H(\la)\Y(\la)=E(\la)\Y(\la)$ gives\footnote{This follows from $R_0H_0\Y=-Q\Y=-\Y+\F$.}
+\begin{align}
+\label{eq:lambda-dependent-recursive-series}
+  \Y(\la)
+=
+  \F
++
+  R_0
+  (
+    \la V_{\text{c}}
+  -
+    E(\la)
+  )
+  \Y(\la)
+\end{align}
+which provides a recursive equation for $\Y(\la)$ that can be used to solve for wavefunction contributions order by order.
+\end{rmk}
+\end{samepage}
+
+\begin{ex}
+The first two derivatives of equation~\ref{eq:lambda-dependent-recursive-series} are given by
+\begin{align*}
+  \pd{\Y(\la)}{\la}
+=&
+  R_0
+  \pr{
+    V_{\text{c}}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \Y(\la)
++
+  R_0
+  (
+    \la V_{\text{c}}
+  -
+    E(\la)
+  )
+  \pd{\Y(\la)}{\la}
+\\
+  \pd{^2\Y(\la)}{\la^2}
+=&
+-
+  R_0
+  \pd{^2E(\la)}{\la^2}
+  \Y(\la)
++
+  2
+  R_0
+  \pr{
+    V_{\text{c}}
+  -
+    \pd{E(\la)}{\la}
+  }
+  \pd{\Y(\la)}{\la}
++
+  R_0
+  (
+    \la V_{\text{c}}
+  -
+    E(\la)
+  )
+  \pd{^2\Y(\la)}{\la^2}
+\end{align*}
+which can be used to determine the first- and second-order wavefunction contributions.
+\begin{align}
+\label{eq:first-and-second-order-principal-terms}
+  \Y\ord{1}
+=
+  \left.
+  \pd{\Y(\la)}{\la}
+  \right|_{\la=0}
+=
+  R_0
+  V_{\text{c}}
+  \F
+&&
+  \Y\ord{2}
+=
+  \left.
+  \fr{1}{2}
+  \pd{^2\Y(\la)}{\la^2}
+  \right|_{\la=0}
+=
+  R_0
+  V_{\text{c}}
+  \Y\ord{1}
+=
+  R_0
+  V_{\text{c}}
+  R_0
+  V_{\text{c}}
+  \F
+\end{align}
+Here we have used $E_{\text{c}}\ord{0}=E_{\text{c}}\ord{1}=0$ and $R_0\F=0$ to simplify the result.
+\end{ex}
+
+\begin{ex}
+\label{ex:first-order-wavefunction-expansion-unsimplified}
+Plugging in the spectral decomposition for $R_0$ allows us to expand $\Y\ord{1}$ in the determinant basis.
+\begin{align}
+\label{eq:first-order-wavefunction-expansion-unsimplified}
+  \Y\ord{1}
+=
+  R_0
+  V_{\text{c}}
+  \F
+=
+  \sum_{\substack{a\\i}}
+  \F_i^a
+  \fr{\ip{\F_i^a|V_{\text{c}}|\F}}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \F_{ij}^{ab}
+  \fr{\ip{\F_{ij}^{ab}|V_{\text{c}}|\F}}{\mc{E}_{ab}^{ij}}
+\end{align}
+The expansion truncates at double excitations because the maximum excitation level of $V_{\text{c}}$ is $+2$.
+\end{ex}
+
+\begin{ex}
+The numerators in example~\ref{ex:first-order-wavefunction-expansion-unsimplified} are easily evaluated using Slater's rules, which leads to the following.
+\begin{align*}
+\label{eq:first-order-wavefunction-expansion}
+  \Y\ord{1}
+=
+  \sum_{\substack{a\\i}}
+  \F_i^a
+  \fr{f_a^i}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \F_{ij}^{ab}\,
+  \fr{\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+\hspace{20pt}
+\implies
+\hspace{20pt}
+  E_{\text{c}}\ord{2}
+=
+  \ip{\F|V_{\text{c}}|\Y\ord{1}}
+=
+  \sum_{\substack{a\\i}}
+  \fr{f_i^af_a^i}{\mc{E}_a^i}
++
+  (\tfr{1}{2!})^2
+  \sum_{\substack{ab\\ij}}
+  \fr{\ol{g}_{ij}^{ab}\,\ol{g}_{ab}^{ij}}{\mc{E}_{ab}^{ij}}
+\end{align*}
+Note that the singles contribution vanishes for canonical Hartree-Fock references, since $f_a^i=0$.
+These extra terms are required for non-canonical orbitals, such as those obtained from restricted open-shell Hartree-Fock (ROHF) theory.
+\end{ex}
+
+\begin{dfn}\label{dfn:resolvent-line}
+\thmtitle{Resolvent line}
+We can generalize our previous definition of the \textit{resolvent line} as follows
+%% ERROR
+% \begin{align}
+%   \,\resolventline[0.7]{}\,
+%   Y
+% \equiv
+%   \sum_k
+%   \pr{\tfr{1}{k!}}^2
+%   \sum_{\substack{a_1\cd a_k\\i_1\cd i_k}}
+%   \fr{y_{a_1\cd a_k}^{i_1\cd i_k}}{\mc{E}_{a_1\cd a_k}^{i_1\cd i_k}}
+%   \tl{a}^{a_1\cd a_k}_{i_1\cd i_k}
+% &&
+%   Y
+% =
+%   Y_{n\rightarrow n}
+% +
+%   Y_{n\not\rightarrow n}
+% &&
+%   Y_{n\rightarrow n}
+% =
+%   y_0
+% +
+%   \sum_k
+%   \pr{\tfr{1}{k!}}^2
+%   \sum_{\substack{p_1\cd p_k\\q_1\cd q_k}}
+%   y_{p_1\cd p_k}^{q_1\cd q_k}
+%   \tl{a}^{p_1\cd p_k}_{q_1\cd q_k}
+% \end{align}
+where $Y$ is an arbitrary operator.
+The last equation is the Wick expansion of $Y_{n\rightarrow n}$, which denotes the purely particle-number-conserving part\footnote{The component that maps $\mc{F}_n\rightarrow\mc{F}_n$ for all $n$, which can always be written as a linear combination of excitation operators.} of $Y$.
+This definition immediately implies
+%% ERROR
+% $
+%   \,\resolventline[0.7]{}\,\,
+%   \kt{\Y}
+% =
+%   R_0
+%   \kt{\Y}
+% $
+for all $\Y$.\footnote{Since any $\kt{\Y}$ can be written as $Y\kt{\F}$, this follows from applying eq~\ref{eq:resolvent-spectral-decomposition} to each term in the Wick expansion of $Y$ in $R_0Y\kt{\F}$.}
+Other expressions are defined by giving resolvent lines priority in the order of operations, with maximum priority given to the rightmost resolvent.
+%% ERROR
+% \begin{align}
+%     Y_1
+%   \,\resolventline[0.7]{}\,
+%     Y_2
+%   \cd
+%   \,\resolventline[0.7]{}\,
+%     Y_n
+% \equiv
+%     Y_1
+%   \pr{
+%   \,\resolventline[0.7]{}\,
+%     Y_2
+%   \pr{
+%   \cd
+%   \pr{
+%   \,\resolventline[0.7]{}\,
+%     Y_n
+%     \vphantom{Y_Y^Y}
+%   }\cd}}
+% &&
+% \gno{\ol{
+%     Y_1
+%   \,\resolventline[0.8]{}\,
+%     Y_2
+%   \cd
+%   \,\resolventline[0.8]{}\,
+%     Y_n
+% }}
+% \equiv
+% \gno{\ol{
+%   \,\,
+%     Y_1
+%   \pr{
+%   \,\resolventline[0.7]{}\,
+%     Y_2
+%   \pr{
+%   \cd
+%   \pr{
+%   \,\resolventline[0.7]{}\,
+%     Y_n
+%     \vphantom{Y_Y^Y}
+%   }\cd}}
+% }}
+% \end{align}
+This definition also specifies the interpretation rule for a graphs with resolvent lines, which are formally defined below.
+\end{dfn}
+
+%% ERROR
+% \begin{cor}\label{cor:wicks-theorem-for-pt}
+% \thmtitle{Wick's theorem for perturbation theory}
+% \thmstatement{
+% $
+%   YR_0Y_1\cd R_0 Y_m
+%   \kt{\F}
+% =
+%   \pr{
+%     \gno{
+%       Y
+%       \,\resolventline[0.8]{}\,
+%       Y_1
+%       \cd
+%       \,\resolventline[0.8]{}\,
+%       Y_m
+%     }
+%   +
+%     \gno{\ol{
+%       Y
+%       \,\resolventline[0.8]{}\,
+%       Y_1
+%       \cd
+%       \,\resolventline[0.8]{}\,
+%       Y_m
+%     }}
+%   }
+%   \kt{\F}
+% $%
+% }%
+% \vspace{5pt}
+% \thmproof{
+%   This follows directly from Wick's theorem and definition~\ref{dfn:resolvent-line}.
+% }
+% \end{cor}
+
+\begin{dfn}\label{dfn:resolvent-graph}
+\thmtitle{Resolvent graph}
+A \textit{resolvent graph} represents a normal-ordered product of operators and resolvents.
+Graphs with disconnected parts that don't share any resolvent lines are considered products of separate resolvent graphs.
+Vertical spaces between resolvent lines in a resolvent graph are termed \textit{levels}, which are numbered from bottom with zero indexing.
+Therefore, an operator lies in the $k\eth$ level if there are $k$ resolvent lines below it.
+Formally, then, an \textit{$m$-level resolvent graph} $G(\rh,m)\equiv(G,\rh,m)$ associates each operator $o$ in $G$ with a specific level $\rh(o)=\rh_o$ in $\mb{Z}_m=\{0,1,\ld,m-1\}$ through the \textit{level map} $\rh$.\,\footnote{
+  Note that an $m$-level resolvent graph contains $m-1$ resolvents.
+}
+Therefore, each line $l$ in $G$ crosses resolvents
+$
+  \text{min}(\rh_{h(l)},\rh_{t(l)}) + 1
+$
+through
+$
+  \text{max}(\rh_{h(l)},\rh_{t(l)})
+$.
+\end{dfn}
+
+\begin{ex}
+In diagram notation, $\Y\ord{1}$ and $E_{\text{c}}\ord{2}$ can be expressed as follows.
+\begin{align}
+  \Y\ord{1}
+=
+\diagram[bottom]{
+  \draw
+    (0,-0.5)
+      node[circlep] {}
+    to
+    ++(0.5,0)
+      node[ddot] (f1) {};
+  \draw[->-]
+    (f1)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (f1)
+    to
+      ++(+0.25,1);
+  \draw[thick,flexdotted] (0.2,+0.25) to ++(0.6,0);
+}
++
+\diagram[bottom]{
+  \interaction{2}{g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-]
+    (g1)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (g1)
+    to
+      ++(+0.25,1);
+  \draw[->-]
+    (g2)
+    to
+      ++(-0.25,1);
+  \draw[-<-]
+    (g2)
+    to
+      ++(+0.25,1);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+  \draw[thick,flexdotted] (-0.3,+0.25) to ++(1.6,0);
+}
+&&
+  E_{\text{c}}\ord{2}
+=
+\diagram{
+  %top
+  \draw
+    (0,+0.5)
+      node[circlep] {}
+    to
+    ++(0.5,0)
+      node[ddot] (1f1) {};
+  %bottom
+  \draw
+    (0,-0.5)
+      node[circlep] {}
+    to
+    ++(0.5,0)
+      node[ddot] (2f1) {};
+  \draw[->-=0.4,bend left ] (2f1) to (1f1);
+  \draw[-<-=0.6,bend right] (2f1) to (1f1);
+  \draw[thick,flexdotted] (0.2,0) to ++(0.6,0);
+}
++
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  %lines
+  \draw[->-=0.4,bend left ] (2g1) to (1g1);
+  \draw[-<-=0.6,bend right] (2g1) to (1g1);
+  \draw[->-=0.4,bend left ] (2g2) to (1g2);
+  \draw[-<-=0.6,bend right] (2g2) to (1g2);
+  \draw[thick,flexdotted] (-0.3,0) to ++(1.6,0);
+}
+\end{align}
+\end{ex}
+
+\begin{ex}
+The expansion for $\Y\ord{2}$ can be evaluated using \cref{cor:wicks-theorem-for-pt}.
+Assuming Brillouin's theorem for simplicity,
+\begin{align}
+\nonumber
+  \Y\ord{2}
+=
+  R_0
+  V_{\text{c}}
+  R_0
+  V_{\text{c}}
+  \kt{\F}
+=&\
+\nonumber
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \node[ddot] (2g2) at (1,0) {};
+  \draw[-<-] (1g1) to ++(-0.25,+1);
+  \draw[->-=0.25,->-=0.75] (1g1) to node[midway,ddot] (2g1) {} ++(+0.25,+1);
+  \draw[sawtooth] (2g1) to (2g2);
+  \draw[->-,bend left =45] (1g2) to (2g2);
+  \draw[-<-,bend right=45] (1g2) to (2g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(0.7,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \node[ddot] (2g2) at (1,0) {};
+  \draw[->-] (1g1) to ++(-0.25,+1);
+  \draw[-<-=0.25,-<-=0.75] (1g1) to node[midway,ddot] (2g1) {} ++(+0.25,+1);
+  \draw[sawtooth] (2g1) to (2g2);
+  \draw[->-,bend left =45] (1g2) to (2g2);
+  \draw[-<-,bend right=45] (1g2) to (2g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.35) to ++(0.7,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-=0.25,->-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1);
+  \draw[-<-=0.7] (t1) to ++(+0.25,1);
+  \draw[->-=0.25,->-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1);
+  \draw[-<-=0.7] (t2) to ++(+0.25,1);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[-<-=0.25,-<-=0.75] (t1) to node[midway,ddot] (g1) {}
+    ++(-0.25,1);
+  \draw[->-=0.7] (t1) to ++(+0.25,1);
+  \draw[-<-=0.25,-<-=0.75] (t2) to node[midway,ddot] (g2) {}
+    ++(-0.25,1);
+  \draw[->-=0.7] (t2) to ++(+0.25,1);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{t}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  \draw[->-] (t1) to ++(-0.25,1);
+  \draw[-<-] (t1) to ++(+0.25,1);
+  \draw[->-,bend left] (t2) to (g1);
+  \draw[-<-,bend right] (t2) to (g1);
+  \draw[->-] (g2) to ++(-0.25,0.5);
+  \draw[-<-] (g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+\\&\
+\label{eq:second-order-wavefunction-graphical}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(1.125,0)}{ddot}{sawtooth};
+  \draw[-<-] (1g1) to ++(-0.25,1);
+  \draw[->-] (1g1) to ++(+0.25,1);
+  \draw[-<-] (1g2) to ++(-0.25,1);
+  \draw[->-=0.25,->-=0.75] (1g2) to ++(+0.25,1);
+  \draw[-<-] (2g2) to ++(-0.25,0.5);
+  \draw[->-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.4,-0.27) to ++(2.9,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(1.125,0)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1);
+  \draw[-<-] (1g1) to ++(+0.25,1);
+  \draw[->-] (1g2) to ++(-0.25,1);
+  \draw[-<-=0.25,-<-=0.75] (1g2) to ++(+0.25,1);
+  \draw[->-] (2g2) to ++(-0.25,0.5);
+  \draw[-<-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.4,-0.27) to ++(2.9,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(2.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
++
+\diagram[bottom]{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{2g}{(2,0)}{ddot}{sawtooth};
+  \draw[-<-] (1g1) to ++(-0.25,1);
+  \draw[->-] (1g1) to ++(+0.25,1);
+  \draw[-<-] (1g2) to ++(-0.25,1);
+  \draw[->-] (1g2) to ++(+0.25,1);
+  \draw[-<-] (2g1) to ++(-0.25,0.5);
+  \draw[->-] (2g1) to ++(+0.25,0.5);
+  \draw[-<-] (2g2) to ++(-0.25,0.5);
+  \draw[->-] (2g2) to ++(+0.25,0.5);
+  \draw[thick,flexdotted] (-0.3,-0.27) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(3.9,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+\\
+=&\
+  \tfr{1}{2}
+  \sum_{\substack{abc\\ij}}
+  \F_i^a\,
+  \fr{
+    \ol{g}_{aj}^{bc}
+    \ol{g}_{bc}^{ij}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{bc}^{ij}
+  }
+-
+  \tfr{1}{2}
+  \sum_{\substack{ab\\ijk}}
+  \F_i^a
+  \fr{
+    \ol{g}_{jk}^{ib}
+    \ol{g}_{ab}^{jk}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{ab}^{jk}
+  }
++
+  \tfr{1}{2^3}
+  \sum_{\substack{abcd\\ij}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
++
+  \tfr{1}{2^3}
+  \sum_{\substack{ab\\ijkl}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
+\nonumber
+\\&\
++
+  \sum_{\substack{abc\\ijk}}
+  \F_{ij}^{ab}
+  \fr{
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
++
+  \tfr{1}{2^2}
+  \sum_{\substack{abcd\\ijk}}
+  \F_{ijk}^{abc}
+  \fr{
+    \ol{g}_{ad}^{ij}
+    \ol{g}_{bc}^{dk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ad}^{ij}
+  }
+-
+  \tfr{1}{2^2}
+  \sum_{\substack{abc\\ijkl}}
+  \F_{ijk}^{abc}
+  \fr{
+    \ol{g}_{ab}^{il}
+    \ol{g}_{lc}^{jk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ab}^{il}
+  }
++
+  \tfr{1}{2^4}
+  \sum_{\substack{abcd\\ijkl}}
+  \F_{ijkl}^{abcd}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+\end{align}
+where the operators in the final diagram do not form an equivalent pair because they pass through different resolvent lines.
+The third-order contribution to the correlation energy can be evaluated as the complete contractions of $V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}$
+\begin{align}
+  E_{\text{c}}\ord{3}
+\,{=}\,
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-=0.25,->-=0.75, bend left]
+    (2g1)
+    to
+      node[midway,ddot] (g1) {}
+    (1g1);
+  \draw[-<-=0.65,bend right] (2g1) to (1g1);
+  \draw[->-=0.25,->-=0.75, bend left]
+    (2g2)
+    to
+      node[midway,ddot] (g2) {}
+    (1g2);
+  \draw[-<-=0.65,bend right] (2g2) to (1g2);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+{+}
+\diagram{
+  %top
+  \interaction{2}{1g}{(0,+0.5)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[-<-=0.25,-<-=0.75, bend left]
+    (2g1)
+    to
+      node[midway,ddot] (g1) {}
+    (1g1);
+  \draw[->-=0.65,bend right] (2g1) to (1g1);
+  \draw[-<-=0.25,-<-=0.75, bend left]
+    (2g2)
+    to
+      node[midway,ddot] (g2) {}
+    (1g2);
+  \draw[->-=0.65,bend right] (2g2) to (1g2);
+  \draw[sawtooth] (g1)--(g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(1.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+{+}
+\diagram{
+  %top
+  \draw[sawtooth]
+    (0,+0.5)
+      node[ddot] (1g1) {}
+    to
+    ++(2,0)
+      node[ddot] (1g2) {};
+  %middle
+  \interaction{2}{g}{(1,+0.0)}{ddot}{sawtooth};
+  %bottom
+  \interaction{2}{2g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-,bend left ] (2g1) to (1g1);
+  \draw[-<-,bend right] (2g1) to (1g1);
+  \draw[->-,bend left ] (2g2) to (g1);
+  \draw[-<-,bend right] (2g2) to (g1);
+  \draw[->-,bend left ] (g2) to (1g2);
+  \draw[-<-,bend right] (g2) to (1g2);
+  \draw[thick,flexdotted] (-0.3,-0.3) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.3,+0.3) to ++(2.6,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+}
+{=}
+  \tfr{1}{2^3}
+  \sum_{\substack{abcd\\ij}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
+{+}
+  \tfr{1}{2^3}
+  \sum_{\substack{ab\\ijkl}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
+{+}
+  \sum_{\substack{abc\\ijk}}
+  \fr{
+    \ol{g}_{ij}^{ab}
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
+\end{align}
+which is equivalent to contracting the doubles contributions to $\Y\ord{2}$ with $\tfr{1}{4}\ol{g}_{ij}^{ab}\tl{a}^{ij}_{ab}$.
+Note that $E_{\text{c}}\ord{m+1}$ always only depends on the doubles contribution to $\Y\ord{m}$, but that the doubles coefficients themselves may involve triples, quadruples and higher contributions from wavefunction components of order less than $m$.
+\end{ex}
+
+\begin{ex}
+Using
+${}\ord{m}c_{ab\cd}^{ij\cd}=\ip{\F_{ij\cd}^{ab\cd}|\Y\ord{m}}$, the second order CI coefficients can be determined from eq~\ref{eq:second-order-wavefunction-graphical} by contracting a bare excitation operator with the top of each diagram.
+Interpreting these graphs gives the following.
+\begin{align*}
+  {}\ord{2}c_a^i
+&=
+  \tfr{1}{2}
+  \sum_{\substack{bc\\j}}
+  \fr{
+    \ol{g}_{aj}^{bc}
+    \ol{g}_{bc}^{ij}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{bc}^{ij}
+  }
+-
+  \tfr{1}{2}
+  \sum_{\substack{b\\jk}}
+  \fr{
+    \ol{g}_{jk}^{ib}
+    \ol{g}_{ab}^{jk}
+  }{
+    \mc{E}_a^i
+    \mc{E}_{ab}^{jk}
+  }
+\\
+  {}\ord{2}c_{ab}^{ij}
+&=
+  \tfr{1}{2}
+  \sum_{\substack{cd}}
+  \fr{
+    \ol{g}_{ab}^{cd}
+    \ol{g}_{cd}^{ij}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{ij}
+  }
++
+  \tfr{1}{2}
+  \sum_{\substack{kl}}
+  \fr{
+    \ol{g}_{kl}^{ij}
+    \ol{g}_{ab}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ab}^{kl}
+  }
++
+  \op{P}_{(a/b)}^{(i/j)}
+  \sum_{\substack{c\\k}}
+  \fr{
+    \ol{g}_{ac}^{ik}
+    \ol{g}_{kb}^{cj}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{ac}^{ik}
+  }
+\\
+  {}\ord{2}c_{abc}^{ijk}
+&=
+  \op{P}_{(a/bc)}^{(ij/k)}
+  \sum_{\substack{d}}
+  \fr{
+    \ol{g}_{ad}^{ij}
+    \ol{g}_{bc}^{dk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ad}^{ij}
+  }
+-
+  \op{P}_{(ab/c)}^{(i/jk)}
+  \sum_{\substack{l}}
+  \fr{
+    \ol{g}_{ab}^{il}
+    \ol{g}_{lc}^{jk}
+  }{
+    \mc{E}_{abc}^{ijk}
+    \mc{E}_{ab}^{il}
+  }
+\\
+  {}\ord{2}c_{abcd}^{ijkl}
+&=
+  \op{P}_{(ab/cd)}^{(ij/kl)}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+\end{align*}
+Note that the second order quadruples coefficient is disconnected.
+Prop.~\ref{prop:second-order-c4} shows that the second-order quadruples operator is actually a simple product of first-order doubles operators.
+This fact was an early motivation for coupled-pair many-electron theory,\footnote{This is the original name for coupled-cluster doubles.} since it justifies approximating
+$
+  \Y_{\text{CIDQ}}
+=
+  (1+C_2+C_4)\F
+$
+by
+$
+  \Y_{\text{CPMET}}
+=
+  (1 + C_2 + \tfr{1}{2}C_2^2)\F
+$.
+\end{ex}
+
+\begin{prop}
+\label{prop:second-order-c4}
+\thmstatement{
+$
+  {}\ord{2} C_4
+=
+  \tfr{1}{2}
+  {}\ord{1} C_2^2
+$
+}
+\thmproof{
+This follows from rearranging the resolvent denominator.
+\begin{align*}
+  \fr{1}{\mc{E}_{abcd}^{ijkl}\mc{E}_{ab}^{ij}}
++
+  \fr{1}{\mc{E}_{abcd}^{ijkl}\mc{E}_{cd}^{kl}}
+=
+  \fr{
+    \mc{E}_{cd}^{kl} + \mc{E}_{ab}^{ij}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+=
+  \fr{
+    1
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+\implies
+  {}\ord{2}C_4
+=
+  \pr{\tfr{1}{2}}^4
+  \sum_{\substack{abcd\\ijkl}}
+  \tl{a}^{abcd}_{ijkl}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{abcd}^{ijkl}
+    \mc{E}_{ab}^{ij}
+  }
+=
+  \tfr{1}{2}\cdot
+  \pr{\tfr{1}{2}}^4
+  \sum_{\substack{abcd\\ijkl}}
+  \tl{a}^{abcd}_{ijkl}
+  \fr{
+    \ol{g}_{ab}^{ij}
+    \ol{g}_{cd}^{kl}
+  }{
+    \mc{E}_{ab}^{ij}
+    \mc{E}_{cd}^{kl}
+  }
+=
+  \tfr{1}{2}
+  {}\ord{1}C_2^2
+\end{align*}
+}
+\end{prop}
+
+\begin{lem}\label{lem:energy-substitution}
+\thmtitle{The Energy Substitution Lemma}
+\thmstatement{
+  $\Y\ord{m}$ equals the sum of a ``principal term''
+  $(R_0V_{\text{c}})^m\F$
+  plus all possible substitutions of adjacent factors $(R_0V_{\text{c}})^{r_i}$ in the principal term by $R_0E_{\text{c}}\ord{r_i}$.
+  Each term in the sum is weighted by a sign factor $(-)^k$, where $k$ is the number of substitutions.
+}
+\thmproof{
+  See \cref{app:linked-diagram-theorem}.
+}
+\end{lem}
+
+\begin{ex}
+Lemma~\ref{lem:energy-substitution} is consistent with equation~\ref{eq:first-and-second-order-principal-terms} because substitution of the rightmost factors in the principal term leaves a resolvent acting on the reference determinant and because the first-order energy contribution equals zero.
+The first non-trivial examples of the energy substitution lemma begin at third order.
+\begin{align}
+\label{eq:energy-substitution-psi-3}
+  \Y\ord{3}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}\F
+\\
+\label{eq:energy-substitution-psi-4}
+  \Y\ord{4}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0V_{\text{c}}R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{3}R_0V_{\text{c}}\F
+\\
+\nonumber
+  \Y\ord{5}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0V_{\text{c}}R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}R_0V_{\text{c}}\F
+\\&\
+\nonumber
+-
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}\F
++
+  R_0E_{\text{c}}\ord{2}R_0E_{\text{c}}\ord{2}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{3}R_0V_{\text{c}}R_0V_{\text{c}}\F
+\\&\
+\label{eq:energy-substitution-psi-5}
+-
+  R_0V_{\text{c}}R_0E_{\text{c}}\ord{3}R_0V_{\text{c}}\F
+-
+  R_0E_{\text{c}}\ord{4}R_0V_{\text{c}}\F
+\end{align}
+\end{ex}
+
+\begin{thm}\label{thm:bracketing-theorem}
+\thmtitle{The Bracketing Theorem}
+\thmstatement{
+  $\Y\ord{m}$ equals the principal term plus all possible insertions of nested brackets into the principal term.
+  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.\footnote{
+  The ``brackets'' here are reference expectation values: $\ip{W}\equiv\ip{\F|W|\F}$.
+}
+}
+\thmproof{
+  See \cref{app:linked-diagram-theorem}.
+}
+\end{thm}
+
+
+\begin{ex}
+Equations~\ref{eq:energy-substitution-psi-3} and~\ref{eq:energy-substitution-psi-4} are clearly consistent with \cref{thm:bracketing-theorem}, since $E_{\text{c}}\ord{2}{=}\,\ip{V_{\text{c}}R_0V_{\text{c}}}$ and $E_{\text{c}}\ord{3}{=}\,\ip{V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}}$.
+\begin{align}
+\label{eq:bracketing-psi-3}
+  \Y\ord{3}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+\\
+  \Y\ord{4}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0V_{\text{c}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+\\
+\intertext{
+The first non-vanishing terms with nested brackets appear at fifth-order
+}
+\nonumber
+  \Y\ord{5}
+=&\
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+-
+  R_0V_{\text{c}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+\\&\
+\nonumber
+-
+  R_0V_{\text{c}}R_0V_{\text{c}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
++
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}R_0V_{\text{c}}\F
+\\&\
+-
+  R_0V_{\text{c}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+-
+  R_0\ip{V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
++
+  R_0\ip{V_{\text{c}}R_0\ip{V_{\text{c}}R_0V_{\text{c}}}R_0V_{\text{c}}}R_0V_{\text{c}}\F
+\end{align}
+which follows from substituting equation~\ref{eq:bracketing-psi-3} into $E\ord{4}=\ip{\F|V_{\text{c}}|\Y\ord{3}}$ in the energy substitution expansion of $\Y\ord{5}$.
+\end{ex}
+
+
+\begin{ex}
+Assuming Brillouin's theorem, the simplest non-vanishing term with an inserted bracket appears in $\Y\ord{3}$.
+\begin{align*}
+  R_0
+  \ip{V_{\text{c}}R_0V_{\text{c}}}
+  R_0
+  V_{\text{c}}
+  \F
+=
+\diagram{
+  \interaction{2}{1g}{(0,-0.5)}{ddot}{sawtooth};
+  \draw[->-] (1g1) to ++(-0.25,1);
+  \draw[-<-] (1g1) to ++(+0.25,1);
+  \draw[->-] (1g2) to ++(-0.25,1);
+  \draw[-<-] (1g2) to ++(+0.25,1);
+  \interaction{2}{2g}{(2,-0.5)}{ddot}{sawtooth};
+  \interaction{2}{3g}{(2,+0.5)}{ddot}{sawtooth};
+  \draw[->-=0.4,bend left ] (2g1) to (3g1);
+  \draw[-<-=0.6,bend right] (2g1) to (3g1);
+  \draw[->-=0.4,bend left ] (2g2) to (3g2);
+  \draw[-<-=0.6,bend right] (2g2) to (3g2);
+  \draw[thick,flexdotted] (-0.3,-0.25) to ++(1.6,0);
+  \draw[thick,flexdotted] (-0.4,+0.35) to ++(1.8,0);
+  \draw[opacity=0] (0.5,-0.5) circle (0.125cm);
+  \draw[thick,flexdotted] (1.7,0) to ++(1.6,0);
+  \padborder{5pt};
+  \draw[double, thick] (current bounding box.south west)--(current bounding box.south east);
+  \node at (0.5,-1) {remainder};
+  \node at (2.5,-1) {insertion};
+  \node[inner sep=0pt] at (-1.5,0) {
+    \begin{tabular}{c}
+    level of the\\insertion
+    \end{tabular}
+  };
+  \draw[->] (-2.5,0) to (-0.3,0);
+  \node[inner sep=0pt] at (+4,+0.4) {$1\rst$\,level};
+  \node[inner sep=0pt] at (+4,-0.3) {$0\eth$\,level};
+}
+\end{align*}
+\end{ex}
+
+\begin{prop}
+\thmtitle{Wigner's (2n+1) rule}
+\end{prop}
+
+
+
+
+\newpage
+\appendix
+\section{Proof of the Linked-Diagram Theorem}\label{app:linked-diagram-theorem}
+
+\begin{ntt}\label{ntt:operator-combinations}
+Let
+``$Y^m$ choose $Z^k$'', denoted ${}^mC_k(Y:Z)$,
+refer to a sum over the $m$ choose $k$ permutations of $Y^{m-k}Z^k$,\,\footnote{For example,
+$
+  {}^4C_2(Y:Z)
+=
+  Y^2Z^2
++
+  YZYZ
++
+  YZ^2Y
++
+  ZY^2Z
++
+  ZYZY
++
+  Z^2Y^2
+$.
+}
+where $Y$ and $Z$ are operators that may or may not commute.\,\footnote{
+  If they do commute, then ${}^mC_k(Y:Z)={n\choose k}Y^{m-k}Z^k$.
+}
+This defines a generalization of the binomial theorem.
+\begin{align}
+\label{eq:generalized-binomial-theorem}
+  (
+    Y
+  +
+    Z
+  )^m
+=
+  \sum_{k=0}^m
+  {}^mC_k(Y:Z)
+\end{align}
+Furthermore, let
+$
+  {}^mC(Y:Z_1,\ld,Z_k)
+$
+be a sum over permutations of
+$
+  Y^{m-k}
+  Z_1\cd Z_k
+$ that preserve the ordering of the $Z_i$'s.\,\footnote{
+  For example,
+$
+  {}^4C(Y:Z_1,Z_2)
+=
+  Y^2Z_1Z_2
++
+  YZ_1YZ_2
++
+  YZ_1Z_2Y
++
+  Z_1Y^2Z_2
++
+  Z_1YZ_2Y
++
+  Z_1Z_2Y^2
+$.
+}
+When all of the $Z_i$'s equal $Z$, we can write
+$
+  {}^mC(Y:Z_1,\ld,Z_k)
+=
+  {}^mC_k(Y:Z)
+$.
+\end{ntt}
+
+\begin{prop}
+\label{prop:wavefunction-infinite-recursion}
+\thmstatement{
+$\ds{
+  \Y(\la)
+=
+  \sum_{m=0}^\infty
+  \pr{
+    R_0
+    (\la V_{\text{c}} - E(\la))
+  }^m
+  \F
+}$
+}
+\thmproof{
+  This follows by infinite recursion of equation~\ref{eq:lambda-dependent-recursive-series} with the assumption
+  $\ds{
+  \lim_{m\rightarrow\infty}
+  \pr{
+    R_0
+    (\la V_{\text{c}} - E(\la))
+  }^m
+  \Y(\la)
+  =
+    0
+  }$.
+}
+\end{prop}
+
+\begin{dfn}\label{dfn:integer-compositions}
+\thmtitle{Integer compositions}
+The \textit{compositions} of an integer $m$ are the ways of writing $m$ as a sum of positive integers.
+The full set of integer compositions of $m$ is given by
+$
+  \mc{C}(m)
+=
+  \mc{C}_1(m)
+  \cup
+  \mc{C}_2(m)
+  \cup
+  \cd
+  \cup
+  \mc{C}_m(m)
+$
+where
+$
+  \mc{C}_k(m)
+=
+  \{
+    (r_1,\ld,r_k)\in\mb{N}_0^k
+  \,|\,
+    r_1+\cd+r_k
+  =
+    m
+  \}
+$
+are the integer compositions of $m$ into $k$ parts.
+\end{dfn}
+
+\begin{lem}
+\label{lem:energy-substitution-proof}
+\thmtitle{The Energy Substitution Lemma}
+\thmstatement{
+  $\Y\ord{m}$ equals the sum of a ``principal term''
+  $(R_0V_{\text{c}})^m\F$
+  plus all possible substitutions of adjacent factors $(R_0V_{\text{c}})^{r_i}$ in the principal term by $R_0E_{\text{c}}\ord{r_i}$.
+  Each term in the sum is weighted by a sign factor $(-)^k$, where $k$ is the number of substitutions.
+}\vspace{5pt}
+\thmproof{
+Using equation~\ref{eq:generalized-binomial-theorem} and a double sum identity\footnote{
+  Reverse double-sum reduction:
+  $\ds{
+    \sum_{m=0}^\infty
+    \sum_{k=0}^m
+    t_{m-k,k}
+  =
+    \sum_{k'=0}^\infty
+    \sum_{k=0}^\infty
+    t_{k',k}
+  }$.
+  See
+  \url{http://functions.wolfram.com/GeneralIdentities/12/}.
+} in the infinite recursion formula for $\Y(\la)$ gives the following.
+{\footnotesize
+\begin{align*}
+  \Y(\la)
+=
+  \sum_{m=0}^\infty
+  (
+    R_0
+    (
+      \la V_{\text{c}}
+    -
+      E(\la)
+    )
+  )^m
+  \F
+=
+  \sum_{m=0}^\infty
+  \sum_{k=0}^m
+  \la^{m-k}
+  (-)^k\,\,
+  {}^mC_k
+  (
+    R_0V_{\text{c}}:
+    R_0E(\la)
+  )
+  \F
+=
+  \sum_{k'=0}^\infty
+  \sum_{k=0}^\infty
+  \la^{k'}
+  (-)^{k}\,\,
+  {}^{k'+k}\hspace{-1pt}C_k
+  (
+    R_0V_{\text{c}}:
+    R_0E(\la)
+  )
+  \F
+\end{align*}}%
+The $k'=0$ term has no operators separating $\F$ from the resolvent and vanishes.
+Taylor expansion of the energies gives
+{\footnotesize
+\begin{align*}
+  \Y(\la)
+=&\
+  \sum_{k=0}^\infty
+  \sum_{k'=1}^\infty
+  {\sum_{p_1=1}^\infty}
+  \cd
+  {\sum_{p_k=1}^\infty}
+  \la^{k' + p_1 + \cd + p_k}
+  (-)^{k}\,\,
+  {}^{k'+k}\hspace{-1pt}C
+  (
+    R_0V_{\text{c}}:
+    R_0E_{\text{c}}\ord{p_1},\ld,
+    R_0E_{\text{c}}\ord{p_k}
+  )
+  \F
+\\
+=&\
+  \sum_{m=1}^\infty
+  \sum_{k=0}^{m-1}
+  \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}_{k+1}(m)}
+  \la^m
+  (-)^k\,\,
+  {}^{k+r_1}\hspace{-1pt}C
+  (
+    R_0V_{\text{c}}:
+    R_0E_{\text{c}}\ord{r_2},\ld,
+    R_0E_{\text{c}}\ord{r_{k+1}}
+  )
+  \F
+\end{align*}}%
+where we have grouped powers of $\la$ using a multi-sum reduction.
+Writing the inner sums as a sum over $\mc{C}(m)$ we find
+\begin{align}
+  \Y\ord{m}
+=
+  \left.
+  \fr{1}{m!}
+  \pd{^m\Y(\la)}{\la^m}
+  \right|_{\la=0}
+=
+  \sum_{(r_1,\ld,r_{k+1})}^{\mc{C}(m)}
+  (-)^k\,\,
+  {}^{k+r_1}\hspace{-1pt}C
+  (
+    R_0V_{\text{c}}:
+    R_0E_{\text{c}}\ord{r_2},\ld,
+    R_0E_{\text{c}}\ord{r_{k+1}}
+  )
+  \F
+\end{align}
+which, given \cref{ntt:operator-combinations} and definition~\ref{dfn:integer-compositions}, is an algebraic statement of the proposition, completing the proof.
+}
+\end{lem}
+
+\begin{thm}
+\thmtitle{The Bracketing Theorem}
+\thmstatement{
+  $\Y\ord{m}$ equals the principal term plus all possible insertions of nested brackets into the principal term.
+  Each term in the sum is weighted by $(-)^k$ where $k$ is the total number of brackets.
+}\vspace{5pt}
+\thmproof{
+  The proposition holds for $m=1$ because
+  $\Y\ord{1}=R_0V_{\text{c}}\F$ and there are no possible bracketings.
+  Assume it holds for $m-1$.
+  Then by the energy substitution lemma it also holds for $m$ because $E_{\text{c}}\ord{r_i}$
+  equals
+  $\ip{\F|V_{\text{c}}|\Y\ord{r_i}}$
+  which, by our inductive assumption, equals
+  $\ip{V_{\text{c}}(R_0V_{\text{c}})^{r_i}}$
+  plus all nested bracketings weighted by appropriate sign factors.
+}
+\end{thm}
