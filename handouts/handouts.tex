@@ -3,7 +3,7 @@
 \documentclass[%
 paper=A4,
 twoside=true,
-openright,
+%openright,
 parskip=full,
 chapterprefix=true,
 11pt,
@@ -12,7 +12,7 @@ headings=normal,
 
 \usepackage[					% clean thesis style
 	figuresep=colon,%
-	sansserif=false,%
+	sansserif=true,%
 	hangfigurecaption=false,%
 	hangsection=true,%
 	hangsubsection=true,%
@@ -42,6 +42,13 @@ headings=normal,
 \pagestyle{maincontentstyle} 	% fancy header and footer
 
 \include{\SectionsPath/hartree-fock}
+
+\begin{appendices}
+	\include{\SectionsPath/constrained-optimization}
+	\include{\SectionsPath/functional-derivatives}
+	\include{\SectionsPath/fundamental-lemma-calculus-variations}
+	\include{\SectionsPath/unitary-invariances-hf-orbitals}
+\end{appendices}
 
 %\backmatter
 \printindex

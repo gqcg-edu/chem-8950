@@ -1,0 +1,75 @@
+\chapter{Unitary Invariances for Hartree-Fock Orbitals}\label{app:hartree-fock-orbital-invariance}
+
+
+\paragraph{Orthonormality.}
+By definition, unitary transformations preserve overlaps.
+This can be verified as follows
+\begin{align*}
+  \ip{\tl\y_i|\tl\y_j}
+=
+\sum_{kl}
+  U_{ki}U_{lj}^*
+  \ip{\y_k|\y_l}
+=
+\sum_{kl}
+  U_{ki}U_{lj}^*
+  \delta_{kl}
+=
+\sum_k
+  U_{ki}U_{kj}^*
+=
+  \delta_{ij}
+\end{align*}
+using $\sum_k U_{ki}U_{kj}^*=(\bo{U}\bo{U}\dg)_{ji}=(\bo{1})_{ji}=\d_{ji}$.
+
+\paragraph{Fock operator.}
+Only the Coulomb and exchange parts of the Fock operator depend on the orbital set.
+For the Coulomb part, we have
+{\small\begin{align*}
+\sum_i
+  \ip{\tl\y_i(2)|\op{g}(1,2)|\tl\y_i(2)}
+=
+\sum_{ijk}
+  U_{ji}U_{ki}^*
+  \ip{\y_j(2)|\op{g}(1,2)|\y_k(2)}
+=
+\sum_{jk}
+  \delta_{jk}
+  \ip{\y_j(2)|\op{g}(1,2)|\y_k(2)}
+=
+\sum_j
+  \ip{\y_j(2)|\op{g}(1,2)|\y_j(2)}
+\end{align*} \underline{}}%
+using the fact that $\sum_i U_{ji}U_{ki}^*=\d_{jk}$.
+For the exchange part, we have the same thing with a $\op{P}(1,2)$ sandwiched in there.
+
+\paragraph{Hamiltonian expectation value.}
+The vector notation $\bm\y$ for our orbitals allows us to express $\F$ and $\tl\F$ as
+\begin{align*}
+  \F(1,\ld,n)
+=
+  \tfrac{1}{\sqrt{n!}}
+  |\bm\y(1)\cd\bm\y(n)|
+%\sp\sp
+  \tl\F(1,\ld,n)
+=
+  \tfrac{1}{\sqrt{n!}}
+  |\tl{\bm\y}(1)\cd\tl{\bm\y}(n)|
+\end{align*}
+which, noting that the matrix $\ma{\tl{\bm\y}(1)\ \cd\ \tl{\bm\y}(n)}$ is simply
+\begin{align*}
+  \ma{\tl{\bm\y}(1)\ \cd\ \tl{\bm\y}(n)}
+=
+  \ma{\bo{U}\dg\bm\y(1)\ \cd\ \bo{U}\dg\bm\y(n)}
+=
+  \bo{U}\dg\ma{\bm\y(1)\ \cd\ \bm\y(n)}
+\end{align*}
+implies $\tl\F=\det(\bo{U}\dg)\F=\det(\bo{U})^*\F$.
+Therefore, $\tl{\F}$ and $\F$ have the same energy expectation values.
+\begin{align}
+  \ip{\tl\F|\op{H}_e|\tl\F}
+=
+  \det(\bo{U}\bo{U}\dg)\ip{\F|\op{H}_e|\F}
+=
+  \ip{\F|\op{H}_e|\F}
+\end{align}
