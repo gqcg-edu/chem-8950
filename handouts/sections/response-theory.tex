@@ -1,0 +1,290 @@
+\chapter{Response theory}
+
+\begin{rmk}
+In the presence of a time-varying field, a molecule's electronic wavefunction is no longer simply an eigenfunction of the Hamiltonian.
+Instead, its electronic structure is described by the \textit{time-dependent Schr\"odinger equation}
+\begin{align}
+\label{eq:schrodinger-equation}
+  H(t)
+  \Y(t)
+=
+  i
+  \pd{\Y(t)}{t}
+&&
+  H(t)
+=
+  H
++
+  V(t)
+\end{align}
+where $H$ is the usual electronic Hamiltonian and $V(t)$ is an \textit{interaction Hamiltonian} describing the energetic influence of the field.
+A general series solution to equation~\ref{eq:schrodinger-equation}, known as the \textit{Dyson series}, is derived in \cref{appendix:dyson-series}.
+The interaction Hamiltonian can be expressed as a sum over one-electron operators $V_\beta$, representing the electronic degrees of freedom which couple to the external field, scaled by \emph{time-envelopes} $f_\beta(t)$ which control the strength of the applied field over time.
+\begin{align}
+\label{eq:interaction-time-envelopes}
+  V(t)
+=
+\ts{
+  \sum_\beta
+  V_\beta
+  f_\beta(t)
+}
+\end{align}
+One of the most important examples is the Hamiltonian of a dipole in an electric field, which is discussed in \cref{ex:dipole-approximation} below.
+The zeroth order solutions of equation~\ref{eq:schrodinger-equation} are termed \textit{stationary states}, which have the following form.\footnotemark
+\footnotetext{
+When $\bm{f}=\bo{0}$, the Hamiltonian loses its time-dependence and we can write $\left.\Y(t)\right|_{\bm{f}=\bo{0}}=\f(t)\Y$ where $\f(t)$ is independent of the electronic coordinates.
+Substituting this into eq~\ref{eq:schrodinger-equation} and rearranging gives
+$
+  H\Y/\Y
+=
+  i\dot{\f}(t)/\f(t)
+$, which equals a constant $E$ since each side depends in different variables.
+Therefore, $H\Y=E\Y$ and $i\dot{\f}(t)=E\f(t)$.  Integrating the latter gives $\f(t)=e^{-iEt}$.
+}
+\begin{align}
+  \left.
+  \Y(t)
+  \right|_{\bm{f}=\bo{0}}
+=
+  e^{-iE_kt}
+  \Y_k
+&&
+  H\Y_k
+=
+  E_k\Y_k
+\end{align}
+As a boundary condition we assume that $V(t)$ vanishes in the past, where $\Y(t)$ is initially in the ground stationary state.
+\begin{align}
+\label{eq:boundary-conditions}
+  \lim_{t\rightarrow-\infty}
+  f_\beta(t)
+=
+  0
+&&
+  \lim_{t\rightarrow-\infty}
+  e^{+iHt}
+  \Psi(t)
+=
+  \Psi_0
+\end{align}
+This limiting behavior can be enforced by introducing a complex shift in the frequency domain of $f_\beta(t)$'s Fourier expansion.\footnotemark
+\footnotetext{
+  This is a slightly unusual convention for the Fourier transform.
+  A useful mnemonic for checking these is
+  $
+    \int_{-\infty}^\infty
+    dk\,
+    e^{ikx}
+  =
+    2\pi\,
+    \d(x)
+  $.
+}
+\begin{align}
+\label{eq:frequency-envelopes}
+  f_\beta(t)
+=
+  \int_{-\infty}^\infty
+  d\w\,
+  f_\beta(\w_\ev)
+  e^{-i\w_\ev t}
+&&
+  f_\beta(\w_\ev)
+\equiv
+  (2\pi)^{-1}
+  \int_{-\infty}^\infty
+  dt\,
+  f_\beta(t)
+  e^{+i\w_\ev t}
+&&
+  \w_\ev
+\equiv
+  \w
++
+  i\ev
+&&
+  \ev
+=
+  |\ev|
+\end{align}
+This has the effect of scaling the time envelope by a damping factor $e^{\ev t}$.
+For sufficiently small $\ev$, this scaled envelope will match the original one to arbitrary precision in an arbitrarily wide window about the time origin.
+The fact that the interaction Hamiltonian and the coupling operators $\{V_\beta\}$ are Hermitian implies the following identities.
+\begin{align}
+  f_\beta^*(t)
+=
+  f_\beta(t)
+&&
+  f_\beta^*(\w_{\ev})
+=
+  f_\beta(-\w_{-\ev})
+\end{align}
+\end{rmk}
+
+
+\begin{ex}
+\label{ex:dipole-approximation}
+The dominant coupling of an electronic system to an external electric or magnetic field is mediated through its dipoles, leading to \textit{the dipole approximation}.
+Quantizing the classical formulae for these interaction energies gives
+\begin{align}
+\begin{array}{r@{\ }l@{\ }l@{\hspace{2cm}}r@{\ }l@{\hspace{2cm}}r@{\ }l}
+  V_{\bo{E}}(t)
+\approx&
+-\,
+  \bm{\mu}\cdot\bo{E}(t)
+&=
+-
+  \sum_\beta
+  \mu_\beta
+  \mc{E}_\beta(t)
+&
+  \bm{\mu}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{\mu}}\,|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{\mu}}
+&=
+-
+  \op{\bo{r}}
+\\
+  V_{\bo{B}}(t)
+\approx&
+-
+  \bm{m}\cdot\bo{B}(t)
+&=
+-
+  \sum_\beta
+  m_\beta
+  \mc{B}_\beta(t)
+&
+  \bm{m}
+&=
+  \sum_{pq}
+  \ip{\y_p|\op{\bm{m}}|\y_q}
+  a_p\dg a_q
+&
+  \op{\bm{m}}
+&=
+-
+  \tfr{1}{2}
+  (
+    \op{\bm{l}}
+  +
+    2\,
+    \op{\bo{s}}
+  )
+\end{array}
+\end{align}
+where $\op{\bm{\mu}}$ and $\op{\bm{m}}$ are the first-quantized electric and magnetic dipole operators.\footnote{
+More generally, these expressions are
+$
+  \op{\bm{\mu}}
+=
+  q_e\,\op{\bo{r}}
+$,
+where $q_e=-e$ is the charge of an electron,
+and
+$
+  \op{\bm{m}}
+=
+  \mu_{\text{B}}
+  (
+    g_l\,
+    \op{\bm{l}}
+  +
+    g_{\text{s}}\,
+    \op{\bo{s}}
+  )
+$
+where $\mu_{\text{B}}=\tfr{1}{2}\cdot\tfr{e\hbar}{m_e}$ is the Bohr magneton and $g_l=-1$, $g_{\text{s}}=-2$ are the spin and orbital \textit{$g$-factors}.
+Note that the exact $g_{\text{s}}$ actually deviates very slightly from $2$ due to effects arising in quantum field theory.
+The orbital angular momentum operator is given by $\op{\bm{l}}=\op{\bo{r}}\times\op{\bo{p}}$ and $\op{\bo{s}}$ is the intrinsic spin angular momentum operator.
+}
+The leading terms neglected by the dipole approximation are quadratic in the field amplitudes.
+These weaker interactions are mediated through the higher moments (quadrupole, octupole, etc.) of the charge and current distributions and may become important in symmetric molecules where certain dipole interactions are ``symmetry forbidden''.
+\end{ex}
+
+
+
+% % ERROR
+
+% \begin{dfn}
+% \thmtitle{Quasi-energy}
+% \begin{align}
+%   \Psi(t)
+% =
+%   e^{-i\th(t)}
+%   \bar{\Psi}(t)
+% &&
+%   \left.
+%   \th(t)
+%   \right|_{\bm{f}=\bo{0}}
+% =
+%   E_0
+%   t
+% &&
+%   \lim_{t\rightarrow-\infty}
+%   \bar{\Psi}(t)
+% =
+%   \Psi_0
+% \end{align}
+% \begin{align}
+%   (
+%     H(t)
+%   -
+%     i
+%     \tpd{}{t}
+%   )
+%   \bar{\Psi}(t)
+% =
+%   \dot{\th}(t)
+%   \bar{\Psi}(t)
+% \end{align}
+% \begin{align}
+%   \dot{\th}(t)
+% =
+%   \int_0^t
+%   dt'
+%   \ip{\bar{\Psi}(t')|
+%     H(t')
+%   -
+%     i\tpd{}{t'}
+%   |\bar{\Psi}(t')}
+% \end{align}
+% \begin{align}
+%   \br{\d\bar{\Psi}(t)}
+%     H(t)
+%   -
+%     i
+%     \tpd{}{t}
+%   \kt{\bar{\Psi}(t)}
+% =
+%   \dot{\th}(t)
+%   \ip{\d\bar{\Psi}(t)|\bar{\Psi}(t)}
+% \end{align}
+% \begin{align}
+%   \ip{\d\bar{\Psi}(t)|\bar{\Psi}(t)}
+% +
+%   \ip{\bar{\Psi}(t)|\d\bar{\Psi}(t)}
+% =
+%   0
+% \end{align}
+% \begin{align}
+%   \d
+%   \ip{\bar{\Psi}(t)|
+%     H(t)
+%   -
+%     i
+%     \tpd{}{t}
+%   |\bar{\Psi}(t)}
+% +
+%   i
+%   \tpd{}{t}
+%   \ip{\bar{\Psi}(t)|\d\bar{\Psi}(t)}
+% =
+%   0
+% \end{align}
+% \end{dfn}

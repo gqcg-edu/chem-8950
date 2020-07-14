@@ -1,0 +1,217 @@
+\chapter{The Thouless theorem}
+\label{appendix:thouless}
+
+\begin{ntt}
+\label{ntt:orbital-transformation}
+Let $\bm{\y}=[\y_p]$ be a row vector of orthonormal spin-orbitals, composed of occupied and virtual blocks, $\bm{\y}=[\bm{\y}_{\text{o}}\ \bm{\y}_{\text{v}}]$, with respect to a reference determinant, $\F$.
+Other spin-orbital bases relate to this one via
+$
+  \kt{\bm{\y}'}
+=
+  \kt{\bm{\y}}\,
+  \bo{U}
+$,
+which is a unitary transformation if the primed orbitals are orthonormal.
+Let $\F'$ be the \textit{transformed reference determinant}, constructed from the first $n$ orbitals in $\bm{\y}'$.
+Then the occupied and virtual orbitals of the transformed space are given by
+\begin{align}
+\label{eq:block-transformation}
+  \kt{\bm{\y}'_{\text{o}}}
+=
+  \kt{\bm{\y}_{\text{o}}}\,
+  \bo{U}_{\text{oo}}
++
+  \kt{\bm{\y}_{\text{v}}}\,
+  \bo{U}_{\text{vo}}
+&&
+  \kt{\bm{\y}'_{\text{v}}}
+=
+  \kt{\bm{\y}_{\text{o}}}\,
+  \bo{U}_{\text{ov}}
++
+  \kt{\bm{\y}_{\text{v}}}\,
+  \bo{U}_{\text{vv}}
+\end{align}
+in terms of the occupied and virtual blocks of $\bo{U}$.
+This kind of transformation is sometimes called an \textit{orbital rotation}.
+\end{ntt}
+
+
+\begin{thm}
+\label{thm:thouless}
+\thmtitle{The Thouless theorem}
+\begin{enumerate}
+\item
+\label{item:thouless-part-1}
+\thmstatement{
+  The function
+  $e^{T_1}\F$
+  is an intermediately normalized determinant
+  $
+    \tfr{1}{\sqrt{n!}}
+    \text{det}(\widetilde{\y}_1\cd\widetilde{\y}_n)
+  $
+  with orbitals
+  $
+    \widetilde{\y}_i
+  =
+    \y_i
+  +
+    \sum_a
+    \y_a
+    t_a^i
+  $.
+}
+\thmproof{
+  Intermediate normalization follows from
+  $
+    \ip{\F|e^{T_1}\F}
+  =
+    1
+  $.
+  This function has the form of a determinant
+\begin{align*}
+  e^{T_1}
+  \kt{\F}
+=
+  e^{\sum_{a}t_a^1 a_1^a + \cd + \sum_a t_a^n a_n^a}
+  a_1\dg
+  \cd
+  a_n\dg
+  \kt{\vac}
+=
+  \widetilde{a}_1\dg
+  \cd
+  \widetilde{a}_n\dg
+  \kt{\vac}
+=
+  \kt{\widetilde{\F}}
+&&
+  \widetilde{a}_i\dg
+\equiv
+  \text{exp}(\ts{\sum_{a}t_a^i a_i^a})\,
+  a_i\dg
+\end{align*}
+  since $\sum_a t_a^ia_i^a$ commutes with all creation operators except $a_i\dg$.
+  The transformed orbitals are given by
+\begin{align*}
+  \kt{\widetilde{\y}_i}
+=
+  \widetilde{a}_i\dg
+  \kt{\vac}
+=
+  \text{exp}(\ts{\sum_{a}t_a^i a_a\dg a_i})\,
+  a_i\dg
+  \kt{\vac}
+=
+  (\ts{
+    1
+  +
+    \sum_a
+    t_a^i
+    a_a\dg
+    a_i
+  })\,
+    a_i\dg
+  \kt{\vac}
+=
+  \kt{\y_i}
++
+  \ts{\sum_a}
+  t_a^i
+  \kt{\y_a}
+\end{align*}
+ using $a_i^2=0$ and $a_ia_i\dg\kt{\vac}=\kt{\vac}$.
+}
+
+
+\item
+\thmstatement{
+  Any intermediately normalized determinant
+  $
+    \widetilde{\F}
+  =
+    \tfr{1}{\sqrt{n!}}
+    \text{det}(\widetilde{\y}_1\cd\widetilde{\y}_n)
+  $
+  can be written as $e^{T_1}\,\F$.
+}
+\thmproof{
+  Intermediate normalization implies that $\widetilde{\F}$ has non-zero overlap with the reference determinant.
+  Therefore, $\widetilde{\F}$ can be written as
+  $\F'/\ip{\F|\F'}$
+  where $\F'$ is a Slater determinant.
+  The normalization factor is given by
+\begin{align*}
+\ts{
+  \ip{\F|\F'}
+=
+  \tfr{1}{n!}
+  \sum_{\pi,\si}^{\text{S}_n}
+  \e_\pi
+  \e_\si
+  \ip{\y_{\pi(1)}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{\pi(n)}|\y'_{\si(n)}}
+=
+  \sum_{\si}^{\text{S}_n}
+  \e_\si
+  \ip{\y_{1}|\y'_{\si(1)}}
+  \cd
+  \ip{\y_{n}|\y'_{\si(n)}}
+=
+  \text{det}(\bo{U}_{\text{oo}})\,\,.
+}
+\end{align*}
+  Therefore,
+  $
+    \widetilde{\F}
+  =
+    \F'/
+    \text{det}(\bo{U}_{\text{oo}})
+  =
+    \F'\,
+    \text{det}(\bo{U}_{\text{oo}}^{-1})
+  $
+  and the rows of $\widetilde{\F}$ are given by the following vector\footnote{
+    The second equality follows from expanding $\kt{\bm{\y}_{\text{o}}'}$ according to eq~\ref{eq:block-transformation}.
+  }
+\begin{align*}
+  \kt{\bm{\widetilde{\y}}_{\text{o}}}
+=
+  \kt{\bm{\y}'_{\text{o}}}\,
+  \bo{U}_{\text{oo}}^{-1}
+=
+  \kt{\bm{\y}_{\text{o}}}\,
++
+  \kt{\bm{\y}_{\text{v}}}\,
+  \bo{U}_{\text{vo}}
+  \bo{U}_{\text{oo}}^{-1}
+\end{align*}
+  with elements
+  $
+    \widetilde{\y}_i
+  =
+    \y_i
+  +
+    \sum_a
+    \y_a\,
+    (\bo{U}_{\text{vo}}\bo{U}_{\text{oo}}^{-1})_{ai}
+  $.
+  Referring back to part one,
+  $
+    \widetilde{\F}
+  =
+    e^{T_1}\F
+  $
+  with
+  $
+    t_a^i
+  =
+    (\bo{U}_{\text{vo}}\bo{U}_{\text{oo}}^{-1})_{ai}
+  $.
+}
+\end{enumerate}
+\end{thm}
+
+
