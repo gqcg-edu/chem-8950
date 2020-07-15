@@ -1,0 +1,33 @@
+name: exercises
+
+on:
+  push:
+    branches:
+        - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install makeindex
+      run: sudo apt-get install texlive-binaries
+    - name: Install Miniconda
+      run: |
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/miniconda.sh
+        bash $HOME/miniconda.sh -b -u -p $HOME/miniconda
+        echo "::add-path::$HOME/miniconda/bin"
+    - name: Install tectonic
+      run: conda install -y -c conda-forge tectonic
+    - name: Typeset exercises
+      run: | 
+        cd exercises
+        tectonic exercises.tex
+        makeindex exercises.idx
+        tectonic exercises.tex
+    - name: Archive exercises.pdf
+      uses: actions/upload-artifact@v1
+      with:
+        name: exercises.pdf
+        path: exercises.pdf

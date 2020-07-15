@@ -1,0 +1,67 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{avcthm}
+\RequirePackage{amsthm,kvoptions,etoolbox,thmtools,scrextend,embrac}
+\RequirePackage{cleveref}
+\SetupKeyvalOptions{family=fam,prefix=fam@}
+\DeclareStringOption[]{numberby}[]
+\DeclareStringOption[10pt plus 2pt minus 5pt]{skip}[10pt plus 2pt minus 5pt]
+\ProcessKeyvalOptions*
+
+\patchcmd{\@endtheorem}{\@endpefalse}{}{}{}
+\patchcmd{\endproof}{\@endpefalse}{}{}{}
+\declaretheoremstyle[
+  spaceabove=5pt,
+  spacebelow=5pt,
+  %bodyfont=\small\setlength{\abovedisplayskip}{\fam@skip}\setlength{\belowdisplayskip}{\fam@skip}
+]{avc}
+\theoremstyle{avc}
+\newtheorem{dfn} {Definition} [\fam@numberby]
+\newtheorem{drv} {Derivation} [\fam@numberby]
+\newtheorem{thm} {Theorem}    [\fam@numberby]
+\newtheorem{cor} {Corollary}  [\fam@numberby]
+\newtheorem{lem} {Lemma}      [\fam@numberby]
+\newtheorem{rmk} {Remark}     [\fam@numberby]
+\newtheorem{prop}{Proposition}[\fam@numberby]
+\newtheorem{prob}{Problem}    [\fam@numberby]
+\newtheorem{ex}  {Example}    [\fam@numberby]
+\newtheorem{ax}  {Axiom}      [\fam@numberby]
+\newtheorem{ntt} {Notation}   [\fam@numberby]
+% \cref
+\crefname{dfn}     {def}        {defs}
+\crefname{drv}     {derivation} {derivations}
+\crefname{thm}     {thm}        {theorems}
+\crefname{cor}     {corollary}  {corollaries}
+\crefname{lem}     {lemma}      {lemmas}
+\crefname{rmk}     {rmk}        {remarks}
+\crefname{prop}    {prop}       {props}
+\crefname{prob}    {problem}    {problems}
+\crefname{ex}      {ex}         {exampless}
+\crefname{ax}      {axiom}      {axioms}
+\crefname{ntt}     {notation}   {notations}
+\crefname{equation}{eq}         {eqs}
+\crefname{table}   {table}      {tables}
+% \Cref
+\Crefname{dfn}     {Def}        {Defs}
+\Crefname{drv}     {Derivation} {Derivations}
+\Crefname{thm}     {Thm}        {Theorems}
+\Crefname{cor}     {Corollary}  {Corollaries}
+\Crefname{lem}     {Lemma}      {Lemmas}
+\Crefname{rmk}     {Rmk}        {Remarks}
+\Crefname{prop}    {Prop}       {Props}
+\Crefname{prob}    {Problem}    {Problems}
+\Crefname{ex}      {Ex}         {Exampless}
+\Crefname{ax}      {Axiom}      {Axioms}
+\Crefname{ntt}     {Notation}   {Notations}
+\Crefname{equation}{Eq}         {Eqs}
+\Crefname{table}   {Table}      {Tables}
+% macros for theorem body
+\newcommand{\thmtitle}[1]{\textit{\bfseries\mathversion{bold}#1.}}
+\newcommand{\thmstatement}[1]{{\itshape #1}}
+\newcommand{\thmproof}[1]{
+  \begin{addmargin}[1em]{0em}
+    Proof: #1
+  \end{addmargin}
+}
+% also set crefname for other things, in order to be consistent
+
+\endinput
