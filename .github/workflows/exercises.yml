@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Install makeindex
+    - name: Install TeX Live binaries
       run: sudo apt-get install texlive-binaries
     - name: Install Miniconda
       run: |
@@ -23,8 +23,6 @@ jobs:
     - name: Typeset exercises
       run: | 
         cd exercises
-        tectonic exercises.tex
-        makeindex exercises.idx
         tectonic exercises.tex
     - name: Archive exercises.pdf
       uses: actions/upload-artifact@v1
