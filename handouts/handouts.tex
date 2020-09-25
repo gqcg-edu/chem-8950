@@ -1,0 +1,76 @@
+% !TEX program = xelatex
+
+\documentclass[%
+paper=A4,
+twoside=true,
+%openright,
+parskip=full,
+chapterprefix=true,
+11pt,
+headings=normal,
+]{scrreprt}%
+
+\usepackage[					% clean thesis style
+	figuresep=colon,%
+	sansserif=true,%
+	hangfigurecaption=false,%
+	hangsection=true,%
+	hangsubsection=true,%
+	colorize=full,%
+	colortheme=bluemagenta,%
+	bibsys=bibtex,%
+	bibstyle=alphabetic,%
+]{config/cleanthesis}
+
+\newcommand*{\SectionsPath}{sections} % directory containing sections
+\newcommand*{\ConfigPath}{config} % directory containing configuration files
+
+\input{\ConfigPath/config.tex}
+
+\title{\Huge CHEM 8950}
+\subtitle{\Large Advanced Quantum Chemistry \\ Handouts}
+\date{}
+
+\begin{document}
+
+\dominitoc
+
+\maketitle
+
+\pagenumbering{roman}			% roman page numbing (invisible for empty page style)
+\pagestyle{plain}				% no header or footers
+\setcounter{tocdepth}{2}		% define depth of toc
+\tableofcontents				% display table of contents
+\cleardoublepage
+
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{maincontentstyle} 	% fancy header and footer
+
+\include{\SectionsPath/hartree-fock}
+\include{\SectionsPath/roothaan-hall-pople-nesbet}
+\include{\SectionsPath/second-quantization}
+\include{\SectionsPath/wicks-theorem}
+\include{\SectionsPath/kutzelnigg-mukherjee}
+\include{\SectionsPath/diagrams}
+\include{\SectionsPath/coupled-cluster}
+\include{\SectionsPath/perturbation-theory}
+\include{\SectionsPath/perturbative-analysis}
+\include{\SectionsPath/orbital-relaxation}
+\include{\SectionsPath/response-theory}
+
+\begin{appendices}
+	\include{\SectionsPath/constrained-optimization}
+	\include{\SectionsPath/functional-derivatives}
+	\include{\SectionsPath/fundamental-lemma-calculus-variations}
+	\include{\SectionsPath/unitary-invariances-hf-orbitals}
+	\include{\SectionsPath/pull-through-relation}
+	\include{\SectionsPath/linked-diagram-proof}
+	\include{\SectionsPath/thouless-theorem}
+	\include{\SectionsPath/orbital-rotations}
+\end{appendices}
+
+%\backmatter
+\printindex
+
+\end{document}

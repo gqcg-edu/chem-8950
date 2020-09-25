@@ -1,0 +1,36 @@
+\chapter{The pull-through relation}\label{app:pull-through-relation}
+
+\begin{prop}\label{prop:pull-through-relation}
+\thmtitle{Pull-through relation}
+\thmstatement{
+  For any non-commuting $x_1,\ld,x_n$, and $y$ for which addition, subtraction and multiplication are defined, $x_1\cd x_ny=\pr{\mp}^nyx_1\cd x_n+\sum_{k=1}^n\pr{\mp}^{n-k}x_1\cd[x_k,y]_{\pm}\cd x_n$, where $[x,y]_{\pm}\equiv xy\pm yx$.
+}
+\thmproof{
+  The $n=1$ case follows from the definition of the commutator brackets: $xy=\mp yx+[x,y]_{\pm}$.
+  Now, assume it holds for $n$ and consider the $n+1$ case.
+  Since $x_1\cd x_{n+1}y=x_1\cd x_n(\mp yx_{n+1}+[x_{n+1},y]_{\pm})$, we find
+  \begin{align*}
+    x_1\cd x_{n+1}y
+  =&\
+  \mp
+    \pr{
+      \pr{\mp}^nyx_1\cd x_n
+    +
+      \sum_{k=1}^n
+      \pr{\mp}^{n-k}
+      x_1\cd [x_k,y]_{\pm}\cd x_n
+    }
+    x_{n+1}
+  +
+    x_1\cd x_n[x_{n+1},y]_{\pm}
+  \\=&\
+    \pr{\mp}^{n+1}
+    yx_1\cd x_{n+1}
+  +
+    \sum_{k=1}^{n+1}
+    \pr{\mp}^{n+1-k}
+    x_1\cd[x_k,y]_{\pm}\cd x_{n+1}
+  \end{align*}
+  and, by induction, the result holds for all $n$.
+}
+\end{prop}

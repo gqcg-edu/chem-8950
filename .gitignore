@@ -29,3 +29,8 @@
 
 # Swap files
 *.swp
+
+*-blx.bib
+*.mtc*
+*.pdf
+*.run.xml

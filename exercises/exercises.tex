@@ -1,0 +1,52 @@
+% !TEX program = xelatex
+
+\documentclass[%
+paper=A4,
+twoside=true,
+%openright,
+parskip=full,
+chapterprefix=true,
+11pt,
+headings=normal,
+]{scrreprt}%
+
+\usepackage[					% clean thesis style
+	figuresep=colon,%
+	sansserif=true,%
+	hangfigurecaption=false,%
+	hangsection=true,%
+	hangsubsection=true,%
+	colorize=full,%
+	colortheme=bluemagenta,%
+	bibsys=bibtex,%
+	bibstyle=alphabetic,%
+]{config/cleanthesis}
+
+\newcommand*{\SectionsPath}{sections} % directory containing sections
+\newcommand*{\ConfigPath}{config} % directory containing configuration files
+
+\input{\ConfigPath/config.tex}
+
+\title{\Huge CHEM 8950}
+\subtitle{\Large Advanced Quantum Chemistry \\ Exercises}
+\date{}
+
+\begin{document}
+
+\dominitoc
+
+\maketitle
+
+\pagenumbering{roman}			% roman page numbing (invisible for empty page style)
+\pagestyle{plain}				% no header or footers
+\setcounter{tocdepth}{2}		% define depth of toc
+\tableofcontents				% display table of contents
+\cleardoublepage
+
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{maincontentstyle} 	% fancy header and footer
+
+\include{\SectionsPath/hartree-fock}
+
+\end{document}

@@ -1,0 +1,220 @@
+\chapter{Orbital rotations}
+\label{appendix:orbital-rotations}
+
+\begin{dfn}
+\label{dfn:normal-matrix}
+\thmtitle{Normal matrix}
+A square matrix satisfying $\bo{N}\dg\bo{N}=\bo{N}\bo{N}\dg$ is termed \textit{normal}.
+Several important kinds of matrices meet this criterion:
+\textit{Hermitian matrices}, $\bo{H}\dg=\bo{H}$;
+\textit{anti-Hermitian matrices}, $\bo{A}\dg=-\bo{A}$;
+and
+\textit{unitary matrices}, $\bo{U}\dg=\bo{U}^{-1}$.
+Note that Hermitian and anti-Hermitian matrices can always be written as $\bo{X}+\bo{X}\dg$ and $\bo{X}-\bo{X}\dg$.
+\end{dfn}
+
+\begin{rmk}
+\label{rmk:spectral-theorem}
+The spectral theorem\footnote{See \url{https://en.wikipedia.org/wiki/Spectral_theorem}} for normal matrices says that $\bo{N}=\bo{V}\widetilde{\bo{N}}\bo{V}\dg$ where $\bo{V}$ is unitary and $\widetilde{\bo{N}}$ is diagonal.
+A direct corollary\footnote{Since there exists a basis in which $\bo{N}$ is diagonal, statements about $\bo{N}$ translate into statements about its eigenvalues.} is that the eigenvalues of Hermitian, anti-Hermitian, and unitary matrices can be written as follows.
+\begin{align}
+  h^*
+=
+  h
+\implies
+  h
+=
+  \f
+&&
+  a^*
+=
+-
+  a
+\implies
+  a
+=
+  i\f
+&&
+  u^*
+=
+  u^{-1}
+\implies
+  u
+=
+  e^{i\f}
+&&
+  \f
+\in
+  \mb{R}
+\end{align}
+In words, Hermitian eigenvalues are real, anti-Hermitian eigenvalues are pure imaginary, and unitary eigenvalues lie on the unit circle.
+Note that unitary eigenvalues have the form $u=\text{exp}(a)$ where $a$ is an anti-Hermitian eigenvalue.
+This implies that any unitary matrix $\bo{U}$ can be written as $\text{exp}(\bo{A})$, where $\bo{A}$ is anti-Hermitian.
+\end{rmk}
+
+\begin{rmk}
+\label{rmk:spin-orbital-transformation-law}
+According to \cref{dfn:normal-matrix} and \cref{rmk:spectral-theorem}, unitary transformations of the spin-orbitals can be parametrized as
+\begin{align}
+\label{eq:spin-orbital-transformation}
+  \y_p'
+=
+  \sum_q
+  \y_q
+  (\text{exp}(\bo{X} - \bo{X}\dg))_{qp}
+\end{align}
+in terms of a square matrix $\bo{X}$.
+The form of this parametrization leads to redundancies.
+In particular, notice that $(\bo{X})_{pq}\equiv z\,\delta_{pp'}\delta_{qq'}$ generates the same transformation as $(\bo{X})_{pq}\equiv -z^*\,\delta_{pq'}\delta_{qp'}$.
+These redundancies are eliminated by setting the upper or lower triangle of $\bo{X}$ to zero.
+The creation operators for these orbitals are given by
+$
+  a_p^{\prime\,\dagger}
+=
+  \sum_q
+  a_q\dg
+  (\text{exp}(\bo{X} - \bo{X}\dg))_{qp}
+$.
+\end{rmk}
+
+
+\begin{prop}
+\label{prop:creation-operator-similarity-transform}
+\thmstatement{
+The identity\ \
+$\ds{
+  \text{exp}(G)\,a_p\dg\,\text{exp}(-G)
+=
+  \sum_q
+  a_q\dg\,
+  (\text{exp}(\bo{G}))_{qp}
+}$\
+holds for any
+$
+  G
+=
+  \sum_{pq}
+  (\bo{G})_{pq}\,
+  a_p\dg a_q
+$.
+}\vspace{3pt}
+\thmproof{
+  This follows from
+  $
+    [G,\cdot\,]^m(a_p\dg)
+  =
+    \sum_q
+    a_q\dg
+    (\bo{G}^m)_{qp}
+  $,
+  which we will prove by induction.
+  For $m=0$ the statement is trivially true.
+  If we assume it holds for $m$, then the following shows that it also holds for $m+1$,\footnote{
+  The second equality here follows from expanding $G$ and using
+$
+  [a_r\dg a_s, a_q\dg]
+=
+  \no{
+    a_r\dg
+    \ctr{}{a}{_s}{}
+    a_s a_q\dg
+  }
+=
+  a_r\dg\,
+  \delta_{sq}
+$.
+}
+\begin{align*}
+\ts{
+  [G,\cdot\,]^{m+1}(a_p\dg)
+=
+  \sum_q
+  [G, a_q\dg]\,
+  (\bo{G}^m)_{qp}
+=
+  \sum_{qr}
+  a_r\dg
+  (\bo{G})_{rq}
+  (\bo{G}^m)_{qp}
+=
+  \sum_r
+  a_r\dg
+  (\bo{G}^{m+1})_{rp}
+}
+\end{align*}
+  which completes the induction.
+  Substituting this result into the Hausdorff expansion of
+$
+  \text{exp}(G)\,a_p\dg\,\text{exp}(-G)
+$
+and  recognizing the Taylor expansion of $\text{exp}(\bo{G})$ completes the proof.
+}
+\end{prop}
+
+
+\begin{rmk}
+Given \cref{rmk:spin-orbital-transformation-law} and \cref{prop:creation-operator-similarity-transform}, the transformation of particle-hole operators can be expressed as
+\begin{align}
+\label{eq:operator-transformation}
+\begin{array}{r@{\ }l}
+  a_p^{\prime\,\dagger}
+&=
+  \text{exp}(X - X\dg)
+  a_p\dg\,
+  \text{exp}(X\dg - X)
+\\[4pt]
+  a_p^{\prime}
+&=
+  \text{exp}(X - X\dg)
+  a_p\,
+  \text{exp}(X\dg - X)
+\end{array}
+&&
+  X
+=
+  \sum_{p>q}
+  (\bo{X})_{pq}
+  a_p\dg a_q
+\end{align}
+where the annihilation operator transformation is simply the adjoint of the one for creation operators.
+\end{rmk}
+
+
+\begin{rmk}
+If $\Th'$ is obtained by replacing all of the orbitals in the basis expansion of $\Th\in\mc{F}$ with primed orbitals, then
+\begin{align}
+  \Th'
+=
+  \text{exp}(X - X\dg)
+  \Th
+\end{align}
+which follows from substituting equation~\ref{eq:operator-transformation} into
+$
+  a_{p_1}^{\prime\,\dagger}
+  \cd
+  a_{p_n}^{\prime\,\dagger}
+  \kt{\vac}
+$
+to prove that
+$
+  \kt{\F'_{(p_1\cd p_n)}}
+=
+  \text{exp}(X - X\dg)
+  \kt{\F_{(p_1\cd p_n)}}
+$\footnote{
+  Note that
+$
+  \text{exp}(X\dg - X)
+=
+  \pr{\text{exp}(X - X\dg)}^{-1}
+$
+and
+$
+  \text{exp}(X\dg - X)
+  \kt{\vac}
+=
+  \kt{\vac}
+$.
+}
+for any basis state.
+\end{rmk}

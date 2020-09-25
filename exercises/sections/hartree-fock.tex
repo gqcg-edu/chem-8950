@@ -1,0 +1,35 @@
+\chapter{Hartree-Fock}
+
+\begin{Exercise}
+    Answer each of the following in one sentence, using words only.
+    \Question{Define canonical Hartree-Fock orbitals.}\label{canon_hf}
+    \Question{Explain why the choice of Hartree-Fock orbitals is not unique.}\label{unique_hf}
+\end{Exercise}
+
+\begin{Answer}
+    \ref{canon_hf}. Hartree-Fock orbitals are ``canonical'' when the Lagrange multiplier matrix is diagonal.
+    \ref{unique_hf}. The Hartree-Fock energy and the orbital overlaps are invariant to a unitary transformation, so any unitary variation of the canonical orbitals satisfies the Hartree-Fock optimization conditions.
+\end{Answer}
+
+\begin{Exercise}
+    Briefly explain how the Lagrangian approach to constrained optimization works. Draw pictures where necessary.
+\end{Exercise}
+
+\begin{Exercise}
+  Determine the functional derivatives of the Hartree-Fock Lagrangian,
+  $\dfr{\d\mc{L}}{\d\y_k^*}$
+  and
+  $\dfr{\d\mc{L}}{\d\y_k}$.
+\end{Exercise}
+
+\begin{Exercise}
+    Derive the following expression for the energy expectation value of a Slater determinant, known as the \textit{first Slater rule}.
+    \begin{align*}
+      \ip{\F|\op{H}_e|\F}
+    =
+    \sum_{i}^n
+      \ip{\y_i|\op{h}|\y_i}
+    +\fr{1}{2}\sum_{ij}^n
+      \ip{\y_i\y_j||\y_i\y_j}
+    \end{align*}
+\end{Exercise}

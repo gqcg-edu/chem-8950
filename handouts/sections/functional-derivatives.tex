@@ -1,0 +1,91 @@
+\chapter{Functional Derivatives}\label{app:functional-derivatives}
+
+A functional is just a function of a function -- i.e.\ some rule $F$ that maps a function $f$ into a number $F[f]$.  Definite integrals are a common example.
+In order to optimize a functional $F$ with respect to its argument $f$, one needs to take a \textit{functional derivative}.\footnote{\url{http://en.wikipedia.org/wiki/Functional_derivative}}
+To motivate the definition of a functional derivative, first consider the definition of an ordinary derivative
+\begin{align}
+  \fd{f(x)}{x}
+\equiv
+  \lim_{\e\rightarrow0}
+  \fr{f(x+\e)-f(x)}{\e}
+\end{align}
+and note the following identity, which you can verify using
+$
+  f(x+\e)
+=
+  f(x)
++
+  \dfd{f(x)}{x}
+  \e
++
+  \mc{O}(\e^2)
+$.
+\begin{align}\label{eq:scalar-derivative-trick}
+  \lim_{\e\rightarrow0}
+  \fr{f(x+\e)-f(x)}{\e}
+=&\
+\left.
+  \fr{df(x+\e)}{d\e}
+\right|_{\e=0}
+\end{align}
+For multivariate functions, we have the concept of a \textit{directional derivative}
+\begin{align}\label{eq:directional-derivative}
+  \bo{y}\cdot
+  \pd{f(\bo{x})}{\bo{x}}
+=
+  \lim_{\e\rightarrow0}
+  \fr{f(\bo{x}+\e\bo{y}) - f(\bo{x})}{\e}
+\end{align}
+which measures the change in $f(\bo{x})$ in the direction $\bo{y}$.
+Using equation \ref{eq:scalar-derivative-trick}, the directional derivative can be evaluated as an ordinary scalar derivative with respect to $\e$.
+\begin{align}\label{eq:vector-derivative-trick}
+  \bo{y}\cdot
+  \pd{f(\bo{x})}{\bo{x}}
+=
+  \left.
+  \fd{f(\bo{x} + \e\bo{y})}{\e}
+  \right|_{\e=0}
+\end{align}
+The functional derivative $\dfr{\d F}{\d f}$ is defined to satisfy an equation analogous to \ref{eq:directional-derivative}, playing the role of the gradient.
+\begin{align}
+  \int_{-\infty}^{\infty}
+  dx'\,
+  g(x')
+  \fr{\d F[f]}{\d f(x')}
+\equiv
+  \lim_{\e\rightarrow0}
+  \fr{F[f+\e g] - F[f]}{\e}
+\end{align}
+This left-hand side could be called a \textit{functional directional derivative}, giving the change in $F$ upon displacing its argument along the function $g$.
+Here, the integral takes the role of the dot product in \ref{eq:directional-derivative}.
+Using the same trick as in equation \ref{eq:vector-derivative-trick}, the functional derivative can be expressed as an ordinary scalar derivative.
+\begin{align}
+\label{eq:functional-derivative-trick}
+  \int_{-\infty}^{\infty}
+  dx'\,
+  g(x')
+  \fr{\d F[f]}{\d f(x')}
+=
+  \left.
+  \fd{F[f+\e g]}{\e}
+  \right|_{\e=0}
+\end{align}
+The standard procedure for evaluating the functional derivative is to first evaluate the right-hand side of equation~\ref{eq:functional-derivative-trick} for an arbitrary $g$ and then infer what $\dfr{\d F[f]}{\d f(x)}$ must be by comparing to the left-hand side.
+Equivalently, $g(x')$ can be replaced with a Dirac delta $\d(x-x')$ in order to arrive at $\dfr{\d F[f]}{\d f(x)}$ directly.
+
+Using eq. \ref{eq:functional-derivative-trick} and the lemma in \cref{app:fundamental-lemma-of-calculus-of-variations}, we find that the stationarity condition for a functional
+\begin{align}
+  \fr{\d F[f]}{\d f}
+\overset{!}{=}
+  0
+\end{align}
+is equivalent to the following condition.
+\begin{align}
+  \left.
+  \fd{F[f+\e g]}{\e}
+  \right|_{\e=0}
+\overset{!}{=}
+  0
+&&
+  \text{for all $g(x)$}
+\end{align}
